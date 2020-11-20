@@ -28,8 +28,14 @@
 	<context:component-scan 
 	               base-package="kr.spring.member.controller" />
 	<context:component-scan 
-	               base-package="kr.spring.board.controller"/>               
-	
+	               base-package="kr.spring.board.free.controller"/>
+	<context:component-scan 
+	               base-package="kr.spring.board.sysqna.controller"/>              
+	<context:component-scan 
+	               base-package="kr.spring.board.tip.controller"/>                            
+	<context:component-scan 
+	               base-package="kr.spring.board.tranqna.controller"/>
+	               
 	<!-- tiles 설정 -->
 	<beans:bean id="tilesConfigurer"
 	 class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
@@ -37,7 +43,10 @@
 			<beans:list>
 				<beans:value>/WEB-INF/tiles-def/main.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/member.xml</beans:value>
-				<beans:value>/WEB-INF/tiles-def/board.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/boardfree.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/boardtip.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/boardsysqna.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/boardtranqna.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
