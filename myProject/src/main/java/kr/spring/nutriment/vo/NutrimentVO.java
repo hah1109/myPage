@@ -14,7 +14,6 @@ public class NutrimentVO {
 	private int sugars; // 당
 	private int protein; //단백질
 	
-	
 	public int getFoodNum() {
 		return foodNum;
 	}
