@@ -12,7 +12,7 @@ public interface MemberService {
 	public void insertMember_detail(MemberVO member);
 
 	/*public int selectMem_num(); //시퀀스 가져오고
-	public void insertMember(MemberVO member); //공통 멤버테이블에 넣고 
+	public void insertTrainer(MemberVO member); //공통 멤버테이블에 넣고 
 	public void insertTrainer_detail(MemberVO member); //트레이너 회원정보 넣고 가 한 사이클
 	 */
 	public void insertTrainer_detail(MemberVO member);

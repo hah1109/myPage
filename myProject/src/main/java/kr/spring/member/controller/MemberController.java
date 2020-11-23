@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +25,13 @@ public class MemberController {
 	
 	@Resource
 	private MemberService memberService;
+	
+	//자바빈(VO) 초기화
+	//서버 유효성 체크시 필수로 필요
+	@ModelAttribute
+	public MemberVO initCommand() {
+		return new MemberVO();
+	}
 	
 	/*========================================================================================================*/
 	//로그인 폼에서 회원가입 버튼을 눌렀을시 호출될 메서드

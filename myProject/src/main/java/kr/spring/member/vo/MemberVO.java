@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +18,8 @@ public class MemberVO {
 	private int mem_auth;
 
 	// 회원 아이디
-	@NotEmpty
+	//정규표현식을 이용해서 유효성 체크
+	@Pattern(regexp="^[A-Za-z0-9+]{4,10}$")
 	private String mem_id;
 
 	// 일반회원의 트레이너의 회원번호
@@ -46,9 +48,11 @@ public class MemberVO {
 	private String mem_pw;
 
 	//회원의 전화번호
+	@NotEmpty
 	private String mem_cell;
 
 	//회원의 이메일
+	@NotEmpty
 	private String mem_email;
 
 	//회원의 프로필 사진
