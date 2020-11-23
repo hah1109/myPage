@@ -67,9 +67,9 @@
 			[<span>${user.mem_auth}</span>]
 			[<span>${user.mem_id}</span>]
 			<a href="${pageContext.request.contextPath}">알림</a>
-			<a href="${pageContext.request.contextPath}/member/myPage.do">MyPage</a>
+			<a href="${pageContext.request.contextPath}/member/myPageMember.do">MyPage</a>
 			<a href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a>
-			<a href="${pageContext.request.contextPath}/board/qna_sys.do">QnA</a>
+			<a href="${pageContext.request.contextPath}/board/qnaSys.do">QnA</a>
 			</c:if>
 			
 			<!-- 비로그인 상태 : 회원가입,로그인 화성화 -->
@@ -84,10 +84,10 @@
 		<!-- 헤더 메인 메뉴 링크 임시로 main으로 통일 해 둠 -->
 		<div class="align-center">
 			<a href="${pageContext.request.contextPath}/main/main.do">메인로고</a>
-			<a href="${pageContext.request.contextPath}/main/main.do">홈트레이닝</a>
-			<a href="${pageContext.request.contextPath}/main/main.do">식단</a>
+			<a href="${pageContext.request.contextPath}/homeTraining/hwList.do">홈트레이닝</a>
+			<a href="${pageContext.request.contextPath}/nutriment/nutrimentGuide.do">식단</a>
 			<a href="${pageContext.request.contextPath}/main/main.do">트레이닝 다이어리</a>
-			<a href="${pageContext.request.contextPath}/main/main.do">게시판</a>
+			<a href="${pageContext.request.contextPath}/boardFree/list.do">게시판</a>
 			<a href="${pageContext.request.contextPath}/main/main.do">트레이너</a>
 		</div>
 		
