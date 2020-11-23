@@ -35,6 +35,8 @@
 	               base-package="kr.spring.board.tip.controller"/>                            
 	<context:component-scan 
 	               base-package="kr.spring.board.tranqna.controller"/>
+	<context:component-scan 
+	               base-package="kr.spring.board.nutriment.controller"/>
 	               
 	<!-- tiles 설정 -->
 	<beans:bean id="tilesConfigurer"
