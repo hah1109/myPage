@@ -8,8 +8,8 @@
 		<div style="float:right">
 			<!-- 로그인 상태 : 회원등급아이콘,id,알림아이콘,mypage,로그아웃,QnA 활성화 -->
 			<c:if test="${!empty user}">
-			[<span>${user.grade}</span>]
-			[<span>${user.id}</span>]
+			[<span>${user.mem_auth}</span>]
+			[<span>${user.mem_id}</span>]
 			<a href="${pageContext.request.contextPath}">알림</a>
 			<a href="${pageContext.request.contextPath}/member/myPage.do">MyPage</a>
 			<a href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a>
@@ -18,7 +18,7 @@
 			
 			<!-- 비로그인 상태 : 회원가입,로그인 화성화 -->
 			<c:if test="${empty user}">
-			<a href="${pageContext.request.contextPath}/member/registerUser.do">회원가입</a>
+			<a href="${pageContext.request.contextPath}/member/userType.do">회원가입</a>
 			<a href="${pageContext.request.contextPath}/member/login.do">로그인</a>	
 			</c:if>
 		</div>
