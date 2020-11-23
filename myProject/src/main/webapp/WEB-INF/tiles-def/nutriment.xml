@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="nutrimentGuide" template="/WEB-INF/views/template/layout1.jsp">
+    	<put-attribute name="title" value="식단 가이드"/>
+    	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/nutriment/nutrimentGuide.jsp"/>  
+    	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>        
+    </definition>
+    <definition name="nutrimentSearch" template="/WEB-INF/views/template/layout1.jsp">
+    	<put-attribute name="title" value="영양성분 검색"/>
+    	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/nutriment/nutrimentSerch.jsp"/>  
+    	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>        
+    </definition>
+    <definition name="nutriList" template="/WEB-INF/views/template/layout1.jsp">
+    	<put-attribute name="title" value="영양성분 검색기"/>
+    	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/nutriment/nutriList.jsp"/>  
+    	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>        
+    </definition>
+    <definition name="nutriDetail" template="/WEB-INF/views/template/layout1.jsp">
+    	<put-attribute name="title" value="영양성분 검색결과"/>
+    	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/nutriment/nutrimentDetail.jsp"/>  
+    	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>        
+    </definition>
+</tiles-definitions>

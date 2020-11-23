@@ -19,14 +19,16 @@ public class NutrimentController {
 
 	//영양성분 검색 페이지 호출
 	@RequestMapping(value="/nutriment/nutriList.do", method=RequestMethod.GET)
-	public ModelAndView nutriList(HttpSession session) {
+	public String nutriList() {
 		
 		// 조건체크해서 session에 로그인 되어 있는 아이디의 auth값 받기
-		MemberVO memberVO = (MemberVO)session.getAttribute("user");
-		int auth = memberVO.getMem_auth();
+		//MemberVO memberVO = (MemberVO)session.getAttribute("user");
+		//int auth = memberVO.getMem_auth();
 		
 		//nutriList 뷰 리턴/서버에 auth 값 리턴 -> script로 버튼 노출 처리
-		return new ModelAndView("nutriList","auth",auth);
+		//return new ModelAndView("nutriList","auth",auth);
+		
+		return "nutriList";
 
 	}
 

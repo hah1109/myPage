@@ -113,7 +113,7 @@
 				</ul>
 			</li>
 			<li class="nutriment">
-				<a href="${pageContext.request.contextPath}/nutriment/nutrimentGuide.do">식단</a>
+				<a href="${pageContext.request.contextPath}/nutriment/nutriList.do">식단</a>
 				<ul class="nutri-sub submenu" style="z-index: 2;">
 					<li><a href="${pageContext.request.contextPath}/nutriment/nutrimentGuide.do">식단 가이드</a></li>
 					<li><a href="${pageContext.request.contextPath}/nutriment/nutriList.do">영양성분 검색</a></li>
