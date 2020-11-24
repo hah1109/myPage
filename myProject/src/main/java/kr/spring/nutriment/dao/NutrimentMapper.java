@@ -7,7 +7,7 @@ import kr.spring.nutriment.vo.NutrimentVO;
 
 public interface NutrimentMapper {
 
-	@Select("SELECT * FROM nutriment WHERE food_name=#{foodName}")
+	@Select("SELECT * FROM nutriment WHERE food_name='%' || #{foodName} || '%'")
 	public NutrimentVO selectNutriment(String foodName);
 
 	@Insert("INSERT INTO nutriment (food_num,food_name,food_g,food_kcal,food_fat,food_col,food_na,food_carb,food_df,food_sugars,food_protein)"+ 

@@ -58,19 +58,23 @@ public class NutrimentController {
 	
 	//영양성분 검색 페이지 검색버튼 onClick event
 	@RequestMapping(value="/nutriment/nutrimentSearch.do", method=RequestMethod.GET)
-	public String nutriSearch(@RequestParam(value="foodName") String foodName, Model model){
+	public String nutriSearch(@RequestParam String foodName, Model model){
+		
 		
 		//@RequestParma 으로 request에서 foodName 받아옴, 받아서 select문 돌린 후 
-		//selectNutriment의 리턴값인 nutriment 자바빈 변수에 저장
-		NutrimentVO nutriDetail = nutrimentService.selectNutriment(foodName);
+		//selectNutriment의 리턴값인 nutrimentVO를 변수에 저장
+		NutrimentVO nutrimentVO = (NutrimentVO)nutrimentService.selectNutriment(foodName);
+		
+		if(log.isDebugEnabled()) { log.debug("<<영양성분 검색>> :" + nutrimentVO);}
 
-		if(nutriDetail != null) {//검색 결과 있을 시
+		
+		/*if(nutriDetail != null) {//검색 결과 있을 시
 			
 			//모델에 자바빈 add 후 view 리턴
 			model.addAttribute("nutriDetail",nutriDetail);
-			
-			return "nutriDetail";
-			
+			*/
+			return "nutrimentDetail";
+		/*	
 		} else {//검색 결과 없을 시
 			
 		
@@ -80,7 +84,7 @@ public class NutrimentController {
 			return "common/result";
 			
 		}
-	
+	*/
 	}
 
 	
@@ -136,7 +140,7 @@ public class NutrimentController {
 		//유효성 체크 결과 에러가 있으면 InsertForm 호출
 		if(result.hasErrors()) { return "nutriInsertForm"; }
 		
-		if(log.isDebugEnabled()) log.debug("<<영양성분 등록>> :" + nutrimentVO);
+		if(log.isDebugEnabled()) { log.debug("<<영양성분 등록>> :" + nutrimentVO);}
 		
 		//영양성분 등록
 		nutrimentService.insertNutriment(nutrimentVO);
