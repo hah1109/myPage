@@ -12,6 +12,6 @@ public interface NutrimentMapper {
 
 	@Insert("INSERT INTO nutriment (food_num,food_name,food_g,food_kcal,food_fat,food_col,food_na,food_carb,food_df,food_sugars,food_protein)"+ 
 		"VALUES (nutriment_seq.nextval,#{foodName}, #{foodWeight},#{kcal},#{fat},#{col},#{na},#{carb},#{dietaryFiber},#{sugars},#{protein})")
-	public void insertNutriment(NutrimentVO vo);
+	public void insertNutriment(NutrimentVO nutrimentVO);
 		
 }

@@ -13,13 +13,13 @@ public class NutrimentServiceImpl implements NutrimentService{
 	@Override
 	public NutrimentVO selectNutriment(String foodName) {
 		
-		return null;
+		return nutrimentMapper.selectNutriment(foodName);
 	}
 
 	@Override
-	public void insertNutriment(NutrimentVO vo) {
-		// TODO Auto-generated method stub
+	public void insertNutriment(NutrimentVO nutrimentVO) {
 		
+		nutrimentMapper.insertNutriment(nutrimentVO);
 	}
 
 }

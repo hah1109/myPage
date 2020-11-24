@@ -76,7 +76,7 @@
 		                                    kr.spring.board.tip.dao,
 		                                    kr.spring.board.sysqna.dao,
 		                                    kr.spring.board.tranqna.dao,
-		                                    kr.spring.nutriment.vo"/>
+		                                    kr.spring.nutriment.dao"/>
 	</bean>
 	
 </beans>
