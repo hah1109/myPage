@@ -30,6 +30,8 @@
 	<context:component-scan 
 	               base-package="kr.spring.board.free.controller"/>
 	<context:component-scan 
+	               base-package="kr.spring.comment.freec.controller"/>
+	<context:component-scan 
 	               base-package="kr.spring.board.sysqna.controller"/>              
 	<context:component-scan 
 	               base-package="kr.spring.board.tip.controller"/>                            

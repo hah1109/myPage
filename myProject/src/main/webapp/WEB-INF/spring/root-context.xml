@@ -65,6 +65,7 @@
 		<property name="dataSource" ref="dataSource"/>
 		<property name="typeAliasesPackage" value="kr.spring.member.vo,
 		                                           kr.spring.board.free.vo,
+		                                           kr.spring.comment.freec.vo,
 		                                           kr.spring.board.tip.vo,
 		                                           kr.spring.board.sysqna.vo,
 		                                           kr.spring.board.tranqna.vo,
@@ -73,6 +74,7 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="kr.spring.member.dao,
 		                                    kr.spring.board.free.dao,
+		                                    kr.spring.comment.freec.dao,
 		                                    kr.spring.board.tip.dao,
 		                                    kr.spring.board.sysqna.dao,
 		                                    kr.spring.board.tranqna.dao,
