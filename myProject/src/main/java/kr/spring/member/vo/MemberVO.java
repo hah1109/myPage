@@ -29,7 +29,6 @@ public class MemberVO {
 	private String g_addr;
 
 	// 트레이너 회원의 경력
-	@NotEmpty
 	private String career;
 
 	// 트레이너 회원의 이력(경력제외)
