@@ -63,7 +63,7 @@ public class NutrimentController {
 		
 		//@RequestParma 으로 request에서 foodName 받아옴, 받아서 select문 돌린 후 
 		//selectNutriment의 리턴값인 nutrimentVO를 변수에 저장
-		NutrimentVO nutrimentVO = (NutrimentVO)nutrimentService.selectNutriment(foodName);
+		NutrimentVO nutrimentVO = nutrimentService.selectNutriment(foodName);
 		
 		if(log.isDebugEnabled()) { log.debug("<<영양성분 검색>> :" + nutrimentVO);}
 
@@ -157,7 +157,7 @@ public class NutrimentController {
 	@RequestMapping(value="/nutriment/nutriCal.do", method=RequestMethod.GET)
 	public String nutriCalForm() {
 			
-		return "nutriICal";
+		return "nutrimentCal";
 	}
 
 	//탄단지 계산기 결과 호출
