@@ -12,7 +12,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Resource
 	private MemberMapper memberMapper;
-	
+
 	//일반회원 회원가입 사이클
 	@Override
 	public void insertMember_detail(MemberVO member) {
@@ -36,72 +36,86 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void deleteMember_detail(int mem_num) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteTrainer_detail(int mem_num) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
+	//일반회원 id찾는 메서드
 	@Override
-	public MemberVO selectFindIdMember_detail(String phone, String email) {
-		// TODO Auto-generated method stub
-		return null;
+	public MemberVO selectFindIdMember_detail(String cell, String email) {
+		return memberMapper.selectFindIdMember_detail(cell, email);
 	}
-
+	
+	//트레이너 id찾는 메서드
 	@Override
-	public MemberVO selectFindIdTrainer_detail(String phone, String email) {
-		// TODO Auto-generated method stub
-		return null;
+	public MemberVO selectFindIdTrainer_detail(String cell, String email) {
+		return memberMapper.selectFindIdTrainer_detail(cell, email);
 	}
 
+	//일반회원 pw찾는 메서드
+	@Override
+	public MemberVO selectFindPwMember_detail(String id, String cell) {
+		return memberMapper.selectFindPwMember_detail(id, cell);
+
+	}
+
+	//트레이너 pw찾는 메서드
+	@Override
+	public MemberVO selectFindPwTrainer_detail(String id, String cell) {
+		return memberMapper.selectFindPwTrainer_detail(id, cell);
+	}
+
+	//일반회원 로그인 처리와 아이디 중복체크 확인에 쓰일 메서드
 	@Override
 	public MemberVO selectCheckMember_detail(String id) {
 		return memberMapper.selectCheckMember_detail(id);
 	}
 
+	//트레이너 로그인 처리와 아이디 중복체크 확인에 쓰일 메서드
 	@Override
 	public MemberVO selectCheckTrainer_detail(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return memberMapper.selectCheckTrainer_detail(id);
 	}
 
 	@Override
 	public void updateMemberPassword(MemberVO member) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updateTrainerPassword(MemberVO member) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updateMemberPhoto(MemberVO member) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updateTrainerPhoto(MemberVO member) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updateMember_detail(MemberVO member) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updateTrainer_detail(MemberVO member) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -115,5 +129,6 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }
