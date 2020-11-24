@@ -1,34 +1,42 @@
 package kr.spring.board.free.vo;
 
+import java.io.IOException;
 import java.sql.Date;
 
 import javax.validation.constraints.NotEmpty;
 
-public class FreeBoardVO {
-	
-	@NotEmpty
+import org.springframework.web.multipart.MultipartFile;
+
+public class FreeBoardVO {	
+
 	private int free_num;
+	
 	@NotEmpty
 	private String free_title;
 	@NotEmpty
 	private String free_content;
-	@NotEmpty
+
 	private int free_hit;
-	@NotEmpty
 	private Date free_reg_date;
-	@NotEmpty
 	private Date free_modify_date;
-	
 	private byte[] free_file;
 	private String free_filename;
-	
-	@NotEmpty
 	private String free_ip;
-	@NotEmpty
-	private int free_auth;
-	@NotEmpty
+	//0은 자유게시판, 1은 팁게시판
+	private int free_type;
 	private int mem_num;
+	private String mem_id;
+	private int mem_auth;
 	
+	public void setUpload(MultipartFile upload) throws IOException{
+		setFree_file(upload.getBytes());
+		setFree_filename(upload.getOriginalFilename());
+	}
+	
+	public void setMuplod(MultipartFile mupload) throws IOException{
+		setFree_file(mupload.getBytes());
+		setFree_filename(mupload.getOriginalFilename());
+	}
 	
 	public int getFree_num() {
 		return free_num;
@@ -84,11 +92,11 @@ public class FreeBoardVO {
 	public void setFree_ip(String free_ip) {
 		this.free_ip = free_ip;
 	}
-	public int getFree_auth() {
-		return free_auth;
+	public int getFree_type() {
+		return free_type;
 	}
-	public void setFree_auth(int free_auth) {
-		this.free_auth = free_auth;
+	public void setFree_type(int free_type) {
+		this.free_type = free_type;
 	}
 	public int getMem_num() {
 		return mem_num;
@@ -97,5 +105,29 @@ public class FreeBoardVO {
 		this.mem_num = mem_num;
 	}
 	
+	public String getMem_id() {
+		return mem_id;
+	}
+
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
+
+	public int getMem_auth() {
+		return mem_auth;
+	}
+
+	public void setMem_auth(int mem_auth) {
+		this.mem_auth = mem_auth;
+	}
 	
+
+	@Override
+	public String toString() {
+		return "FreeBoardVO [free_num=" + free_num + ", free_title=" + free_title + ", free_content=" + free_content
+				+ ", free_hit=" + free_hit + ", free_reg_date=" + free_reg_date + ", free_modify_date="
+				+ free_modify_date + ", free_filename=" + free_filename + ", free_ip=" + free_ip + ", free_type="
+				+ free_type + ", mem_num=" + mem_num + "]";
+	}
+		
 }

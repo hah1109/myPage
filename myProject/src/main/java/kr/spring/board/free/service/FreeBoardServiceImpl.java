@@ -3,53 +3,52 @@ package kr.spring.board.free.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
+import kr.spring.board.free.dao.FreeBoardMapper;
 import kr.spring.board.free.vo.FreeBoardVO;
 
 @Service("freeBoardService")
 public class FreeBoardServiceImpl implements FreeBoardService{
+	
+	@Resource
+	FreeBoardMapper freeBoardMapper;
 
 	@Override
 	public List<FreeBoardVO> selectList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return freeBoardMapper.selectList(map);
 	}
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return freeBoardMapper.selectRowCount(map);
 	}
 
 	@Override
-	public void insertBoardFree(FreeBoardVO boardFree) {
-		// TODO Auto-generated method stub
-		
+	public void insertBoardFree(FreeBoardVO freeBoardVO){
+		freeBoardMapper.insertBoardFree(freeBoardVO);
 	}
 
 	@Override
 	public FreeBoardVO selectBoardFree(Integer free_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return freeBoardMapper.selectBoardFree(free_num);
 	}
 
 	@Override
 	public void updateHitBoardFree(Integer free_num) {
-		// TODO Auto-generated method stub
-		
+		freeBoardMapper.updateHitBoardFree(free_num);
 	}
 
 	@Override
 	public void updateBoardFree(FreeBoardVO boardFree) {
-		// TODO Auto-generated method stub
-		
+		freeBoardMapper.updateBoardFree(boardFree);
 	}
 
 	@Override
-	public void deleteBoardFree(Integer board_num) {
-		// TODO Auto-generated method stub
-		
+	public void deleteBoardFree(Integer free_num) {
+		freeBoardMapper.deleteBoardFree(free_num);
 	}
 
 }
