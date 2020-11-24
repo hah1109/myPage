@@ -33,42 +33,42 @@
 			<li class="homeTraining">
 				<a href="${pageContext.request.contextPath}/homeTraining/hwList.do">홈트레이닝</a>
 				<ul class="ht-sub submenu" style="z-index: 2;">
-<%-- 					<li><a href="${pageContext.request.contextPath}/main/main.do">전신</a></li>
+ 					<li><a href="${pageContext.request.contextPath}/main/main.do">전신</a></li>
 					<li><a href="${pageContext.request.contextPath}/main/main.do">어깨</a></li>
 					<li><a href="${pageContext.request.contextPath}/main/main.do">가슴</a></li>
 					<li><a href="${pageContext.request.contextPath}/main/main.do">등</a></li>
 					<li><a href="${pageContext.request.contextPath}/main/main.do">하체</a></li>
-					<li><a href="${pageContext.request.contextPath}/main/main.do">스트레칭</a></li> --%>
+					<li><a href="${pageContext.request.contextPath}/main/main.do">스트레칭</a></li>
 				</ul>
 			</li>
 			<li class="nutriment">
 				<a href="${pageContext.request.contextPath}/nutriment/nutrimentGuide.do">식단</a>
 				<ul class="nutri-sub submenu" style="z-index: 2;">
-<%-- 					<li><a href="${pageContext.request.contextPath}/nutriment/nutrimentGuide.do">식단 가이드</a></li>
+ 					<li><a href="${pageContext.request.contextPath}/nutriment/nutrimentGuide.do">식단 가이드</a></li>
 					<li><a href="${pageContext.request.contextPath}/nutriment/nutriList.do">영양성분 검색</a></li>
-					<li><a href="${pageContext.request.contextPath}/nutriment/nutrimentCal.do">일일 권장 영양소</a></li> --%>
+					<li><a href="${pageContext.request.contextPath}/nutriment/nutrimentCal.do">일일 권장 영양소</a></li>
 				</ul>
 			</li>
 			<li class="training-diary">
 				<a href="${pageContext.request.contextPath}/main/main.do">트레이닝 다이어리</a>
 				<ul class="dt-sub submenu" style="z-index: 2;">
-<%-- 					<li><a href="${pageContext.request.contextPath}/main/main.do">피드</a></li>
+ 					<li><a href="${pageContext.request.contextPath}/main/main.do">피드</a></li>
 					<li><a href="${pageContext.request.contextPath}/main/main.do">마이 퍼스널</a></li>
-					<li><a href="${pageContext.request.contextPath}/main/main.do">탐색</a></li> --%>
+					<li><a href="${pageContext.request.contextPath}/main/main.do">탐색</a></li>
 				</ul>
 			</li>
 			<li class="board">
 				<a href="${pageContext.request.contextPath}/boardFree/list.do">게시판</a>
 				<ul class="board-sub submenu" style="z-index: 2;">
-<%-- 					<li><a href="${pageContext.request.contextPath}/boardFree/list.do">자유 게시판</a></li>
-					<li><a href="${pageContext.request.contextPath}/boardTip/list.do">팁 게시판</a></li> --%>
+ 					<li><a href="${pageContext.request.contextPath}/boardFree/list.do">자유 게시판</a></li>
+					<li><a href="${pageContext.request.contextPath}/boardTip/list.do">팁 게시판</a></li>
 				</ul>
 			</li>
 			<li class="trainer">
 				<a href="${pageContext.request.contextPath}/main/main.do">트레이너</a>
 				<ul class="trainer-sub submenu" style="z-index: 2;">
-<%-- 					<li><a href="${pageContext.request.contextPath}/main/main.do">트레이너 리스트</a></li>
-					<li><a href="${pageContext.request.contextPath}/boardTranqna/list.do">트레이너 Q&A</a></li> --%>
+ 					<li><a href="${pageContext.request.contextPath}/main/main.do">트레이너 리스트</a></li>
+					<li><a href="${pageContext.request.contextPath}/boardTranqna/list.do">트레이너 Q&A</a></li>
 				</ul>
 			</li>
 		</ul>

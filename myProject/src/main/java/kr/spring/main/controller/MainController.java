@@ -23,15 +23,10 @@ public class MainController {
 	
 	/*@RequestMapping("")
 	public String getTrainingDiary() {
-		
-		//임시 링크 추후 수정할 것. 리퀘스트 맵핑도
+	
 		return "";
 	}*/
 	
-	/*@RequestMapping("boardFree/list.do")
-	public String getBoard() {
-		//return "list";
-	}*/
 	
 	/*@RequestMapping("")
 	public String geTrainer() {

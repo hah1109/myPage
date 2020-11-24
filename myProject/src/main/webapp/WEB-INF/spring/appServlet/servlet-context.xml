@@ -79,6 +79,7 @@
 			<beans:list>
 				<beans:value>messages.validation</beans:value>
 				<beans:value>messages.boardValidation</beans:value>
+				<beans:value>messages.nutrimentValidation</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>

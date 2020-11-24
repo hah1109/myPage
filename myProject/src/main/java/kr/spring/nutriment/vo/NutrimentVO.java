@@ -1,17 +1,30 @@
 package kr.spring.nutriment.vo;
 
+import javax.validation.constraints.NotEmpty;
+
 public class NutrimentVO {
 	
+	@NotEmpty
 	private int foodNum; //음식 넘버(PK)
+	@NotEmpty
 	private String foodName; //음식 이름
+	@NotEmpty
 	private int foodWeight; //음식 중량
+	@NotEmpty
 	private int kcal; //칼로리
+	@NotEmpty
 	private int fat; //총지방
+	@NotEmpty
 	private int col; //콜레스테롤
+	@NotEmpty
 	private int na; //나트륨
+	@NotEmpty
 	private int carb; //총 탄수량
+	@NotEmpty
 	private int dietaryFiber; //식이섬유
+	@NotEmpty
 	private int sugars; // 당
+	@NotEmpty
 	private int protein; //단백질
 	
 	public int getFoodNum() {

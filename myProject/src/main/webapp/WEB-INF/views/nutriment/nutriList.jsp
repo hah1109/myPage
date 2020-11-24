@@ -50,7 +50,7 @@
 	<!-- 관리자 로그인시 추가 버튼 활성화  -->
 	<c:if test="${auth == 0}">
 	<div class="aling-right">
-		<input type="button" value="추가" onclick="location.href='nutrimentSearch.do'">
+		<input type="button" value="추가" onclick="location.href='${pageContext.request.contextPath}/nutriment/nutrimentInsertForm.do'">
 	</div>
 	</c:if>
 	
