@@ -16,7 +16,7 @@
 	<div id="main_menu" style="z-index: 1;">
 		<tiles:insertAttribute name="left"/>
 	</div>
-	<div id="main_body" style="z-index: 1;">
+	<div id="layout2_body" style="z-index: 1;">
 		<tiles:insertAttribute name="body"/>
 	</div>
 	<div id="main_footer" style="z-index: 1;">

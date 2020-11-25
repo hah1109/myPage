@@ -20,14 +20,21 @@ div#main_menu{
 }
 div#main_body{
 	float:left;
-	width:78%;
-	padding:5px 5px 30px 5px;
+	width:100%;
+	padding:0;
 }
 div#main_footer{
 	clear:both;
 	width:100%;
 	background-color:yellow;
 }
+
+div#layout2_body{
+	float:left;
+	width:78%;
+	padding:5px 5px 30px 5px;
+}
+
 
 /*==========메뉴==========*/
 div#main_menu ul{

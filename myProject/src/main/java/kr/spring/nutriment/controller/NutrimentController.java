@@ -1,5 +1,10 @@
 package kr.spring.nutriment.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -13,15 +18,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.board.free.vo.FreeBoardVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.nutriment.service.NutrimentService;
 import kr.spring.nutriment.vo.NutrimentVO;
+import kr.spring.util.PagingUtil;
 
 @Controller
 public class NutrimentController {
 	
 	private Logger log = Logger.getLogger(this.getClass());
 	
+	@Resource
 	NutrimentService nutrimentService;
 	
 	//자바빈 초기화
@@ -56,35 +64,54 @@ public class NutrimentController {
 	}
 
 	
-	//영양성분 검색 페이지 검색버튼 onClick event
-	@RequestMapping(value="/nutriment/nutrimentSearch.do", method=RequestMethod.GET)
-	public String nutriSearch(@RequestParam String foodName, Model model){
+	//영양성분 검색 페이지 검색
+	@RequestMapping(value="/nutriment/nutrimentSearch.do")
+	public ModelAndView nutriSearch(@RequestParam String foodName,
+									@RequestParam(value="pageNum",defaultValue="1") int currentPage){
+	
 		
+		/*****************paging 처리*************/
 		
-		//@RequestParma 으로 request에서 foodName 받아옴, 받아서 select문 돌린 후 
-		//selectNutriment의 리턴값인 nutrimentVO를 변수에 저장
-		NutrimentVO nutrimentVO = nutrimentService.selectNutriment(foodName);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("foodName", foodName);
 		
-		if(log.isDebugEnabled()) { log.debug("<<영양성분 검색>> :" + nutrimentVO);}
+		//검색된 자바빈의 개수
+		int count = nutrimentService.count(map);
+		if(log.isDebugEnabled()) { log.debug("<<검색된 영양성분 갯수>> : " + count); }
+		
+		PagingUtil page = new PagingUtil(currentPage,count,10,10,"nutrimentSearch.do","&foodName="+foodName);
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
 
+		List<NutrimentVO> list = null;
 		
-		/*if(nutriDetail != null) {//검색 결과 있을 시
+		if(count > 0) { //검색결과 있을 시 
 			
-			//모델에 자바빈 add 후 view 리턴
-			model.addAttribute("nutriDetail",nutriDetail);
-			*/
-			return "nutrimentDetail";
-		/*	
-		} else {//검색 결과 없을 시
+			list = nutrimentService.selectNutriment(map);
+			if(log.isDebugEnabled()) { log.debug("<<검색된 영양성분 목록>> : " + list); }
 			
-		
-			model.addAttribute("message", "검색 결과가 없습니다.");
-			model.addAttribute("url","nutriList.do");
+		} else  {
 			
-			return "common/result";
+			ModelAndView mav = new ModelAndView();
 			
+			mav.addObject("message", "검색 결과가 없습니다.");
+			mav.addObject("url","nutriList.do");
+			mav.setViewName("common/result");
+			
+			return mav;
 		}
-	*/
+		
+		
+		ModelAndView mav = new ModelAndView();
+		
+		
+		mav.addObject("list", list);
+		mav.addObject("count", count);
+		mav.addObject("pagingHtml", page.getPagingHtml());
+		mav.setViewName("nutrimentSearchResult");
+		
+		return mav;
+		
 	}
 
 	
@@ -121,9 +148,6 @@ public class NutrimentController {
 			model.addAttribute("message", "관리자 전용 페이지 입니다.");
 			model.addAttribute("url", "nutriList.do");
 			
-			//login.do 왜 호출 안되는지,, 해결하기,,,,
-			/*model.addAttribute("message", "로그인 후 이용가능한 페이지 입니다.");
-			model.addAttribute("url", "${pageContext.request.contextPath}/member/login.do");*/
 			
 			//model에 값 2개 넘긴 후 result.jsp 리턴
 			return "common/result";
@@ -154,17 +178,86 @@ public class NutrimentController {
 	}
 
 	//탄단지 계산기 폼 호출
-	@RequestMapping(value="/nutriment/nutriCal.do", method=RequestMethod.GET)
+	@RequestMapping(value="/nutriment/nutrimentCal.do", method=RequestMethod.GET)
 	public String nutriCalForm() {
 			
 		return "nutrimentCal";
 	}
 
 	//탄단지 계산기 결과 호출
-	@RequestMapping(value="/nutriment/nutriCal.do", method=RequestMethod.POST)
-	public ModelAndView nutriCalSubmit() {
+	@RequestMapping(value="/nutriment/nutrimentCal.do", method=RequestMethod.POST)
+	public ModelAndView nutriCalSubmit(@RequestParam(value="height") int height,
+								 @RequestParam(value="weight") int weight,
+								 @RequestParam(value="age") int age,
+								 @RequestParam(value="gender") String gender,
+								 @RequestParam(value="type") String type){
 		
-		//DB처리 없이 java or java-script로 계산	
-		return null;
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//view에 넘길 값
+		int carb = 0;
+		int protein = 0;
+		int fat = 0;
+		
+		//기초대사량 계산
+		int bmr = 0;
+		int dayCal = 0; //일일 권장 섭취량
+		
+		if(gender.equals("f")) {//여성일때
+			bmr = (int)(665.1 + (9.56 * weight) + (1.85 * height) - (4.68 * age));
+			dayCal = bmr+200;
+		} else { //남성일떄
+			bmr = (int)(66.5 + (13.7 * weight) + (5.0 * height) - (6.8 * age));
+			dayCal = bmr+200;
+		}
+		
+		mav.addObject("bmr",bmr);
+		mav.addObject("dayCal",dayCal);
+		
+		//권장 섭취량 계산
+		if(type.equals("fast")) {//빠른 체중감량 탄3단5지2
+			
+			carb = (int) (dayCal * 0.3);
+			protein = (int) (dayCal * 0.5);
+			fat = (int) (dayCal * 0.2);
+			
+		} else if(type.equals("normal")) {//적당한 체중 감량 탄4단4지2
+			
+			carb = (int) (dayCal * 0.4);
+			protein = (int) (dayCal * 0.4);
+			fat = (int) (dayCal * 0.2);
+			
+		} else if(type.equals("healthy")) {//건강한 식습관 탄5단3지2
+			
+			carb = (int) (dayCal * 0.5);
+			protein = (int) (dayCal * 0.3);
+			fat = (int) (dayCal * 0.2);
+			
+		} else if(type.equals("low")) {//저강도 운동 탄 3 단백질:몸무게*1.5 지 2
+			
+			carb = (int) (dayCal * 0.3);
+			protein = (int) (weight * 1.5);
+			fat = (int) (dayCal * 0.2);
+			
+		} else if(type.equals("high")) {//고강도 운동 탄4 단백질:몸무게*2.0 지2
+			
+			carb = (int) (dayCal * 0.4);
+			protein = (int) (weight * 2);
+			fat = (int) (dayCal * 0.2);
+			
+		}
+		
+		mav.addObject("carb",carb);
+		mav.addObject("protein",protein);
+		mav.addObject("fat",fat);
+		
+		
+		System.out.println(carb+protein+fat);
+		mav.setViewName("nutrimentCalResult");
+		
+		return mav;
 	}
+	
+	
 }

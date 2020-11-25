@@ -1,108 +1,103 @@
 package kr.spring.nutriment.vo;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Range;
 
 public class NutrimentVO {
 	
-	@NotNull
-	private int foodNum; //음식 넘버(PK)
-	@NotBlank
-	private String foodName; //음식 이름
-	@NotNull
-	private int foodWeight; //음식 중량
-	@NotNull
-	private int kcal; //칼로리
-	@NotNull
-	private int fat; //총지방
-	@NotNull
-	private int col; //콜레스테롤
-	@NotNull
-	private int na; //나트륨
-	@NotNull
-	private int carb; //총 탄수량
-	@NotNull
-	private int dietaryFiber; //식이섬유
-	@NotNull
-	private int sugars; // 당
-	@NotNull
-	private int protein; //단백질
-	
-	public int getFoodNum() {
-		return foodNum;
+	private int food_num; //음식 넘버(PK)
+	@NotEmpty
+	private String food_name; //음식 이름
+	@Range(min=0,max=1000)
+	private int food_g; //음식 중량
+	@Range(min=0,max=10000)
+	private int food_kcal; //칼로리
+	@Range(min=0,max=1000)
+	private int food_fat; //총지방
+	@Range(min=0,max=1000)
+	private int food_col; //콜레스테롤
+	@Range(min=0,max=1000)
+	private int food_na; //나트륨
+	@Range(min=0,max=1000)
+	private int food_carb; //총 탄수량
+	@Range(min=0,max=1000)
+	private int food_df; //식이섬유
+	@Range(min=0,max=1000)
+	private int food_sugars; // 당
+	@Range(min=0,max=1000)
+	private int food_protein; //단백질
+	public int getFood_num() {
+		return food_num;
 	}
-	public void setFoodNum(int foodNum) {
-		this.foodNum = foodNum;
+	public void setFood_num(int food_num) {
+		this.food_num = food_num;
 	}
-	public String getFoodName() {
-		return foodName;
+	public String getFood_name() {
+		return food_name;
 	}
-	public void setFoodName(String foodName) {
-		this.foodName = foodName;
+	public void setFood_name(String food_name) {
+		this.food_name = food_name;
 	}
-	public int getFoodWeight() {
-		return foodWeight;
+	public int getFood_g() {
+		return food_g;
 	}
-	public void setFoodWeight(int foodWeight) {
-		this.foodWeight = foodWeight;
+	public void setFood_g(int food_g) {
+		this.food_g = food_g;
 	}
-	public int getKcal() {
-		return kcal;
+	public int getFood_kcal() {
+		return food_kcal;
 	}
-	public void setKcal(int kcal) {
-		this.kcal = kcal;
+	public void setFood_kcal(int food_kcal) {
+		this.food_kcal = food_kcal;
 	}
-	public int getFat() {
-		return fat;
+	public int getFood_fat() {
+		return food_fat;
 	}
-	public void setFat(int fat) {
-		this.fat = fat;
+	public void setFood_fat(int food_fat) {
+		this.food_fat = food_fat;
 	}
-	public int getCol() {
-		return col;
+	public int getFood_col() {
+		return food_col;
 	}
-	public void setCol(int col) {
-		this.col = col;
+	public void setFood_col(int food_col) {
+		this.food_col = food_col;
 	}
-	public int getNa() {
-		return na;
+	public int getFood_na() {
+		return food_na;
 	}
-	public void setNa(int na) {
-		this.na = na;
+	public void setFood_na(int food_na) {
+		this.food_na = food_na;
 	}
-	public int getCarb() {
-		return carb;
+	public int getFood_carb() {
+		return food_carb;
 	}
-	public void setCarb(int carb) {
-		this.carb = carb;
+	public void setFood_carb(int food_carb) {
+		this.food_carb = food_carb;
 	}
-	public int getDietaryFiber() {
-		return dietaryFiber;
+	public int getFood_df() {
+		return food_df;
 	}
-	public void setDietaryFiber(int dietaryFiber) {
-		this.dietaryFiber = dietaryFiber;
+	public void setFood_df(int food_df) {
+		this.food_df = food_df;
 	}
-	public int getSugars() {
-		return sugars;
+	public int getFood_sugars() {
+		return food_sugars;
 	}
-	public void setSugars(int sugars) {
-		this.sugars = sugars;
+	public void setFood_sugars(int food_sugars) {
+		this.food_sugars = food_sugars;
 	}
-	public int getProtein() {
-		return protein;
+	public int getFood_protein() {
+		return food_protein;
 	}
-	public void setProtein(int protein) {
-		this.protein = protein;
+	public void setFood_protein(int food_protein) {
+		this.food_protein = food_protein;
 	}
-	
-	
 	@Override
 	public String toString() {
-		return "NutrimentVO [foodNum=" + foodNum + ", foodName=" + foodName + ", foodWeight=" + foodWeight + ", kcal="
-				+ kcal + ", fat=" + fat + ", col=" + col + ", na=" + na + ", carb=" + carb + ", dietaryFiber="
-				+ dietaryFiber + ", sugars=" + sugars + ", protein=" + protein + "]";
+		return "NutrimentVO [food_num=" + food_num + ", food_name=" + food_name + ", food_g=" + food_g + ", food_kcal="
+				+ food_kcal + ", food_fat=" + food_fat + ", food_col=" + food_col + ", food_na=" + food_na
+				+ ", food_carb=" + food_carb + ", food_df=" + food_df + ", food_sugars=" + food_sugars
+				+ ", food_protein=" + food_protein + "]";
 	}
-	
-	
-	
 }
