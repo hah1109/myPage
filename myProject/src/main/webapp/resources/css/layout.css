@@ -2,7 +2,7 @@
 
 /*=========레이아웃=========*/
 div#main{
-	width:1024px;
+	width:100%;
 	margin:0 auto;
 	font-size:10pt;
 	font-family: "맑은 고딕";
