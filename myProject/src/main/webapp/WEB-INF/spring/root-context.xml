@@ -69,7 +69,8 @@
 		                                           kr.spring.board.tip.vo,
 		                                           kr.spring.board.sysqna.vo,
 		                                           kr.spring.board.tranqna.vo,
-		                                           kr.spring.nutriment.vo"/>	
+		                                           kr.spring.nutriment.vo,
+		                                           kr.spring.board.hw.vo"/>	
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="kr.spring.member.dao,
@@ -78,7 +79,8 @@
 		                                    kr.spring.board.tip.dao,
 		                                    kr.spring.board.sysqna.dao,
 		                                    kr.spring.board.tranqna.dao,
-		                                    kr.spring.nutriment.dao"/>
+		                                    kr.spring.nutriment.dao,
+		                                    kr.spring.board.hw.vo"/>
 	</bean>
 	
 </beans>
