@@ -2,7 +2,7 @@
 
 /*=========레이아웃=========*/
 div#main{
-	width:1024px;
+	width:100%;
 	margin:0 auto;
 	font-size:10pt;
 	font-family: "맑은 고딕";
@@ -15,19 +15,26 @@ div#main_header{
 }
 div#main_menu{
 	float:left;
-	width:17%;
+	width:18%;
 	min-height:400px;
 }
 div#main_body{
 	float:left;
-	width:78%;
-	padding:5px 5px 30px 5px;
+	width:100%;
+	padding:0;
 }
 div#main_footer{
 	clear:both;
 	width:100%;
 	background-color:yellow;
 }
+
+div#layout2_body{
+	float:left;
+	width:78%;
+	padding:5px 5px 30px 5px;
+}
+
 
 /*==========메뉴==========*/
 div#main_menu ul{

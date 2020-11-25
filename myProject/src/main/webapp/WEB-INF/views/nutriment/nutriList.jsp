@@ -43,7 +43,6 @@
 	
 	<section>
 		<div class="resultArea" id="resultArea">
-			<!-- 표 영역 -->
 		</div>
 	</section>
 	

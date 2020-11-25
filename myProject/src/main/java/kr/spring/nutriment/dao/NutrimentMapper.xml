@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="kr.spring.nutriment.dao.NutrimentMapper">  
+
+	<select id="selectNutriment" parameterType="map" resultType="kr.spring.nutriment.vo.NutrimentVO">
+	    SELECT * FROM (SELECT a.*, rownum rnum FROM (
+		      SELECT * FROM nutriment WHERE food_name LIKE '%' || #{foodName} || '%' ORDER BY food_num DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+ 

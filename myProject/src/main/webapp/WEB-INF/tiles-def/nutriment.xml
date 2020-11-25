@@ -12,16 +12,24 @@
     	<put-attribute name="body" value="/WEB-INF/views/nutriment/nutriList.jsp"/>  
     	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>        
     </definition>
+    <definition name="nutrimentSearchResult" template="/WEB-INF/views/template/layout3.jsp">
+    	<put-attribute name="title" value="영양성분 검색기"/>
+    	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/nutriment/nutriList.jsp"/> 
+    	<put-attribute name="subBody" value="/WEB-INF/views/nutriment/nutrimentSearchResult.jsp"/> 
+    	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>        
+    </definition>
     <definition name="nutrimentCal" template="/WEB-INF/views/template/layout1.jsp">
     	<put-attribute name="title" value="일일 권장 영양소 계산기"/>
     	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
-    	<put-attribute name="body" value="/WEB-INF/views/nutriment/nutrimentCal.jsp"/>  
+    	<put-attribute name="body" value="/WEB-INF/views/nutriment/nutrimentCal.jsp"/>
     	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>        
     </definition>
-    <definition name="nutrimentCalResult" template="/WEB-INF/views/template/layout1.jsp">
-    	<put-attribute name="title" value="일일 권장 영양소 계산 결과"/>
+    <definition name="nutrimentCalResult" template="/WEB-INF/views/template/layout3.jsp">
+    	<put-attribute name="title" value="일일 권장 영양소 계산기"/>
     	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
-    	<put-attribute name="body" value="/WEB-INF/views/nutriment/nutrimentCalResult.jsp"/>  
+    	<put-attribute name="body" value="/WEB-INF/views/nutriment/nutrimentCal.jsp"/>
+     	<put-attribute name="subBody" value="/WEB-INF/views/nutriment/nutrimentCalResult.jsp"/>
     	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>        
     </definition>
     <definition name="nutrimentDetail" template="/WEB-INF/views/template/layout1.jsp">
