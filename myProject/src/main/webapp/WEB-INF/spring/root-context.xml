@@ -80,7 +80,7 @@
 		                                    kr.spring.board.sysqna.dao,
 		                                    kr.spring.board.tranqna.dao,
 		                                    kr.spring.nutriment.dao,
-		                                    kr.spring.board.hw.vo"/>
+		                                    kr.spring.board.hw.dao"/>
 	</bean>
 	
 </beans>

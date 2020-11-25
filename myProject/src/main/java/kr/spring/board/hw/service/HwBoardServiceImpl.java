@@ -1,58 +1,49 @@
 package kr.spring.board.hw.service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.servlet.ModelAndView;
+import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
+import kr.spring.board.hw.dao.HwBoardMapper;
 import kr.spring.board.hw.vo.HwBoardVO;
 
-public class HwBoardServiceImpl implements HwBoardService{
+@Service("hwBoardService")
+public class HwBoardServiceImpl implements HwBoardService {
+
+	@Resource
+	HwBoardMapper hwBoardMapper;
 
 	@Override
-	public String hwList(String part) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<HwBoardVO> hwSelectList(Map<String, Object> map) {
+		return hwBoardMapper.selectHwList(map);
 	}
 
 	@Override
-	public ModelAndView hwDetailView(int hwboard_num) {
-		// TODO Auto-generated method stub
-		return null;
+	public int selectRowCount(Map<String, Object> map) {
+		return hwBoardMapper.selectRowCount(map);
 	}
 
 	@Override
-	public String hwBoardWriteForm(int hwBoard_num, Model model) {
-		// TODO Auto-generated method stub
-		return null;
+	public void insertHwBoard(HwBoardVO hwBoardVO) {
+		hwBoardMapper.insertBoard(hwBoardVO);
 	}
 
 	@Override
-	public String submitHwBoardWrite(HwBoardVO hwBoardVO, BindingResult result, HttpServletRequest request,
-			HttpSession session) {
-		// TODO Auto-generated method stub
-		return null;
+	public HwBoardVO selectHwBoard(Integer hwBoard_num) {
+		return hwBoardMapper.selectHwBoard(hwBoard_num);
 	}
 
 	@Override
-	public String hwBoardUpdateForm(int hwBoard_num, Model model) {
-		// TODO Auto-generated method stub
-		return null;
+	public void updateHwBoard(HwBoardVO hwBoardVO) {
+		hwBoardMapper.updateHwBoard(hwBoardVO);
 	}
 
 	@Override
-	public String submitHwBoardUpdate(HwBoardVO hwBoardVO, BindingResult result, HttpServletRequest request,
-			HttpSession session, Model model) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String submitHwBoardDelete(int hwBoard_num, BindingResult result, HttpServletRequest request, Model model) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteHwBoard(Integer hwBoard_num) {
+		hwBoardMapper.deleteHwBoard(hwBoard_num);
 	}
 
 }
