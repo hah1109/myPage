@@ -33,6 +33,38 @@
        <put-attribute name="title" value="비밀번호찾기결과"/>
        <put-attribute name="body" value="/WEB-INF/views/member/findPw.jsp"/>  
     </definition>
+    <definition name="memberView" extends="main">
+       <put-attribute name="title" value="일반회원마이페이지"/>
+       <put-attribute name="body" value="/WEB-INF/views/member/memberView.jsp"/>  
+    </definition>
+    <definition name="trainerView" extends="main">
+       <put-attribute name="title" value="트레이너마이페이지"/>
+       <put-attribute name="body" value="/WEB-INF/views/member/trainerView.jsp"/>  
+    </definition>
+    <definition name="memberModify" extends="main">
+    	<put-attribute name="title" value="일반회원 상세정보 수정"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/memberModify.jsp"/>  
+    </definition> 
+    <definition name="trainerModify" extends="main">
+    	<put-attribute name="title" value="트레이너 상세정보 수정"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/trainerModify.jsp"/>  
+    </definition> 
+    <definition name="memberChangePassword" extends="main">
+    	<put-attribute name="title" value="일반회원 비밀번호 수정"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/memberChangePassword.jsp"/>  
+    </definition> 
+    <definition name="trainerChangePassword" extends="main">
+    	<put-attribute name="title" value="트레이너 비밀번호 수정"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/trainerChangePassword.jsp"/>  
+    </definition> 
+    <definition name="memberDelete" extends="main">
+    	<put-attribute name="title" value="일반회원 탈퇴"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/memberDelete.jsp"/>  
+    </definition> 
+    <definition name="trainerDelete" extends="main">
+    	<put-attribute name="title" value="트레이너 탈퇴"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/trainerDelete.jsp"/>  
+    </definition>
 </tiles-definitions>
 
 

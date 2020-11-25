@@ -29,7 +29,7 @@ public interface MemberService {
 	public void deleteMember(Integer mem_num); //auth값 3(탈퇴회원)으로 변경
 	public void deleteMember_detail(MemberVO member); //일반회원 탈퇴
 	 */
-	public void deleteMember_detail(int mem_num);
+	public void deleteMember_detail(Integer mem_num);
 
 	/*	
  	//일반회원 탈퇴관련 메서드 묶음
@@ -38,7 +38,7 @@ public interface MemberService {
  	public void deleteMember(Integer mem_num); //auth값 3(탈퇴회원)으로 변경
 	public void deleteTrainer_detail(MemberVO member); //트레이너 탈퇴
 	 */
-	public void deleteTrainer_detail(int mem_num);
+	public void deleteTrainer_detail(Integer mem_num);
 
 	//id찾기
 	public MemberVO selectFindIdMember_detail(String cell, String email);
@@ -56,10 +56,6 @@ public interface MemberService {
 	public void updateMemberPassword(MemberVO member);
 	public void updateTrainerPassword(MemberVO member);
 
-	//프로필 사진 변경
-	public void updateMemberPhoto(MemberVO member);
-	public void updateTrainerPhoto(MemberVO member);
-
 	//나머지 개인정보 변경
 	public void updateMember_detail(MemberVO member);
 	public void updateTrainer_detail(MemberVO member);
@@ -67,4 +63,8 @@ public interface MemberService {
 	//개인정보 마이페이지에 불러오기
 	public MemberVO selectMember_detail(int mem_num);
 	public MemberVO selectTrainer_detail(int mem_num);
+
+	//프로필 사진 변경
+	public void updateMemberPhoto(MemberVO member);
+	public void updateTrainerPhoto(MemberVO member);
 }

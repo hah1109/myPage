@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 public class MemberVO {
-	
+
 	// 회원번호
 	private int mem_num;
 
@@ -71,9 +71,14 @@ public class MemberVO {
 
 	//회원의 가입일
 	private Date mem_date;
-	
+
+	//비밀번호 변경시 현재 비밀번호를 저장하는 용도로 사용
+	@Size(min=4,max=10)
+	private String now_passwd;
+
+
 	//비밀번호 일치 여부 체크 db와 연결할 필요 없이 이미 정보를 불러와 셋팅한 MemberVO에서 처리
-	 public boolean isCheckedPasswd(String userPasswd){
+	public boolean isCheckedPasswd(String userPasswd){
 		/*0관리자, 1일반회원, 2트레이너, 3탈퇴회원*/
 		//탈퇴 회원이 아닌 회원들
 		if(mem_auth < 3 && mem_pw.equals(userPasswd)) {
@@ -81,7 +86,7 @@ public class MemberVO {
 		}
 		return false;
 	}
-	 
+
 	//이미지 BLOB 처리
 	//blob은 Binary Large Object의 약자 즉, 이름에서 바이너리 형태로 큰 객체를 저장할 것이라 생각하면 됨
 	//mybatis가 byte타입으로 테이블에 저장해주기에 작성한 코드
@@ -91,7 +96,7 @@ public class MemberVO {
 		//파일 이름
 		//setPhotoname(upload.getOriginalFilename());
 	}
-	
+
 	/******************************Getter&Setter*************************************/
 
 	public int getMem_num() {
@@ -238,20 +243,28 @@ public class MemberVO {
 		this.mem_date = mem_date;
 	}
 	
+	public String getNow_passwd() {
+		return now_passwd;
+	}
+
+	public void setNow_passwd(String now_passwd) {
+		this.now_passwd = now_passwd;
+	}
+
 	/******************************Getter&Setter*************************************/
-	
-	
+
+
 	/******************************toString*************************************/
-	
+
 	@Override
 	public String toString() {
 		return "MemberVO [mem_num=" + mem_num + ", mem_auth=" + mem_auth + ", mem_id=" + mem_id + ", t_num=" + t_num
 				+ ", g_addr=" + g_addr + ", career=" + career + ", exp=" + exp + ", mem_gender=" + mem_gender
 				+ ", mem_name=" + mem_name + ", mem_pw=" + mem_pw + ", mem_cell=" + mem_cell + ", mem_email="
 				+ mem_email + ", mem_zipcode=" + mem_zipcode + ", mem_addr1=" + mem_addr1 + ", mem_addr2=" + mem_addr2
-				+ ", mem_intro=" + mem_intro + ", mem_date=" + mem_date + "]";
+				+ ", mem_intro=" + mem_intro + ", mem_date=" + mem_date + ", now_passwd=" + now_passwd + "]";
 	}
-	
+
 	/******************************toString*************************************/
 
 }

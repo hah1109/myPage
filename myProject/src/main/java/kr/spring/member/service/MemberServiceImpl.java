@@ -33,16 +33,16 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.insertTrainer_detail(member);//트에이너 테이블에 저장한다
 	}
 
+	//일반회원 로그인 처리와 아이디 중복체크 확인에 쓰일 메서드
 	@Override
-	public void deleteMember_detail(int mem_num) {
-		// TODO Auto-generated method stub
-
+	public MemberVO selectCheckMember_detail(String id) {
+		return memberMapper.selectCheckMember_detail(id);
 	}
 
+	//트레이너 로그인 처리와 아이디 중복체크 확인에 쓰일 메서드
 	@Override
-	public void deleteTrainer_detail(int mem_num) {
-		// TODO Auto-generated method stub
-
+	public MemberVO selectCheckTrainer_detail(String id) {
+		return memberMapper.selectCheckTrainer_detail(id);
 	}
 
 	//일반회원 id찾는 메서드
@@ -50,7 +50,7 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO selectFindIdMember_detail(String cell, String email) {
 		return memberMapper.selectFindIdMember_detail(cell, email);
 	}
-	
+
 	//트레이너 id찾는 메서드
 	@Override
 	public MemberVO selectFindIdTrainer_detail(String cell, String email) {
@@ -70,28 +70,46 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.selectFindPwTrainer_detail(id, cell);
 	}
 
-	//일반회원 로그인 처리와 아이디 중복체크 확인에 쓰일 메서드
-	@Override
-	public MemberVO selectCheckMember_detail(String id) {
-		return memberMapper.selectCheckMember_detail(id);
-	}
-
-	//트레이너 로그인 처리와 아이디 중복체크 확인에 쓰일 메서드
-	@Override
-	public MemberVO selectCheckTrainer_detail(String id) {
-		return memberMapper.selectCheckTrainer_detail(id);
-	}
-
 	@Override
 	public void updateMemberPassword(MemberVO member) {
-		// TODO Auto-generated method stub
-
+		memberMapper.updateMemberPassword(member);
 	}
 
 	@Override
 	public void updateTrainerPassword(MemberVO member) {
-		// TODO Auto-generated method stub
+		memberMapper.updateTrainerPassword(member);
+	}
+	
+	@Override
+	public void deleteMember_detail(Integer mem_num) {
+		memberMapper.deleteMember(mem_num); //auth값 3(탈퇴회원)으로 변경
+		memberMapper.deleteMember_detail(mem_num); //일반회원 탈퇴
+	}
 
+	@Override
+	public void deleteTrainer_detail(Integer mem_num) {
+		memberMapper.deleteMember(mem_num); //auth값 3(탈퇴회원)으로 변경
+		memberMapper.deleteTrainer_detail(mem_num); //트레이너 탈퇴
+	}
+
+	@Override
+	public void updateMember_detail(MemberVO member) {
+		memberMapper.updateMember_detail(member);
+	}
+
+	@Override
+	public void updateTrainer_detail(MemberVO member) {
+		memberMapper.updateTrainer_detail(member);
+	}
+
+	@Override
+	public MemberVO selectMember_detail(int mem_num) {
+		return memberMapper.selectMember_detail(mem_num);
+	}
+
+	@Override
+	public MemberVO selectTrainer_detail(int mem_num) {
+		return memberMapper.selectTrainer_detail(mem_num);
 	}
 
 	@Override
@@ -105,30 +123,5 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 
 	}
-
-	@Override
-	public void updateMember_detail(MemberVO member) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void updateTrainer_detail(MemberVO member) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public MemberVO selectMember_detail(int mem_num) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public MemberVO selectTrainer_detail(int mem_num) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 }

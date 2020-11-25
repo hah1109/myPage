@@ -57,22 +57,15 @@ public interface MemberMapper {
 
 
 	//비밀번호 변경
-	@Update("UPDATE member_detail SET mem_pw=#{mem_pw} WHERE m.mem_id=#{mem_id}")
+	@Update("UPDATE member_detail SET mem_pw=#{mem_pw} WHERE mem_num=#{mem_num}")
 	public void updateMemberPassword(MemberVO member);
-	@Update("UPDATE trainer_detail SET mem_pw=#{mem_pw} WHERE m.mem_id=#{mem_id}")
+	@Update("UPDATE trainer_detail SET mem_pw=#{mem_pw} WHERE mem_num=#{mem_num}")
 	public void updateTrainerPassword(MemberVO member);
 
-
-	//프로필 사진 변경
-	@Update("UPDATE member_detail SET mem_pic=#{mem_pic} WHERE mem_num=#{mem_num}")
-	public void updateMemberPhoto(MemberVO member);
-	@Update("UPDATE trainer_detail SET mem_pic=#{mem_pic} WHERE mem_num=#{mem_num}")
-	public void updateTrainerPhoto(MemberVO member);
-
 	//나머지 개인정보 변경
-	@Update("UPDATE member_detail SET t_num=#{t_num},mem_cell=#{mem_cell},mem_email=#{mem_email},mem_pic=#{mem_pic},mem_zipcode=#{mem_zipcode},mem_addr1=#{mem_addr1},mem_addr2=#{mem_addr2},mem_intro=#{mem_intro} WHERE mem_num=#{mem_num}")
+	@Update("UPDATE member_detail SET mem_cell=#{mem_cell},mem_email=#{mem_email},mem_zipcode=#{mem_zipcode},mem_addr1=#{mem_addr1},mem_addr2=#{mem_addr2} WHERE mem_num=#{mem_num}")
 	public void updateMember_detail(MemberVO member);
-	@Update("UPDATE trainer_detail SET g_addr=#{g_addr},career=#{career},exp=#{exp},mem_cell=#{mem_cell},mem_email=#{mem_email},mem_pic=#{mem_pic},mem_zipcode=#{mem_zipcode},mem_addr1=#{mem_addr1},mem_addr2=#{mem_addr2},mem_intro=#{mem_intro} WHERE mem_num=#{mem_num}")
+	@Update("UPDATE trainer_detail SET g_addr=#{g_addr},career=#{career},exp=#{exp},mem_cell=#{mem_cell},mem_email=#{mem_email},mem_zipcode=#{mem_zipcode},mem_addr1=#{mem_addr1},mem_addr2=#{mem_addr2} WHERE mem_num=#{mem_num}")
 	public void updateTrainer_detail(MemberVO member);
 
 	//개인정보 마이페이지에 불러오기
@@ -81,9 +74,8 @@ public interface MemberMapper {
 	@Select("SELECT m.mem_id,d.g_addr,d.career,d.mem_gender,d.exp,d.mem_name,d.mem_pw,d.mem_cell,d.mem_email,d.mem_pic,d.mem_zipcode,d.mem_addr1,d.mem_addr2,d.mem_intro,d.mem_date FROM member m LEFT OUTER JOIN trainer_detail d ON m.mem_num=d.mem_num WHERE m.mem_num=#{mem_num}")
 	public MemberVO selectTrainer_detail(Integer mem_num);
 
-
 	//회원탈퇴시 auth값 변경
-	@Update("UPDATE member SET auth=3 WHERE mem_num=#{mem_num}")
+	@Update("UPDATE member SET mem_auth=3 WHERE mem_num=#{mem_num}")
 	public void deleteMember(Integer mem_num);
 
 	//회원탈퇴시 탈퇴회원 삭제
@@ -91,5 +83,13 @@ public interface MemberMapper {
 	public void deleteMember_detail(int mem_num); 
 	@Delete("DELETE FROM trainer_detail WHERE mem_num=#{mem_num}")
 	public void deleteTrainer_detail(int mem_num); 
+
+	//아직 안씀
+	//프로필 사진 변경
+	@Update("UPDATE member_detail SET mem_pic=#{mem_pic} WHERE mem_num=#{mem_num}")
+	public void updateMemberPhoto(MemberVO member);
+	@Update("UPDATE trainer_detail SET mem_pic=#{mem_pic} WHERE mem_num=#{mem_num}")
+	public void updateTrainerPhoto(MemberVO member);
+
 
 }

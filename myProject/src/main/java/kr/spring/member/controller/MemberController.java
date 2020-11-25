@@ -221,16 +221,6 @@ public class MemberController {
 		return "redirect:/main/main.do";
 	}
 
-	/*===여기 까지 함============================================================================================*/
-
-	//로그인 폼에서 id/pw버튼을 클릭했을시 호출될 메서드
-	//id/pw 찾기 폼
-	@RequestMapping(value="/member/findIdPw.do", method=RequestMethod.GET)
-	public String formFindIdPw() {
-		//definition 설정명 호출
-		return "findIdPw";
-	}
-
 	//아이디,비밀번호 찾기 후 세션 삭제 처리
 	@RequestMapping("/member/findExit.do")
 	public String findExit(HttpSession session) {   
@@ -238,6 +228,14 @@ public class MemberController {
 		//단순하게 세션값을 없애는 작업
 		session.invalidate();
 		return "redirect:/member/login.do";
+	}
+
+	//로그인 폼에서 id/pw버튼을 클릭했을시 호출될 메서드
+	//id/pw 찾기 폼
+	@RequestMapping(value="/member/findIdPw.do", method=RequestMethod.GET)
+	public String formFindIdPw() {
+		//definition 설정명 호출
+		return "findIdPw";
 	}
 
 	//id/pw찾기 폼에서 양식을 기입하고 id찾기를 눌렀을경우 실행될 메서드
@@ -290,6 +288,8 @@ public class MemberController {
 		return "redirect:/member/login.do";
 	}
 
+	/*===여기 까지 함============================================================================================*/
+
 	//일반회원 상세 정보
 	//마이페이지에 보여질 정보
 	@RequestMapping("/member/myPage.do")
@@ -315,222 +315,197 @@ public class MemberController {
 
 	}  
 
-	//일반회원 정보 수정 폼
-	@RequestMapping(value="/member/updateMember.do",method=RequestMethod.GET)
+	//일반회원/트레이너 정보 수정 폼
+	@RequestMapping(value="/member/update.do",method=RequestMethod.GET)
 	public String formUpdateMember(HttpSession session,Model model) {
 
 		//회원 번호가 필요함
 		//회원 번호를 구하기 위해 session에 저장된 회원 정보 반환
 		MemberVO memberVO = (MemberVO)session.getAttribute("user");
 
-		MemberVO member = memberService.selectMember_detail(memberVO.getMem_num());
-
-		model.addAttribute("memberVO", member);
-
-		return "memberModify";
+		if(memberVO.getMem_auth() == 1) {
+			MemberVO member = memberService.selectMember_detail(memberVO.getMem_num());
+			model.addAttribute("memberVO", member);
+			return "memberModify";
+		}else if(memberVO.getMem_auth() == 2) {
+			MemberVO member = memberService.selectTrainer_detail(memberVO.getMem_num());
+			model.addAttribute("memberVO", member);
+			return "trainerModify";
+		}
+		return myPage(session, model);
 	}
 
+	//일반회원/트레이너 회원정보 수정 처리
+	@RequestMapping(value="/member/update.do",method=RequestMethod.POST)
+	public String submitUpdateMember(@Valid MemberVO memberVO, BindingResult result, HttpSession session) {
+		//회원 정보를 얻기 위해 session에 저장된 회원 정보 반환
+		MemberVO member = (MemberVO)session.getAttribute("user");
 
-	//트레이너 정보 수정 폼
-	@RequestMapping(value="/member/updateTrainer.do",method=RequestMethod.GET)
-	public String formUpdateTrainer(HttpSession session,Model model) {
+		if(member.getMem_auth() == 1) {
+			//전송된 데이터가 저장된 자바빈에 회원 번호를 저장
+			memberVO.setMem_num(member.getMem_num());
+			//회원 정보 수정
+			memberService.updateMember_detail(memberVO);
+			return "redirect:/member/myPage.do";
+		}else if(member.getMem_auth() == 2) {
+			//전송된 데이터가 저장된 자바빈에 회원 번호를 저장
+			memberVO.setMem_num(member.getMem_num());
+			//회원 정보 수정
+			memberService.updateTrainer_detail(memberVO);
+			return "redirect:/member/myPage.do";
+		}
+		return "redirect:/member/myPage.do";
+	}
 
-		//회원 번호가 필요함
-		//회원 번호를 구하기 위해 session에 저장된 회원 정보 반환
+	//회원 비밀번호 변경 폼
+	@RequestMapping(value="/member/updatePw.do",method=RequestMethod.GET)
+	public String formMemberChangePassword(HttpSession session,Model model) {
 		MemberVO memberVO = (MemberVO)session.getAttribute("user");
 
-		MemberVO member = memberService.selectTrainer_detail(memberVO.getMem_num());
-
-		model.addAttribute("memberVO", member);
-
-		return "trainerModify";
-	}
-
-	//회원 정보 수정 처리
-	@RequestMapping(value="/member/memberUpdate.do",method=RequestMethod.POST)
-	public String submitUpdateMember(@Valid MemberVO memberVO, BindingResult result, HttpSession session) {
-
-
-		//회원 번호를 얻기 위해 session에 저장된 회원 정보 반환
-		MemberVO member = (MemberVO)session.getAttribute("user");
-
-		//전송된 데이터가 저장된 자바빈에 회원 번호를 저장
-		member.setMem_num(memberVO.getMem_num());
-
-		//회원 정보 수정
-		memberService.updateMember_detail(member);
-
+		if(memberVO.getMem_auth() == 1) {
+			model.addAttribute("user", memberVO);
+			return "memberChangePassword";
+		}else if(memberVO.getMem_auth() == 2) {
+			model.addAttribute("user", memberVO);
+			return "trainerChangePassword";
+		}
 		return "redirect:/member/myPage.do";
-	}
-
-	//회원 정보 수정 처리
-	@RequestMapping(value="/member/TrainerUpdate.do",method=RequestMethod.POST)
-	public String submitUpdateTrainer(@Valid MemberVO memberVO, BindingResult result, HttpSession session) {
-
-
-		//회원 번호를 얻기 위해 session에 저장된 회원 정보 반환
-		MemberVO member = (MemberVO)session.getAttribute("user");
-
-		//전송된 데이터가 저장된 자바빈에 회원 번호를 저장
-		memberVO.setMem_num(member.getMem_num());
-
-		//회원 정보 수정
-		memberService.updateMember_detail(member);
-
-		return "redirect:/member/myPage.do";
-	}
-
-	//일반회원 비밀번호 변경 폼
-	@RequestMapping(value="/member/memberChangePassword.do",method=RequestMethod.GET)
-	public String formMemberChangePassword() {
-		return "memberChangePassword";
-	}
-
-	//트레이너 비밀번호 변경 폼
-	@RequestMapping(value="/member/trainerChangePassword.do",method=RequestMethod.GET)
-	public String formTrainerChangePassword() {
-		return "trainerChangePassword";
 	}
 
 	//일반회원 비밀번호 변경 처리
-	@RequestMapping(value="/member/memberChangePassword.do",method=RequestMethod.POST)
+	@RequestMapping(value="/member/changePassword.do",method=RequestMethod.POST)
 	public String submitMemberChangePassword(@Valid MemberVO memberVO, BindingResult result, HttpSession session) {
 
-		//정상 전송일 경우
-		//회원 번호를 얻기 위해서 세션에 저장된 회원 정보 반환
-		MemberVO vo = (MemberVO)session.getAttribute("user");
+		if(log.isDebugEnabled()) {
+			log.debug("<<비밀번호 변경 처리>> : " + memberVO);
+		}
 
-		//현재 비밀번호와 변경할 비밀번호가 저장되 자바빈에 회원 번호 저장
-		memberVO.setMem_num(vo.getMem_num());
-
-		//회원 번호를 통해서 회원 정보를 db로부터 읽어와서 입력한 현재 비밀번호와
-		//db에서 읽어온 현재 비밀번호가 일치하는지 확인
-		MemberVO member = memberService.selectMember_detail(memberVO.getMem_num());
-
-
-		/*
-		if(!member.getMem_pw().equals(memberVO.getNow_passwd())) {
-			result.rejectValue("now_passwd", "invalidPassword");
+		//현재 비밀번호와 변경할 비밀번호가 전송됐는지 여부를 체크
+		if(result.hasFieldErrors("now_passwd") || result.hasFieldErrors("passwd")) {
 			return "memberChangePassword";
 		}
-		 */
-
-
-		//일치할 경우 비밀번호 수정 처리
-		//memberService.updateMemberPassword_detail(memberVO);
-
-		return "redirect:/member/myPageMember.do";
-	}
-
-
-	//트레이너 비밀번호 변경 처리
-	@RequestMapping(value="/member/trainerChangePassword.do",method=RequestMethod.POST)
-	public String submitTrainerChangePassword(@Valid MemberVO memberVO, BindingResult result, HttpSession session) {
 
 		//정상 전송일 경우
 		//회원 번호를 얻기 위해서 세션에 저장된 회원 정보 반환
 		MemberVO vo = (MemberVO)session.getAttribute("user");
 
-		//현재 비밀번호와 변경할 비밀번호가 저장되 자바빈에 회원 번호 저장
-		memberVO.setMem_num(vo.getMem_num());
+		if(vo.getMem_auth() == 1) {
+			//현재 비밀번호와 변경할 비밀번호가 저장된 자바빈에 회원 번호 저장
+			memberVO.setMem_num(vo.getMem_num());
 
-		//회원 번호를 통해서 회원 정보를 db로부터 읽어와서 입력한 현재 비밀번호와
-		//db에서 읽어온 현재 비밀번호가 일치하는지 확인
-		MemberVO member = memberService.selectTrainer_detail(memberVO.getMem_num());
+			//회원 번호를 통해서 회원 정보를 db로부터 읽어와서 입력한 현재 비밀번호와
+			//db에서 읽어온 현재 비밀번호가 일치하는지 확인
+			MemberVO member = memberService.selectMember_detail(memberVO.getMem_num());
 
+			if(!member.getMem_pw().equals(memberVO.getNow_passwd())) {
+				result.rejectValue("now_passwd","invalidPassword");
+				return "memberChangePassword";
+			}
 
-		/*
-		if(!member.getPasswd().equals(memberVO.getNow_passwd())) {
-			result.rejectValue("now_passwd", "invalidPassword");
-			return "trianerChangePassword";
+			//일치할 경우 비밀번호 수정 처리
+			memberService.updateMemberPassword(memberVO);
+			return "redirect:/member/myPage.do";
+		}else if(vo.getMem_auth() == 2) {
+			//현재 비밀번호와 변경할 비밀번호가 저장되 자바빈에 회원 번호 저장
+			memberVO.setMem_num(vo.getMem_num());
+
+			//회원 번호를 통해서 회원 정보를 db로부터 읽어와서 입력한 현재 비밀번호와
+			//db에서 읽어온 현재 비밀번호가 일치하는지 확인
+			MemberVO member = memberService.selectTrainer_detail(memberVO.getMem_num());
+
+			if(!member.getMem_pw().equals(memberVO.getNow_passwd())) {
+				result.rejectValue("now_passwd","invalidPassword");
+				return "memberChangePassword";
+			}
+
+			//일치할 경우 비밀번호 수정 처리
+			memberService.updateTrainerPassword(memberVO);
+			return "redirect:/member/myPage.do";
 		}
-		 */
 
-		//일치할 경우 비밀번호 수정 처리
-		//memberService.updateTrainerPassword_detail(memberVO);
-
-		return "redirect:/member/myPageMember.do";
+		return "redirect:/member/myPage.do";
 	}
 
-	//일반회원 회원 탈퇴 폼
-	@RequestMapping(value="/member/memberdelete.do",method=RequestMethod.GET)
-	public String formMemberDelete() {
-		return "memberDelete";
-	}
+	//일반회원/트레이너 회원탈퇴 폼
+	@RequestMapping(value="/member/delete.do",method=RequestMethod.GET)
+	public String formMemberDelete(HttpSession session,Model model) {
 
+		MemberVO memberVO = (MemberVO)session.getAttribute("user");
+		if(memberVO.getMem_auth() == 1) {
+			model.addAttribute("user", memberVO);
+			return "memberDelete";
+		}else if(memberVO.getMem_auth() == 2) {
+			model.addAttribute("user", memberVO);
+			return "trainerDelete";
+		}
+		return "redirect:/member/myPage.do";
 
-	//트레이너 회원 탈퇴 폼
-	@RequestMapping(value="/member/trainerdelete.do",method=RequestMethod.GET)
-	public String formTrainerDelete() {
-		return "trainerDelete";
 	}
 
 	//일반회원 회원 탈퇴 처리
-	@RequestMapping(value="/member/memberdelete.do",method=RequestMethod.POST)
+	@RequestMapping(value="/member/delete.do",method=RequestMethod.POST)
 	public String submitMemberDelete(@Valid MemberVO memberVO, BindingResult result, HttpSession session) {
 
 		//회원 번호를 얻기 위해 세션에 저장된 회원 정보 반환
 		MemberVO vo = (MemberVO)session.getAttribute("user");
-		//전송된 데이터가 저장된 자바빈에 회원 번호를 저장
-		memberVO.setMem_num(vo.getMem_num());
+		
+		if(vo.getMem_auth() == 1) {
+			//전송된 데이터가 저장된 자바빈에 회원 번호를 저장
+			memberVO.setMem_num(vo.getMem_num());
 
-		//비밀번호 일치 여부 체크
-		//회원 번호를 이용해서 회원 정보를 읽기
-		MemberVO member = memberService.selectMember_detail(memberVO.getMem_num());
-		boolean check = false;
-
-		//데이터가 있을 경우
-		if(memberVO!=null && memberVO.getMem_id().equals(vo.getMem_id())) {
 			//비밀번호 일치 여부 체크
-			check = memberVO.isCheckedPasswd(memberVO.getMem_pw());
-		}
+			//회원 번호를 이용해서 회원 정보를 읽기
+			MemberVO member = memberService.selectMember_detail(memberVO.getMem_num());
+			boolean check = false;
 
-		if(check) {
-			//인증 성공, 회원정보 삭제
-			memberService.deleteMember_detail(memberVO.getMem_num());
+			//데이터가 있을 경우
+			if(member!=null && memberVO.getMem_id().equals(vo.getMem_id())) {
+				//비밀번호 일치 여부 체크
+				check = member.isCheckedPasswd(memberVO.getMem_pw());
+			}
 
-			//로그아웃
-			session.invalidate();
-			return "redirect:/main/main.do";
-		}else {
-			//인증 실패
-			result.reject("invalidIdOrPassword");
-			return "memberDelete";
-		}
-	}
+			if(check) {
+				//인증 성공, 회원정보 삭제
+				memberService.deleteMember_detail(memberVO.getMem_num());
 
-	//트레이너 회원 탈퇴 처리
-	@RequestMapping(value="/member/trainerdelete.do",method=RequestMethod.POST)
-	public String submitTrainerDelete(@Valid MemberVO memberVO, BindingResult result, HttpSession session) {
+				//로그아웃
+				session.invalidate();
+				return "redirect:/main/main.do";
+			}else {
+				//인증 실패
+				result.reject("invalidIdOrPassword");
+				return "memberDelete";
+			}
+		}else if(vo.getMem_auth() == 2){
+			//전송된 데이터가 저장된 자바빈에 회원 번호를 저장
+			memberVO.setMem_num(vo.getMem_num());
 
-		//회원 번호를 얻기 위해 세션에 저장된 회원 정보 반환
-		MemberVO vo = (MemberVO)session.getAttribute("user");
-		//전송된 데이터가 저장된 자바빈에 회원 번호를 저장
-		memberVO.setMem_num(vo.getMem_num());
-
-		//비밀번호 일치 여부 체크
-		//회원 번호를 이용해서 회원 정보를 읽기
-		MemberVO member = memberService.selectTrainer_detail(memberVO.getMem_num());
-		boolean check = false;
-
-		//데이터가 있을 경우
-		if(memberVO!=null && memberVO.getMem_id().equals(vo.getMem_id())) {
 			//비밀번호 일치 여부 체크
-			check = memberVO.isCheckedPasswd(memberVO.getMem_pw());
-		}
+			//회원 번호를 이용해서 회원 정보를 읽기
+			MemberVO member = memberService.selectTrainer_detail(memberVO.getMem_num());
+			boolean check = false;
 
-		if(check) {
-			//인증 성공, 회원정보 삭제
-			memberService.deleteTrainer_detail(memberVO.getMem_num());
+			//데이터가 있을 경우
+			if(member!=null && memberVO.getMem_id().equals(vo.getMem_id())) {
+				//비밀번호 일치 여부 체크
+				check = member.isCheckedPasswd(memberVO.getMem_pw());
+			}
 
-			//로그아웃
-			session.invalidate();
-			return "redirect:/main/main.do";
-		}else {
-			//인증 실패
-			result.reject("invalidIdOrPassword");
-			return "trainerDelete";
+			if(check) {
+				//인증 성공, 회원정보 삭제
+				memberService.deleteTrainer_detail(memberVO.getMem_num());
+
+				//로그아웃
+				session.invalidate();
+				return "redirect:/main/main.do";
+			}else {
+				//인증 실패
+				result.reject("invalidIdOrPassword");
+				return "memberDelete";
+			}
 		}
+		return "redirect:/member/login.do";
+
 	}
 
 	//이미지 출력
