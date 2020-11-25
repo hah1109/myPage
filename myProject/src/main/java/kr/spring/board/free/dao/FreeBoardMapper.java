@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.board.free.vo.FreeBoardVO;
+import kr.spring.comment.freec.vo.FreeBoardCommentVO;
 
 public interface FreeBoardMapper {
 	
@@ -32,5 +33,11 @@ public interface FreeBoardMapper {
 	
 	@Delete("DELETE FROM board_free WHERE free_num=#{free_num}")
 	public void deleteBoardFree(Integer free_num);
+	
+	@Insert("INSERT INTO board_free_comment (freec_num, free_comment, free_num, mem_num) VALUES (freec_num_seq.nextval,#{free_comment},#{free_num},#{mem_num})")
+	public int insertFreeComment(FreeBoardCommentVO free_comment);
+	
+	//Mapper
+	public List<FreeBoardCommentVO> selectFreeComment(Integer free_num);
 	
 }

@@ -7,6 +7,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
+		var pre_upload = $('#upload').val();
 		var photo_path;
 		var free_photo;
 		$('#upload').change(function(){
@@ -32,7 +33,7 @@
 		$('.reset_photo').click(function(){
 			$(this).hide();
 			$('#free_mfile').attr('src',photo_path).show();
-			$('#upload').val("");
+			$('#upload').val('');
 		});
 		
 		$('.cancel_photo').click(function(){

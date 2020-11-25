@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.board.free.service.FreeBoardService;
 import kr.spring.board.free.vo.FreeBoardVO;
+import kr.spring.comment.freec.vo.FreeBoardCommentVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
 
@@ -121,14 +122,18 @@ public class FreeBoardController {
 	public String process(@RequestParam int free_num, Model model, HttpSession session) {
 		if(log.isDebugEnabled()) log.debug("<<글상세>> : " + free_num);
 
-		FreeBoardVO freeBoardVO = freeBoardService.selectBoardFree(free_num);				
+		FreeBoardVO freeBoardVO = freeBoardService.selectBoardFree(free_num);
+		List<FreeBoardCommentVO> freeCommentList = freeBoardService.selectFreeComment(free_num);
+		freeBoardVO.setCommentList(freeCommentList);
 		
 		//다른 아이디로 조회하는 경우에만 해당 글의 조회 수 증가
 		MemberVO member = (MemberVO)session.getAttribute("user");
 		if(member.getMem_num() != freeBoardVO.getMem_num()) {
 			freeBoardService.updateHitBoardFree(free_num);
 		}
+		
 		model.addAttribute("boardFree", freeBoardVO);
+		model.addAttribute("freeCommentList",freeCommentList);
 		return "boardFreeView";
 	}
 

@@ -72,5 +72,17 @@
 			free_num = #{free_num}
 	</update>
 	
+	<select id="selectFreeComment" parameterType="integer" resultType="FreeBoardCommentVO">
+		SELECT * FROM board_free_comment c JOIN (
+												SELECT m.*, CASE WHEN mem_auth = 1 then '일반회원'
+	             												 WHEN mem_auth = 2 then '트레이너'
+	            											     WHEN mem_auth = 0 then '관리자'
+	               												 else '기타' END as mem_auth_s FROM member m
+	               								)
+	                USING(mem_num)
+                WHERE free_num = #{free_num}
+		 ORDER BY freec_num DESC
+	</select>
+	
 
 </mapper>

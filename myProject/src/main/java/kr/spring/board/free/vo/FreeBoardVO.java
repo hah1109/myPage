@@ -2,10 +2,13 @@ package kr.spring.board.free.vo;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import kr.spring.comment.freec.vo.FreeBoardCommentVO;
 
 public class FreeBoardVO {	
 
@@ -28,14 +31,12 @@ public class FreeBoardVO {
 	private String mem_id;
 	private int mem_auth;
 	
+	private List<FreeBoardCommentVO> commentList;
+	
 	public void setUpload(MultipartFile upload) throws IOException{
+		if(upload == null) return;
 		setFree_file(upload.getBytes());
 		setFree_filename(upload.getOriginalFilename());
-	}
-	
-	public void setMuplod(MultipartFile mupload) throws IOException{
-		setFree_file(mupload.getBytes());
-		setFree_filename(mupload.getOriginalFilename());
 	}
 	
 	public int getFree_num() {
@@ -121,6 +122,14 @@ public class FreeBoardVO {
 		this.mem_auth = mem_auth;
 	}
 	
+
+	public List<FreeBoardCommentVO> getCommentList() {
+		return commentList;
+	}
+
+	public void setCommentList(List<FreeBoardCommentVO> commentList) {
+		this.commentList = commentList;
+	}
 
 	@Override
 	public String toString() {

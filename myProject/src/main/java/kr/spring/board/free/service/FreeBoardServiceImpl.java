@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.spring.board.free.dao.FreeBoardMapper;
 import kr.spring.board.free.vo.FreeBoardVO;
+import kr.spring.comment.freec.vo.FreeBoardCommentVO;
 
 @Service("freeBoardService")
 public class FreeBoardServiceImpl implements FreeBoardService{
@@ -51,4 +52,16 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		freeBoardMapper.deleteBoardFree(free_num);
 	}
 
+	@Override
+	public int insertFreeComment(FreeBoardCommentVO free_comment) {
+		return freeBoardMapper.insertFreeComment(free_comment);		
+	}
+
+	@Override
+	public List<FreeBoardCommentVO> selectFreeComment(Integer free_num) {
+		return freeBoardMapper.selectFreeComment(free_num);
+	}
+	
+	
+	
 }

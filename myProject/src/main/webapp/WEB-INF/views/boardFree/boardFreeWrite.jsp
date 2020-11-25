@@ -66,7 +66,7 @@
 		<div class="align-center">
 			<input type="submit" value="글등록">
 			<input type="button" value="목록"
-			       onclick="location.href='write.do'">
+			       onclick="location.href='list.do'">
 		</div> 
 	</form:form> 
 </div>

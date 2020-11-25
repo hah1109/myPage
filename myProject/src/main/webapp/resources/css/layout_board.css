@@ -197,6 +197,7 @@ input[id="zipcode"]{
 	width:95px;
 }
 
+/*================페이지 10개씩,20개씩등등 보기=============*/
 
 .selectRowCount > ul { 
     height: 30px;
@@ -210,6 +211,21 @@ input[id="zipcode"]{
 .selectRowCount > ul > li { cursor: pointer; }
 
 .selectRowCount > a#submit { z-index: 1; }
+
+/*=====================댓글창======================*/
+form#commentbox{
+	border:none;
+}
+input#comment{
+	width:500px;
+	height:30px;
+}
+div.commentList a:hover{
+	cursor: pointer;
+	color:blue;
+	text-decoration: underline;
+}
+
 
 
 
