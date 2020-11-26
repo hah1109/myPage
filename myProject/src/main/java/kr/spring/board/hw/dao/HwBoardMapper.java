@@ -16,10 +16,10 @@ public interface HwBoardMapper {
 	public List<HwBoardVO> selectHwList(Map<String, Object> map);
 
 	//페이지 넘버
-	public int selectRowCount(Map<String, Object> map);
+	public int selectHwRowCount(Map<String, Object> map);
 
 	//글등록
-	@Insert("INSERT INTO hwboard (hw_num,hw_title,hw_link,hw_part,hw_kcal) values(board_seq.nextval, #{title},#{link},#{part},#{kcal})")
+	@Insert("INSERT INTO hwboard (hw_num,hw_title,hw_link,hw_part,hw_kcal) values(hwboard_seq.nextval, #{hw_title},#{hw_link},#{hw_part},#{hw_kcal})")
 	public void insertBoard(HwBoardVO hwBoard_);
 
 	//상세페이지

@@ -22,8 +22,9 @@ public class HwBoardServiceImpl implements HwBoardService {
 	}
 
 	@Override
-	public int selectRowCount(Map<String, Object> map) {
-		return hwBoardMapper.selectRowCount(map);
+	public int selectHwRowCount(Map<String, Object> map) {
+		System.out.println("service" + map);
+		return hwBoardMapper.selectHwRowCount(map);
 	}
 
 	@Override

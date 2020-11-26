@@ -37,6 +37,8 @@ public class HwBoardController {
 		return new HwBoardVO();
 	}
 	
+	
+	
 	//list 호출	
 	// 트레이닝 화면을 호출해주는 부분
 	//조건에 따라 view에 노출되는 동영상, 메인 글씨 변경(조건은 부위를 조건으로)
@@ -44,7 +46,7 @@ public class HwBoardController {
 	@RequestMapping(value="/homeTraining/hwList.do")
 	public ModelAndView hwList(@RequestParam(value="pageNum", defaultValue="1")
 						 int currentPage,
-						 @RequestParam(value="keyfield",defaultValue="")
+						 @RequestParam(value="keyfield", defaultValue="")
 						 String keyfield,
 						 @RequestParam(value="keyword", defaultValue="")
 						 String keyword) {
@@ -53,29 +55,36 @@ public class HwBoardController {
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		
+		if(log.isDebugEnabled()) {
+			log.debug("<<count>>0 : " + map);
+		}
+		
+		
 		//총 글 갯수
-		int count = hwBoardService.selectRowCount(map);
+		int count = hwBoardService.selectHwRowCount(map);
 		
 		//로그
 		if(log.isDebugEnabled()) {
-			log.debug("<<count>> : " + count);
+			log.debug("<<count>> : " + count + map);
 		}
 		
-		PagingUtil page = new PagingUtil(keyfield, keyword,currentPage,count,10,10,"hwboardlist.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword,currentPage,count,10,10,"hwList.do");
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
 	
 		List<HwBoardVO> list = null;
 		if(count > 0) {
 			list = hwBoardService.hwSelectList(map);
-			
+			for(HwBoardVO img:list) {
+				
+			}
 			if(log.isDebugEnabled()) {
 				log.debug("<<글 목록>> : " + list);
 			}
 		}
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("hwBoardList");
+		mav.setViewName("hwList");
 		mav.addObject("count",count);
 		mav.addObject("list", list);
 		mav.addObject("pagingHtml", page.getPagingHtml());
@@ -96,14 +105,20 @@ public class HwBoardController {
 	}
 
 	//관리자만 등록할 수 있는 버튼이눌렸을 경우 글 등록 폼 호출
-	@RequestMapping(value="/hwboard/hwboardwrite.do",method=RequestMethod.GET)
+	@RequestMapping(value="/homeTraining/hwBoardWrite.do",method=RequestMethod.GET)
 	public String form() {
-		return "hwBoardWrite";
+		return "/homeTraining/hwBoardWrite";
 	}
 	
 	//등록 폼에서 글 등록(Submit)
-	@RequestMapping(value="/homeTraining/hwBoardwrite.do", method=RequestMethod.POST)
+	@RequestMapping(value="/homeTraining/hwBoardWrite.do", method=RequestMethod.POST)
 	public String submitHwBoardWrite(@Valid HwBoardVO hwBoardVO, BindingResult result, HttpServletRequest request,HttpSession session) {
+		System.out.println("rkrkrkrkkr");
+		if(result!=null) {
+			String link = hwBoardVO.getHw_link();
+			System.out.println(link);
+			
+		}
 		//로그
 		if(log.isDebugEnabled()) {
 			log.debug("<<hw게시판 글 저장>> : " + hwBoardVO);
@@ -111,7 +126,7 @@ public class HwBoardController {
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
-			return "hwBoardWrite";
+			return "/homeTraining/hwBoardWrite";
 		}
 		
 		//글쓰기
