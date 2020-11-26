@@ -24,10 +24,8 @@ public class FreeBoardAjaxController {
 	@RequestMapping("/boardFree/list_comment.do")
 	@ResponseBody
 	public List<FreeBoardCommentVO> list(@RequestParam int free_num){		
-		return freeBoardService.selectFreeComment(free_num);
+		return freeBoardService.selectListFreeComment(free_num);
 	}
-	
-	
 	
 	@RequestMapping("/boardFree/submit_freecomment.do")
 	@ResponseBody
@@ -45,6 +43,21 @@ public class FreeBoardAjaxController {
 		return freeBoardService.insertFreeComment(free_comment);		
 	}
 	
+	@RequestMapping("/boardFree/update_freecomment.do")
+	@ResponseBody
+	public int updateComment(@RequestParam int freec_num,@RequestParam String update_comment) {
+		if(log.isDebugEnabled()) log.debug("<<자유게시판 댓글수정>> : " + freec_num);
+		FreeBoardCommentVO free_comment = freeBoardService.selectOneFreeComment(freec_num);
+		free_comment.setFree_comment(update_comment);		
+		return freeBoardService.updateFreeComment(free_comment);
+	}
+	
+	@RequestMapping("/boardFree/delete_freecomment.do")
+	@ResponseBody
+	public int deleteComment(@RequestParam int freec_num) {
+		if(log.isDebugEnabled()) log.debug("<<자유게시판 댓글 삭제>> : " + freec_num);
+		return freeBoardService.deleteFreeComment(freec_num);
+	}
 	
 
 }

@@ -5,79 +5,122 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout_board.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(){				
-		var mem_num = ${user.mem_num};
-		commentList();
-		
-		function commentList(){
-		    $.ajax({
-		        url : 'list_comment.do',
-		        type : 'get',
-		        data : {free_num:$('#free_num').val()},
-		        success : function(data){					
-		            var a ='';
-		            $.each(data, function(key, value){
-		                a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-		                a += '<div><b>'+value.mem_id + '</b>';
-						a += '&nbsp;' + value.mem_auth_s;	
-						if(value.mem_num == mem_num){
-						a += '&nbsp;|&nbsp;<span><a onclick="commentUpdate('+value.freec_num+',\''+value.free_comment+'\');">수정</a>';
-		                a += '&nbsp;|&nbsp;<a onclick="commentDelete('+value.mem_id+');">삭제</a> </span>'; 
-						}	            	                	                
-		                a += '<div class="commentContent'+value.freec_num+'"> <p>'+value.free_comment +'</p></div>';						
-						a += '</div></div>';
-		            });		
-					            
-		            $(".commentList").html(a);
-		        }
-		    });
-		};
-		
-		
-		
-		$('#submit_comment').click(function(){
-			if($('#comment').val()==''){
-				alert('댓글 내용을 입력해주세요!');
-				return;
-			}
-			alert('${user.mem_num}');
-
-			$.ajax({
-				url:'submit_freecomment.do',
-				type:'post',
-				data:{comment:$('#comment').val(),
-					free_num:$('#free_num').val(),
-					'mem_num':mem_num},
-					/* mem_num:$('#mem_num').val()}, */
-				dataType:'json',
-				cache:false,
-				timeout:30000,
-				success:function(data){
-					if(data == 1){
-						$('#comment').val('');
-					}
-					commentList();
+var mem_num = ${user.mem_num};
+$(document).ready(function(){
+	commentList();	
+	$('#submit_comment').click(function(){
+		if($('#comment').val()==''){
+			alert('댓글 내용을 입력해주세요!');
+			return;
+		}
+		$.ajax({
+			url:'submit_freecomment.do',
+			type:'post',
+			data:{comment:$('#comment').val(),
+				free_num:$('#free_num').val(),
+				'mem_num':mem_num},
+			dataType:'json',
+			cache:false,
+			timeout:30000,
+			success:function(data){
+				if(data == 1){
+					$('#comment').val('');
 				}
-			});
+				commentList();
+			},
+			error:function(){
+				alert('네트워크 오류 발생!');
+			}
 		});
-		
-		
-		
-		
+	});	
+});
+
+function commentList(){
+    $.ajax({
+
+    	url : 'list_comment.do',
+        type : 'get',
+        data : {free_num:$('#free_num').val()},
+        success : function(data){					
+            var a ='';
+            $.each(data, function(key, value){
+                a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+                a += '<div><b>'+value.mem_id + '</b>';
+                if(value.mem_auth == 1){
+                	a += '&nbsp;일반회원';	
+                }else if(value.mem_auth == 2){
+                	a += '&nbsp;트레이너';
+                }else if(value.mem_auth == 0){
+                	a += '&nbsp;관리자';
+                }
+				if(value.mem_num == mem_num){
+				a += '&nbsp;|&nbsp;<span class="commentModify'+value.freec_num+'"><a onclick="commentUpdate('+value.freec_num+',\''+value.free_comment+'\');">수정</a>';
+                a += '&nbsp;|&nbsp;<a onclick="commentDelete('+value.freec_num+');">삭제</a> </span>'; 
+				}	            	                	                
+                a += '<div class="commentContent'+value.freec_num+'"> <p>'+value.free_comment +'</p></div>';						
+				a += '</div></div>';
+            });		
+			            
+            $(".commentList").html(a);
+        }
+    });
+};
+
+function commentUpdate(freec_num, free_comment){
+	var a = '';
+	var b = '';
+	a += '<a onclick="commentUpdateCommit('+freec_num+');">수정완료</a>';
+	a += '&nbsp;|&nbsp;<a onclick="commentDelete('+freec_num+');">삭제</a>';
+  	b += '<div class="input-group">';
+    b += '<input type="text" class="form-control" id="content_'+freec_num+'" value="'+free_comment+'"/>';
+/*     b += '<button class="btn_commentModify" value="수정">'; */
+    b += '</div>';
+    $('.commentModify'+freec_num).html(a);
+    $('.commentContent'+freec_num).html(b);		
+}
+
+
+function commentUpdateCommit(freec_num){
+	var update_comment = $('#content_'+freec_num).val();
+	$.ajax({
+		url:'update_freecomment.do',
+		type:'post',
+		data:{'freec_num':freec_num,
+			  'update_comment':update_comment},
+		dataType:'json',
+		cache:false,
+		timeout:30000,
+		success:function(data){
+			if(data == 1){
+				alert('댓글 수정 완료');
+				commentList();
+			}
+		},
+		error:function(){
+			alert('네트워크 오류 발생!');
+		}
 	});
-	
-	
-	function commentUpdate(freec_num, free_comment){
-		var a = '';
-	  	a += '<div class="input-group">';
-	    a += '<input type="text" class="form-control" name="content_'+freec_num+'" value="'+free_comment+'"/>';
-	    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+freec_num+');">수정</button> </span>';
-	    a += '</div>';
-	    
-	    $('.commentContent'+freec_num).html(a);
-		
-	}
-	
+}
+
+function commentDelete(freec_num){
+	$.ajax({
+		url:'delete_freecomment.do',
+		type:'post',
+		data:{'freec_num':freec_num},
+		dataType:'json',
+		cache:false,
+		timeout:30000,
+		success:function(data){
+			if(data == 1){
+				commentList();
+				alert('댓글 삭제 완료');
+			}
+		},
+		error:function(){
+			alert('댓글삭제 네트워크오류');
+		}
+	});
+}
 	
 </script>
 <div class="page-main-style">

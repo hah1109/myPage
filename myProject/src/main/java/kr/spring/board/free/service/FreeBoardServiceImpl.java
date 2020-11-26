@@ -58,9 +58,25 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 
 	@Override
-	public List<FreeBoardCommentVO> selectFreeComment(Integer free_num) {
-		return freeBoardMapper.selectFreeComment(free_num);
+	public List<FreeBoardCommentVO> selectListFreeComment(Integer free_num) {
+		return freeBoardMapper.selectListFreeComment(free_num);
 	}
+
+	@Override
+	public int updateFreeComment(FreeBoardCommentVO free_comment) {
+		return freeBoardMapper.updateFreeComment(free_comment);
+	}
+
+	@Override
+	public FreeBoardCommentVO selectOneFreeComment(Integer freec_num) {
+		return freeBoardMapper.selectOneFreeComment(freec_num);
+	}
+
+	@Override
+	public int deleteFreeComment(int freec_num) {
+		return freeBoardMapper.deleteFreeComment(freec_num);
+	}
+	
 	
 	
 	

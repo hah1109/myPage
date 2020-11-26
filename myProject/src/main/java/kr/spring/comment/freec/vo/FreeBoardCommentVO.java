@@ -15,7 +15,6 @@ public class FreeBoardCommentVO {
 	private int mem_num;
 	private String mem_id;
 	private int mem_auth;
-	private String mem_auth_s;
 	
 	public int getFreec_num() {
 		return freec_num;
@@ -66,13 +65,6 @@ public class FreeBoardCommentVO {
 		this.mem_auth = mem_auth;
 	}
 	
-	
-	public String getMem_auth_s() {
-		return mem_auth_s;
-	}
-	public void setMem_auth_s(String mem_auth_s) {
-		this.mem_auth_s = mem_auth_s;
-	}
 	@Override
 	public String toString() {
 		return "FreeBoardCommentVO [freec_num=" + freec_num + ", free_comment=" + free_comment + ", freec_reg_date="
