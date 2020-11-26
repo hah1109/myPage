@@ -14,3 +14,17 @@ create table board_free(
   constraint boardfree_fk foreign key (mem_num) references member(mem_num)
 );
 create sequence board_free_seq;
+
+create table board_free_comment(
+    freec_num number not null,
+    free_comment varchar2(50) not null,
+    freec_reg_date date default sysdate not null,
+    freec_modify_date date default sysdate not null,
+    free_num number not null,
+    mem_num number not null,
+    constraint freec_num_pk primary key (freec_num),
+    constraint free_num_fk foreign key (free_num) references board_free(free_num),
+    constraint mem_num_fk foreign key (mem_num) references member(mem_num)
+);
+
+create sequence freec_num_seq;

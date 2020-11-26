@@ -75,7 +75,6 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="kr.spring.member.dao,
 		                                    kr.spring.board.free.dao,
-		                                    kr.spring.comment.freec.dao,
 		                                    kr.spring.board.tip.dao,
 		                                    kr.spring.board.sysqna.dao,
 		                                    kr.spring.board.tranqna.dao,

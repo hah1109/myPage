@@ -53,6 +53,7 @@ function commentList(){
                 }else if(value.mem_auth == 0){
                 	a += '&nbsp;관리자';
                 }
+                a += '&nbsp;' + value.freec_modify_date;
 				if(value.mem_num == mem_num){
 				a += '&nbsp;|&nbsp;<span class="commentModify'+value.freec_num+'"><a onclick="commentUpdate('+value.freec_num+',\''+value.free_comment+'\');">수정</a>';
                 a += '&nbsp;|&nbsp;<a onclick="commentDelete('+value.freec_num+');">삭제</a> </span>'; 
@@ -73,7 +74,6 @@ function commentUpdate(freec_num, free_comment){
 	a += '&nbsp;|&nbsp;<a onclick="commentDelete('+freec_num+');">삭제</a>';
   	b += '<div class="input-group">';
     b += '<input type="text" class="form-control" id="content_'+freec_num+'" value="'+free_comment+'"/>';
-/*     b += '<button class="btn_commentModify" value="수정">'; */
     b += '</div>';
     $('.commentModify'+freec_num).html(a);
     $('.commentContent'+freec_num).html(b);		

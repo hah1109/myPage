@@ -43,7 +43,7 @@ public interface FreeBoardMapper {
 	@Select("SELECT * FROM board_free_comment c JOIN member m USING(mem_num) WHERE c.freec_num = #{freec_num}")
 	public FreeBoardCommentVO selectOneFreeComment(Integer freec_num);
 	
-	@Update("UPDATE board_free_comment SET free_comment = #{free_comment} WHERE freec_num = #{freec_num}")
+	@Update("UPDATE board_free_comment SET free_comment = #{free_comment}, freec_modify_date = SYSDATE  WHERE freec_num = #{freec_num}")
 	public int updateFreeComment(FreeBoardCommentVO free_comment);
 	
 	@Delete("DELETE FROM board_free_comment WHERE freec_num = #{freec_num}")

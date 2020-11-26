@@ -34,8 +34,6 @@
 	<context:component-scan
 		base-package="kr.spring.board.free.controller" />
 	<context:component-scan
-		base-package="kr.spring.comment.freec.controller" />
-	<context:component-scan
 		base-package="kr.spring.board.sysqna.controller" />
 	<context:component-scan
 		base-package="kr.spring.board.tip.controller" />
@@ -92,13 +90,22 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
-	<!-- 인터셉터 필요시 주석 풀어서 사용할 것 <interceptors> <interceptor> <mapping path="/member/myPage.do"/> 
-		<mapping path="/member/update.do"/> <mapping path="/member/changePassword.do"/> 
-		<mapping path="/member/delete.do"/> <mapping path="/board/write.do"/> <mapping 
-		path="/board/update.do"/> <mapping path="/board/delete.do"/> <beans:bean 
-		class="kr.spring.interceptor.LoginCheckInterceptor"/> </interceptor> <interceptor> 
-		<mapping path="/board/update.do"/> <mapping path="/board/delete.do"/> <beans:bean 
-		class="kr.spring.interceptor.WriterCheckInterceptor"/> </interceptor> </interceptors> -->
+	
+	<!-- 인터셉터 필요시 주석 풀어서 사용할 것 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/boardFree/list.do"/> 
+			<mapping path="/boardFree/write.do"/> 
+			<mapping path="/boardFree/detail.do"/> 			
+			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/> 
+		</interceptor>
+		<interceptor>	
+			<mapping path="/boardFree/modify.do"/>
+			<mapping path="/boardFree/delete.do"/>
+		<beans:bean class="kr.spring.interceptor.WriterCheckInterceptor"/> 
+		</interceptor>
+	</interceptors> 
+	
 	<!-- BLOB 타입 이미지 표시 -->
 	<beans:bean id="imageView" class="kr.spring.view.ImageView" />
 
