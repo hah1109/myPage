@@ -96,12 +96,17 @@
 		<interceptor>
 			<mapping path="/boardFree/list.do"/> 
 			<mapping path="/boardFree/write.do"/> 
-			<mapping path="/boardFree/detail.do"/> 			
+			<mapping path="/boardFree/detail.do"/>
+			<mapping path="/boardTip/list.do"/>
+			<mapping path="/boardTip/write.do"/>
+			<mapping path="/boardTip/detail.do"/>		
 			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/> 
 		</interceptor>
 		<interceptor>	
 			<mapping path="/boardFree/modify.do"/>
 			<mapping path="/boardFree/delete.do"/>
+			<mapping path="/boardTip/modify.do"/>
+			<mapping path="/boardTip/delete.do"/>
 		<beans:bean class="kr.spring.interceptor.WriterCheckInterceptor"/> 
 		</interceptor>
 	</interceptors> 
