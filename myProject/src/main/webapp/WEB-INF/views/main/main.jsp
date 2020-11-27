@@ -19,7 +19,6 @@
         }
 
         body {
-            background: #eee;
             font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
             font-size: 14px;
             color: #000;
@@ -30,14 +29,17 @@
         .swiper-container {
             width: 100%;
             height: 100%;
+            marign-top:0;
             margin-left: auto;
             margin-right: auto;
+            padding: 0;
         }
 
         .swiper-slide {
             text-align: center;
             font-size: 18px;
             background: #fff;
+            margin:0;
 
             /* Center slide text vertically */
             display: -webkit-box;
@@ -56,29 +58,25 @@
     </style>
     
     <!-- main menu ul,li style -->
-    <style>
-	 	ul, ol, li { list-style:none; margin:0; padding:0; }
-	   
-	    ul.main-menu {}
-	    ul.main-menu > li { display:inline-block; width:80px; padding:5px 10px; margin:5px; text-align:center; position:relative; }
-	    ul.main-menu > li:hover { background:#fff; }
-	    ul.main-menu > li ul.submenu { display:none; position:absolute; top:30px; left:0; }
-	    ul.main-menu > li:hover ul.submenu { display:block; }
-	    ul.main-menu > li ul.submenu > li { display:inline-block; width:80px; padding:5px 10px; background:#eee; border:1px solid #eee; text-align:center; }
-	    ul.main-menu > li ul.submenu > li:hover { background:#fff; }
-	</style>
-	
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mainPageStyle.css">
 </head>
 
 <body>
 
 	<!-- ------------------------------------헤더------------------------------------- -->
 	<!-- 우측 상단 메뉴 -->
-	<div style="float:right">
+	<div id="sub-header" style="float:right">
 		<!-- 로그인 상태 : 회원등급아이콘,id,알림아이콘,mypage,로그아웃,QnA 활성화 -->
 		<c:if test="${!empty user}">
-			[<span>${user.mem_auth}</span>]
+			<c:if test="${user.mem_auth == 0 }">
+				[ <img class="grade-icon" alt="" src="${pageContext.request.contextPath}/resources/images/header/grade_a.png"> ]
+			</c:if>
+			<c:if test="${user.mem_auth == 1 }">
+				[ <img class="grade-icon" alt="" src="${pageContext.request.contextPath}/resources/images/header/grade_t.png"> ]
+			</c:if>
+			<c:if test="${user.mem_auth == 2 }">
+				[ <img class="grade-icon" alt="" src="${pageContext.request.contextPath}/resources/images/header/grade_m.png"> ]
+			</c:if>
 			[<span>${user.mem_id}</span>]
 			<a href="${pageContext.request.contextPath}">알림</a>
 			<a href="${pageContext.request.contextPath}/member/myPage.do">MyPage</a>
@@ -112,6 +110,9 @@
 					<li><a href="${pageContext.request.contextPath}/main/main.do">스트레칭</a></li>
 				</ul>
 			</li>
+			<li>
+				<img class="bar" alt="" src="${pageContext.request.contextPath}/resources/images/header/bar.png">
+			</li>
 			<li class="nutriment">
 				<a href="${pageContext.request.contextPath}/nutriment/nutriList.do">식단</a>
 				<ul class="nutri-sub submenu" style="z-index: 2;">
@@ -119,6 +120,9 @@
 					<li><a href="${pageContext.request.contextPath}/nutriment/nutriList.do">영양성분 검색</a></li>
 					<li><a href="${pageContext.request.contextPath}/nutriment/nutrimentCal.do">일일 권장 영양소</a></li>
 				</ul>
+			</li>
+			<li>
+				<img class="bar" alt="" src="${pageContext.request.contextPath}/resources/images/header/bar.png">
 			</li>
 			<li class="training-diary">
 				<a href="${pageContext.request.contextPath}/main/main.do">트레이닝 다이어리</a>
@@ -128,12 +132,18 @@
 					<li><a href="${pageContext.request.contextPath}/main/main.do">탐색</a></li>
 				</ul>
 			</li>
+			<li>
+				<img class="bar" alt="" src="${pageContext.request.contextPath}/resources/images/header/bar.png">
+			</li>
 			<li class="board">
 				<a href="${pageContext.request.contextPath}/boardFree/list.do">게시판</a>
 				<ul class="board-sub submenu" style="z-index: 2;">
 					<li><a href="${pageContext.request.contextPath}/boardFree/list.do">자유 게시판</a></li>
 					<li><a href="${pageContext.request.contextPath}/boardTip/list.do">팁 게시판</a></li>
 				</ul>
+			</li>
+			<li>
+				<img class="bar" alt="" src="${pageContext.request.contextPath}/resources/images/header/bar.png">
 			</li>
 			<li class="trainer">
 				<a href="${pageContext.request.contextPath}/main/main.do">트레이너</a>
@@ -151,7 +161,7 @@
     <!-- Swiper -->
   	<div class="swiper-container" style="z-index: 1;">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">image</div>
+            <div class="swiper-slide"><img class="swiper-image" alt="" src="${pageContext.request.contextPath}/resources/images/swiper/image1.png"></div>
             <div class="swiper-slide">image</div>
             <div class="swiper-slide">Balanced Meal</div>
             <div class="swiper-slide">Board</div>

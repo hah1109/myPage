@@ -23,14 +23,14 @@ public interface HwBoardMapper {
 	public void insertBoard(HwBoardVO hwBoard_);
 
 	//상세페이지
-	@Select("SELECT * FROM hwboard WHERE hw_num")
-	public HwBoardVO selectHwBoard(Integer hwBoard_num);
+	@Select("SELECT * FROM hwboard WHERE hw_num=#{hw_num}")
+	public HwBoardVO selectHwBoard(Integer hw_num);
 
 	//글 수정
 	public void updateHwBoard(HwBoardVO hwBoard);
 
 	//글 삭제
-	@Delete("DELETE FROM hwboard WHERE hwboard_num=#{hw_num}")
-	public void deleteHwBoard(Integer hwBoard_num);
+	@Delete("DELETE FROM hwboard WHERE hw_num=#{hw_num}")
+	public void deleteHwBoard(Integer hw_num);
 
 }
