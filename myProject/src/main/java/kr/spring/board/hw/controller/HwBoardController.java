@@ -75,9 +75,7 @@ public class HwBoardController {
 		List<HwBoardVO> list = null;
 		if(count > 0) {
 			list = hwBoardService.hwSelectList(map);
-			for(HwBoardVO img:list) {
-				
-			}
+			
 			if(log.isDebugEnabled()) {
 				log.debug("<<글 목록>> : " + list);
 			}
@@ -92,18 +90,6 @@ public class HwBoardController {
 		return mav;
 	}
 
-	//글 상세페이지 호출
-	@RequestMapping(value="/homeTraining/hwDetail.do")
-	public ModelAndView hwDetailView(@RequestParam int hwboard_num) {
-		//로그
-		if(log.isDebugEnabled()) {
-			log.debug("hwboard 글 상세" + hwboard_num);
-		}
-		
-		HwBoardVO hwBoardVO = hwBoardService.selectHwBoard(hwboard_num);
-		return new ModelAndView("hwBoardView", "hwBoardVO", hwBoardVO);
-	}
-
 	//관리자만 등록할 수 있는 버튼이눌렸을 경우 글 등록 폼 호출
 	@RequestMapping(value="/homeTraining/hwBoardWrite.do",method=RequestMethod.GET)
 	public String form() {
@@ -113,11 +99,35 @@ public class HwBoardController {
 	//등록 폼에서 글 등록(Submit)
 	@RequestMapping(value="/homeTraining/hwBoardWrite.do", method=RequestMethod.POST)
 	public String submitHwBoardWrite(@Valid HwBoardVO hwBoardVO, BindingResult result, HttpServletRequest request,HttpSession session) {
-		System.out.println("rkrkrkrkkr");
-		if(result!=null) {
-			String link = hwBoardVO.getHw_link();
-			System.out.println(link);
+		
+		if(hwBoardVO!=null) {
+			String pattern;
+			int io_pattern;
+			String code = null;
+			System.out.println(hwBoardVO.getHw_link());
+			if(hwBoardVO.getHw_link().contains("iframe")) {
+				System.out.println("아이프레임" );
+				pattern = "embed/";
+				io_pattern = hwBoardVO.getHw_link().indexOf(pattern);
+				code = hwBoardVO.getHw_link().substring((io_pattern + pattern.length()),
+						(hwBoardVO.getHw_link().substring(io_pattern).indexOf("\" frameborder")+io_pattern));
+			}else if(hwBoardVO.getHw_link().contains("youtu.be")) {
+				System.out.println("youtu.be");
+				pattern = "youtu.be/";
+				io_pattern = hwBoardVO.getHw_link().indexOf(pattern);
+				code = hwBoardVO.getHw_link().substring(io_pattern + pattern.length());
+			}else if(hwBoardVO.getHw_link().contains("ab_channel")) {
+				System.out.println("사이트 주소" );
+				pattern = "?v=";
+				io_pattern = hwBoardVO.getHw_link().indexOf(pattern);
+				code = hwBoardVO.getHw_link().substring((io_pattern + pattern.length()),
+						(hwBoardVO.getHw_link().substring(io_pattern).indexOf("&ab_")+io_pattern));
+			}else {
+
+				return "hwBoardWrite";
+			}
 			
+			hwBoardVO.setHw_link(code);
 		}
 		//로그
 		if(log.isDebugEnabled()) {
@@ -126,7 +136,7 @@ public class HwBoardController {
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
-			return "/homeTraining/hwBoardWrite";
+			return "hwBoardWrite";
 		}
 		
 		//글쓰기
@@ -135,21 +145,63 @@ public class HwBoardController {
 		return "redirect:/homeTraining/hwList.do";
 	}
 
+	//글 상세페이지 호출
+	@RequestMapping(value="/homeTraining/hwDetail.do")
+	public ModelAndView hwDetailView(@RequestParam int hw_num) {
+		//로그
+		if(log.isDebugEnabled()) {
+			log.debug("hwboard 글 상세" + hw_num);
+		}
+		
+		HwBoardVO hwBoardVO = hwBoardService.selectHwBoard(hw_num);
+		return new ModelAndView("hwView", "hwBoardVO", hwBoardVO);
+	}
+
 	//관리자만 수행 할 수있는 게시판 수정(이건 상세페이지의버튼)
 	@RequestMapping(value="/homeTraining/hwBoardUpdate.do", method=RequestMethod.GET)
-	public String hwBoardUpdateForm(@RequestParam int hwBoard_num, Model model) {
+	public String hwBoardUpdateForm(@RequestParam int hw_num, Model model) {
 		
-		HwBoardVO hwBoardVO = hwBoardService.selectHwBoard(hwBoard_num);
+		HwBoardVO hwBoardVO = hwBoardService.selectHwBoard(hw_num);
 		
 		model.addAttribute("hwBoardVO", hwBoardVO);
 
-		return "hwBoardModity";
+		return "hwBoardModify";
 	}
 
 	//수정 페이지에서 submit했을 때
 	@RequestMapping(value="/homeTraining/hwBoardUpdate.do", method=RequestMethod.POST)
 	public String submitHwBoardUpdate(@Valid HwBoardVO hwBoardVO, BindingResult result, HttpServletRequest request,HttpSession session, Model model) {
+		
+		if(hwBoardVO!=null) {
+			String pattern;
+			int io_pattern;
+			String code = null;
+			System.out.println(hwBoardVO.getHw_link());
+			if(hwBoardVO.getHw_link().contains("iframe")) {
+				System.out.println("아이프레임" );
+				pattern = "embed/";
+				io_pattern = hwBoardVO.getHw_link().indexOf(pattern);
+				code = hwBoardVO.getHw_link().substring((io_pattern + pattern.length()),
+						(hwBoardVO.getHw_link().substring(io_pattern).indexOf("\" frameborder")+io_pattern));
+			}else if(hwBoardVO.getHw_link().contains("youtu.be")) {
+				System.out.println("youtu.be");
+				pattern = "youtu.be/";
+				io_pattern = hwBoardVO.getHw_link().indexOf(pattern);
+				code = hwBoardVO.getHw_link().substring(io_pattern + pattern.length());
+			}else if(hwBoardVO.getHw_link().contains("ab_channel")) {
+				System.out.println("사이트 주소" );
+				pattern = "?v=";
+				io_pattern = hwBoardVO.getHw_link().indexOf(pattern);
+				code = hwBoardVO.getHw_link().substring((io_pattern + pattern.length()),
+						(hwBoardVO.getHw_link().substring(io_pattern).indexOf("&ab_")+io_pattern));
+			}else {
 
+				return "hwBoardWrite";
+			}
+			
+			hwBoardVO.setHw_link(code);
+		}
+		
 		if(log.isDebugEnabled()) {
 			log.debug("<<hw글 정보 수정>> : " + hwBoardVO);
 		}
@@ -171,15 +223,16 @@ public class HwBoardController {
 	}
 
 	//삭제
-	@RequestMapping(value="/hwboard/hwboardupdate.do")
-	public String submitHwBoardDelete(@Valid int hwBoard_num, BindingResult result, HttpServletRequest request, Model model) {
+	@RequestMapping(value="/homeTraining/hwBoardDelete.do")
+	public String submitHwBoardDelete(@Valid int hw_num, 
+			 HttpServletRequest request, Model model) {
 
 		if(log.isDebugEnabled()) {
-			log.debug("<<hw게시판 글 삭제>> : " + hwBoard_num);
+			log.debug("<<hw게시판 글 삭제>> : " + hw_num);
 		}
 		
 		//글 삭제
-		hwBoardService.deleteHwBoard(hwBoard_num);
+		hwBoardService.deleteHwBoard(hw_num);
 		
 		model.addAttribute("message", "글 삭제 완료!!");
 		model.addAttribute("url", 

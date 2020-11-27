@@ -9,4 +9,17 @@
     	<put-attribute name="title" value="홈트레이닝 리스트"/> 
     	<put-attribute name="body" value="/WEB-INF/views/homeTraining/hwList.jsp"/>    
     </definition>
-</tiles-definitions>
+    
+    <definition name="hwView" extends="main">
+    	<put-attribute name="title" value="홈트레이닝 영상"/> 
+    	<put-attribute name="body" value="/WEB-INF/views/homeTraining/hwView.jsp"/>    
+    </definition>
+    <definition name="hwBoardWrite" extends="main">
+    	<put-attribute name="title" value="홈트레이닝 영상 추가"/> 
+    	<put-attribute name="body" value="/WEB-INF/views/homeTraining/hwBoardWrite.jsp"/>    
+    </definition>
+    <definition name="hwBoardModify" extends="main">
+    	<put-attribute name="title" value="홈트레이닝 영상 수정"/> 
+    	<put-attribute name="body" value="/WEB-INF/views/homeTraining/hwBoardModify.jsp"/>    
+    </definition>
+</tiles-definitions>  

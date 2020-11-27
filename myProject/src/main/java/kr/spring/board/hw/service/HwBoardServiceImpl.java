@@ -33,8 +33,8 @@ public class HwBoardServiceImpl implements HwBoardService {
 	}
 
 	@Override
-	public HwBoardVO selectHwBoard(Integer hwBoard_num) {
-		return hwBoardMapper.selectHwBoard(hwBoard_num);
+	public HwBoardVO selectHwBoard(Integer hw_num) {
+		return hwBoardMapper.selectHwBoard(hw_num);
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public class HwBoardServiceImpl implements HwBoardService {
 	}
 
 	@Override
-	public void deleteHwBoard(Integer hwBoard_num) {
-		hwBoardMapper.deleteHwBoard(hwBoard_num);
+	public void deleteHwBoard(Integer hw_num) {
+		hwBoardMapper.deleteHwBoard(hw_num);
 	}
 
 }
