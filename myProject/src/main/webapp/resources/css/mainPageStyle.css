@@ -1,0 +1,168 @@
+@charset "UTF-8";
+
+
+
+
+/*----------------header------------------*/
+
+/*등급아이콘*/
+img.grade-icon{
+	width:15px;	height:15px;margin:0;padding:0;
+}
+
+/*a 태그 text decoration */
+a:link{
+	text-decoration:none;
+	color:#747474;
+}
+a:visited{
+	text-decoration:none;
+	color:#747474;
+}
+a:hover{
+	text-decoration:none;
+	color:#0de9df;
+}
+
+div#sub-header{
+	padding-bottom : 5px;
+	margin-right: 20px;
+}
+
+div#sub-header > a{
+	margin-left : 10px;
+}
+
+ul, ol, li { list-style:none; margin:0; padding:0; }
+	   
+ul.main-menu { height:60px;}
+ul.main-menu > li { display:inline-block; background:#fff; position:relative;}
+ul.main-menu > li:hover { background:#fff; }
+ul.main-menu > li ul.submenu { display:none; position:absolute; top:30px; left:0; }
+ul.main-menu > li:hover ul.submenu { display:block; }
+ul.main-menu > li ul.submenu > li { display:inline-block; background:#fff; width:80px; padding:5px 10px; text-align:center; }
+ul.main-menu > li ul.submenu > li:hover { background:#fff; }
+
+div#main-header{
+	width:100%;
+	heigth:60px;
+	margin-top: 20px;
+}
+
+div#main-header > ul > .main-logo{
+	margin-left: 200px;
+}
+
+div#main-header > ul > li > img{
+	width:3px;
+	height:20px;
+	margin-bottom : 40px;
+	margin-left : 50px;
+	margin-right : 50px;
+}
+
+div#main-header> ul >.main-logo >a{
+	width: 100px; 
+	height: 50px;
+	margin-bottom: 25px;
+	background: url(../images/header/main_logo_for_header.png);
+	text-indent: -6000px;
+	overflow: hidden;
+	clear: both;
+	display: inline-block;
+	background-repeat: no-repeat;
+}
+
+div#main-header> ul >.homeTraining >a{
+	width: 85px; 
+	height: 20px;
+	background: url(../images/header/btn_home_trianing.png);
+	text-indent: -6000px;
+	overflow: hidden;
+	clear: both;
+	margin-left : 200px;
+	margin-bottom : 40px;
+	display: inline-block;
+	background-repeat: no-repeat;
+}
+
+div#main-header> ul >.nutriment >a{
+	width: 35px; 
+	height: 20px;
+	background: url(../images/header/btn_nutriment.png);
+	text-indent: -6000px;
+	overflow: hidden;
+	clear: both;
+	margin-bottom : 40px;
+	display: inline-block;
+	background-repeat: no-repeat;
+}
+
+div#main-header> ul >.training-diary >a{
+	width: 135px; 
+	height: 20px;
+	background: url(../images/header/btn_training_dairy.png);
+	text-indent: -6000px;
+	overflow: hidden;
+	clear: both;
+	margin-bottom : 40px;
+	display: inline-block;
+	background-repeat: no-repeat;
+}
+
+div#main-header> ul >.board >a{
+	width: 50px; 
+	height: 20px;
+	background: url(../images/header/btn_board.png);
+	text-indent: -6000px;
+	overflow: hidden;
+	clear: both;
+	margin-bottom : 40px;
+	display: inline-block;
+	background-repeat: no-repeat;
+}
+
+div#main-header> ul >.trainer >a{
+	width: 65px; 
+	height: 20px;
+	background: url(../images/header/btn_trainer.png);
+	text-indent: -6000px;
+	overflow: hidden;
+	clear: both;
+	margin-bottom : 40px;
+	display: inline-block;
+	background-repeat: no-repeat;
+}
+
+
+/*----------------header------------------*/
+
+
+
+/* --------------body-----------------------*/
+
+div.swiper-container {}
+div.swiper-container > div.swiper-wrapper{}
+div.swiper-container > div.swiper-wrapper > div.swiper-slide {}
+div.swiper-container > div.swiper-wrapper > div.swiper-slide > img {
+	width:100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

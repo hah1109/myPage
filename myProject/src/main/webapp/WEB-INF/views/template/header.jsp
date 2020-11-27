@@ -1,13 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-
-<div id="main_header"> 
-
-	<div style="float:right">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mainPageStyle.css">
+	<!-- ------------------------------------헤더------------------------------------- -->
+	<!-- 우측 상단 메뉴 -->
+	<div id="sub-header" style="float:right">
 		<!-- 로그인 상태 : 회원등급아이콘,id,알림아이콘,mypage,로그아웃,QnA 활성화 -->
 		<c:if test="${!empty user}">
-			[<span>${user.mem_auth}</span>]
+			<c:if test="${user.mem_auth == 0 }">
+				[ <img class="grade-icon" alt="" src="${pageContext.request.contextPath}/resources/images/header/grade_a.png"> ]
+			</c:if>
+			<c:if test="${user.mem_auth == 1 }">
+				[ <img class="grade-icon" alt="" src="${pageContext.request.contextPath}/resources/images/header/grade_t.png"> ]
+			</c:if>
+			<c:if test="${user.mem_auth == 2 }">
+				[ <img class="grade-icon" alt="" src="${pageContext.request.contextPath}/resources/images/header/grade_m.png"> ]
+			</c:if>
 			[<span>${user.mem_id}</span>]
 			<a href="${pageContext.request.contextPath}">알림</a>
 			<a href="${pageContext.request.contextPath}/member/myPage.do">MyPage</a>
@@ -33,7 +41,7 @@
 			<li class="homeTraining">
 				<a href="${pageContext.request.contextPath}/homeTraining/hwList.do">홈트레이닝</a>
 				<ul class="ht-sub submenu" style="z-index: 2;">
- 					<li><a href="${pageContext.request.contextPath}/main/main.do">전신</a></li>
+					<li><a href="${pageContext.request.contextPath}/main/main.do">전신</a></li>
 					<li><a href="${pageContext.request.contextPath}/main/main.do">어깨</a></li>
 					<li><a href="${pageContext.request.contextPath}/main/main.do">가슴</a></li>
 					<li><a href="${pageContext.request.contextPath}/main/main.do">등</a></li>
@@ -41,47 +49,47 @@
 					<li><a href="${pageContext.request.contextPath}/main/main.do">스트레칭</a></li>
 				</ul>
 			</li>
+			<li>
+				<img class="bar" alt="" src="${pageContext.request.contextPath}/resources/images/header/bar.png">
+			</li>
 			<li class="nutriment">
-				<a href="${pageContext.request.contextPath}/nutriment/nutrimentGuide.do">식단</a>
+				<a href="${pageContext.request.contextPath}/nutriment/nutriList.do">식단</a>
 				<ul class="nutri-sub submenu" style="z-index: 2;">
- 					<li><a href="${pageContext.request.contextPath}/nutriment/nutrimentGuide.do">식단 가이드</a></li>
+					<li><a href="${pageContext.request.contextPath}/nutriment/nutrimentGuide.do">식단 가이드</a></li>
 					<li><a href="${pageContext.request.contextPath}/nutriment/nutriList.do">영양성분 검색</a></li>
 					<li><a href="${pageContext.request.contextPath}/nutriment/nutrimentCal.do">일일 권장 영양소</a></li>
 				</ul>
 			</li>
+			<li>
+				<img class="bar" alt="" src="${pageContext.request.contextPath}/resources/images/header/bar.png">
+			</li>
 			<li class="training-diary">
 				<a href="${pageContext.request.contextPath}/main/main.do">트레이닝 다이어리</a>
 				<ul class="dt-sub submenu" style="z-index: 2;">
- 					<li><a href="${pageContext.request.contextPath}/main/main.do">피드</a></li>
+					<li><a href="${pageContext.request.contextPath}/main/main.do">피드</a></li>
 					<li><a href="${pageContext.request.contextPath}/main/main.do">마이 퍼스널</a></li>
 					<li><a href="${pageContext.request.contextPath}/main/main.do">탐색</a></li>
 				</ul>
 			</li>
+			<li>
+				<img class="bar" alt="" src="${pageContext.request.contextPath}/resources/images/header/bar.png">
+			</li>
 			<li class="board">
 				<a href="${pageContext.request.contextPath}/boardFree/list.do">게시판</a>
 				<ul class="board-sub submenu" style="z-index: 2;">
- 					<li><a href="${pageContext.request.contextPath}/boardFree/list.do">자유 게시판</a></li>
+					<li><a href="${pageContext.request.contextPath}/boardFree/list.do">자유 게시판</a></li>
 					<li><a href="${pageContext.request.contextPath}/boardTip/list.do">팁 게시판</a></li>
 				</ul>
+			</li>
+			<li>
+				<img class="bar" alt="" src="${pageContext.request.contextPath}/resources/images/header/bar.png">
 			</li>
 			<li class="trainer">
 				<a href="${pageContext.request.contextPath}/main/main.do">트레이너</a>
 				<ul class="trainer-sub submenu" style="z-index: 2;">
- 					<li><a href="${pageContext.request.contextPath}/main/main.do">트레이너 리스트</a></li>
+					<li><a href="${pageContext.request.contextPath}/main/main.do">트레이너 리스트</a></li>
 					<li><a href="${pageContext.request.contextPath}/boardTranqna/list.do">트레이너 Q&A</a></li>
 				</ul>
 			</li>
 		</ul>
 	</div>
-	
-</div>
-
-
-
-
-
-
-
-
-
-
