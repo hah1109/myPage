@@ -99,7 +99,7 @@
 			<mapping path="/boardFree/detail.do"/>
 			<mapping path="/boardTip/list.do"/>
 			<mapping path="/boardTip/write.do"/>
-			<mapping path="/boardTip/detail.do"/>		
+			<mapping path="/boardTip/detail.do"/>
 			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/> 
 		</interceptor>
 		<interceptor>	
