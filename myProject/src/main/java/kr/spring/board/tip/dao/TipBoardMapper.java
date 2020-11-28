@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.board.free.vo.FreeBoardVO;
-import kr.spring.comment.freec.vo.FreeBoardCofCVO;
+import kr.spring.comment.freec.vo.FreeBoardCommentReplyVO;
 import kr.spring.comment.freec.vo.FreeBoardCommentVO;
 
 public interface TipBoardMapper {
@@ -54,11 +54,11 @@ public interface TipBoardMapper {
 	@Delete("DELETE FROM board_free_comment WHERE freec_num = #{freec_num}")
 	public int deleteFreeComment(int freec_num);
 	
+	//댓글의댓글부분
+	@Select("SELECT r.*, m.*, to_char(r.rfreec_date,'yyyy-mm-dd') str_date FROM board_free_comment_reply r JOIN member m ON r.mem_num = m.mem_num WHERE r.freec_num = #{freec_num}")
+	public List<FreeBoardCommentReplyVO> selectReplyComment(Integer freec_num);
 	
-	@Select("SELECT * FROM board_free_cofc JOIN member USING(mem_num) WHERE freec_num = #{freec_num}")
-	public List<FreeBoardCofCVO> selectListBoardCofC(Integer freec_num);
-	
-	public int inserBoardCofC(FreeBoardCofCVO boardCofC);
+	public int inserBoardCofC(FreeBoardCommentReplyVO replyComment);
 	
 	public int deleteBoardCofC(int cofc_num);
 	

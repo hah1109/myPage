@@ -85,14 +85,15 @@
 	
 	<select id="selectListFreeComment" parameterType="integer" resultType="freeBoardCommentVO">
 		SELECT
-			a.*, b.* 
+			a.*, b.*, to_char(a.freec_modify_date,'yyyy-mm-dd') str_date
 		FROM 
 		    (SELECT * FROM board_free_comment c JOIN member m USING(mem_num) ORDER BY c.freec_num DESC) a  
 		LEFT JOIN 
-		    (SELECT freec_num, COUNT(*) cofcnumber FROM board_free_cofc GROUP BY freec_num) b 
+		    (SELECT freec_num, COUNT(*) countComment FROM board_free_comment_reply GROUP BY freec_num) b 
 		ON a.freec_num = b.freec_num
 		WHERE a.free_num = #{free_num}
 	</select>
+
 	
 	
 </mapper>

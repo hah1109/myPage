@@ -44,7 +44,7 @@ function commentList(){
         success : function(data){			
             var a ='';
             $.each(data, function(key, value){
-                a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+                a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin:10px; padding-bottom:10px;">';
                 a += '<div><b>'+value.mem_id + '</b>';
                 if(value.mem_auth == 1){
                 	a += '&nbsp;일반회원';	
@@ -53,13 +53,13 @@ function commentList(){
                 }else if(value.mem_auth == 0){
                 	a += '&nbsp;관리자';
                 }
-                a += '&nbsp;' + value.freec_modify_date;
+                a += '&nbsp;' + value.str_date;
 				if(value.mem_num == mem_num){
 				a += '&nbsp;|&nbsp;<span class="commentModify'+value.freec_num+'"><a onclick="commentUpdate('+value.freec_num+',\''+value.free_comment+'\');">수정</a>';
                 a += '&nbsp;|&nbsp;<a onclick="commentDelete('+value.freec_num+');">삭제</a> </span>'; 
 				}            	                	                
                 a += '<div class="commentContent'+value.freec_num+'"> <p>'+value.free_comment +'</p></div></div>';
-                a += '<div class="boardCofC'+value.freec_num+'"> <a onclick="select_BoardCofC('+value.freec_num+')"> 댓글 '+value.cofcnumber+'</a></div>'
+                a += '<div class="boardCofC'+value.freec_num+'"> <a onclick="select_BoardCofC('+value.freec_num+')"> 댓글 '+value.countComment+'</a></div>'
 				a += '</div>';
             });		
 			            
@@ -136,7 +136,7 @@ function select_BoardCofC(freec_num){
             var a ='';
             $.each(data, function(key, value){
 	            a += '<div class="list_boardcofc" style="border-top:1px solid darkgray; margin:10px; padding:10px;"><b>'+value.mem_id + '</b>';
-	            a += value.cofc_comment + '</div>';            
+	            a += '&nbsp;&nbsp;'+value.rfreec_comment + '</div>';            
             });
 			a += '<input type="text" id="boardComment_of" style="padding-left: 10px;">';
 			a += '<input type="button" value="등록" onclick="submit_boardCofC('+freec_num+');">';

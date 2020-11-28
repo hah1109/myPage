@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.board.tip.service.TipBoardService;
-import kr.spring.comment.freec.vo.FreeBoardCofCVO;
+import kr.spring.comment.freec.vo.FreeBoardCommentReplyVO;
 import kr.spring.comment.freec.vo.FreeBoardCommentVO;
 
 @Controller
@@ -64,12 +64,11 @@ public class TipBoardAjaxController {
 	//댓글의 댓글
 	@RequestMapping("/boardTip/list_boardCofC.do")
 	@ResponseBody
-	public List<FreeBoardCofCVO> selectListCofC(@RequestParam int freec_num){
+	public List<FreeBoardCommentReplyVO> selectListCofC(@RequestParam int freec_num){
 		if(log.isDebugEnabled()) log.debug("<<댓글의 댓글>> : " + freec_num);
-		List<FreeBoardCofCVO> list = tipBoardService.selectListBoardCofC(freec_num);
+		List<FreeBoardCommentReplyVO> list = tipBoardService.selectReplyComment(freec_num);
 		System.out.println(list);
 		return list;
-	}
-	
+	}	
 	
 }

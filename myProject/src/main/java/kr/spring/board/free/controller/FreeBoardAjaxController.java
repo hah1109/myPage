@@ -48,7 +48,7 @@ public class FreeBoardAjaxController {
 	public int updateComment(@RequestParam int freec_num,@RequestParam String update_comment) {
 		if(log.isDebugEnabled()) log.debug("<<자유게시판 댓글수정>> : " + freec_num);
 		FreeBoardCommentVO free_comment = freeBoardService.selectOneFreeComment(freec_num);
-		free_comment.setFree_comment(update_comment);		
+		free_comment.setFree_comment(update_comment);
 		return freeBoardService.updateFreeComment(free_comment);
 	}
 	

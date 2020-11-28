@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.spring.board.free.vo.FreeBoardVO;
 import kr.spring.board.tip.dao.TipBoardMapper;
-import kr.spring.comment.freec.vo.FreeBoardCofCVO;
+import kr.spring.comment.freec.vo.FreeBoardCommentReplyVO;
 import kr.spring.comment.freec.vo.FreeBoardCommentVO;
 
 @Service("tipBoardService")
@@ -85,19 +85,19 @@ public class TipBoardServiceImple implements TipBoardService{
 	}
 
 	@Override
-	public List<FreeBoardCofCVO> selectListBoardCofC(Integer freec_num) {
-		return tipBoardMapper.selectListBoardCofC(freec_num);
+	public List<FreeBoardCommentReplyVO> selectReplyComment(Integer freec_num) {
+		return tipBoardMapper.selectReplyComment(freec_num);
 	}
 
 	@Override
-	public int inserBoardCofC(FreeBoardCofCVO boardCofC) {
-		return tipBoardMapper.inserBoardCofC(boardCofC);
+	public int inserBoardCofC(FreeBoardCommentReplyVO replyComment) {
+		return tipBoardMapper.inserBoardCofC(replyComment);
 	}
 
 	@Override
 	public int deleteBoardCofC(int cofc_num) {
 		return tipBoardMapper.deleteBoardCofC(cofc_num);
-	}	
+	}
 	
 
 }

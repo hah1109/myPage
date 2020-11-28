@@ -28,14 +28,14 @@ create table board_free_comment(
 );
 create sequence freec_num_seq;
 
-create table board_free_cofc(
-    cofc_num number not null,
-    cofc_comment varchar2(100) not null,
-    cofc_date date default sysdate  not null,
+CREATE TABLE board_free_comment_reply(
+    rfreec_num number not null,
+    rfreec_comment varchar2(100) not null,
+    rfreec_date date default sysdate not null,
     freec_num number not null,
     mem_num number not null,
-    constraint cofc_num_pk primary key (cofc_num),
-    constraint freec_num_cfk foreign key (freec_num) references board_free_comment,
-    constraint mem_num_cfk foreign key (mem_num) references member    
+    constraint rfreec_num_pk primary key (rfreec_num),
+    constraint freec_num_rfk foreign key (freec_num) references board_free_comment,
+    constraint mem_num_rfk foreign key (mem_num) references member    
 );
-create sequence cofc_num_seq;
+create sequence rfreec_num_seq;

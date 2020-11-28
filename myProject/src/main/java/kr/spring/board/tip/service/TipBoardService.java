@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.spring.board.free.vo.FreeBoardVO;
-import kr.spring.comment.freec.vo.FreeBoardCofCVO;
+import kr.spring.comment.freec.vo.FreeBoardCommentReplyVO;
 import kr.spring.comment.freec.vo.FreeBoardCommentVO;
 
 public interface TipBoardService {
@@ -27,8 +27,9 @@ public interface TipBoardService {
 	public int deleteFreeComment(int freec_num);
 	
 	//댓글의 댓글부분(수정은 불가-> 조회, 등록, 삭제)
-	public List<FreeBoardCofCVO> selectListBoardCofC(Integer freec_num);	
-	public int inserBoardCofC(FreeBoardCofCVO boardCofC);	
+	public List<FreeBoardCommentReplyVO> selectReplyComment(Integer freec_num);	
+	public int inserBoardCofC(FreeBoardCommentReplyVO boardCofC);	
 	public int deleteBoardCofC(int cofc_num);
+	
 	
 }
