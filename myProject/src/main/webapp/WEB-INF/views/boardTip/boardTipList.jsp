@@ -24,7 +24,7 @@
 	});
 </script>
 <div class="page-main-style">
-	<h2>자유 게시판 목록</h2>
+	<h2>트레이너 TIP 게시판</h2>
 	<form action="list.do" id="search_form" method="get">
 		<ul class="search">
 			<li>
@@ -42,10 +42,10 @@
 		</ul>
 	</form>
 	<div class="align-right">
-		<c:if test="${empty user}">
+		<c:if test="${empty user || user.mem_auth==1}">
 			<input type="button" value="글쓰기" onclick="location.href='write.do'" disabled="disabled">
 		</c:if>
-		<c:if test="${!empty user}">
+		<c:if test="${!empty user && user.mem_auth==2}">
 			<input type="button" value="글쓰기" onclick="location.href='write.do'">
 		</c:if>
 	</div>
@@ -54,10 +54,10 @@
 		<div class="align-center">등록된 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-		<table>
+		<table class="tipBoardTable">
 			<tr>
 				<th>번호</th>
-				<th width="400">제목</th>
+				<th width="400" colspan="2">제목</th>
 				<th>작성자</th>
 				<th>최근수정일</th>
 				<th>조회수</th>
@@ -65,7 +65,13 @@
 			<c:forEach var="boardFree" items="${list}">
 				<tr>
 					<td>${boardFree.free_num}</td>
-					<td><a href="detail.do?free_num=${boardFree.free_num}">${boardFree.free_title}</a></td>
+					<c:if test="${!empty boardFree.free_filename}">
+					<td width="350" style="border-right:none;"><a href="detail.do?free_num=${boardFree.free_num}">${boardFree.free_title}</a></td>
+					<td width="50" style="border-left:none;"><img src="imageView.do?free_num=${boardFree.free_num}" style="max-width:50px; max-height:50px;"></td>
+					</c:if>
+					<c:if test="${empty boardFree.free_filename}">
+					<td colspan="2"><a href="detail.do?free_num=${boardFree.free_num}">${boardFree.free_title}</a></td>
+					</c:if>
 					<td>${boardFree.mem_id}</td>
 					<td>${boardFree.free_modify_date}</td>
 					<td>${boardFree.free_hit}</td>

@@ -15,6 +15,8 @@ public class FreeBoardCommentVO {
 	private int mem_num;
 	private String mem_id;
 	private int mem_auth;
+	//댓글의 댓글 수
+	private int cofcnumber;
 	
 	public int getFreec_num() {
 		return freec_num;
@@ -64,12 +66,21 @@ public class FreeBoardCommentVO {
 	public void setMem_auth(int mem_auth) {
 		this.mem_auth = mem_auth;
 	}
-	
+
+	public int getCofcumber() {
+		return cofcnumber;
+	}
+
+	public void setCofcumber(int cofcumber) {
+		this.cofcnumber = cofcumber;
+	}
 	@Override
 	public String toString() {
 		return "FreeBoardCommentVO [freec_num=" + freec_num + ", free_comment=" + free_comment + ", freec_reg_date="
 				+ freec_reg_date + ", freec_modify_date=" + freec_modify_date + ", free_num=" + free_num + ", mem_num="
-				+ mem_num + "]";
-	}	
+				+ mem_num + ", mem_id=" + mem_id + ", mem_auth=" + mem_auth + ", cofcnumber=" + cofcnumber + "]";
+	}
+	
+	
 
 }

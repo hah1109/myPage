@@ -30,8 +30,10 @@ public class FreeBoardVO {
 	private int mem_num;
 	private String mem_id;
 	private int mem_auth;
+	//이미지도 같이 수정시 0, 이미지빼고 수정시 1
+	private int isImgUpdate;
 	
-	private List<FreeBoardCommentVO> commentList;
+	private List<FreeBoardCommentVO> commentList;	
 	
 	public void setUpload(MultipartFile upload) throws IOException{
 		if(upload == null) return;
@@ -130,6 +132,15 @@ public class FreeBoardVO {
 	public void setCommentList(List<FreeBoardCommentVO> commentList) {
 		this.commentList = commentList;
 	}
+	
+	public int getIsImgUpdate() {
+		return isImgUpdate;
+	}
+
+	public void setIsImgUpdate(int isImgUpdate) {
+		this.isImgUpdate = isImgUpdate;
+	}
+	
 
 	@Override
 	public String toString() {

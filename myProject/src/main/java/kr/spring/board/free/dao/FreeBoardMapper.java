@@ -31,6 +31,9 @@ public interface FreeBoardMapper {
 	//Mapper
 	public void updateBoardFree(FreeBoardVO boardFree);
 	
+	//Mapper
+	public void updateBoardFreeExImg(FreeBoardVO boardFree);
+	
 	@Delete("DELETE FROM board_free WHERE free_num=#{free_num}")
 	public void deleteBoardFree(Integer free_num);
 	

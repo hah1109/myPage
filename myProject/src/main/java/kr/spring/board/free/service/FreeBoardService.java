@@ -15,6 +15,7 @@ public interface FreeBoardService {
 	public FreeBoardVO selectBoardFree(Integer free_num);
 	public void updateHitBoardFree(Integer free_num);
 	public void updateBoardFree(FreeBoardVO boardFree);
+	public void updateBoardFreeExImg(FreeBoardVO boardFree);
 	public void deleteBoardFree(Integer free_num);
 	public int insertFreeComment(FreeBoardCommentVO free_comment);
 	public List<FreeBoardCommentVO> selectListFreeComment(Integer free_num);

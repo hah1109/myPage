@@ -41,7 +41,7 @@ function commentList(){
     	url : 'list_comment.do',
         type : 'get',
         data : {free_num:$('#free_num').val()},
-        success : function(data){					
+        success : function(data){			
             var a ='';
             $.each(data, function(key, value){
                 a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
@@ -57,9 +57,10 @@ function commentList(){
 				if(value.mem_num == mem_num){
 				a += '&nbsp;|&nbsp;<span class="commentModify'+value.freec_num+'"><a onclick="commentUpdate('+value.freec_num+',\''+value.free_comment+'\');">수정</a>';
                 a += '&nbsp;|&nbsp;<a onclick="commentDelete('+value.freec_num+');">삭제</a> </span>'; 
-				}	            	                	                
-                a += '<div class="commentContent'+value.freec_num+'"> <p>'+value.free_comment +'</p></div>';						
-				a += '</div></div>';
+				}            	                	                
+                a += '<div class="commentContent'+value.freec_num+'"> <p>'+value.free_comment +'</p></div></div>';
+                a += '<div class="boardCofC'+value.freec_num+'"> <a onclick="select_BoardCofC('+value.freec_num+')"> 댓글 '+value.cofcnumber+'</a></div>'
+				a += '</div>';
             });		
 			            
             $(".commentList").html(a);
@@ -103,7 +104,7 @@ function commentUpdateCommit(freec_num){
 }
 
 function commentDelete(freec_num){
-	var choice = window.confirm('삭제하시겠습니까?');
+	var choice = window.confirm('댓글을 삭제하시겠습니까?');
 	if(!choice){
 		return;
 	}
@@ -124,10 +125,36 @@ function commentDelete(freec_num){
 		}
 	});
 }
+
+function select_BoardCofC(freec_num){
+	
+ 	 $.ajax({
+    	url : 'list_boardCofC.do',
+        type : 'get',
+        data : {'freec_num':freec_num},
+        success : function(data){					
+            var a ='';
+            $.each(data, function(key, value){
+	            a += '<div class="list_boardcofc" style="border-top:1px solid darkgray; margin:10px; padding:10px;"><b>'+value.mem_id + '</b>';
+	            a += value.cofc_comment + '</div>';            
+            });
+			a += '<input type="text" id="boardComment_of" style="padding-left: 10px;">';
+			a += '<input type="button" value="등록" onclick="submit_boardCofC('+freec_num+');">';
+			$('.boardCofC'+freec_num).html(a);
+		},
+		error : function(){
+			alert('댓글의댓글 불러오기 네트워크 오류');
+		}
+ 	 }); 
+}
+
+function submit_boardCofC(freec_num){
+	
+}
 	
 </script>
 <div class="page-main-style">
-	<h3>자유 게시판</h3>
+	<h3>팁 게시판</h3>
 	<h2>${boardFree.free_title}</h2>
 	<ul>
 		<li>
@@ -151,7 +178,7 @@ function commentDelete(freec_num){
 	</ul>
 	<hr size="1" width="100%">
 	<c:if test="${!empty boardFree.free_filename}">
-		<img src="imageView.do?free_num=${boardFree.free_num}"  style="max-width:400px; max-height:400px;">
+		<img src="imageView.do?free_num=${boardFree.free_num}"  style="max-width:500px; max-height:500px;">
 	</c:if>
 	<p>
 		${boardFree.free_content}
@@ -183,35 +210,11 @@ function commentDelete(freec_num){
 	</form>
 	<h3>댓글</h3>
 	<hr>
-
-
+	
 	
 	<div class="container">
         <div class="commentList"></div>
     </div>
     
     
-	 
-
-	
-<%-- 	<c:if test="${!empty boardFree.commentList }">
-		<c:forEach var="freeBoardComment" items="${freeCommentList}">			
-			<input type="hidden" id="mem_num" value="${freeBoardComment.freec_num}">
-			<p>
-			<b>${freeBoardComment.mem_id}</b>
-			<c:if test="${freeBoardComment.mem_auth==1}">
-			일반회원
-			</c:if>
-			<c:if test="${freeBoardComment.mem_auth==2}">
-			트레이너
-			</c:if>
-			${freeBoardComment.freec_modify_date}
-			<c:if test="${user.mem_num == freeBoardComment.mem_num}">
-				<input type="button" value="수정" id="modify_comment">
-				<input type="button" value="삭제" id="delete_comment">
-			</c:if>
-			</p>			
-			${freeBoardComment.free_comment}					
-		</c:forEach>
-	</c:if> --%>
 </div>

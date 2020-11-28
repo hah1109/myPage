@@ -26,5 +26,16 @@ create table board_free_comment(
     constraint free_num_fk foreign key (free_num) references board_free(free_num),
     constraint mem_num_fk foreign key (mem_num) references member(mem_num)
 );
-
 create sequence freec_num_seq;
+
+create table board_free_cofc(
+    cofc_num number not null,
+    cofc_comment varchar2(100) not null,
+    cofc_date date default sysdate  not null,
+    freec_num number not null,
+    mem_num number not null,
+    constraint cofc_num_pk primary key (cofc_num),
+    constraint freec_num_cfk foreign key (freec_num) references board_free_comment,
+    constraint mem_num_cfk foreign key (mem_num) references member    
+);
+create sequence cofc_num_seq;

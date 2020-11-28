@@ -48,6 +48,11 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 
 	@Override
+	public void updateBoardFreeExImg(FreeBoardVO boardFree) {
+		freeBoardMapper.updateBoardFreeExImg(boardFree);
+	}
+
+	@Override
 	public void deleteBoardFree(Integer free_num) {
 		freeBoardMapper.deleteBoardFree(free_num);
 	}

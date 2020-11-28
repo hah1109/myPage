@@ -7,6 +7,14 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
+		$('#board_submit').submit(function(){
+			if($('#free_content').val()==''){
+				alert('내용을 입력해 주세요');
+				$('#free_content').focus();
+				return false;
+			}
+		});
+		
 		var pre_upload = $('#upload').val();
 		var photo_path;
 		var free_photo;
@@ -50,7 +58,7 @@
 <div class="page-main-style">
 	<h2>자유 게시판</h2>
   	<form:form commandName="boardFree" action="modify.do"
-	                      		    enctype="multipart/form-data">
+	                      		    enctype="multipart/form-data" id="board_submit">
 	    <form:hidden path="free_num"/>
  		<form:errors element="div" cssClass="error-color"/>
 		<ul>
@@ -61,7 +69,7 @@
 			</li>
 			<li>
 				<label for="free_content">내용</label>
-				<form:textarea path="free_content" cols="40" rows="10"/>
+				<form:textarea path="free_content" id="free_content" cols="40" rows="10"/>
 				<form:errors path="free_content" cssClass="error-color"/>
 			</li>
 			

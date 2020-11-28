@@ -167,7 +167,13 @@ public class FreeBoardController {
 		if(result.hasErrors()) return "boardFreeModify";
 		
 		freeBoardVO.setFree_ip(request.getRemoteAddr());
-		freeBoardService.updateBoardFree(freeBoardVO);
+		
+		if(freeBoardVO.getIsImgUpdate()==1) {
+			freeBoardService.updateBoardFreeExImg(freeBoardVO);
+		}else {
+			freeBoardService.updateBoardFree(freeBoardVO);
+		}
+		
 		
 		model.addAttribute("message", "글이 수정되었습니다.");
 		model.addAttribute("url", request.getContextPath() + "/boardFree/list.do");

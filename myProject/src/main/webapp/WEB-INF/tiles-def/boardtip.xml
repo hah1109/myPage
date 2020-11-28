@@ -5,8 +5,20 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-    <definition name="test01" extends="main">
-    	<put-attribute name="title" value="게시판 목록"/>
-    	<put-attribute name="body" value="/WEB-INF/views/board/boardList.jsp"/>  
+    <definition name="boardTipList" extends="main">
+    	<put-attribute name="title" value="팁게시판 목록"/>
+    	<put-attribute name="body" value="/WEB-INF/views/boardTip/boardTipList.jsp"/>  
+    </definition>
+    <definition name="boardTipWrite" extends="main">
+    	<put-attribute name="title" value="팁게시판 쓰기"/>
+    	<put-attribute name="body" value="/WEB-INF/views/boardTip/boardTipWrite.jsp"/>  
+    </definition>
+    <definition name="boardTipView" extends="main">
+    	<put-attribute name="title" value="팁게시판 글상세"/>
+    	<put-attribute name="body" value="/WEB-INF/views/boardTip/boardTipView.jsp"/>  
+    </definition>
+    <definition name="boardTipModify" extends="main">
+    	<put-attribute name="title" value="팁게시판 수정"/>
+    	<put-attribute name="body" value="/WEB-INF/views/boardTip/boardTipModify.jsp"/>  
     </definition>
 </tiles-definitions>

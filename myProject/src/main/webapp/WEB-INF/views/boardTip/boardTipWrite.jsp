@@ -6,6 +6,14 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
+		$('#board_submit').submit(function(){
+			if($('#free_content').val()==''){
+				alert('내용을 입력해 주세요');
+				$('#free_content').focus();
+				return false;
+			}
+		});
+		
 		$('#upload').change(function(){
 			$('#cancel_upload').show();
 		});
@@ -32,15 +40,13 @@
 		$('#cancel_upload').click(function(){
 			$('#upload').val("");
 			$('.free_file').hide();
-		});
-		
+		});		
 	});
 </script>
 
 <div class="page-main-style">
-	<h2>자유 게시판</h2>
-  	<form:form commandName="freeBoardVO" action="write.do"
-	                      		    enctype="multipart/form-data"> 
+	<h2>팁 게시판</h2>
+  	<form:form commandName="freeBoardVO" action="write.do" enctype="multipart/form-data" id="board_submit"> 
  		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 			<li>
