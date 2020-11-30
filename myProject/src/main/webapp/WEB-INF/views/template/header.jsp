@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mainPageStyle.css">
 	<!-- ------------------------------------헤더------------------------------------- -->
-	<!-- 우측 상단 메뉴 -->
 	<div id="sub-header" style="float:right">
 		<!-- 로그인 상태 : 회원등급아이콘,id,알림아이콘,mypage,로그아웃,QnA 활성화 -->
 		<c:if test="${!empty user}">
@@ -11,10 +10,10 @@
 				[ <img class="grade-icon" alt="" src="${pageContext.request.contextPath}/resources/images/header/grade_a.png"> ]
 			</c:if>
 			<c:if test="${user.mem_auth == 1 }">
-				[ <img class="grade-icon" alt="" src="${pageContext.request.contextPath}/resources/images/header/grade_t.png"> ]
+				[ <img class="grade-icon" alt="" src="${pageContext.request.contextPath}/resources/images/header/grade_m.png"> ]
 			</c:if>
 			<c:if test="${user.mem_auth == 2 }">
-				[ <img class="grade-icon" alt="" src="${pageContext.request.contextPath}/resources/images/header/grade_m.png"> ]
+				[ <img class="grade-icon" alt="" src="${pageContext.request.contextPath}/resources/images/header/grade_t.png"> ]
 			</c:if>
 			[<span>${user.mem_id}</span>]
 			<a href="${pageContext.request.contextPath}">알림</a>
@@ -53,7 +52,7 @@
 				<img class="bar" alt="" src="${pageContext.request.contextPath}/resources/images/header/bar.png">
 			</li>
 			<li class="nutriment">
-				<a href="${pageContext.request.contextPath}/nutriment/nutriList.do">식단</a>
+				<a href="${pageContext.request.contextPath}/nutriment/nutrimentGuide.do">식단</a>
 				<ul class="nutri-sub submenu" style="z-index: 2;">
 					<li><a href="${pageContext.request.contextPath}/nutriment/nutrimentGuide.do">식단 가이드</a></li>
 					<li><a href="${pageContext.request.contextPath}/nutriment/nutriList.do">영양성분 검색</a></li>

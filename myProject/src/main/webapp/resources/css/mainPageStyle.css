@@ -49,9 +49,7 @@ div#main-header{
 	margin-top: 20px;
 }
 
-div#main-header > ul > .main-logo{
-	margin-left: 200px;
-}
+div#main-header > ul > .main-logo{}
 
 div#main-header > ul > li > img{
 	width:3px;
@@ -137,6 +135,12 @@ div#main-header> ul >.trainer >a{
 
 /*----------------header------------------*/
 
+
+/*----------------footer------------------*/
+.align-center{
+	text-align:center;
+}
+/*----------------footer------------------*/
 
 
 /* --------------body-----------------------*/

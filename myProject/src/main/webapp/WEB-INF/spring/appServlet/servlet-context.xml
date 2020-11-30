@@ -43,6 +43,10 @@
 		base-package="kr.spring.nutriment.controller" />
 	<context:component-scan
 		base-package="kr.spring.board.hw.controller" />
+	<context:component-scan
+		base-package="kr.spring.board.feed.controller" />
+	<context:component-scan
+		base-package="kr.spring.board.tl.controller" />
 
 	<!-- tiles 설정 -->
 	<beans:bean id="tilesConfigurer"

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.spring.board.free.vo.FreeBoardVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.nutriment.service.NutrimentService;
 import kr.spring.nutriment.vo.NutrimentVO;
@@ -218,43 +217,43 @@ public class NutrimentController {
 		//권장 섭취량 계산
 		if(type.equals("fast")) {//빠른 체중감량 탄3단5지2
 			
-			carb = (int) (dayCal * 0.3);
-			protein = (int) (dayCal * 0.5);
-			fat = (int) (dayCal * 0.2);
+			carb = (int) (dayCal * 0.3 /4);
+			protein = (int) (dayCal * 0.5 /4);
+			fat = (int) (dayCal * 0.2 /9);
 			
 		} else if(type.equals("normal")) {//적당한 체중 감량 탄4단4지2
 			
-			carb = (int) (dayCal * 0.4);
-			protein = (int) (dayCal * 0.4);
-			fat = (int) (dayCal * 0.2);
+			carb = (int) (dayCal * 0.4 /4);
+			protein = (int) (dayCal * 0.4 /4);
+			fat = (int) (dayCal * 0.2 /9);
 			
 		} else if(type.equals("healthy")) {//건강한 식습관 탄5단3지2
 			
-			carb = (int) (dayCal * 0.5);
-			protein = (int) (dayCal * 0.3);
-			fat = (int) (dayCal * 0.2);
+			carb = (int) (dayCal * 0.5 /4);
+			protein = (int) (dayCal * 0.3 /4);
+			fat = (int) (dayCal * 0.2 /9);
 			
 		} else if(type.equals("low")) {//저강도 운동 탄 3 단백질:몸무게*1.5 지 2
 			
-			carb = (int) (dayCal * 0.3);
-			protein = (int) (weight * 1.5);
-			fat = (int) (dayCal * 0.2);
+			carb = (int) (dayCal * 0.3 /4);
+			protein = (int) (weight * 1.5 /4);
+			fat = (int) (dayCal * 0.2 /9);
 			
 		} else if(type.equals("high")) {//고강도 운동 탄4 단백질:몸무게*2.0 지2
 			
-			carb = (int) (dayCal * 0.4);
-			protein = (int) (weight * 2);
-			fat = (int) (dayCal * 0.2);
-			
+			carb = (int) (dayCal * 0.4 /4);
+			protein = (int) (weight * 2 /4);
+			fat = (int) (dayCal * 0.2 /9);
 		}
 		
+		mav.addObject("type",type);
 		mav.addObject("carb",carb);
 		mav.addObject("protein",protein);
 		mav.addObject("fat",fat);
 		
 		
 		System.out.println(carb+protein+fat);
-		mav.setViewName("nutrimentCalResult");
+		mav.setViewName("nutrimentCal");
 		
 		return mav;
 	}

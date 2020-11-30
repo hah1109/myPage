@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <title>MainPage</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<!--     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"> -->
 
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/swiper-bundle.min.css">
@@ -72,10 +72,10 @@
 				[ <img class="grade-icon" alt="" src="${pageContext.request.contextPath}/resources/images/header/grade_a.png"> ]
 			</c:if>
 			<c:if test="${user.mem_auth == 1 }">
-				[ <img class="grade-icon" alt="" src="${pageContext.request.contextPath}/resources/images/header/grade_t.png"> ]
+				[ <img class="grade-icon" alt="" src="${pageContext.request.contextPath}/resources/images/header/grade_m.png"> ]
 			</c:if>
 			<c:if test="${user.mem_auth == 2 }">
-				[ <img class="grade-icon" alt="" src="${pageContext.request.contextPath}/resources/images/header/grade_m.png"> ]
+				[ <img class="grade-icon" alt="" src="${pageContext.request.contextPath}/resources/images/header/grade_t.png"> ]
 			</c:if>
 			[<span>${user.mem_id}</span>]
 			<a href="${pageContext.request.contextPath}">알림</a>
@@ -114,7 +114,7 @@
 				<img class="bar" alt="" src="${pageContext.request.contextPath}/resources/images/header/bar.png">
 			</li>
 			<li class="nutriment">
-				<a href="${pageContext.request.contextPath}/nutriment/nutriList.do">식단</a>
+				<a href="${pageContext.request.contextPath}/nutriment/nutrimentGuide.do">식단</a>
 				<ul class="nutri-sub submenu" style="z-index: 2;">
 					<li><a href="${pageContext.request.contextPath}/nutriment/nutrimentGuide.do">식단 가이드</a></li>
 					<li><a href="${pageContext.request.contextPath}/nutriment/nutriList.do">영양성분 검색</a></li>
@@ -191,5 +191,13 @@
     
     <!-- ------------------------------------바디------------------------------------- -->
     
+    <!-- ------------------------------------푸터------------------------------------- -->
+    <div class="align-center">
+		<hr style="border:solid 3px #0de9df;">
+		<img class="mainLogo" alt="" src="${pageContext.request.contextPath}/resources/images/header/main_logo_for_header.png">
+	&copy; 2020 My First Trainner
+	</div>
+	<!-- ------------------------------------푸터------------------------------------- -->
+	
 </body>
 </html>

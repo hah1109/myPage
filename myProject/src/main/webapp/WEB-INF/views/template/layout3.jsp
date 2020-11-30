@@ -13,11 +13,13 @@
 	<div id="main_header" style="z-index: 2;">
 		<tiles:insertAttribute name="header"/>
 	</div>
-	<div id="main_body" style="z-index: 1;">
-		<tiles:insertAttribute name="body"/>
-	</div>
-	<div id="sub_body" style="z-index: 1;">
-		<tiles:insertAttribute name="subBody"/>
+	<div id="body">
+		<div id="main_body" style="z-index: 1;">
+			<tiles:insertAttribute name="body"/>
+		</div>
+		<div id="sub_body" style="z-index: 1;">
+			<tiles:insertAttribute name="subBody"/>
+		</div>
 	</div>
 	<div id="main_footer" style="z-index: 1;">
 		<tiles:insertAttribute name="footer"/>
