@@ -28,8 +28,8 @@ public interface TipBoardService {
 	
 	//댓글의 댓글부분(수정은 불가-> 조회, 등록, 삭제)
 	public List<FreeBoardCommentReplyVO> selectReplyComment(Integer freec_num);	
-	public int inserBoardCofC(FreeBoardCommentReplyVO boardCofC);	
-	public int deleteBoardCofC(int cofc_num);
+	public int inserReplyComment(FreeBoardCommentReplyVO replyComment);	
+	public int deleteReplyComment(int rfreec_num);
 	
 	
 }

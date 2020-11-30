@@ -20,13 +20,13 @@ public interface TipBoardMapper {
 	//Mapper
 	public int selectRowCount(Map<String,Object> map);
 	
-	@Select("SELECT * FROM board_free b JOIN member m USING(mem_num) WHERE free_num = #{free_num}")
+	//Mapper
 	public FreeBoardVO selectBoardFree(Integer free_num);
 	
 	@Insert("INSERT INTO board_free (free_num,free_title,free_content,free_file,free_filename,free_ip,free_type,mem_num) VALUES (board_free_seq.nextval,#{free_title},#{free_content},#{free_file},#{free_filename},#{free_ip},#{free_type},#{mem_num})")
 	public void insertBoardTip(FreeBoardVO freeBoard);
 	
-	@Update("UPDATE board_free SET free_hit=free_hit+1 WHERE free_num=#{free_num}")
+	//Mapper
 	public void updateHitBoardFree(Integer free_num);
 	
 	//Mapper
@@ -55,12 +55,14 @@ public interface TipBoardMapper {
 	public int deleteFreeComment(int freec_num);
 	
 	//댓글의댓글부분
-	@Select("SELECT r.*, m.*, to_char(r.rfreec_date,'yyyy-mm-dd') str_date FROM board_free_comment_reply r JOIN member m ON r.mem_num = m.mem_num WHERE r.freec_num = #{freec_num}")
+	//Mapper
 	public List<FreeBoardCommentReplyVO> selectReplyComment(Integer freec_num);
 	
-	public int inserBoardCofC(FreeBoardCommentReplyVO replyComment);
+	//Mapper
+	public int inserReplyComment(FreeBoardCommentReplyVO replyComment);
 	
-	public int deleteBoardCofC(int cofc_num);
+	//Mapper
+	public int deleteReplyComment(int rfreec_num);
 	
 	
 

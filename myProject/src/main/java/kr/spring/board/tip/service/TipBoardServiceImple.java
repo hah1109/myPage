@@ -90,13 +90,13 @@ public class TipBoardServiceImple implements TipBoardService{
 	}
 
 	@Override
-	public int inserBoardCofC(FreeBoardCommentReplyVO replyComment) {
-		return tipBoardMapper.inserBoardCofC(replyComment);
+	public int inserReplyComment(FreeBoardCommentReplyVO replyComment) {
+		return tipBoardMapper.inserReplyComment(replyComment);
 	}
 
 	@Override
-	public int deleteBoardCofC(int cofc_num) {
-		return tipBoardMapper.deleteBoardCofC(cofc_num);
+	public int deleteReplyComment(int rfreec_num) {
+		return tipBoardMapper.deleteReplyComment(rfreec_num);
 	}
 	
 
