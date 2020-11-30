@@ -49,6 +49,7 @@
     	<put-attribute name="title" value="트레이너 상세정보 수정"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/trainerModify.jsp"/>  
     </definition> 
+    
     <definition name="memberChangePassword" extends="main">
     	<put-attribute name="title" value="일반회원 비밀번호 수정"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/memberChangePassword.jsp"/>  
