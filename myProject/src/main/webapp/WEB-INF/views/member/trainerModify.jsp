@@ -1,59 +1,147 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<div class="page-main-style">
-	<h2>트레이너 정보 수정</h2>
-	<form:form action="update.do" commandName="memberVO">
-		<form:errors element="div" cssClass="error-color"/>
-		<ul>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout_trainerModify.css">
+
+<style>
+.detail_modify_btn{
+	margin-top:4px;
+	background-image: url('../resources/images/btn_detail_modify.png');
+	height:40px;
+}
+.password_modify_btn{
+	margin-top:4px;
+	background-image: url('../resources/images/btn_password_modify.png');
+	height:40px;
+}
+.delete_btn{
+	margin-top:4px;
+	background-image: url('../resources/images/btn_delete_member.png');
+	height:26px;
+}
+
+.update_btn{
+   width:140px;
+   height:50px;
+   margin-bottom: 5px;
+   background-image: url('../resources/images/Btn_modify.png');
+}
+.Btn_home{
+   width:140px;
+   height:50px;
+   margin-bottom: 5px;
+   background-image: url('../resources/images/Btn_modify_home.png');
+}
+
+</style>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#member_modify-form').submit(function(){
+			var choice = window.confirm('수정하시겠습니까?');
+			if(choice){
+				alert('수정완료!');
+			}else{
+				return false;
+			}
+		});
+	});
+</script>
+
+<div class="mypage_style">
+  <div class="container">
+    <div class="left">
+    
+    <form:form id="member_modify-form" action="update.do" commandName="memberVO">
+    	<ul>
+	      	<li>
+	      		<a><img class="mypage_texts" src="../resources/images/text_name.png"></a>
+	      	</li>
 			<li>
-				<label>             이름                  ${user.mem_name}</label><br>
+				<form:input path="mem_name" value="${trainer.mem_name}" readonly="true"/>
+			</li>
+			
+			<li>
+				<a><img class="mypage_texts" src="../resources/images/text_cell.png"></a>
 			</li>
 			<li>
-				<label for="mem_cell">전화번호</label>
-				<form:input path="mem_cell"/>
-				<form:errors path="mem_cell" cssClass="error-color"/>
+				<form:input type="text" id="memModify" path="mem_cell" placeholder="${trainer.mem_cell}"/>
+			</li>
+			
+			<li>
+				<a><img class="mypage_texts" src="../resources/images/text_email.png"></a>
 			</li>
 			<li>
-				<label for="mem_email">이메일</label>
-				<form:input path="mem_email"/>
-				<form:errors path="mem_email" cssClass="error-color"/>
+				<form:input type="text" id="memModify" path="mem_email" placeholder="${trainer.mem_email}"/>
+			</li>
+			
+			<li>
+				<a><img class="mypage_texts" src="../resources/images/text_g_addr.png"></a>
 			</li>
 			<li>
-				<label for="g_addr">근무지 주소</label>
-				<form:input path="g_addr"/>
-				<form:errors path="g_addr" cssClass="error-color"/>
+				<form:input type="text" id="memModify" path="g_addr" placeholder="${trainer.g_addr}"/>
+			</li>
+			
+			<li>
+				<a><img class="mypage_texts" src="../resources/images/text_exp.png"></a>
 			</li>
 			<li>
-				<label for="exp">경력</label>
-				<form:input path="exp"/>년
-				<form:errors path="exp" cssClass="error-color"/>
+				<form:input type="text" id="memModify" path="exp" placeholder="${trainer.exp}"/>
+			</li>
+			
+			<li>
+				<a><img class="mypage_texts" src="../resources/images/text_career.png"></a>
 			</li>
 			<li>
-				<label for="career">이력</label>
-				<form:input path="career"/>
-				<form:errors path="career" cssClass="error-color"/>
+				<form:input type="text" id="memModify" path="career" placeholder="${trainer.career}"/>
+			</li>
+			
+			<li>
+				<a><img class="mypage_texts" src="../resources/images/text_zipcode.png"></a>
 			</li>
 			<li>
-				<label for="mem_zipcode">우편번호</label>
-				<form:input path="mem_zipcode"/>
-				<form:errors path="mem_zipcode" cssClass="error-color"/>
+				<form:input type="text" id="memModify" path="mem_zipcode" placeholder="${trainer.mem_zipcode}"/>
+			</li>
+			
+			<li>
+				<a><img class="mypage_texts" src="../resources/images/text_addr1.png"></a>
 			</li>
 			<li>
-				<label for="mem_addr1">주소</label>
-				<form:input path="mem_addr1"/>
-				<form:errors path="mem_addr1" cssClass="error-color"/>
+				<form:input type="text" id="memModify" path="mem_addr1" placeholder="${trainer.mem_addr1}"/>
+			</li>
+			
+			<li>
+				<a><img class="mypage_texts" src="../resources/images/text_addr2.png"></a>
 			</li>
 			<li>
-				<label for="mem_addr2">상세주소</label>
-				<form:input path="mem_addr2"/>
-				<form:errors path="mem_addr2" cssClass="error-color"/>
+				<form:input type="text" id="memModify" path="mem_addr2" placeholder="${trainer.mem_addr2}"/>
 			</li>
+			
+			<li>
+				<a><img class="mypage_texts" src="../resources/images/text_registerDate.png"></a>
+			</li>
+			<li>
+				<form:input type="text" id="memModify" path="mem_date" value="${trainer.mem_date}" readonly="true"/>
+			</li>
+			
+			<input type="submit" value="" class="update_btn">
+		
 		</ul>
-		<div class="align-center">
-			<input type="submit" value="수정">
-			<input type="button" value="홈으로"
-			    onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
-		</div>
+		
+		
 	</form:form>
+	
+   </div>
+    <div class="right">
+      <form:form class="re_form" action="login.do" commandName="memberVO">
+	      <div class="form">
+	        <input type="button"  class="detail_modify_btn" onclick="location.href='update.do'" />
+			<input type="button" class="password_modify_btn" onclick="location.href='updatePw.do'">
+			<input type="button" class="delete_btn" onclick="location.href='delete.do'">
+	      </div>
+      </form:form>
+    </div>
+  </div>
 </div>

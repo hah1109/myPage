@@ -83,6 +83,8 @@ public class MemberVO {
 		//탈퇴 회원이 아닌 회원들
 		if(mem_auth < 3 && mem_pw.equals(userPasswd)) {
 			return true;
+		}else if(mem_pw.equals(null)) {
+			return false;
 		}
 		return false;
 	}

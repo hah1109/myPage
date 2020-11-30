@@ -22,12 +22,10 @@ body {
   }
 }
 .left {
-  background: #e2e2e5;
-  background-color: #f0f0f2;
-  height: calc(100% - 40px);
-  top: 20px;
+  
+  height: 300px;
   position: relative;
-  width: 50%;
+  width: 500px;
 }
 @media (max-width: 767px) {
   .left {
@@ -49,11 +47,12 @@ body {
   margin: 40px;
 }
 .right {
-  background: #0de9df;
+  background: #DAEFF5;
   box-shadow: 0px 0px 40px 16px rgba(0,0,0,0.22);
   color: #000;
   position: relative;
-  width: 50%;
+  width:300px;
+  height:300px;
 }
 @media (max-width: 767px) {
   .right {
@@ -74,10 +73,22 @@ path {
   stroke-dasharray: 240 1386;
 }
 .form {
+  width:300px;
+  height:300px;
   margin: 40px;
-  margin-top: 10px;
-  margin-left: 20px;
+  margin-top: 20px;
+  margin-left: 35px;
   position: absolute;
+}
+.form_left {
+  background: #DAEFF5;
+  background-color: #DAEFF5;
+  width:300px;
+  height:300px;
+  position: absolute;
+  padding:0;
+  box-shadow: 0px 0px 40px 16px rgba(0,0,0,0.22);
+  border:none;
 }
 
 label {
@@ -96,7 +107,7 @@ input {
   height: 30px;
   line-height: 30px;
   outline: none !important;
-  width: 100%;
+  width: 75%;
 }
 input::-moz-focus-inner { 
   border: 0; 
@@ -135,4 +146,16 @@ input::-moz-focus-inner {
 .input_id_pw{
 	border:2px solid #000;
 	border-radius:6px;
+}
+.find_id_btn{
+   margin-top:10px;
+   margin-left:5px;
+   width:200px;
+   background-image: url('../resources/images/Btn_find_id.png');
+}
+.find_pw_btn{
+   margin-top:10px;
+   margin-left:5px;
+   width:200px;
+   background-image: url('../resources/images/Btn_find_pw.png');
 }

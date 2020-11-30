@@ -7,12 +7,36 @@
 .login_btn{
    width:125px;
    height:30px;
-   margin-left: 50px;
+   margin-left: 25%;
    margin-top: 15px;
    margin-bottom: 5px;
    background-image: url('../resources/images/Btn_login.png');
 }
+.error{
+	margin-top:4%;
+	font-size: 12px;
+	text-align: center;
+	color:red;
+}
 </style>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#re_form').submit(function(){
+			if($('#mem_id').val()==''){
+	            $('#mem_id').attr('placeholder','아이디를 입력하세요');
+	            $('#mem_id').focus();
+	            return false;
+			}
+			if($('#mem_pw').val()==''){
+	            $('#mem_pw').attr('placeholder','비밀번호를 입력하세요');
+	            $('#mem_pw').focus();
+	            return false;
+			}
+		});
+	});	
+</script>
 
 <div class="page-main-style">
   <div class="container">
@@ -28,10 +52,13 @@
          <div class="form">
          
          	<!-- id/pw 입력란 -->
+         	
          	<label for="mem_id">ID</label>
-         	<form:input class="input_id_pw" path="mem_id"/>
+         	<form:input class="input_id_pw" path="mem_id" id="mem_id"/>
+         	<form:errors path="mem_id"/>
            	<label for="mem_pw" >Password</label>
-           	<form:input type="password" class="input_id_pw" path="mem_pw"/><br>
+           	<form:input type="password" class="input_id_pw" path="mem_pw" id="mem_pw"/>
+           	<form:errors path="mem_pw"/><br>
          	
          	<!-- 일반회원/트레이너 선택란 -->    
          	<img class="texts_img" src="../resources/images/text_Member.png">
@@ -39,8 +66,11 @@
          	<img class="texts_img" src="../resources/images/text_Trainer.png">
          	<input type="radio" class="radio_btn" name="mem_auth" value="2">
          	
+         	<!-- 에러메세지 -->
+         	<form:errors element="div" class="error"/>
+         	
          	<!-- 로그인 버튼 -->
-         	<input type="submit" id="submit" value="" class="login_btn">
+         	<input type="submit" value="" class="login_btn">
          	
          	<!-- 회원가입 + id/pw찾기 -->
            	<button type="button" class="r_f_btn" onclick="location.href='${pageContext.request.contextPath}/member/userType.do'">

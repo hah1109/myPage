@@ -65,6 +65,10 @@
     	<put-attribute name="title" value="트레이너 탈퇴"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/trainerDelete.jsp"/>  
     </definition>
+    <definition name="register_confirm" extends="main">
+       <put-attribute name="title" value="회원가입 확인"/>
+       <put-attribute name="body" value="/WEB-INF/views/member/register_confirm.jsp"/>  
+    </definition>
 </tiles-definitions>
 
 

@@ -1,6 +1,8 @@
 package kr.spring.member.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -60,7 +62,7 @@ public class MemberController {
 	//일반회원 회원정보를 기입하고 회원가입 버튼을 눌렀을 경우 호출될 메서드
 	//일반회원 회원가입 처리
 	@RequestMapping(value="/member/memberRegister.do", method=RequestMethod.POST)
-	public String submitMemberRegister(@Valid MemberVO memberVO, BindingResult result) {
+	public String submitMemberRegister(@Valid MemberVO memberVO, BindingResult result, Model model, HttpServletRequest request) {
 
 		//로그 정보로 데이터가 넘어오는 과정을 보여줌
 		if(log.isDebugEnabled()) {
@@ -74,9 +76,12 @@ public class MemberController {
 
 		//유효성 체크 결과 정상일 경우 쿼리문 작업
 		memberService.insertMember_detail(memberVO);
-
+		
+		model.addAttribute("message", "회원가입이 완료되었습니다.");
+		model.addAttribute("url", request.getContextPath() + "redirect:/member/login.do");
+		
 		//일반회원 회원정보를 테이블에 정상적으로 등록했을 경우 로그인 페이지로 이동
-		return "redirect:/member/login.do";
+		return "register_confirm";
 	}
 
 	/*========================================================================================================*/
@@ -96,7 +101,7 @@ public class MemberController {
 	//트레이너 회원정보를 기입하고 회원가입 버튼을 눌렀을 경우 호출될 메서드
 	//트레이너 회원가입 처리
 	@RequestMapping(value="/member/trainerRegister.do", method=RequestMethod.POST)
-	public String submitTrainerRegister(@Valid MemberVO memberVO, BindingResult result) {
+	public String submitTrainerRegister(@Valid MemberVO memberVO, BindingResult result, Model model) {
 
 		//로그 정보로 데이터가 넘어오는 과정을 보여줌
 		if(log.isDebugEnabled()) {
@@ -111,11 +116,24 @@ public class MemberController {
 		//유효성 체크 결과 정상일 경우 쿼리문 작업
 		memberService.insertTrainer_detail(memberVO);
 
+		model.addAttribute("message", "회원가입이 완료되었습니다.");
+		
 		//트레이너 회원정보를 테이블에 정상적으로 등록했을 경우 로그인 페이지로 이동
-		return "redirect:/member/login.do";
+		return "register_confirm";
 	}
 
 	/*========================================================================================================*/
+
+
+	//회원가입 확인페이지
+	@RequestMapping("/member/register_confirm.do")
+	public String registerConfirm() {
+
+		//트레이너 회원정보를 테이블에 정상적으로 등록했을 경우 로그인 페이지로 이동
+		return "redirect:/main/main.do";
+	}
+
+
 
 	/*========================================================================================================*/
 	//로그인 폼을 호출하는 메서드 [회원가입/로그인/(id/pw)찾기] 버튼으로 3가지 동작이 있음
@@ -132,7 +150,7 @@ public class MemberController {
 	//로그인 폼에서 콤보박스로 일반회원/트레이너를 선택하고 로그인 버튼을 눌렀을 시 호출
 	//일반회원/트레이너 로그인 처리
 	@RequestMapping(value="/member/login.do", method=RequestMethod.POST)
-	public String submitLogin(@Valid MemberVO memberVO, BindingResult result, HttpSession session) {
+	public String submitLogin(@Valid MemberVO memberVO, BindingResult result, HttpSession session, HttpServletResponse response, Model model) {
 		//memberVO에는 로그인 폼에서 유저가 입력한 데이터가 들어있음
 		//로그 정보로 데이터가 넘어오는 과정을 보여줌
 		if(log.isDebugEnabled()) {
@@ -154,8 +172,12 @@ public class MemberController {
 
 				//id값이 있는 경우
 				if(member != null) {
+					if(member.getMem_pw() != null) {
 					//비밀번호 일치여부 체크
 					check = member.isCheckedPasswd(memberVO.getMem_pw());
+					}else {
+						throw new LoginCheckException();
+					}
 				}
 
 				if(check) {
@@ -183,7 +205,11 @@ public class MemberController {
 				//id값이 있는 경우
 				if(trainer != null) {
 					//비밀번호 일치여부 체크
+					if(trainer.getMem_pw() != null) {
 					check = trainer.isCheckedPasswd(memberVO.getMem_pw());
+					}else {
+						throw new LoginCheckException();
+					}
 				}
 
 				if(check) {
@@ -248,7 +274,6 @@ public class MemberController {
 			log.debug("<<<id찾기 정보>>> : " + memberVO);
 		}
 
-		System.out.println(result);
 		//일반회원 일경우
 		if(memberVO.getMem_auth() == 1) {
 			//id 찾기
@@ -276,7 +301,6 @@ public class MemberController {
 			//pw찾기
 			MemberVO member = memberService.selectFindPwMember_detail(memberVO.getMem_id(),memberVO.getMem_cell());
 			session.setAttribute("findPw", member);
-			System.out.println(member.getMem_pw());
 			return "findPw";
 		}else if(memberVO.getMem_auth() == 2) {//트레이너일 경우
 			//pw찾기
@@ -337,7 +361,7 @@ public class MemberController {
 
 	//일반회원/트레이너 회원정보 수정 처리
 	@RequestMapping(value="/member/update.do",method=RequestMethod.POST)
-	public String submitUpdateMember(@Valid MemberVO memberVO, BindingResult result, HttpSession session) {
+	public String submitUpdateMember(@Valid MemberVO memberVO, BindingResult result, HttpSession session,HttpServletRequest request,Model model) {
 		//회원 정보를 얻기 위해 session에 저장된 회원 정보 반환
 		MemberVO member = (MemberVO)session.getAttribute("user");
 
@@ -346,6 +370,7 @@ public class MemberController {
 			memberVO.setMem_num(member.getMem_num());
 			//회원 정보 수정
 			memberService.updateMember_detail(memberVO);
+			
 			return "redirect:/member/myPage.do";
 		}else if(member.getMem_auth() == 2) {
 			//전송된 데이터가 저장된 자바빈에 회원 번호를 저장
@@ -448,7 +473,7 @@ public class MemberController {
 
 		//회원 번호를 얻기 위해 세션에 저장된 회원 정보 반환
 		MemberVO vo = (MemberVO)session.getAttribute("user");
-		
+
 		if(vo.getMem_auth() == 1) {
 			//전송된 데이터가 저장된 자바빈에 회원 번호를 저장
 			memberVO.setMem_num(vo.getMem_num());
