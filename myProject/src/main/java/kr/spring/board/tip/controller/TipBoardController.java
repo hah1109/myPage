@@ -90,7 +90,6 @@ public class TipBoardController {
 	@RequestMapping("/boardTip/imageView.do")
 	public ModelAndView viewImage(@RequestParam int free_num) {
 		if(log.isDebugEnabled()) log.debug("<<이미지 출력>> : " + free_num);
-		System.out.println("테스트트트11111111111111111111");
 		FreeBoardVO freeBoardVO = tipBoardService.selectBoardFree(free_num);
 		System.out.println("테스트트트");
 		ModelAndView mav = new ModelAndView();

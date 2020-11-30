@@ -62,13 +62,31 @@ public class TipBoardAjaxController {
 	}
 	
 	//댓글의 댓글
-	@RequestMapping("/boardTip/list_boardCofC.do")
+	@RequestMapping("/boardTip/list_replyComment.do")
 	@ResponseBody
 	public List<FreeBoardCommentReplyVO> selectListCofC(@RequestParam int freec_num){
 		if(log.isDebugEnabled()) log.debug("<<댓글의 댓글>> : " + freec_num);
-		List<FreeBoardCommentReplyVO> list = tipBoardService.selectReplyComment(freec_num);
-		System.out.println(list);
-		return list;
-	}	
+		return tipBoardService.selectReplyComment(freec_num);
+	}
+	
+	@RequestMapping("/boardTip/submit_replyComment.do")
+	@ResponseBody
+	public int submitReplyComment(@RequestParam String replyComment_content,
+									@RequestParam int freec_num,
+									@RequestParam int mem_num) {
+		if(log.isDebugEnabled()) log.debug("<<댓글의댓글입력>> : " + replyComment_content);
+		FreeBoardCommentReplyVO replyComment = new FreeBoardCommentReplyVO();
+		replyComment.setFreec_num(freec_num);
+		replyComment.setMem_num(mem_num);
+		replyComment.setRfreec_comment(replyComment_content);
+		return tipBoardService.inserReplyComment(replyComment);
+	}
+	
+	@RequestMapping("/boardTip/delete_replyComment.do")
+	@ResponseBody
+	public int deleteReplyComment(@RequestParam int rfreec_num) {
+		if(log.isDebugEnabled()) log.debug("<<댓글의댓글삭제>> : " + rfreec_num);
+		return tipBoardService.deleteReplyComment(rfreec_num);
+	}
 	
 }

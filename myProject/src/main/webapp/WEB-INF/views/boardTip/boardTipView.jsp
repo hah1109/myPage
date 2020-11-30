@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout_board.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-var mem_num = ${user.mem_num};
 $(document).ready(function(){
 	commentList();	
 	$('#submit_comment').click(function(){
@@ -34,7 +33,7 @@ $(document).ready(function(){
 		});
 	});	
 });
-
+var mem_num = ${user.mem_num};
 function commentList(){
     $.ajax({
 
@@ -59,7 +58,7 @@ function commentList(){
                 a += '&nbsp;|&nbsp;<a onclick="commentDelete('+value.freec_num+');">삭제</a> </span>'; 
 				}            	                	                
                 a += '<div class="commentContent'+value.freec_num+'"> <p>'+value.free_comment +'</p></div></div>';
-                a += '<div class="boardCofC'+value.freec_num+'"> <a onclick="select_BoardCofC('+value.freec_num+')"> 댓글 '+value.countComment+'</a></div>'
+                a += '<div class="replyComment'+value.freec_num+'"> <a onclick="select_replyComment('+value.freec_num+')"> 댓글 '+value.countComment+'</a></div>'
 				a += '</div>';
             });		
 			            
@@ -126,21 +125,25 @@ function commentDelete(freec_num){
 	});
 }
 
-function select_BoardCofC(freec_num){
+function select_replyComment(freec_num){
 	
  	 $.ajax({
-    	url : 'list_boardCofC.do',
+    	url : 'list_replyComment.do',
         type : 'get',
         data : {'freec_num':freec_num},
         success : function(data){					
             var a ='';
             $.each(data, function(key, value){
-	            a += '<div class="list_boardcofc" style="border-top:1px solid darkgray; margin:10px; padding:10px;"><b>'+value.mem_id + '</b>';
-	            a += '&nbsp;&nbsp;'+value.rfreec_comment + '</div>';            
+	            a += '<div class="list_replyComment" style="border-top:1px solid darkgray; margin:10px; padding:10px;"><b>'+value.mem_id + '</b>';
+	            a += '&nbsp;&nbsp;'+value.rfreec_comment + '&nbsp;&nbsp;';
+	            if(mem_num == value.mem_num){
+	            a += '|&nbsp;<a onclick="delete_replyComment(' + value.rfreec_num +','+ freec_num + ');">삭제</a>';
+	            }
+	            a += '</div>';
             });
-			a += '<input type="text" id="boardComment_of" style="padding-left: 10px;">';
-			a += '<input type="button" value="등록" onclick="submit_boardCofC('+freec_num+');">';
-			$('.boardCofC'+freec_num).html(a);
+			a += '<input type="text" id="replyComment_content" style="padding-left: 10px;">';
+			a += '<input type="button" value="등록" onclick="submit_replyComment('+freec_num+');">';
+			$('.replyComment'+freec_num).html(a);
 		},
 		error : function(){
 			alert('댓글의댓글 불러오기 네트워크 오류');
@@ -148,8 +151,48 @@ function select_BoardCofC(freec_num){
  	 }); 
 }
 
-function submit_boardCofC(freec_num){
+function submit_replyComment(freec_num){
+	if($('#replyComment_content').val()==''){
+		alert('내용을 입력해주세요');
+		return;
+	}
 	
+	$.ajax({
+		url:'submit_replyComment.do',
+		type:'post',
+		data:{replyComment_content:$('#replyComment_content').val(),
+			  'freec_num':freec_num,
+			  'mem_num':mem_num},
+		success:function(data){
+			if(data==1){
+				alert('댓글이 입력되었습니다.');
+				$('#replyComment_content').val('');
+				select_replyComment(freec_num);
+			}
+		},
+		error:function(){
+			alert('댓글의 댓글 입력 네트워크 오류');	
+		}
+	});
+}
+
+function delete_replyComment(rfreec_num,freec_num){
+	var choice = window.confirm('삭제하시겠습니까?');
+	if(choice){
+		$.ajax({
+			url:'delete_replyComment.do',
+			type:'post',
+			data:{'rfreec_num':rfreec_num},
+			success:function(data){
+				if(data==1){
+					select_replyComment(freec_num);
+				}				
+			},
+			error:function(){
+				alert('댓글의댓글 삭제 오류');
+			}
+		});
+	}	
 }
 	
 </script>
