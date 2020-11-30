@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout_resultIdPw.css">
-
+ 
 <style>
 .confirm_btn{
    width:200px;

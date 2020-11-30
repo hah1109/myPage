@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout_userType.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
-
+ 
 <div class="page-main-style">
    <div class="align-center">
       <h2 class="type_text"><img src="../resources/images/text_Member_type_select.png"></h2>

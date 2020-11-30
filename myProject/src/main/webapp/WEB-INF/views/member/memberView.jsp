@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout_memberView.css">
 
 <style>
-
+ 
 .detail_modify_btn{
 	margin-top:4px;
 	background-image: url('../resources/images/btn_detail_modify.png');

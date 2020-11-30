@@ -7,7 +7,7 @@
 
 <script type="text/javascript">
 /*----------------------------일반 회원 가입 페이지----------------------------------*/
-
+ 
      $(document).ready(function(){
       var checkId = 0;
       

@@ -11,7 +11,7 @@
    margin-top: 15px;
    margin-bottom: 5px;
    background-image: url('../resources/images/Btn_login.png');
-}
+} 
 .error{
 	margin-top:4%;
 	font-size: 12px;

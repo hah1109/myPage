@@ -9,7 +9,7 @@
 	background-image: url('../resources/images/btn_detail_modify.png');
 	height:40px;
 }
-
+ 
 .password_modify_btn{
 	margin-top:4px;
 	background-image: url('../resources/images/btn_password_modify.png');

@@ -75,8 +75,7 @@ public class MemberVO {
 	//비밀번호 변경시 현재 비밀번호를 저장하는 용도로 사용
 	@Size(min=4,max=10)
 	private String now_passwd;
-
-
+  
 	//비밀번호 일치 여부 체크 db와 연결할 필요 없이 이미 정보를 불러와 셋팅한 MemberVO에서 처리
 	public boolean isCheckedPasswd(String userPasswd){
 		/*0관리자, 1일반회원, 2트레이너, 3탈퇴회원*/

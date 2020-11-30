@@ -11,7 +11,7 @@
    margin-top: 50px;
    margin-bottom: 5px;
    background-image:url('../resources/images/Btn_confirm.png');
-}
+} 
 </style>
 
   <div class="container">

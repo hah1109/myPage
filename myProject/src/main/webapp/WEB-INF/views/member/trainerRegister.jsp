@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout_trainerRegister.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
-
+ 
 <script type="text/javascript">
 /*----------------------------일반 회원 가입 페이지----------------------------------*/
 

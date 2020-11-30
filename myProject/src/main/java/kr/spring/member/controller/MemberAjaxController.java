@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
-
+  
 @Controller
 public class MemberAjaxController {
 	private Logger log = Logger.getLogger(this.getClass());
