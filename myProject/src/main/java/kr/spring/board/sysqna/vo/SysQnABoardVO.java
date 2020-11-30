@@ -1,33 +1,36 @@
 package kr.spring.board.sysqna.vo;
 
+import java.io.IOException;
 import java.sql.Date;
 
 import javax.validation.constraints.NotEmpty;
 
-public class SysQnAVO {
-	@NotEmpty
+import org.springframework.web.multipart.MultipartFile;
+
+public class SysQnABoardVO {
+
 	private int sq_num;
 	@NotEmpty
 	private String sq_title;
 	@NotEmpty
 	private String sq_content;
-	@NotEmpty
 	private int sq_hit;
-	@NotEmpty
 	private Date sq_reg_date;
-	@NotEmpty
-	private Date sq_modify_date;
-	
+	private Date sq_modify_date;	
 	private byte[] sq_file;
 	private String sq_filename;
-	
-	@NotEmpty
 	private String sq_ip;
-	@NotEmpty
-	private String sq_id;
 	@NotEmpty
 	private int mem_num;
 	
+	private String mem_id;
+	
+	
+	public void setUpload(MultipartFile upload) throws IOException{
+		if(upload == null) return;
+		setSq_file(upload.getBytes());
+		setSq_filename(upload.getOriginalFilename());
+	}
 	
 	public int getSq_num() {
 		return sq_num;
@@ -83,12 +86,6 @@ public class SysQnAVO {
 	public void setSq_ip(String sq_ip) {
 		this.sq_ip = sq_ip;
 	}
-	public String getSq_id() {
-		return sq_id;
-	}
-	public void setSq_id(String sq_id) {
-		this.sq_id = sq_id;
-	}
 	public int getMem_num() {
 		return mem_num;
 	}
@@ -96,5 +93,11 @@ public class SysQnAVO {
 		this.mem_num = mem_num;
 	}
 	
+	@Override
+	public String toString() {
+		return "SysQnAVO [sq_num=" + sq_num + ", sq_title=" + sq_title + ", sq_content=" + sq_content + ", sq_hit="
+				+ sq_hit + ", sq_reg_date=" + sq_reg_date + ", sq_modify_date=" + sq_modify_date + ", sq_filename="
+				+ sq_filename + ", sq_ip=" + sq_ip + ", mem_num=" + mem_num + "]";
+	}
 	
 }
