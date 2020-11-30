@@ -104,6 +104,9 @@
 			<mapping path="/boardTip/list.do"/>
 			<mapping path="/boardTip/write.do"/>
 			<mapping path="/boardTip/detail.do"/>
+			<mapping path="/boardSysqna/list.do"/>
+			<mapping path="/boardSysqna/write.do"/>
+			<mapping path="/boardSysqna/detail.do"/>
 			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/> 
 		</interceptor>
 		<interceptor>	
@@ -111,6 +114,8 @@
 			<mapping path="/boardFree/delete.do"/>
 			<mapping path="/boardTip/modify.do"/>
 			<mapping path="/boardTip/delete.do"/>
+			<mapping path="/boardSysqna/modify.do"/>
+			<mapping path="/boardSysqna/delete.do"/>
 		<beans:bean class="kr.spring.interceptor.WriterCheckInterceptor"/> 
 		</interceptor>
 	</interceptors> 
