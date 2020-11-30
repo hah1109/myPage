@@ -39,7 +39,7 @@ public interface TipBoardMapper {
 	public void deleteBoardFree(Integer free_num);
 	
 	//댓글부분
-	@Select("SELECT * FROM board_free_comment c JOIN member m USING(mem_num) WHERE c.free_num = #{free_num} ORDER BY c.freec_num DESC")
+	//Mapper
 	public List<FreeBoardCommentVO> selectListFreeComment(Integer free_num);
 	
 	@Insert("INSERT INTO board_free_comment (freec_num, free_comment, free_num, mem_num) VALUES (freec_num_seq.nextval,#{free_comment},#{free_num},#{mem_num})")
