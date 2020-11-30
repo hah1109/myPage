@@ -7,12 +7,13 @@ body {
   margin: 0;
 }
 
- 
+  
 .container {
   display: flex;
   height: 100%;
   margin: 0 auto;
-  width: 640px;
+   width: 450px;
+  padding-bottom: 20px;
 }
 @media (max-width: 767px) {
   .container {
