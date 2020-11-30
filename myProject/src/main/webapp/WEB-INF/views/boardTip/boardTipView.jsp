@@ -125,14 +125,16 @@ function commentDelete(freec_num){
 	});
 }
 
+/* 댓글의댓글 글읽기 및 쓰기 */
 function select_replyComment(freec_num){
-	
+	commentList();
  	 $.ajax({
     	url : 'list_replyComment.do',
         type : 'get',
         data : {'freec_num':freec_num},
         success : function(data){					
             var a ='';
+            a += '<a onclick="reset_replyComment('+freec_num+')">댓글접기</a>'
             $.each(data, function(key, value){
 	            a += '<div class="list_replyComment" style="border-top:1px solid darkgray; margin:10px; padding:10px;"><b>'+value.mem_id + '</b>';
 	            a += '&nbsp;&nbsp;'+value.rfreec_comment + '&nbsp;&nbsp;';
@@ -141,8 +143,9 @@ function select_replyComment(freec_num){
 	            }
 	            a += '</div>';
             });
-			a += '<input type="text" id="replyComment_content" style="padding-left: 10px;">';
+			a += '<input type="text" id="replyComment_content" style="padding-left: 10px;" placeholder="답댓글을 입력해주세요">';
 			a += '<input type="button" value="등록" onclick="submit_replyComment('+freec_num+');">';
+			a += '<input type="button" value="취소" onclick="cancel_replyComment('+freec_num+');">';
 			$('.replyComment'+freec_num).html(a);
 		},
 		error : function(){
@@ -151,6 +154,12 @@ function select_replyComment(freec_num){
  	 }); 
 }
 
+/* 댓글의댓글 읽기 다시 숨기기 */
+function reset_replyComment(freec_num){
+	commentList();
+}
+
+/* 댓글의 댓글 글 입력하기 */
 function submit_replyComment(freec_num){
 	if($('#replyComment_content').val()==''){
 		alert('내용을 입력해주세요');
@@ -176,6 +185,12 @@ function submit_replyComment(freec_num){
 	});
 }
 
+/* 댓글의 댓글 글 쓰다가 취소하기(쓴 내용 치우기) */
+function cancel_replyComment(freec_num){
+	select_replyComment(freec_num);
+}
+
+/* 댓글의 댓글 삭제하기 */
 function delete_replyComment(rfreec_num,freec_num){
 	var choice = window.confirm('삭제하시겠습니까?');
 	if(choice){
