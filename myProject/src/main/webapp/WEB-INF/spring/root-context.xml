@@ -83,6 +83,6 @@
 		                                    kr.spring.nutriment.dao,
 		                                    kr.spring.board.feed.dao,
 		                                    kr.spring.board.tl.dao"/>
-	</bean>
+	</bean> 
 	
 </beans>
