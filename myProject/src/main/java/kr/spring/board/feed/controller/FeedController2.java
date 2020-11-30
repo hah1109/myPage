@@ -4,6 +4,6 @@ import org.springframework.stereotype.Controller;
 
 //홍아현
 @Controller
-public interface FeedController2 {
+public class FeedController2 {
 
 }
