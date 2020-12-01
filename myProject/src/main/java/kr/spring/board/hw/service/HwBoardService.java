@@ -12,7 +12,7 @@ public interface HwBoardService {
 	public void insertHwBoard(HwBoardVO hwBoardVO);
 	public HwBoardVO selectHwBoard(Integer hw_num);
 	public void updateHwBoard(HwBoardVO hwBoardVO);
-	public void deleteHwBoard(Integer hw_num);;
+	public void deleteHwBoard(Integer hw_num);
 	
 
 }
