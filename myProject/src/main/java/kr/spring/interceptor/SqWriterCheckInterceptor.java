@@ -9,16 +9,15 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import kr.spring.board.free.service.FreeBoardService;
-import kr.spring.board.free.vo.FreeBoardVO;
+import kr.spring.board.sysqna.service.SysQnABoardService;
+import kr.spring.board.sysqna.vo.SysQnABoardVO;
 import kr.spring.member.vo.MemberVO;
 
-public class WriterCheckInterceptor extends HandlerInterceptorAdapter{
-	
+public class SqWriterCheckInterceptor extends HandlerInterceptorAdapter {
 	private Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource
-	private FreeBoardService freeBoardService;
+	private SysQnABoardService sysQnABoardService;
 	 
 	@Override
 	public boolean preHandle(HttpServletRequest request,
@@ -30,9 +29,8 @@ public class WriterCheckInterceptor extends HandlerInterceptorAdapter{
 		}
 		
 		//작성자의 회원 번호 구하기
-		int free_num = 
-				Integer.parseInt(request.getParameter("free_num"));
-		FreeBoardVO board = freeBoardService.selectBoardFree(free_num);
+		int sq_num = Integer.parseInt(request.getParameter("sq_num"));
+		SysQnABoardVO board = sysQnABoardService.selectBoardSysqna(sq_num);
 		
 		//로그인 회원 번호 구하기
 		HttpSession session = request.getSession();
@@ -64,10 +62,3 @@ public class WriterCheckInterceptor extends HandlerInterceptorAdapter{
 		return true;
 	}
 }
-
-
-
-
-
-
-

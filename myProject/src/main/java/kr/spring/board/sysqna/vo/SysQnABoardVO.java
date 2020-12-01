@@ -20,11 +20,21 @@ public class SysQnABoardVO {
 	private byte[] sq_file;
 	private String sq_filename;
 	private String sq_ip;
-	@NotEmpty
 	private int mem_num;
+	private int mem_auth;
 	
 	private String mem_id;
-	
+	//이미지도 같이 수정시 0, 이미지빼고 수정시 1
+	private int isImgUpdate;
+		
+		
+	public int getIsImgUpdate() {
+		return isImgUpdate;
+	}
+
+	public void setIsImgUpdate(int isImgUpdate) {
+		this.isImgUpdate = isImgUpdate;
+	}
 	
 	public void setUpload(MultipartFile upload) throws IOException{
 		if(upload == null) return;
@@ -34,7 +44,16 @@ public class SysQnABoardVO {
 	
 	public int getSq_num() {
 		return sq_num;
+	}	
+	
+	public String getMem_id() {
+		return mem_id;
 	}
+
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
+
 	public void setSq_num(int sq_num) {
 		this.sq_num = sq_num;
 	}
@@ -92,7 +111,14 @@ public class SysQnABoardVO {
 	public void setMem_num(int mem_num) {
 		this.mem_num = mem_num;
 	}
-	
+	public int getMem_auth() {
+		return mem_auth;
+	}
+
+	public void setMem_auth(int mem_auth) {
+		this.mem_auth = mem_auth;
+	}
+
 	@Override
 	public String toString() {
 		return "SysQnAVO [sq_num=" + sq_num + ", sq_title=" + sq_title + ", sq_content=" + sq_content + ", sq_hit="

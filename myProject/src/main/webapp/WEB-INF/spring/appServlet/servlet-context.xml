@@ -113,10 +113,13 @@
 			<mapping path="/boardFree/modify.do"/>
 			<mapping path="/boardFree/delete.do"/>
 			<mapping path="/boardTip/modify.do"/>
-			<mapping path="/boardTip/delete.do"/>
+			<mapping path="/boardTip/delete.do"/>			
+		<beans:bean class="kr.spring.interceptor.WriterCheckInterceptor"/> 
+		</interceptor>
+		<interceptor>
 			<mapping path="/boardSysqna/modify.do"/>
 			<mapping path="/boardSysqna/delete.do"/>
-		<beans:bean class="kr.spring.interceptor.WriterCheckInterceptor"/> 
+		<beans:bean class="kr.spring.interceptor.SqWriterCheckInterceptor"/>
 		</interceptor>
 	</interceptors> 
 	
