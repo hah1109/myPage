@@ -38,7 +38,7 @@
 </script>
 
 <div class="page-main-style">
-	<h2>자유 게시판</h2>
+	<h2>시스템 문의 게시판</h2>
   	<form:form commandName="sysQnABoardVO" action="write.do"
 	                      		    enctype="multipart/form-data"> 
  		<form:errors element="div" cssClass="error-color"/>

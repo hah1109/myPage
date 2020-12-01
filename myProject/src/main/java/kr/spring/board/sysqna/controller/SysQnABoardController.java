@@ -73,6 +73,7 @@ public class SysQnABoardController {
 		mav.setViewName("boardSysqnaList");
 		mav.addObject("count",count);
 		mav.addObject("list", list);
+		mav.addObject("rowCount", rowCount);
 		mav.addObject("pagingHtml", page.getPagingHtml());
 
 		return mav;

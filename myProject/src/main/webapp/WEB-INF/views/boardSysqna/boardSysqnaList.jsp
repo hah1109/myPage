@@ -6,26 +6,29 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("div.boardPaging-selectbox > ul").on("click", ".init", function() {
-		    $(this).closest("div.boardPaging-selectbox > ul").children('li:not(.init)').slideDown();
+		$(".selectbox-options").on("click", ".init", function() {
+		    $(this).closest("ul").children('li:not(.init)').slideToggle();
+		    if($('.selectbox-option').hasClass('opened')){
+		    	$('.selectbox-options').removeClass('opened');
+		    }else{
+		    	$('.selectbox-options').addClass('opened');
+		    }
 		});
-		
-		var allOptions = $("div.boardPaging-selectbox > ul").children('li:not(.init)');
-		$("div.boardPaging-selectbox > ul").on("click", "li:not(.init)", function() {
-		    allOptions.removeClass('selected');
-		    $(this).addClass('selected');
-		    $("div.boardPaging-selectbox > ul").children('.init').html($(this).html());
-		    allOptions.slideUp();
+
+ 		var allOptions = $(".selectbox-options").children('li:not(.init)');
+		$(".selectbox-options").on("click", "li:not(.init)", function() {
+ 		    allOptions.removeClass('selected');
+		    $(this).addClass('selected'); 
+		    $(".selectbox-options").children('.init').html($(this).html());
+ 		    allOptions.slideUp(); 
 		});
-		
-		
-		$("#submit").click(function() {
-		    alert("The selected Value is "+ $("div.boardPaging-selectbox > ul").find(".selected").data("value"));
-		});
+ 
+
+
 	});
 </script>
 <div class="page-main-style">
-	<h2>자유 게시판 목록</h2>
+	<h2>시스템 문의 게시판</h2>
 	<form action="list.do" id="search_form" method="get">
 		<ul class="search">
 			<li>
@@ -66,8 +69,13 @@
 			</tr>
 			<c:forEach var="boardSysQna" items="${list}">
 				<tr>
-					<td>${boardSysQna.sq_num}</td>
-					<td><a href="detail.do?sq_num=${boardSysQna.sq_num}">${boardSysQna.sq_title}</a></td>
+					<td>${boardSysQna.asc_rnum}</td>
+					<c:if test="${user.mem_num == boardSysQna.mem_num}">
+						<td><b><a href="detail.do?sq_num=${boardSysQna.sq_num}">${boardSysQna.sq_title}</a></b></td>
+					</c:if>
+					<c:if test="${user.mem_num != boardSysQna.mem_num}">
+						<td style="color:grey;"><img src="${pageContext.request.contextPath}/resources/images/board/lock.png" style="max-width:16px;">비밀글 입니다</td>
+					</c:if>
 					<td>${boardSysQna.mem_id}</td>
 					<td>${boardSysQna.sq_modify_date}</td>
 					<td>${boardSysQna.sq_hit}</td>
@@ -79,7 +87,7 @@
 			<div class="align-center">${pagingHtml}</div>
 			<div class="boardPaging-selectbox">
 				<ul class="selectbox-options">
-				    <li class="init">10개씩 보기</li>
+				    <li class="init">${rowCount}개씩 보기</li>
 				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=10">10개씩 보기</a></li>
 				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=20">20개씩 보기</a></li>
 				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=30">30개씩 보기</a></li>

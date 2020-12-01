@@ -26,15 +26,20 @@
 	</select>
 	
 	<select id="selectList" parameterType="map" resultType="sysQnABoardVO">	
-		SELECT
-			*
-		FROM (SELECT
-				a.*,
-				rownum rnum
-			  FROM (SELECT
-			  			*
-			  		FROM board_sysqna b JOIN member m
-			  		ON b.mem_num = m.mem_num
+	 SELECT * FROM
+		 (SELECT 
+		    d.*, rownum rnum
+		 FROM 
+		    (SELECT 
+		       *
+		    FROM
+		     (SELECT a.*, rownum asc_rnum
+		     FROM  (SELECT
+		                *
+		          FROM 
+		            board_sysqna b JOIN member m
+		          ON 
+		            b.mem_num = m.mem_num
 			  		<where>
 			  			<if test="keyoword !='' and keyfield == 'title'">
 			  				b.sq_title LIKE '%' || #{keyword} || '%'
@@ -51,7 +56,8 @@
 							b.sq_content LIKE '%' || #{keyword} || '%'
 						</if>
 			  		</where>
-			  		ORDER BY b.sq_num DESC)a)
+			  		ORDER BY b.sq_num) a) c
+		ORDER BY c.asc_rnum DESC) d)
 		<![CDATA[
 			WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>	

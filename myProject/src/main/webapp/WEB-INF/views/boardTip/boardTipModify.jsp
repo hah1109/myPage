@@ -56,7 +56,7 @@
 </script>
 
 <div class="page-main-style">
-	<h2>자유 게시판</h2>
+	<h2>팁 게시판</h2>
   	<form:form commandName="boardFree" action="modify.do"
 	                      		    enctype="multipart/form-data" id="board_submit">
 	    <form:hidden path="free_num"/>

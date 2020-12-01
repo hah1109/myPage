@@ -42,24 +42,25 @@
 			  		FROM board_free b JOIN member m
 			  		ON b.mem_num = m.mem_num
 			  		<where>
+			  			free_type = 1
 			  			<if test="keyoword !='' and keyfield == 'title'">
-			  				b.free_title LIKE '%' || #{keyword} || '%'
+			  				AND b.free_title LIKE '%' || #{keyword} || '%'
 			  			</if>
 			  			<if test="keyword != '' and keyfield == 'id'">
-							m.id LIKE '%' || #{keyword} || '%'
+							AND m.id LIKE '%' || #{keyword} || '%'
 						</if>
 						<if test="keyword != '' and keyfield == 'content'">
-							b.free_content LIKE '%' || #{keyword} || '%'
+							AND b.free_content LIKE '%' || #{keyword} || '%'
 						</if>
 						<if test="keyword != '' and keyfield == 'all'">
-							b.free_title LIKE '%' || #{keyword} || '%' or
+							AND b.free_title LIKE '%' || #{keyword} || '%' or
 							m.id LIKE '%' || #{keyword} || '%' or
 							b.free_content LIKE '%' || #{keyword} || '%'
 						</if>
 			  		</where>
 			  		ORDER BY b.free_num DESC)a)
 		<![CDATA[
-			WHERE rnum >= #{start} AND rnum <= #{end} AND free_type = 1
+			WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>	
 	</select>
 	

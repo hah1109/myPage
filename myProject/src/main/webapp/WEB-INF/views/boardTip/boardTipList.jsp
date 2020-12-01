@@ -7,6 +7,11 @@
 	$(document).ready(function(){
 		$("div.boardPaging-selectbox > ul").on("click", ".init", function() {
 		    $(this).closest("div.boardPaging-selectbox > ul").children('li:not(.init)').slideDown();
+		    if($('.selectbox-option').hasClass('opened')){
+		    	$('.selectbox-options').removeClass('opened');
+		    }else{
+		    	$('.selectbox-options').addClass('opened');
+		    }
 		});
 		
 		var allOptions = $("div.boardPaging-selectbox > ul").children('li:not(.init)');
@@ -17,10 +22,6 @@
 		    allOptions.slideUp();
 		});
 		
-		
-		$("#submit").click(function() {
-		    alert("The selected Value is "+ $("div.boardPaging-selectbox > ul").find(".selected").data("value"));
-		});
 	});
 </script>
 <div class="page-main-style">

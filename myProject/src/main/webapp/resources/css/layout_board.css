@@ -212,15 +212,16 @@ input[id="zipcode"]{
 	right:10px;
 	float: left;
 	width: 100px;
-	height: 23px;
+	height: 25px;
 	margin-right: 5px;
 	z-index: 10;
 }
 
 ul.selectbox-options {
 	position: absolute;
+	top:5px;
 	width: 100%;
-	height: 40px;
+	height: 23px;
 	max-height: 40px;
 	margin: 0;
 	padding: 0;
@@ -231,38 +232,39 @@ ul.selectbox-options {
 }
 ul.selectbox-options li {
 	list-style: none;
+	padding: 0 7px;
+	display: block;
 }
 ul.selectbox-options.opened {
 	height: auto;
 	max-height: 500px;
 }
-ul.selectbox-options li {
+ul.selectbox-options li:not(.init) {
 	display: none;
-	height: 40px;
+	height: 25px;
 	padding: 0 10px;
-	line-height: 40px;
+	line-height: 25px;
 	font-size: 12px;
 }
 ul.selectbox-options li.selected {
 	font-weight: bold;
 }
-ul.selectbox-options li.selected,
-ul.selectbox-options li:first-child,
-ul.selectbox-options.opened li.selected:first-child {
+ul.selectbox-options li.init,
+ul.selectbox-options li:first-child{
 	background-repeat: no-repeat;
-	background-image: url(http://rootbox.co.kr/resources/customized_checkbox/customized_selectbox.png);
-	background-position: 100% 6px;	
+	background-image: url(../images/board/selectbox.png);
+	background-position: 100% -2px;
+	height:25px;
 }
+ul.selectbox-options.opened li.init,
 ul.selectbox-options.opened li:first-child,
-ul.selectbox-options.opened li.selected:first-child {
-	background-position: 100% -22px;
+ul.selectbox-options.opened li.init:first-child {
+	background-position: 100% -30px;
 }
 ul.selectbox-options.opened li {
 	display: block;
 }
-ul.selectbox-options.opened li.selected {
-	background-image: none;
-}
+
 ul.selectbox-options li.selected {
 	display: block;
 }

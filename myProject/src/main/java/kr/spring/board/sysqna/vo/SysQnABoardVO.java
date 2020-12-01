@@ -26,8 +26,17 @@ public class SysQnABoardVO {
 	private String mem_id;
 	//이미지도 같이 수정시 0, 이미지빼고 수정시 1
 	private int isImgUpdate;
+	
+	private int asc_rnum;	
 		
-		
+	public int getAsc_rnum() {
+		return asc_rnum;
+	}
+
+	public void setAsc_rnum(int asc_rnum) {
+		this.asc_rnum = asc_rnum;
+	}
+
 	public int getIsImgUpdate() {
 		return isImgUpdate;
 	}
