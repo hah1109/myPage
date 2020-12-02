@@ -67,8 +67,18 @@
 				<tr>
 					<td>${boardTranqna.tq_num}</td>
 					<c:if test="${!empty boardTranqna.tq_filename}">
-					<td width="350" style="border-right:none;"><a href="detail.do?tq_num=${boardTranqna.tq_num}">${boardTranqna.tq_title}</a></td>
-					<td width="50" style="border-left:none;"><img src="imageView.do?tq_num=${boardTranqna.tq_num}" style="max-width:50px; max-height:50px;"></td>
+						<c:if test="${boardTranqna.tq_type == 0}">
+							<td width="350" style="border-right:none;"><a href="detail.do?tq_num=${boardTranqna.tq_num}">${boardTranqna.tq_title}</a></td>
+							<td width="50" style="border-left:none;"><img src="imageView.do?tq_num=${boardTranqna.tq_num}" style="max-width:50px; max-height:50px;"></td>
+						</c:if>
+						<c:if test="${boardTranqna.tq_type == 1 && user.mem_auth==1}">
+							<td width="350" style="border-right:none;"><span class="onlyTrainer">[트레이너만공개]</span><img src="${pageContext.request.contextPath}/resources/images/board/lock.png" class="onlyTrainerimg">${boardTranqna.tq_title}</td>
+							<td width="50" style="border-left:none;"><img src="imageView.do?tq_num=${boardTranqna.tq_num}" style="max-width:50px; max-height:50px;"></td>
+						</c:if>
+						<c:if test="${boardTranqna.tq_type == 1 && user.mem_auth!=1}">
+							<td width="350" style="border-right:none;"><span class="onlyTrainer">[트레이너만공개] </span><a href="detail.do?tq_num=${boardTranqna.tq_num}">${boardTranqna.tq_title}</a></td>
+							<td width="50" style="border-left:none;"><img src="imageView.do?tq_num=${boardTranqna.tq_num}" style="max-width:50px; max-height:50px;"></td>
+						</c:if>
 					</c:if>
 					<c:if test="${empty boardTranqna.tq_filename}">
 					<td colspan="2"><a href="detail.do?tq_num=${boardTranqna.tq_num}">${boardTranqna.tq_title}</a></td>

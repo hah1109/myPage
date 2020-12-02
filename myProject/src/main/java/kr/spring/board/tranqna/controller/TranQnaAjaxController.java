@@ -30,7 +30,7 @@ public class TranQnaAjaxController {
 		return tranQnABoardMapper.selectListTranqnaComment(tq_num);
 	}
 	
-	@RequestMapping("/boardTip/submit_tqcomment.do")
+	@RequestMapping("/boardTranqna/submit_tqcomment.do")
 	@ResponseBody
 	public int process(@RequestParam String comment,
 						@RequestParam int tq_num,

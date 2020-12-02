@@ -324,5 +324,14 @@ div.list_boardcofc{
 	padding : 0px 0px 10px 20px;
 }
 
-
+/*=========================트레이너게시판===========================*/
+.onlyTrainerimg{
+	max-width:16px;
+	position:relative;
+	top:2px;
+}
+.onlyTrainer{
+	color:grey;
+	font-weight:bold;
+}
 
