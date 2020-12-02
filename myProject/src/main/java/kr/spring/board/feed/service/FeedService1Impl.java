@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import kr.spring.board.feed.dao.FeedMapper1;
-import kr.spring.board.feed.vo.FeedVO1;
+import kr.spring.board.feed.vo.FeedVO;
 
 @Service("FeedService1")
 public class FeedService1Impl implements FeedService1{
@@ -17,7 +17,7 @@ public class FeedService1Impl implements FeedService1{
 	FeedMapper1 feedMapper;
 
 	@Override
-	public List<FeedVO1> selectRecoList(Map<String, Object> map) {
+	public List<FeedVO> selectRecoList(Map<String, Object> map) {
 		return feedMapper.selectRecoList(map);
 	}
 
@@ -28,19 +28,19 @@ public class FeedService1Impl implements FeedService1{
 	}
 
 	@Override
-	public void selectRecoBoard(FeedVO1 feed) {
+	public void selectRecoBoard(FeedVO feed) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void insertFollow(FeedVO1 feed) {
+	public void insertFollow(FeedVO feed) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteFollow(FeedVO1 feed) {
+	public void deleteFollow(FeedVO feed) {
 		// TODO Auto-generated method stub
 		
 	}

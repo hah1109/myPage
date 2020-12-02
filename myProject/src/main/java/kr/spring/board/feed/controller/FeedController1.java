@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.board.feed.service.FeedService1;
-import kr.spring.board.feed.vo.FeedVO1;
+import kr.spring.board.feed.vo.FeedVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
    
@@ -30,8 +30,8 @@ public class FeedController1 {
 	
 	//자바빈 초기화
 	@ModelAttribute
-	public FeedVO1 initCommand() {
-		return new FeedVO1();
+	public FeedVO initCommand() {
+		return new FeedVO();
 	}
 	
 	//게시판 목록
@@ -55,7 +55,7 @@ public class FeedController1 {
 			map.put("start", page.getStartCount());
 			map.put("end", page.getEndCount());
 
-			List<FeedVO1> list = null;
+			List<FeedVO> list = null;
 			if(count > 0) {
 				list = FeedService.selectRecoList(map);
 
@@ -66,7 +66,7 @@ public class FeedController1 {
 
 
 			ModelAndView mav = new ModelAndView();
-			mav.setViewName("/boardFeed/feedReco");
+			mav.setViewName("feedReco");
 			mav.addObject("count",count);
 			mav.addObject("list",list);
 			mav.addObject("pagingHtml",page.getPagingHtml());

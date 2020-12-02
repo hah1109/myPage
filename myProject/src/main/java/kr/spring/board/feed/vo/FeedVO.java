@@ -5,7 +5,7 @@ import java.sql.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class FeedVO1 {
+public class FeedVO {
 	/*@@@@@@@@@@@@@@@@@feed 테이블@@@@@@@@@@@@@@@@@*/
 	private int feed_num; //피드 글 번호 -> 시퀀스 생성
 	private int feed_type; //글 타입(1:식단 / 2:운동)

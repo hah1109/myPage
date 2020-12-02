@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import kr.spring.board.feed.service.FeedService2;
-import kr.spring.board.feed.vo.FeedVO1;
+import kr.spring.board.feed.vo.FeedVO;
 
 //조재희
 @Controller
@@ -19,8 +19,8 @@ public class FeedController2 {
 	
 	//자바빈 초기화
 	@ModelAttribute
-	public FeedVO1 initCommand() {
-		return new FeedVO1();
+	public FeedVO initCommand() {
+		return new FeedVO();
 	}
 	
 	/*게시물 목록(현재 로그인된 아이디와 클릭된 아이디의 관계 파악하여 list 목록을 호출)
