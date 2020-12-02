@@ -129,7 +129,7 @@
 				<ul class="dt-sub submenu" style="z-index: 2;">
 					<li><a href="${pageContext.request.contextPath}/main/main.do">피드</a></li>
 					<li><a href="${pageContext.request.contextPath}/main/main.do">마이 퍼스널</a></li>
-					<li><a href="${pageContext.request.contextPath}/main/main.do">탐색</a></li>
+					<li><a href="${pageContext.request.contextPath}/boardFeed/feedReco.do">탐색</a></li>
 				</ul>
 			</li>
 			<li>
@@ -146,9 +146,9 @@
 				<img class="bar" alt="" src="${pageContext.request.contextPath}/resources/images/header/bar.png">
 			</li>
 			<li class="trainer">
-				<a href="${pageContext.request.contextPath}/main/main.do">트레이너</a>
+				<a href="${pageContext.request.contextPath}/trainerList/trainerList.do">트레이너</a>
 				<ul class="trainer-sub submenu" style="z-index: 2;">
-					<li><a href="${pageContext.request.contextPath}/main/main.do">트레이너 리스트</a></li>
+					<li><a href="${pageContext.request.contextPath}/trainerList/trainerList.do">트레이너 리스트</a></li>
 					<li><a href="${pageContext.request.contextPath}/boardTranqna/list.do">트레이너 Q&A</a></li>
 				</ul>
 			</li>
@@ -162,7 +162,7 @@
   	<div class="swiper-container" style="z-index: 1;">
         <div class="swiper-wrapper">
             <div class="swiper-slide"><img class="swiper-image" alt="" src="${pageContext.request.contextPath}/resources/images/swiper/image1.png"></div>
-            <div class="swiper-slide">image</div>
+            <div class="swiper-slide"><img class="swiper-image" alt="" src="${pageContext.request.contextPath}/resources/images/swiper/image1.png"></div>
             <div class="swiper-slide">Balanced Meal</div>
             <div class="swiper-slide">Board</div>
             <div class="swiper-slide">Trainer</div>
@@ -170,17 +170,17 @@
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
     </div>
-    
+      
 
     <!-- Swiper JS 링크-->
     <script src="${pageContext.request.contextPath}/resources/js/swiper-bundle.min.js"></script>
 
     <!-- Swiper script  swiper 스크립트는 바디에 있어야 동작 하므로 옮기지 말 것-->
-    <script>
+    <script>  
         var swiper = new Swiper('.swiper-container', {
             direction: 'vertical',
             slidesPerView: 1,
-            spaceBetween: 30,
+            spaceBetween: 0,
             mousewheel: true,
             pagination: {
                 el: '.swiper-pagination',

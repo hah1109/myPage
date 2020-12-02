@@ -28,6 +28,12 @@ div#body{
 	padding:0;
 	display: inline-block;
 }
+div#main_body{
+	float:left;
+	width:100%;
+	padding:0;
+	display: inline-block;
+}
 div#main_footer{
 	clear:both;
 	width:100%;

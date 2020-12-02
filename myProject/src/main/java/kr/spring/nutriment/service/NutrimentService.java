@@ -10,5 +10,7 @@ public interface NutrimentService {
 	public List<NutrimentVO> selectNutriment(Map<String,Object> map);
 	public int count(Map<String,Object> map);
 	public void insertNutriment(NutrimentVO vo);
+	public void deleteNutriment(int food_num);
+	public NutrimentVO selectNutriDetail(int food_num);
 
 }

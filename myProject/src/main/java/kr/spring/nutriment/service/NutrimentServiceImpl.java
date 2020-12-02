@@ -34,6 +34,18 @@ public class NutrimentServiceImpl implements NutrimentService{
 		nutrimentMapper.insertNutriment(nutrimentVO);
 	}
 
+	@Override
+	public void deleteNutriment(int food_num) {
+		
+		nutrimentMapper.deleteNutriment(food_num);
+	}
+
+	@Override
+	public NutrimentVO selectNutriDetail(int food_num) {
+		
+		return nutrimentMapper.selectNutriDetail(food_num);
+	}
+
 	
 
 }

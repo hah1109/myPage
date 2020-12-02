@@ -20,6 +20,14 @@ div#nutriCalResult{
 	display:inline-block;
 }
 
+div#nutrimentDetail{
+	width:500px;
+	height:80%;
+	float:left;
+	margin-bottom: 50px;
+	margin-left: 38%;
+	display: block;
+}
 
 div#bg1{
 	width:500px;
@@ -105,14 +113,14 @@ div#fast-bar > div#fat {
 
 /*normal*/
 div#normal-bar > div#carb {
-	width:30%;
+	width:40%;
 	height:50px;
 	background-color:#ffc000;
 	float:left;
 }
 
 div#normal-bar > div#protein {
-	width:50%;
+	width:40%;
 	height:50px;
 	background-color:#00b4ff;
 	float:left;
@@ -127,14 +135,14 @@ div#normal-bar > div#fat {
 
 /*#healthy*/
 div#healthy-bar > div#carb {
-	width:40%;
+	width:50%;
 	height:50px;
 	background-color:#ffc000;
 	float:left;
 }
 
 div#healthy-bar > div#protein {
-	width:40%;
+	width:30%;
 	height:50px;
 	background-color:#00b4ff;
 	float:left;
@@ -204,5 +212,32 @@ div#non-result > p{
 	color:#7e7e7e; 
 	text-align:center;
 }
+
+
+/******************Detail table style*******************/
+table{
+	width:80%;
+	margin:100px auto;
+	border:1px solid #000;
+	border-collapse:collapse;
+}
+
+table td, table th{
+	border:1px solid #000;
+	padding:5px;
+	text-align: center;
+	font-size: 16px;
+}
+
+div#button{
+	text-align: center;
+}
+
+
+
+
+
+
+
 
 

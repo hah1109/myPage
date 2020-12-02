@@ -9,16 +9,10 @@
 		$('#nutrimentSearchForm').submit(function(){
 			<%-- 유효성 체크 --%>
 			if($('#foodName').val() == ''){
-			
-				var p = document.createElement('p');
-				var pText = document.createTextNode('검색어를 입력해주세요.');
-				var resultArea = document.getElementById('resultArea');
 				
-				resultArea.appendChild(p);
-				p.appendChild(pText);
-				
+				alert('검색어를 입력해주세요.');
 				$('#foodName').focus();
-
+				
 				return false;
 			}
 
@@ -26,31 +20,53 @@
 
 	});
 </script>
-<div>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nutrimentSearch.css">
+<div id="nutriList">
 	<h2>영양성분 검색</h2>
-	<section>
-	<form id="nutrimentSearchForm" action="nutrimentSearch.do">
-		<ul>
-			<li>
-				<input type="text" id="foodName" name="foodName"/>
-			</li>
-		</ul>
-		<div>
-			<input type="submit" value="검색">
-		</div>
-	</form>
-	</section>
-	
-	<section>
-		<div class="resultArea" id="resultArea">
-		</div>
-	</section>
-	
-	<!-- 관리자 로그인시 추가 버튼 활성화  -->
-	<c:if test="${auth == 0}">
-	<div class="aling-right">
-		<input type="button" value="추가" onclick="location.href='nutrimentInsertForm.do'"/>
+	<div id="main-div">
+		<div id="sub-div">
+		
+		<!-- -------------------------Search Bar---------------------------- -->
+			<div>
+				<form id="nutrimentSearchForm" action="nutriSearch.do">
+					<c:if test="${auth == 0}">
+						<div id="search-bar" style="margin-left:45px;">
+					</c:if>
+					<c:if test="${auth != 0 || empty auth}">
+						<div id="search-bar" style="margin-left:90px;">
+					</c:if>
+						<ul>
+							<li>
+								<input type="text" id="foodName" name="foodName" placeholder="영양성분이 궁금한 식품의 이름을 검색해보세요!"/>
+							</li>
+						</ul>
+						<div id="button">
+							<input type="submit" value="검색">
+							<c:if test="${auth == 0}">
+								<div class="aling-right">
+									<input type="button" value="추가" onclick="location.href='nutrimentInsertForm.do'"/>
+								</div>
+							</c:if>
+						</div>
+				</form>
+			</div>
+			<!-- -------------------------Search Bar---------------------------- -->
+			
+			
+			<!-- -------------------------Result Table-------------------------- -->
+			<div id="result">
+				<div>	
+					<ul id="result-ul">
+						<c:forEach var="nutriment" items="${list}">
+							<li><a href="nutrimentDetail.do?food_num=${nutriment.food_num}">${nutriment.food_name}</a></li>
+							<hr style="border: dashed 1px #9c9c9c;">
+						</c:forEach>
+					</ul>
+				</div>
+				<div id="paging" class="align-center">${pagingHtml}</div>
+			</div>
+			<!-- -------------------------Result Table-------------------------- -->
+			
+		</div>	
 	</div>
-	</c:if>
-	
 </div>
