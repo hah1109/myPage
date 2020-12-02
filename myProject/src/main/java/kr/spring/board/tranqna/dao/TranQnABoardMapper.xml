@@ -92,4 +92,42 @@
 		WHERE
 			tq_num = #{tq_num}
 	</update>
+	
+ 	<select id="selectListTranqnaComment" parameterType="integer" resultType="tranQnABoardCommentVO">
+		SELECT
+			a.*, b.*, to_char(a.tqc_modify_date,'yyyy-mm-dd') str_date
+		FROM 
+		    (SELECT * FROM board_tranqna_comment c JOIN member m USING(mem_num) ORDER BY c.tqc_num DESC) a  
+		LEFT JOIN 
+		    (SELECT tqc_num, COUNT(*) countComment FROM board_tranqna_comment_reply GROUP BY tqc_num) b 
+		ON a.tqc_num = b.tqc_num
+		WHERE a.tq_num = #{tq_num}
+	</select>
+	
+	<select id="selectReplyComment" parameterType="integer" resultType="tranQnABoardCommentReplyVO">
+		SELECT 
+			r.*, m.*, to_char(r.rtqc_date,'yyyy-mm-dd') str_date 
+		FROM 
+			board_tranqna_comment_reply r 
+			JOIN 
+			member m ON r.mem_num = m.mem_num 
+		WHERE 
+			r.tqc_num = #{tqc_num}
+	</select>
+	
+	<insert id="insertReplyComment" parameterType="tranQnABoardCommentReplyVO">
+		INSERT INTO 
+			board_tranqna_comment_reply (rtqc_num,rtqc_comment,tqc_num,mem_num) 
+		VALUES 
+			(rtqc_num_seq.nextval,#{rtqc_comment},#{tqc_num},#{mem_num})
+	</insert>
+	
+	<delete id="deleteReplyComment" parameterType="integer">
+		DELETE FROM
+			board_tranqna_comment_reply
+		WHERE
+			rtqc_num=#{rtqc_num}
+	</delete>
+	  
+	
 </mapper>

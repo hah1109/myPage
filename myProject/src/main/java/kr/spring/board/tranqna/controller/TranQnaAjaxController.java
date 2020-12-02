@@ -22,6 +22,7 @@ public class TranQnaAjaxController {
 	@Resource
 	TranQnABoardMapper tranQnABoardMapper;
 	
+	
 	//댓글부분
 	@RequestMapping("/boardTranqna/list_comment.do")
 	@ResponseBody
@@ -35,7 +36,7 @@ public class TranQnaAjaxController {
 						@RequestParam int tq_num,
 						@RequestParam int mem_num){
 		
-		if(log.isDebugEnabled()) log.debug("<<자유게시판 댓글등록>> : " + tq_num + ":" + comment);
+		if(log.isDebugEnabled()) log.debug("<<트레이너 게시판 댓글등록>> : " + tq_num + ":" + comment);
 				
 		TranQnABoardCommentVO tq_comment = new TranQnABoardCommentVO();
 		tq_comment.setTq_comment(comment);
