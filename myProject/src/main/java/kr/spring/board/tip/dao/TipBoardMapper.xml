@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.board.tip.dao.TipBoardMapper">
+  
 	<update id="updateHitBoardFree" parameterType="integer">
 		UPDATE board_free SET free_hit=free_hit+1 WHERE free_num=#{free_num}
 	</update>
+	
 	<select id="selectBoardFree" parameterType="integer" resultType="freeBoardVO">
 		SELECT * FROM board_free b JOIN member m USING(mem_num) WHERE free_num = #{free_num}
 	</select>
+	
 	<select id="selectRowCount" parameterType="map" resultType="integer">
 		SELECT
 			COUNT(*)
@@ -125,5 +128,4 @@
 		WHERE
 			rfreec_num=#{rfreec_num}
 	</delete>
-	
 </mapper>

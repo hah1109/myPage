@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.board.tranqna.dao.TranQnABoardMapper">
+
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM board_tranqna b JOIN member m
+		ON b.mem_num = m.mem_num
+		<where>
+			<if test="keyword != '' and keyfield == 'title'">
+				AND b.tq_title LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="keyword != '' and keyfield == 'id'">
+				AND m.id LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="keyword != '' and keyfield == 'content'">
+				AND b.tq_content LIKE '%' || #{keyword} || '%'
+			</if>
+			<if test="keyword != '' and keyfield == 'all'">
+				AND b.tq_title LIKE '%' || #{keyword} || '%' or
+				m.id LIKE '%' || #{keyword} || '%' or
+				b.tq_content LIKE '%' || #{keyword} || '%'
+			</if>
+		</where>		
+	</select>
+	
+	<select id="selectList" parameterType="map" resultType="tranQnABoardVO">	
+		SELECT
+			*
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			  FROM (SELECT
+			  			*
+			  		FROM board_tranqna b JOIN member m
+			  		ON b.mem_num = m.mem_num
+			  		<where>
+			  			<if test="keyoword !='' and keyfield == 'title'">
+			  				b.tq_title LIKE '%' || #{keyword} || '%'
+			  			</if>
+			  			<if test="keyword != '' and keyfield == 'id'">
+							m.id LIKE '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield == 'content'">
+							b.tq_content LIKE '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield == 'all'">
+							b.tq_title LIKE '%' || #{keyword} || '%' or
+							m.id LIKE '%' || #{keyword} || '%' or
+							b.tq_content LIKE '%' || #{keyword} || '%'
+						</if>
+			  		</where>
+			  		ORDER BY b.tq_num DESC)a)
+		<![CDATA[
+			WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>	
+	</select>
+	
+	<select id="selectBoardTranqna" parameterType="integer" resultType="tranQnABoardVO">
+		SELECT * FROM board_tranqna b JOIN member m USING(mem_num) WHERE tq_num = #{tq_num}
+	</select>
+
+	<update id="updateHitBoardTranqna" parameterType="integer">
+		UPDATE board_tranqna SET tq_hit=tq_hit+1 WHERE tq_num=#{tq_num}
+	</update>
+	
+	<update id="updateBoardTranqna" parameterType="tranQnABoardVO">
+		UPDATE 
+			board_tranqna
+		SET 
+			tq_title = #{tq_title},
+			tq_content = #{tq_content},
+			tq_modify_date = SYSDATE,
+			tq_type = #{tq_type},
+			tq_file = #{tq_file},
+			tq_filename = #{tq_filename},
+			tq_ip = #{tq_ip}
+		WHERE
+			tq_num = #{tq_num}
+	</update>
+	
+	<update id="updateBoardTranqnaExImg" parameterType="tranQnABoardVO">
+		UPDATE 
+			board_tranqna
+		SET 
+			tq_title = #{tq_title},
+			tq_content = #{tq_content},
+			tq_modify_date = SYSDATE,
+			tq_type=#{tq_type},
+			tq_ip = #{tq_ip}
+		WHERE
+			tq_num = #{tq_num}
+	</update>
+</mapper>

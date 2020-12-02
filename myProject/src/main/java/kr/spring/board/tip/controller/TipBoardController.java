@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.board.free.vo.FreeBoardVO;
 import kr.spring.board.tip.service.TipBoardService;
-import kr.spring.comment.freec.vo.FreeBoardCommentVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
 
@@ -91,7 +90,7 @@ public class TipBoardController {
 	public ModelAndView viewImage(@RequestParam int free_num) {
 		if(log.isDebugEnabled()) log.debug("<<이미지 출력>> : " + free_num);
 		FreeBoardVO freeBoardVO = tipBoardService.selectBoardFree(free_num);
-		System.out.println("테스트트트");
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("imageView");		
 		mav.addObject("imageFile", freeBoardVO.getFree_file());
