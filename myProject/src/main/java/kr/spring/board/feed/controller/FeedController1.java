@@ -19,7 +19,7 @@ import kr.spring.board.feed.service.FeedService1;
 import kr.spring.board.feed.vo.FeedVO1;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
-
+   
 //이상훈
 @Controller
 public class FeedController1 {
