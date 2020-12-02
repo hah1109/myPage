@@ -33,4 +33,4 @@ public interface HwBoardMapper {
 	@Delete("DELETE FROM hwboard WHERE hw_num=#{hw_num}")
 	public void deleteHwBoard(Integer hw_num);
 
-}
+}  
