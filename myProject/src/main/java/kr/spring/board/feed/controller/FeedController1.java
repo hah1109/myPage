@@ -24,7 +24,7 @@ import kr.spring.util.PagingUtil;
 @Controller
 public class FeedController1 {
 	private Logger log = Logger.getLogger(this.getClass());
-	
+	   
 	@Resource
 	FeedService1 FeedService;
 	
