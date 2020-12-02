@@ -13,6 +13,10 @@
     	<put-attribute name="title" value="퍼스널게시판"/>
     	<put-attribute name="body" value="/WEB-INF/views/boardFeed/myPersonalList.jsp"/>  
     </definition>
+    <definition name="feedReco" extends="main">
+       <put-attribute name="title" value="추천게시판"/>
+       <put-attribute name="body" value="/WEB-INF/views/boardFeed/feedReco.jsp"/>  
+    </definition>
 </tiles-definitions>
 
 

@@ -61,6 +61,8 @@
 				<beans:value>/WEB-INF/tiles-def/boardsysqna.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/boardtranqna.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/hwboard.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/trainerList.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/boardFeed.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
