@@ -7,7 +7,7 @@ create table feed(
   feed_filename varchar2(150),/*업로드한 파일명*/
   feed_ip varchar2(40) not null,/*ip*/
   mem_num number not null,/*업로드한 회원의 mem_num*/
-  mee_id varchar2(20) not null,/*업로드한 회원의 mem_id*/
+  mem_id varchar2(20) not null,/*업로드한 회원의 mem_id*/
   feed_auth number(5) not null,/*글 공유범위 0:나만보기,1:트레이너만,2:팔로워만,3:전체공개*/
   constraint feed_pk primary key (feed_num),
   constraint feed_mem_num_fk foreign key (mem_num) references member (mem_num),
