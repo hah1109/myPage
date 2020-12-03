@@ -17,10 +17,11 @@ public interface FeedMapper2 {
 	//내가 쓴 글의 갯수 구하기
 	@Select("select count(*) from feed where mem_num=#{mem_num}")
 	public int countingFeedList(Integer mem_num);
+
 	//피드등록
-	@Insert("Insert into feed (feed_num, feed_type, feed_content, feed_file, feed_filename, feed_ip, mem_num, feed_auth)"
-			+" values(feed_num.nextval, #{feed_type}, #{feed_content}, #{feed_file}, #{feed_filename}, #{feed_ip}, #{mem_num}, #{feed_auth})")
-	public void insertFeedBoard(FeedVO feedBoard);
+		@Insert("Insert into feed (feed_num, feed_type, feed_content, feed_file, feed_filename, feed_ip, mem_num, mem_id, feed_auth, feed_reg_date)"
+				+" values(feed_num.nextval, #{feed_type}, #{feed_content}, #{feed_file}, #{feed_filename}, #{feed_ip}, #{mem_num}, #{mem_id}, #{feed_auth}, SYSDATE)")
+		public void insertFeedBoard(FeedVO feedBoard);
 	//피드선택(상세글)
 	@Select("SELECT * FROM feed b JOIN member m USING(mem_num) WHERE feed_num = #{feed_num}")
 	public FeedVO selectFeedBoard(Integer feedBoard_num);

@@ -94,28 +94,30 @@ public class FeedController2 {
 	}
 	
 	//게시물 등록 처리
-	@RequestMapping(value="/feedBoard/feedWrite.do",method=RequestMethod.POST)
-	public String feedWriteSubmit(@Valid FeedVO feedVO, 
-							BindingResult result, 
-							HttpServletRequest request,
-							HttpSession session,
-							Model model) {
-		
-		if(log.isDebugEnabled()) log.debug("<<마이 퍼스널 게시판 글 저장>> :" + feedVO);
-		
-		if(result.hasErrors()) return feedWriteForm();
-		
-		MemberVO member = (MemberVO)session.getAttribute("user");
-		feedVO.setMem_num(member.getMem_num());
-		feedVO.setFeed_ip(request.getRemoteAddr());
-		feedVO.setFeed_type(0);
-		feedService.insertFeedBoard(feedVO);
-		
-		model.addAttribute("message", "운동일지가 등록되었습니다.");
-		model.addAttribute("url",request.getContextPath() + "/boardFeed/list.do");
-		
-		return "common/result";
-	}	
+		@RequestMapping(value="/boardFeed/feedWrite.do",method=RequestMethod.POST)
+		public String feedWriteSubmit(@Valid FeedVO feedVO, 
+								BindingResult result, 
+								HttpServletRequest request,
+								HttpSession session,
+								Model model) {
+			
+			if(log.isDebugEnabled()) log.debug("<<마이 퍼스널 게시판 글 저장>> :" + feedVO);
+			
+			if(result.hasErrors()) return feedWriteForm();
+			
+			MemberVO member = (MemberVO)session.getAttribute("user");
+			feedVO.setMem_num(member.getMem_num());
+			feedVO.setMem_id(member.getMem_id());
+			feedVO.setFeed_ip(request.getRemoteAddr());
+			feedVO.setFeed_type(0);
+			feedService.insertFeedBoard(feedVO);
+			
+			model.addAttribute("message", "운동일지가 등록되었습니다.");
+			model.addAttribute("url",request.getContextPath() + "/boardFree/list.do");
+			
+			return "common/result";
+		}	
+
 	//게시물 수정 폼
 	
 	//게시물 수정 처리
