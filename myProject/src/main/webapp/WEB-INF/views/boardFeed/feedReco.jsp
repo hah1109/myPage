@@ -3,12 +3,24 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
+<style>
+.write_Btn{
+	width:50px;
+	height:50px;
+	background-image: url('../resources/images/Btn_write_board.png');
+	border:none;
+	border-radius: 25px;
+} 
+</style>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout_feedReco.css">
 <div class="page-main-style">
+	
 	<c:if test="${count == 0}">
 		<div class="masonry">
+			<input type="button" class="write_Btn" value="" onclick="location.href='feedWrite.do'">
 			<div class="grid">
-				<img src="https://source.unsplash.com/random/1">
+				<img src="../resources/images/cameraImage.jpg">
 				<div class="grid__body">
 					<div class="relative">
 						<a class="grid__link" target="_blank" href="/" ></a>
@@ -21,9 +33,11 @@
 	</c:if>
 	<c:if test="${count > 0}">
 		<div class="masonry">
+		<input type="button" class="writeBtn" value="" onclick="location.href='feedWrite.do'">
 		<c:forEach var="feed" items="${list}">
 		  <div class="grid">
-		    <img src="imageView.do?feed_num=${feed.feed_num}">
+		  	<c:if test="${feed.file_name == null}"><img src="url('../resources/images/cameraImage.jpg')"></c:if>
+		    <c:if test="${feed.file_name != null}"><img src="imageView.do?feed_num=${feed.feed_num}"></c:if>
 		    <div class="grid__body">
 		      <div class="relative">
 		      								<!-- @@@@@@@@@@여기에 글상세 링크 넣기  @@@@@@@@@@@@-->
@@ -43,5 +57,7 @@
 		  </div>
 		  </c:forEach>
 		</div>
+		<c:if test="${count == 1}"></c:if>
+		<c:if test="${count > 1}"><div class="align-center">${pagingHtml}</div></c:if>		
 	</c:if>
 </div>
