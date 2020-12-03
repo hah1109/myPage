@@ -209,16 +209,19 @@ public class NutrimentController {
 	
 	
 	//영양성분 삭제 처리
-	@RequestMapping(value="/nutriment/nutrimentDelete.do",method=RequestMethod.GET)
-	public String nutriDelete(@RequestParam int food_num, Model model,HttpSession session) {
+	@RequestMapping("/nutriment/nutrimentDelete.do")
+	public String nutriDelete(int food_num, Model model, HttpSession session) {
 		
 
 		//관리자 로그인 확인 체크 (버튼으로 접근이 아닌 주소로 접근할 때를 위해)
 		//session에 로그인 되어 있는 아이디의 auth값 받기
 		MemberVO memberVO = (MemberVO)session.getAttribute("user");
+		if(log.isDebugEnabled()) { log.debug("<<food_num1>> :" + food_num);}
+		
 		
 		if(memberVO != null) { //로그인 상태일 시
 			
+			if(log.isDebugEnabled()) { log.debug("<<food_num2>> :" + food_num);}
 			
 			if(memberVO.getMem_auth() == 0) {//로그인 된 id의 auth 값이 0(관리자 일 때)
 				

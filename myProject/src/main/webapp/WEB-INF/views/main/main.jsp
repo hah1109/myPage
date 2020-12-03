@@ -29,7 +29,8 @@
         .swiper-container {
             width: 100%;
             height: 100%;
-            marign-top:0;
+            margin-top:0;
+            margin-bottom:0;
             margin-left: auto;
             margin-right: auto;
             padding: 0;
@@ -180,7 +181,7 @@
         var swiper = new Swiper('.swiper-container', {
             direction: 'vertical',
             slidesPerView: 1,
-            spaceBetween: 0,
+            spaceBetween: 1,
             mousewheel: true,
             pagination: {
                 el: '.swiper-pagination',
