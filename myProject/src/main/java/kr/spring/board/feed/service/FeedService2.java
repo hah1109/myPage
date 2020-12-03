@@ -3,6 +3,7 @@ package kr.spring.board.feed.service;
 import java.util.List;
 
 import kr.spring.board.feed.vo.FeedVO;
+import kr.spring.member.vo.MemberVO;
 
 //조재희
 public interface FeedService2 {
@@ -15,4 +16,8 @@ public interface FeedService2 {
 
 	//public void insertFollow(FeedVO feedVO);
 	//public void deleteFollow();
+	
+
+	public void updateProfile(MemberVO member);
+	public void updateIntro(MemberVO member);
 }

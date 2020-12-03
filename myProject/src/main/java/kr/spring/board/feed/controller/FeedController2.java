@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.board.feed.service.FeedService2;
 import kr.spring.board.feed.vo.FeedVO;
+import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 
 //조재희
@@ -28,10 +29,18 @@ public class FeedController2 {
 	@Resource
 	FeedService2 feedService;
 	
+	@Resource
+	MemberService memberService;
+	
 	//자바빈 초기화
 	@ModelAttribute
 	public FeedVO initCommand() {
 		return new FeedVO();
+	}
+	
+	@ModelAttribute
+	public MemberVO initCmd() {
+		return new MemberVO();
 	}
 	
 	/*게시물 목록(현재 로그인된 아이디와 클릭된 아이디의 관계 파악하여 list 목록을 호출)
@@ -47,12 +56,13 @@ public class FeedController2 {
 		session_num과 profile_num이 다르면서 training이 맞는 경우
 		다른 사람의 프로필 사진을 누르면서 training이 아닌 경우 => 팔로우공개, 트레이너공개, 전체공개가 보여진다
 	 */
-	@RequestMapping("/feedBoard/feedList.do")
+	@RequestMapping(value="/feedBoard/feedList.do",method=RequestMethod.GET)
 	public ModelAndView feedList(HttpSession session) {
 
 		//회원번호를 얻기위해 세션에 저장된 회원 정보를 반환
-	    MemberVO memberVO = (MemberVO)session.getAttribute("user");
-		int count = feedService.countingFeedList(memberVO.getMem_num());
+	    MemberVO vo = (MemberVO)session.getAttribute("user");
+	    MemberVO memberVO = memberService.selectMember_detail(vo.getMem_num());
+	    int count = feedService.countingFeedList(memberVO.getMem_num());
 		
 		if(log.isDebugEnabled()) {
 			log.debug("<<FeedCount>>" + count);
@@ -70,7 +80,9 @@ public class FeedController2 {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myPersonalList");
+		mav.addObject("count", count);
 		mav.addObject("list", list);
+		mav.addObject("member", memberVO);
 		
 		return mav;
 	}
@@ -100,7 +112,7 @@ public class FeedController2 {
 		feedService.insertFeedBoard(feedVO);
 		
 		model.addAttribute("message", "운동일지가 등록되었습니다.");
-		model.addAttribute("url",request.getContextPath() + "/boardFree/list.do");
+		model.addAttribute("url",request.getContextPath() + "/boardFeed/list.do");
 		
 		return "common/result";
 	}	

@@ -5,8 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.board.feed.vo.FeedVO;
+import kr.spring.member.vo.MemberVO;
 
 //조재희
 public interface FeedMapper2 {
@@ -35,6 +37,11 @@ public interface FeedMapper2 {
 	//팔로우끊기
 	@Delete("delete from follower where follower_to = #{follower_to}")
 	public void deleteFollow();*/
+	//=========================회원정보======
+	@Update("update spmember_detail set mem_pic=#{mem_pic} where mem_num=#{mem_num}")
+	public void updateProfile(MemberVO member);
+	@Update("update spmember_detail set mem_intro=#{mem_intro} where mem_num=#{mem_num}")
+	public void updateIntro(MemberVO member);
 	
 	
 } 
