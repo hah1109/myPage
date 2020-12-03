@@ -56,7 +56,7 @@ public class FeedController2 {
 		session_num과 profile_num이 다르면서 training이 맞는 경우
 		다른 사람의 프로필 사진을 누르면서 training이 아닌 경우 => 팔로우공개, 트레이너공개, 전체공개가 보여진다
 	 */
-	@RequestMapping(value="/feedBoard/feedList.do",method=RequestMethod.GET)
+	@RequestMapping(value="/boardFeed/feedList.do",method=RequestMethod.GET)
 	public ModelAndView feedList(HttpSession session) {
 
 		//회원번호를 얻기위해 세션에 저장된 회원 정보를 반환
@@ -88,7 +88,7 @@ public class FeedController2 {
 	}
 	
 	//게시물 등록 폼
-	@RequestMapping(value="/feedBoard/feedWrite.do",method=RequestMethod.GET)
+	@RequestMapping(value="/boardFeed/feedWrite.do",method=RequestMethod.GET)
 	public String feedWriteForm() {
 		return "feedWrite";
 	}
@@ -110,7 +110,7 @@ public class FeedController2 {
 			feedVO.setMem_id(member.getMem_id());
 			feedVO.setFeed_ip(request.getRemoteAddr());
 			feedVO.setFeed_type(0);
-			feedService.insertFeedBoard(feedVO);
+			feedService.insertboardFeed(feedVO);
 			
 			model.addAttribute("message", "운동일지가 등록되었습니다.");
 			model.addAttribute("url",request.getContextPath() + "/boardFree/list.do");
