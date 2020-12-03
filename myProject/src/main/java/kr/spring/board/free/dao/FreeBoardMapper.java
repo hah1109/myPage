@@ -40,7 +40,7 @@ public interface FreeBoardMapper {
 	@Insert("INSERT INTO board_free_comment (freec_num, free_comment, free_num, mem_num) VALUES (freec_num_seq.nextval,#{free_comment},#{free_num},#{mem_num})")
 	public int insertFreeComment(FreeBoardCommentVO free_comment);
 	
-	@Select("SELECT * FROM board_free_comment c JOIN member m USING(mem_num) WHERE c.free_num = #{free_num} ORDER BY c.freec_num DESC")
+	/*@Select("SELECT * FROM board_free_comment c JOIN member m USING(mem_num) WHERE c.free_num = #{free_num} ORDER BY c.freec_num DESC")*/
 	public List<FreeBoardCommentVO> selectListFreeComment(Integer free_num);
 	
 	@Select("SELECT * FROM board_free_comment c JOIN member m USING(mem_num) WHERE c.freec_num = #{freec_num}")

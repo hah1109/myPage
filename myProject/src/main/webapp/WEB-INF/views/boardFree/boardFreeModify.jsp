@@ -53,43 +53,47 @@
 	                      		    enctype="multipart/form-data">
 	    <form:hidden path="free_num"/>
  		<form:errors element="div" cssClass="error-color"/>
-		<ul>
+		<ul style="margin-top:20px">
 			<li>
 				<label for="free_title">제목</label>
-				<form:input path="free_title"/>
+				<form:input path="free_title" class="title"/>
 				<form:errors path="free_title" cssClass="error-color"/>
 			</li>
 			<li>
 				<label for="free_content">내용</label>
-				<form:textarea path="free_content" cols="40" rows="10"/>
+				<form:textarea path="free_content" cols="45" rows="15"/>
 				<form:errors path="free_content" cssClass="error-color"/>
 			</li>
 			
-			<c:if test="${empty boardFree.free_filename}">
-	 			<li>
-					<img name="free_file" id="free_file" style="max-width:300px; max-height:300px; display:none;">
-				</li>
+			<li>
+			<c:if test="${empty boardFree.free_filename}">	 			
+					<img name="free_file" id="free_file" style="max-width:350px; max-height:350px; display:none; position:relative; left:130px;">				
 			</c:if>
 					
 			<c:if test="${!empty boardFree.free_filename}">
 				<input type=hidden value="1" name="isImgUpdate" class="isImgUpdate">
 				<div class="align-center">
-					<img src="imageView.do?free_num=${boardFree.free_num}" name="free_mfile" id="free_mfile" style="max-width:300px; max-height:300px;">
-				</div>
-				<input type="button" value="이미지 되돌리기" class="reset_photo" style="display:none">
-			</c:if>	
+					<img src="imageView.do?free_num=${boardFree.free_num}" name="free_mfile" id="free_mfile" 
+					style="max-width:350px; max-height:350px;">
+				</div>				
+			</c:if>
+			</li>
+			
+			<li>		
+				<label for="upload" class="upload">이미지 파일업로드</label>	
+			</li>
 			<li>
-			<div class="align-center">
-				<input type="file" value="이미지 업로드 및 수정" name="upload" id="upload" accept="image/gif,image/png,image/jpeg">				
-				<input type="button" value="이미지 삭제" class="cancel_photo">
-			</div>
-			</li>	
+				<input type="file" name="upload" id="upload" accept="image/gif,image/png,image/jpeg" style="visibility:hidden;">				
+				<input type="button" value="이미지 삭제" class="cancel_photo" class="delete_img" style="width:100px;">
+				<input type="button" value="이미지 되돌리기" class="reset_photo" style="display:none; width:120px;">
+			</li>
 		</ul>
 		
 			
-		<div class="align-right">
+		<div class="align-right" style="padding-top:30px;">
 			<input type="submit" value="수정">
 			<input type="button" value="목록으로" onclick="location.href='list.do'">
 		</div> 
+		
 	</form:form> 
 </div>

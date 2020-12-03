@@ -55,18 +55,43 @@
 		<div class="align-center">등록된 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-		<table>
+		<table class="table_freeboard">
 			<tr>
-				<th>번호</th>
+				<th></th>
 				<th width="400">제목</th>
 				<th>작성자</th>
 				<th>최근수정일</th>
+				
 				<th>조회수</th>
 			</tr>
 			<c:forEach var="boardFree" items="${list}">
 				<tr>
-					<td>${boardFree.free_num}</td>
-					<td><a href="detail.do?free_num=${boardFree.free_num}">${boardFree.free_title}</a></td>
+					<td><img src="${pageContext.request.contextPath}/resources/images/board/dot.png" style="width:5px; position:relative; left:6px;"></td>
+					<td style="text-align:left;">
+						<c:if test="${boardFree.commentNum>0}">
+							<c:if test="${empty boardFree.free_filename}">	
+								<a href="detail.do?free_num=${boardFree.free_num}">${boardFree.free_title} <b>[${boardFree.commentNum}]</b></a>
+							</c:if>
+							<c:if test="${!empty boardFree.free_filename}">
+								<a href="detail.do?free_num=${boardFree.free_num}">
+									${boardFree.free_title} 
+									<img src="${pageContext.request.contextPath}/resources/images/board/clip.png" style="width:12px;">
+									<b>[${boardFree.commentNum}]</b>
+								</a>
+							</c:if>
+						</c:if>
+						<c:if test="${boardFree.commentNum==0}">
+							<c:if test="${empty boardFree.free_filename}">	
+								<a href="detail.do?free_num=${boardFree.free_num}">${boardFree.free_title}</a>
+							</c:if>
+							<c:if test="${!empty boardFree.free_filename}">
+								<a href="detail.do?free_num=${boardFree.free_num}">
+									${boardFree.free_title}
+									<img src="${pageContext.request.contextPath}/resources/images/board/clip.png" style="width:12px;">
+								</a>
+							</c:if>
+						</c:if>
+					</td>
 					<td>${boardFree.mem_id}</td>
 					<td>${boardFree.free_modify_date}</td>
 					<td>${boardFree.free_hit}</td>

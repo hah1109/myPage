@@ -33,6 +33,8 @@ public class FreeBoardVO {
 	//이미지도 같이 수정시 0, 이미지빼고 수정시 1
 	private int isImgUpdate;
 	
+	private int commentNum;
+	
 	private List<FreeBoardCommentVO> commentList;	
 	
 	public void setUpload(MultipartFile upload) throws IOException{
@@ -141,6 +143,13 @@ public class FreeBoardVO {
 		this.isImgUpdate = isImgUpdate;
 	}
 	
+	public int getCommentNum() {
+		return commentNum;
+	}
+
+	public void setCommentNum(int commentNum) {
+		this.commentNum = commentNum;
+	}
 
 	@Override
 	public String toString() {

@@ -53,7 +53,7 @@ function commentList(){
                 }else if(value.mem_auth == 0){
                 	a += '&nbsp;관리자';
                 }
-                a += '&nbsp;' + value.freec_modify_date;
+                a += '&nbsp;' + value.str_date;
 				if(value.mem_num == mem_num){
 				a += '&nbsp;|&nbsp;<span class="commentModify'+value.freec_num+'"><a onclick="commentUpdate('+value.freec_num+',\''+value.free_comment+'\');">수정</a>';
                 a += '&nbsp;|&nbsp;<a onclick="commentDelete('+value.freec_num+');">삭제</a> </span>'; 
