@@ -1,13 +1,24 @@
 package kr.spring.board.feed.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.board.feed.service.FeedService2;
 import kr.spring.board.feed.vo.FeedVO;
+import kr.spring.member.vo.MemberVO;
 
 //조재희
 @Controller
@@ -15,7 +26,7 @@ public class FeedController2 {
 	private Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource
-	FeedService2 FeedService;
+	FeedService2 feedService;
 	
 	//자바빈 초기화
 	@ModelAttribute
@@ -36,11 +47,63 @@ public class FeedController2 {
 		session_num과 profile_num이 다르면서 training이 맞는 경우
 		다른 사람의 프로필 사진을 누르면서 training이 아닌 경우 => 팔로우공개, 트레이너공개, 전체공개가 보여진다
 	 */
+	@RequestMapping("/feedBoard/feedList.do")
+	public ModelAndView feedList(HttpSession session) {
+
+		//회원번호를 얻기위해 세션에 저장된 회원 정보를 반환
+	    MemberVO memberVO = (MemberVO)session.getAttribute("user");
+		int count = feedService.countingFeedList(memberVO.getMem_num());
+		
+		if(log.isDebugEnabled()) {
+			log.debug("<<FeedCount>>" + count);
+		}
+		
+		List<FeedVO> list = null;
+		
+		if(count>0) {
+			list = feedService.myPersnolList(memberVO.getMem_num());
+			
+			if(log.isDebugEnabled()) {
+				log.debug("<<피드 목록>> : " + list);
+			}
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("myPersonalList");
+		mav.addObject("list", list);
+		
+		return mav;
+	}
 	
 	//게시물 등록 폼
+	@RequestMapping(value="/feedBoard/feedWrite.do",method=RequestMethod.GET)
+	public String feedWriteForm() {
+		return "feedWrite";
+	}
 	
 	//게시물 등록 처리
-	
+	@RequestMapping(value="/feedBoard/feedWrite.do",method=RequestMethod.POST)
+	public String feedWriteSubmit(@Valid FeedVO feedVO, 
+							BindingResult result, 
+							HttpServletRequest request,
+							HttpSession session,
+							Model model) {
+		
+		if(log.isDebugEnabled()) log.debug("<<마이 퍼스널 게시판 글 저장>> :" + feedVO);
+		
+		if(result.hasErrors()) return feedWriteForm();
+		
+		MemberVO member = (MemberVO)session.getAttribute("user");
+		feedVO.setMem_num(member.getMem_num());
+		feedVO.setFeed_ip(request.getRemoteAddr());
+		feedVO.setFeed_type(0);
+		feedService.insertFeedBoard(feedVO);
+		
+		model.addAttribute("message", "운동일지가 등록되었습니다.");
+		model.addAttribute("url",request.getContextPath() + "/boardFree/list.do");
+		
+		return "common/result";
+	}	
 	//게시물 수정 폼
 	
 	//게시물 수정 처리
