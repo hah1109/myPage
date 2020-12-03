@@ -13,7 +13,7 @@ import kr.spring.comment.freec.vo.FreeBoardCommentReplyVO;
 import kr.spring.comment.freec.vo.FreeBoardCommentVO;
 
 @Service("tipBoardService")
-public class TipBoardServiceImple implements TipBoardService{
+public class TipBoardServiceImpl implements TipBoardService{
 
 	@Resource
 	TipBoardMapper tipBoardMapper;

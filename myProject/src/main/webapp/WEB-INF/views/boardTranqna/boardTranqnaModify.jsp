@@ -8,30 +8,30 @@
 	$(document).ready(function(){
 		
 		$('#board_submit').submit(function(){
-			if($('#free_content').val()==''){
+			if($('#tq_content').val()==''){
 				alert('내용을 입력해 주세요');
-				$('#free_content').focus();
+				$('#tq_content').focus();
 				return false;
 			}
 		});
 		
 		var pre_upload = $('#upload').val();
 		var photo_path;
-		var free_photo;
+		var tq_photo;
 
 		$('#upload').change(function(){
 			
 			var upload = document.getElementById('upload');
 			
-			free_photo = upload.files[0];
-			if(free_photo){
+			tq_photo = upload.files[0];
+			if(tq_photo){
 				var reader = new FileReader();
-				reader.readAsDataURL(free_photo);
+				reader.readAsDataURL(tq_photo);
 				
 				reader.onload = function(){
-					photo_path = $('#free_mfile').attr('src');
-					$('#free_file').attr('src',reader.result).show();
-					$('#free_mfile').attr('src',reader.result).show();
+					photo_path = $('#tq_mfile').attr('src');
+					$('#tq_file').attr('src',reader.result).show();
+					$('#tq_mfile').attr('src',reader.result).show();
 				}				
 			}
 			
@@ -41,14 +41,14 @@
 		
 		$('.reset_photo').click(function(){
 			$(this).hide();
-			$('#free_mfile').attr('src',photo_path).show();
+			$('#tq_mfile').attr('src',photo_path).show();
 			$('#upload').val('');
 			$('.isImgUpdate').val('1');
 		});
 		
 		$('.cancel_photo').click(function(){
-			$('#free_file').hide();
-			$('#free_mfile').hide();
+			$('#tq_file').hide();
+			$('#tq_mfile').hide();
 			$('.isImgUpdate').val('0');
 			$('#upload').val("");
 		});
@@ -57,33 +57,37 @@
 </script>
 
 <div class="page-main-style">
-	<h2>팁 게시판</h2>
-  	<form:form commandName="boardFree" action="modify.do"
+	<h2>트레이너 문의 게시판</h2>
+  	<form:form commandName="boardTranqna" action="modify.do"
 	                      		    enctype="multipart/form-data" id="board_submit">
-	    <form:hidden path="free_num"/>
+	    <form:hidden path="tq_num"/>
  		<form:errors element="div" cssClass="error-color"/>
 		<ul>
+			<!-- <li><p><input type="checkbox" name="tq_type" value="1">트레이너에게만 공개</p></li> -->
 			<li>
-				<label for="free_title">제목</label>
-				<form:input path="free_title"/>
-				<form:errors path="free_title" cssClass="error-color"/>
+				<form:checkbox path="tq_type" value="1" label="트레이너에게만 공개"/>
 			</li>
 			<li>
-				<label for="free_content">내용</label>
-				<form:textarea path="free_content" id="free_content" cols="40" rows="10"/>
-				<form:errors path="free_content" cssClass="error-color"/>
+				<label for="tq_title">제목</label>
+				<form:input path="tq_title"/>
+				<form:errors path="tq_title" cssClass="error-color"/>
+			</li>
+			<li>
+				<label for="tq_content">내용</label>
+				<form:textarea path="tq_content" id="tq_content" cols="40" rows="10"/>
+				<form:errors path="tq_content" cssClass="error-color"/>
 			</li>
 			
-			<c:if test="${empty boardFree.free_filename}">
+			<c:if test="${empty boardTranqna.tq_filename}">
 	 			<li>
-					<img name="free_file" id="free_file" style="max-width:300px; max-height:300px; display:none;">
+					<img name="tq_file" id="tq_file" style="max-width:300px; max-height:300px; display:none;">
 				</li>
 			</c:if>
 					
-			<c:if test="${!empty boardFree.free_filename}">
+			<c:if test="${!empty boardTranqna.tq_filename}">
 				<input type=hidden value="1" name="isImgUpdate" class="isImgUpdate">
 				<div class="align-center">
-					<img src="imageView.do?free_num=${boardFree.free_num}" name="free_mfile" id="free_mfile" style="max-width:300px; max-height:300px;">
+					<img src="imageView.do?tq_num=${boardTranqna.tq_num}" name="tq_mfile" id="tq_mfile" style="max-width:300px; max-height:300px;">
 				</div>
 				<input type="button" value="이미지 되돌리기" class="reset_photo" style="display:none">
 			</c:if>	
