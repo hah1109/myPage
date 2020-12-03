@@ -112,6 +112,7 @@
 			<mapping path="/boardTranqna/list.do"/>
 			<mapping path="/boardTranqna/write.do"/>
 			<mapping path="/boardTranqna/detail.do"/>
+			<mapping path="/feedBoard/feedList.do"/>
 			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/> 
 		</interceptor>
 		<interceptor>	
