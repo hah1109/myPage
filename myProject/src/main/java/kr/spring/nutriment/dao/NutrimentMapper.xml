@@ -5,8 +5,13 @@
 <mapper namespace="kr.spring.nutriment.dao.NutrimentMapper">  
 
 	<select id="selectNutriment" parameterType="map" resultType="kr.spring.nutriment.vo.NutrimentVO">
-	    SELECT * FROM (SELECT a.*, rownum rnum FROM (
-		      SELECT * FROM nutriment WHERE food_name LIKE '%' || #{foodName} || '%' ORDER BY food_num DESC)a)
+	    SELECT * 
+	    FROM (SELECT a.*, rownum rnum 
+	    		FROM ( SELECT * 
+	    				FROM nutriment 
+	    				WHERE food_name LIKE '%' || #{foodName} || '%' ORDER BY food_num DESC
+	    			  )a
+	    	  )
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>

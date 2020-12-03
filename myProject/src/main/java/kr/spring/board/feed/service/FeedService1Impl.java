@@ -23,14 +23,12 @@ public class FeedService1Impl implements FeedService1{
 
 	@Override
 	public int selectCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return feedMapper.selectCount(map);
 	}
 
 	@Override
-	public void selectRecoBoard(FeedVO feed) {
-		// TODO Auto-generated method stub
-		
+	public FeedVO selectRecoBoard(Integer feed_num) {
+		return feedMapper.selectRecoBoard(feed_num);
 	}
 
 	@Override

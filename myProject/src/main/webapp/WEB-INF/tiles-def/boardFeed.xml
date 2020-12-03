@@ -17,6 +17,14 @@
        <put-attribute name="title" value="추천게시판"/>
        <put-attribute name="body" value="/WEB-INF/views/boardFeed/feedReco.jsp"/>  
     </definition>
+    <definition name="myFeed" extends="main">
+       <put-attribute name="title" value="내 피드"/>
+       <put-attribute name="body" value="/WEB-INF/views/boardFeed/myFeed.jsp"/>  
+    </definition>
+    <definition name="myMembersFeed" extends="main">
+       <put-attribute name="title" value="내 회원의 피드"/>
+       <put-attribute name="body" value="/WEB-INF/views/boardFeed/myMembersFeed.jsp"/>  
+    </definition>
 </tiles-definitions>
 
 

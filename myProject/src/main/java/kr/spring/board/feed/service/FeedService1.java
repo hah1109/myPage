@@ -14,9 +14,9 @@ public interface FeedService1 {
 	public List<FeedVO> selectRecoList(Map<String,Object> map);
 	public int selectCount(Map<String,Object> map);
 	
-	//추천게시판에서 글상세 들어갈 경우
+	//추천게시판에서 글상세 들어갈 경우, 이미지 불러오기에서 사용
 	@Select("SELECT * FROM feed WHERE feed_num=#{feed_num}")
-	public void selectRecoBoard(FeedVO feed);
+	public FeedVO selectRecoBoard(Integer feed_num);
 	
 	//팔로우 버튼 눌렀을 경우
 	@Insert("INSERT INTO follower (follower_num, mem_num, follower_to) VALUES(#{follower_num}, #{mem_num}, #{follower_to})")
