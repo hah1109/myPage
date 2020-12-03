@@ -27,7 +27,18 @@ public class FeedService3Impl implements FeedService3{
 		
 		return feedMapper3.selectFeedCount(map);
 	}
+	
+	@Override
+	public List<FeedVO> selectFeedListForT(Map<String, Object> map) {
+		
+		return feedMapper3.selectFeedListForT(map);
+	}
 
+	@Override
+	public int selectFeedForTCount(Map<String, Object> map) {
+		
+		return feedMapper3.selectFeedForTCount(map);
+	}
 	
 	@Override
 	public List<FeedVO> selectMyMemberFeedList(Map<String, Object> map) {
@@ -40,5 +51,19 @@ public class FeedService3Impl implements FeedService3{
 		
 		return feedMapper3.selectMyMemberFeedCount(map);
 	}
+
+	@Override
+	public List<FeedVO> selectAllFeedList(Map<String, Object> map) {
+		
+		return feedMapper3.selectAllFeedList(map);
+	}
+
+	@Override
+	public int selectAllFeedCount(Map<String, Object> map) {
+		
+		return feedMapper3.selectAllFeedCount(map);
+	}
+
+	
 
 }

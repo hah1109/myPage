@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mainPageStyle.css">
 	<!-- ------------------------------------헤더------------------------------------- -->
+	<!-- 우측 상단 메뉴 -->
 	<div id="sub-header" style="float:right">
 		<!-- 로그인 상태 : 회원등급아이콘,id,알림아이콘,mypage,로그아웃,QnA 활성화 -->
 		<c:if test="${!empty user}">
@@ -63,10 +64,10 @@
 				<img class="bar" alt="" src="${pageContext.request.contextPath}/resources/images/header/bar.png">
 			</li>
 			<li class="training-diary">
-				<a href="${pageContext.request.contextPath}/main/main.do">트레이닝 다이어리</a>
+				<a href="${pageContext.request.contextPath}/boardFeed/myFeed.do">트레이닝 다이어리</a>
 				<ul class="dt-sub submenu" style="z-index: 2;">
-					<li><a href="${pageContext.request.contextPath}/main/main.do">피드</a></li>
-					<li><a href="${pageContext.request.contextPath}/main/main.do">마이 퍼스널</a></li>
+					<li><a href="${pageContext.request.contextPath}/boardFeed/myFeed.do">피드</a></li>
+					<li><a href="${pageContext.request.contextPath}/boardFeed/feedList.do">마이 퍼스널</a></li>
 					<li><a href="${pageContext.request.contextPath}/boardFeed/feedReco.do">탐색</a></li>
 				</ul>
 			</li>

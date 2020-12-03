@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="kr.spring.board.feed.dao.FeedMapper3"> 
 
- 	<!-- 전체 피드 리스트 받아오기(팔로워의 팔로워 공개 이상 글 + 내가 쓴 글 중 팔로워 공개 이상 글) -->
+ 	<!-- (일반회원) 전체 피드 리스트 받아오기(팔로워의 팔로워 공개 이상 글 + 내가 쓴 글 중 팔로워 공개 이상 글) -->
 	<select id="selectFeedList" parameterType="map" resultType="feedVO">
 		SELECT * 
 		FROM (SELECT a.*, rownum rnum
@@ -22,9 +22,8 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}	]]>
 		
 	</select>
-
-
-	<!--  전체 피드의 수 카운트 -->
+	
+	<!-- (일반회원) 전체 피드의 수 카운트 -->
 	<select id="selectFeedCount" parameterType="map" resultType="integer">
 		SELECT COUNT(*)
 		FROM feed
@@ -34,7 +33,40 @@
 						  ) 
 					  OR mem_num=#{mem_num} <![CDATA[AND feed_auth > 1]]>
 	</select>
-
+	
+	<!-- (트레이너)전체 피드 리스트 받아오기 (팔로워(+내회원)의 팔로워 공개 이상 글 + 내 회원의 트레이너 공개 이상 글 +  내가 쓴 글 중 팔로워 공개 이상 글) -->
+	<select id="selectFeedListForT" parameterType="map" resultType="feedVO">
+		SELECT * 
+		FROM (SELECT a.*, rownum rnum
+			  FROM (SELECT * 
+					FROM feed
+					WHERE mem_num IN (SELECT follower_to 
+									  FROM follower 
+									  WHERE mem_num=#{mem_num}<![CDATA[AND feed_auth > 1]]>) 
+      					OR mem_num=#{mem_num}<![CDATA[AND feed_auth > 1]]>
+     				    OR mem_num IN (SELECT training_to 
+     				    			   FROM training 
+     				    			   WHERE mem_num=#{mem_num} <![CDATA[AND feed_auth = 1]]>)
+					ORDER BY feed_reg_date;
+				  )a	
+			  )
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}	]]>
+		
+	</select>
+	
+	<!--  (트레이너) 전체  피드의 수 카운트 -->
+	<select id="selectFeedForTCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*) 
+		FROM feed
+		WHERE mem_num IN (SELECT follower_to 
+						  FROM follower 
+						  WHERE mem_num=#{mem_num}<![CDATA[AND feed_auth > 1]]>) 
+   					OR mem_num=#{mem_num}<![CDATA[AND feed_auth > 1]]>
+  				    OR mem_num IN (SELECT training_to 
+  				    			   FROM training 
+  				    			   WHERE mem_num=#{mem_num} <![CDATA[AND feed_auth = 1]]>
+	</select>
 
 	<!-- (트레이너)내회원의 피드 리스트 받아오기 -->
 	<select id="selectMyMemberFeedList" parameterType="map" resultType="feedVO">
@@ -54,7 +86,7 @@
 		]]>
 		  
 	</select>
-
+	
 	<!-- (트레이너)내회원의 피드의 수 카운트 -->
 	<select id="selectMyMemberFeedCount" parameterType="map" resultType="integer">
 		SELECT COUNT(*)

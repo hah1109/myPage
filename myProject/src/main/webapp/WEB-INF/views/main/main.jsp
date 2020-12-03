@@ -126,10 +126,10 @@
 				<img class="bar" alt="" src="${pageContext.request.contextPath}/resources/images/header/bar.png">
 			</li>
 			<li class="training-diary">
-				<a href="${pageContext.request.contextPath}/main/main.do">트레이닝 다이어리</a>
+				<a href="${pageContext.request.contextPath}/boardFeed/myFeed.do">트레이닝 다이어리</a>
 				<ul class="dt-sub submenu" style="z-index: 2;">
-					<li><a href="${pageContext.request.contextPath}/main/main.do">피드</a></li>
-					<li><a href="${pageContext.request.contextPath}/feedBoard/feedList.do">마이 퍼스널</a></li><!-- 여기서부르는ㄷ[ mem_num -->
+					<li><a href="${pageContext.request.contextPath}/boardFeed/myFeed.do">피드</a></li>
+					<li><a href="${pageContext.request.contextPath}/boardFeed/feedList.do">마이 퍼스널</a></li>
 					<li><a href="${pageContext.request.contextPath}/boardFeed/feedReco.do">탐색</a></li>
 				</ul>
 			</li>
