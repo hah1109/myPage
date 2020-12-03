@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FeedVO {
 	/*@@@@@@@@@@@@@@@@@feed 테이블@@@@@@@@@@@@@@@@@*/
 	private int feed_num; //피드 글 번호 -> 시퀀스 생성
+	private String mem_id;
 	private int feed_type; //글 타입(1:식단 / 2:운동)
 	private String feed_content; //글 내용
 	private Date feed_reg_date; //글 등록일
@@ -105,6 +106,14 @@ public class FeedVO {
 		return feed_auth;
 	}
 
+	public String getMem_id() {
+		return mem_id;
+	}
+
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
+
 	public void setFeed_auth(int feed_auth) {
 		this.feed_auth = feed_auth;
 	}
@@ -142,14 +151,14 @@ public class FeedVO {
 	}
 	/*@@@@@@@@@@@@@@@@@ Getter&Setter @@@@@@@@@@@@@@@@@*/
 
-	/*@@@@@@@@@@@@@@@@@ toString(feed_file 제외) @@@@@@@@@@@@@@@@@*/
+	/*@@@@@@@@@@@@@@@@@ toString @@@@@@@@@@@@@@@@@*/
 	@Override
 	public String toString() {
-		return "FeedVO1 [feed_num=" + feed_num + ", feed_type=" + feed_type + ", feed_content=" + feed_content
-				+ ", feed_reg_date=" + feed_reg_date + ", feed_filename=" + feed_filename + ", feed_ip=" + feed_ip
-				+ ", mem_num=" + mem_num + ", feed_auth=" + feed_auth + ", follower_num=" + follower_num
+		return "FeedVO [feed_num=" + feed_num + ", mem_id=" + mem_id + ", feed_type=" + feed_type + ", feed_content="
+				+ feed_content + ", feed_reg_date=" + feed_reg_date + ", feed_filename=" + feed_filename + ", feed_ip="
+				+ feed_ip + ", mem_num=" + mem_num + ", feed_auth=" + feed_auth + ", follower_num=" + follower_num
 				+ ", follower_to=" + follower_to + ", training_num=" + training_num + ", training_to=" + training_to
 				+ "]";
 	}
-	/*@@@@@@@@@@@@@@@@@ toString(feed_file 제외) @@@@@@@@@@@@@@@@@*/
+	/*@@@@@@@@@@@@@@@@@ toString @@@@@@@@@@@@@@@@@*/
 }
