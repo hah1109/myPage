@@ -12,4 +12,5 @@
 } 
 .type_select_btn:hover{
    transform: scale(0.96);
+   cursor:pointer;
 }

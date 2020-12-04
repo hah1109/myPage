@@ -43,6 +43,8 @@ public interface FeedMapper2 {
 	public void updateProfile(MemberVO member);
 	@Update("update spmember_detail set mem_intro=#{mem_intro} where mem_num=#{mem_num}")
 	public void updateIntro(MemberVO member);
+	@Select("select * FROM feed where mem_num=#{mem_num}")
+	public FeedVO selectFeedDetail(Integer mem_num);
 	
 	
 } 

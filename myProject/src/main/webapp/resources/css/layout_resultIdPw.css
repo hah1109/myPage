@@ -66,10 +66,12 @@ input::-moz-focus-inner {
 
 #submit:hover{
    transform: scale(0.96);
+   cursor:pointer;
 }
 
 .confirm_btn:hover{
    transform: scale(0.96);
+   cursor:pointer;
 }
 .id_result{
 	text-align:center;

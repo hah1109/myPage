@@ -70,7 +70,7 @@
          	<form:errors element="div" class="error"/>
          	
          	<!-- 로그인 버튼 -->
-         	<input type="submit" value="" class="login_btn">
+         	<a><input type="submit" value="" class="login_btn"></a>
          	
          	<!-- 회원가입 + id/pw찾기 -->
            	<button type="button" class="r_f_btn" onclick="location.href='${pageContext.request.contextPath}/member/userType.do'">

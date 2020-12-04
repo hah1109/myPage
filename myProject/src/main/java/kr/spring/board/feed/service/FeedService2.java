@@ -17,6 +17,7 @@ public interface FeedService2 {
 	//public void insertFollow(FeedVO feedVO);
 	//public void deleteFollow();
 	
+	public FeedVO selectFeedDetail(Integer mem_num);
 
 	public void updateProfile(MemberVO member);
 	public void updateIntro(MemberVO member);

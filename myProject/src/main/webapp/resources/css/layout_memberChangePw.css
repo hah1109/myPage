@@ -97,6 +97,7 @@ input::-moz-focus-inner {
 }
 #submit:hover{
 	transform: scale(0.96);
+	cursor:pointer;
 }
 .radio_btn{
 	width:15px;
@@ -106,6 +107,7 @@ input::-moz-focus-inner {
 
 .login_btn:hover{
 	transform: scale(0.96);
+	cursor:pointer;
 }
 .r_f_btn{
 	width:110px;
@@ -117,6 +119,7 @@ input::-moz-focus-inner {
 }
 .r_f_btn:hover{
 	transform: scale(0.96);
+	cursor:pointer;
 }
 .texts_img{
 	margin-left:30px;
@@ -172,14 +175,17 @@ input::-moz-focus-inner {
 
 .detail_modify_btn:hover{
 	transform:scale(1.05);
+	cursor:pointer;
 }
 
 .password_modify_btn:hover{
 	transform:scale(1.05);
+	cursor:pointer;
 }
 
 .delete_btn:hover{
 	transform:scale(1.05);
+	cursor:pointer;
 }
 #member_modify-form{
   width: 350px;

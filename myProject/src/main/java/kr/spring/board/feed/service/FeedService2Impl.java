@@ -60,5 +60,11 @@ public class FeedService2Impl implements FeedService2{
 		feedMapper.updateIntro(member);
 		
 	}
+
+	@Override
+	public FeedVO selectFeedDetail(Integer mem_num) {
+		
+		return feedMapper.selectFeedDetail(mem_num);
+	}
  
 }

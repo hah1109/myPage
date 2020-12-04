@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.xml.ws.Response;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -89,8 +91,10 @@ public class FeedController2 {
 	
 	//게시물 등록 폼
 	@RequestMapping(value="/boardFeed/feedWrite.do", method=RequestMethod.GET)
-	public String feedWriteForm() {
+	public String feedWriteForm(){
+		if(log.isDebugEnabled()) log.debug("<<피드 글쓰기 폼 진입 시도>>" );
 		return "feedWrite";
+		
 	}
 
 	//게시물 등록 처리
@@ -103,13 +107,16 @@ public class FeedController2 {
 
 		if(log.isDebugEnabled()) log.debug("<<마이 퍼스널 게시판 글 저장>> :" + feedVO);
 
-		if(result.hasErrors()) return feedWriteForm();
-
+		if(result.hasErrors()) return "feedWrite";
+		//회원번호, ID 셋팅
 		MemberVO member = (MemberVO)session.getAttribute("user");
 		feedVO.setMem_num(member.getMem_num());
 		feedVO.setMem_id(member.getMem_id());
+		
+		//ip 셋팅
 		feedVO.setFeed_ip(request.getRemoteAddr());
-		feedVO.setFeed_type(0);
+		
+		//글쓰기
 		feedService.insertFeedBoard(feedVO);
 
 		model.addAttribute("message", "운동일지가 등록되었습니다.");

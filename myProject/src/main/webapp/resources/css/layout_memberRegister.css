@@ -48,6 +48,7 @@ body{
 }
 .signup-btn:hover{
   transform: scale(0.96);
+  cursor:pointer;
 }
 .signup-form a{
   text-decoration: none;
@@ -60,4 +61,5 @@ body{
 }
 .signup-form a:hover{
   background: rgba(0,0,0,.3);
+  cursor:pointer;
 }
