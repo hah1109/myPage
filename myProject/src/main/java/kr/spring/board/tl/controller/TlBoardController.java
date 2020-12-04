@@ -136,12 +136,13 @@ public class TlBoardController {
 		return "prUpdate";
 	}
 	
+	//업로드 처리 해야함 picName추가해서 
 	//이미지를 출력해줄 메서드
 	@RequestMapping("/trainerList/photoOutPut.do")
 	public ModelAndView outPutImage(HttpSession session) {
 		
 		//세션에서 현재 로그인한 회원의 정보를 가져옴
-		TlBoardVO user = (TlBoardVO)session.getAttribute("user");
+		MemberVO user = (MemberVO)session.getAttribute("user");
 		
 		//읽어온 정보를 로그를 통해 보여줌
 		if(log.isDebugEnabled()) {
