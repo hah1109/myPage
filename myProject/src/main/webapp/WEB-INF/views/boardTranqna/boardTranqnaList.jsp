@@ -127,7 +127,7 @@
 			<div class="align-center">${pagingHtml}</div>
 			<div class="boardPaging-selectbox">
 				<ul class="selectbox-options">
-				    <li class="init">10개씩 보기</li>
+				    <li class="init">${rowCount}개씩 보기</li>
 				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=10">10개씩 보기</a></li>
 				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=20">20개씩 보기</a></li>
 				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=30">30개씩 보기</a></li>

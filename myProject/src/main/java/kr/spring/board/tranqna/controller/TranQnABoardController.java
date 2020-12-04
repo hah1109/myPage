@@ -80,6 +80,7 @@ public class TranQnABoardController {
 		mav.setViewName("boardTranqnaList");
 		mav.addObject("count",count);
 		mav.addObject("list", list);
+		mav.addObject("rowCount",rowCount);
 		mav.addObject("pagingHtml", page.getPagingHtml());
 		
 		return mav;
