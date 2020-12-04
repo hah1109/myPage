@@ -56,7 +56,7 @@ public class FeedController2 {
 		session_num과 profile_num이 다르면서 training이 맞는 경우
 		다른 사람의 프로필 사진을 누르면서 training이 아닌 경우 => 팔로우공개, 트레이너공개, 전체공개가 보여진다
 	 */
-	@RequestMapping(value="/feedBoard/feedList.do",method=RequestMethod.GET)
+	@RequestMapping(value="/boardFeed/feedList.do",method=RequestMethod.GET)
 	public ModelAndView feedList(HttpSession session) {
 
 		//회원번호를 얻기위해 세션에 저장된 회원 정보를 반환
@@ -88,55 +88,55 @@ public class FeedController2 {
 	}
 	
 	//게시물 등록 폼
-	@RequestMapping(value="/feedBoard/feedWrite.do",method=RequestMethod.GET)
+	@RequestMapping(value="/boardFeed/feedWrite.do", method=RequestMethod.GET)
 	public String feedWriteForm() {
 		return "feedWrite";
 	}
-	
+
 	//게시물 등록 처리
-		@RequestMapping(value="/feedBoard/feedWrite.do",method=RequestMethod.POST)
-		public String feedWriteSubmit(@Valid FeedVO feedVO, 
-								BindingResult result, 
-								HttpServletRequest request,
-								HttpSession session,
-								Model model) {
-			
-			if(log.isDebugEnabled()) log.debug("<<마이 퍼스널 게시판 글 저장>> :" + feedVO);
-			
-			if(result.hasErrors()) return feedWriteForm();
-			
-			MemberVO member = (MemberVO)session.getAttribute("user");
-			feedVO.setMem_num(member.getMem_num());
-			feedVO.setMem_id(member.getMem_id());
-			feedVO.setFeed_ip(request.getRemoteAddr());
-			feedVO.setFeed_type(0);
-			feedService.insertFeedBoard(feedVO);
-			
-			model.addAttribute("message", "운동일지가 등록되었습니다.");
-			model.addAttribute("url",request.getContextPath() + "/boardFree/list.do");
-			
-			return "common/result";
-		}	
+	@RequestMapping(value="/boardFeed/feedWrite.do",method=RequestMethod.POST)
+	public String feedWriteSubmit(@Valid FeedVO feedVO, 
+			BindingResult result, 
+			HttpServletRequest request,
+			HttpSession session,
+			Model model) {
+
+		if(log.isDebugEnabled()) log.debug("<<마이 퍼스널 게시판 글 저장>> :" + feedVO);
+
+		if(result.hasErrors()) return feedWriteForm();
+
+		MemberVO member = (MemberVO)session.getAttribute("user");
+		feedVO.setMem_num(member.getMem_num());
+		feedVO.setMem_id(member.getMem_id());
+		feedVO.setFeed_ip(request.getRemoteAddr());
+		feedVO.setFeed_type(0);
+		feedService.insertFeedBoard(feedVO);
+
+		model.addAttribute("message", "운동일지가 등록되었습니다.");
+		model.addAttribute("url",request.getContextPath() + "/boardFree/list.do");
+
+		return "common/result";
+	}	
 
 	//게시물 수정 폼
-	
+
 	//게시물 수정 처리
 
 	//이미지 출력
-		@RequestMapping("/feedBoard/photoView.do")
-		public ModelAndView viewImage(HttpSession session)	{
-			
-			MemberVO user = (MemberVO)session.getAttribute("user");
-			MemberVO memberVO = memberService.selectMember_detail(user.getMem_num());
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName("imageView");
-			mav.addObject("imageFile", memberVO.getMem_pic());
-			//mav.addObject("filename", memberVO.getMem_name());
-			
-			return mav;
-			
-		}
-	
-	
- 
+	@RequestMapping("/boardFeed/photoView.do")
+	public ModelAndView viewImage(HttpSession session)	{
+
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		MemberVO memberVO = memberService.selectMember_detail(user.getMem_num());
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		mav.addObject("imageFile", memberVO.getMem_pic());
+		//mav.addObject("filename", memberVO.getMem_name());
+
+		return mav;
+
+	}
+
+
+
 }

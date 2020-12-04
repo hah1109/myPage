@@ -190,7 +190,7 @@ $(document).ready(function(){
 	<hr size="1" width="100%">
 	<!-- 글쓰기 버튼 -->
 	<p class="align-right">
-		<input type="button" value="글쓰기" onclick="location.href='write.do'">
+		<input type="button" value="글쓰기" onclick="location.href='feedWrite.do'">
 	</p>
 </div>
 <!-- 썸네일, type, content 노출 -->	

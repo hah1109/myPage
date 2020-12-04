@@ -37,8 +37,8 @@ public class FeedAjaxController {
 			map.put("result", "logout");
 		}else {
 			//로그인이 된 경우
-			System.out.println(memberVO.getMem_pic());
 			memberVO.setMem_num(user.getMem_num());
+			System.out.println(memberVO.getMem_pic());
 			feedService.updateProfile(memberVO);
 			
 			//이미지를 업로드 한 후 세션에 저장된 회원 정보의 이미지 이름 교체
@@ -59,8 +59,8 @@ public class FeedAjaxController {
 			map.put("result", "logout");
 		}else {
 			//로그인이 된 경우
-			System.out.println(memberVO.getMem_intro() + memberVO.getMem_name() + memberVO.getMem_num());
 			memberVO.setMem_num(user.getMem_num());
+			System.out.println(memberVO.getMem_intro() + memberVO.getMem_name() + memberVO.getMem_num());
 			feedService.updateIntro(memberVO);
 			
 			//이미지를 업로드 한 후 세션에 저장된 회원 정보의 이미지 이름 교체

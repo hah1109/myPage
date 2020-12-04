@@ -1,7 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout_board.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$('#upload').change(function(){
+			$('#cancel_upload').show();
+		});
+		
+		$('#cancel_upload').click(function(){
+			$(this).hide();
+		});
+		
+		var feed_photo;
+		$('#upload').change(function(){
+			var upload = document.getElementById('upload');
+			
+			feed_photo = upload.files[0];
+			if(feed_photo){
+				var reader = new FileReader();
+				reader.readAsDataURL(feed_photo);
+				
+				reader.onload = function(){
+					$('.feed_file').attr('src',reader.result).show();
+				}				
+			}
+		});
+		
+		$('#cancel_upload').click(function(){
+			$('#upload').val("");
+			$('.feed_file').hide();
+		});
+		
+	});
+</script>
 <div class="page-main-style">
    <form:form id="feedWrite" action="feedWrite.do" commandName="feedVO">
 <!-- 타입 정하는 버튼 -->
@@ -19,7 +53,17 @@
          <form:option value="3" label="전체공개" />
       </form:select>
 <!-- 사진업로드 버튼, 사진 미리보기 -->
-      <form:input type="file" path="feed_file" accept="imgage/gif,image/png,image/jpeg"/>
+      <ul>
+			<li><label for="upload" class="upload">이미지 파일업로드</label> <input
+				type="file" name="upload" id="upload"
+				accept="image/gif,image/png,image/jpeg" style="visibility: hidden;">
+			</li>
+			<li><img id="feed_file" class="feed_file" alt="feed image"
+				style="max-width: 350px; max-height: 350px; display: none; position: relative; left: 130px;">
+			</li>
+			<li><input type="button" value="파일업로드 취소" id="cancel_upload"
+				style="display: none; width: 130px; margin-left: 130px"></li>
+		</ul>
       
 <!-- content 작성란 -->
       <form:textarea path="feed_content" placeholder="내용을 작성해주세요"/>
