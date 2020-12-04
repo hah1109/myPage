@@ -38,6 +38,7 @@
   margin: 0px 0px 10px 0px;
 }
 .masonry .grid__author {
+  text-align: right;
   font-size: 14px;
   font-weight: 300;
 }

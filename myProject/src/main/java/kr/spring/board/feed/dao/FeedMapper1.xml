@@ -13,22 +13,21 @@
 		*
 		FROM feed f JOIN member m
 		ON f.mem_num=m.mem_num 
-		<where>
+		WHERE f.feed_auth = 3
 			<if test="keyword != '' and keyfield == 'feed_type'">
-				f.feed_type LIKE '%' || #{keyword} || f.feed_auth == 3 || '%'
+				 AND (f.feed_type LIKE '%' || #{keyword} || '%')
 			</if>
 			<if test="keyword != '' and keyfield == 'mem_id'">
-				m.mem_id LIKE '%' || #{keyword} || f.feed_auth == 3 || '%'
+				AND (m.mem_id LIKE '%' || #{keyword} || '%')
 			</if>
 			<if test="keyword != '' and keyfield == 'feed_content'">
-				f.feed_content LIKE '%' || #{keyword} || f.feed_auth == 3 || '%'
+				AND (f.feed_content LIKE '%' || #{keyword} || '%')
 			</if>
 			<if test="keyword != '' and keyfield == 'all'">
-				f.feed_title LIKE '%' || #{keyword} || f.feed_auth == 3 || '%' or
-				m.mem_id LIKE '%' || #{keyword} || f.feed_auth == 3 || '%' or
-				f.feed_content LIKE '%' || #{keyword} || f.feed_auth == 3 || '%'
+				AND ((f.feed_title LIKE '%' || #{keyword} || '%')  or
+				(m.mem_id LIKE '%' || #{keyword} || '%')  or
+				(f.feed_content LIKE '%' || #{keyword} || '%'))
 			</if>
-		</where>
 		ORDER BY f.feed_num DESC)a)
  				<![CDATA[
  					WHERE rnum >= #{start} AND rnum <= #{end}

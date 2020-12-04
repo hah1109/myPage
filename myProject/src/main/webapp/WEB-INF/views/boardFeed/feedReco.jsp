@@ -33,11 +33,11 @@
 	</c:if>
 	<c:if test="${count > 0}">
 		<div class="masonry">
-		<input type="button" class="writeBtn" value="" onclick="location.href='feedWrite.do'">
+		<input type="button" class="write_Btn" value="" onclick="location.href='feedWrite.do'">
 		<c:forEach var="feed" items="${list}">
 		  <div class="grid">
-		  	<c:if test="${feed.file_name == null}"><img src="url('../resources/images/cameraImage.jpg')"></c:if>
-		    <c:if test="${feed.file_name != null}"><img src="imageView.do?feed_num=${feed.feed_num}"></c:if>
+		  	<c:if test="${empty feed.feed_filename}"><img src="../resources/images/cameraImage.jpg"></c:if>
+		    <c:if test="${!empty feed.feed_filename}"><img src="imageView.do?feed_num=${feed.feed_num}"></c:if>
 		    <div class="grid__body">
 		      <div class="relative">
 		      								<!-- @@@@@@@@@@여기에 글상세 링크 넣기  @@@@@@@@@@@@-->
@@ -47,7 +47,8 @@
 		        	<c:if test="${feed.feed_type == 2}"> 운동 </c:if>
 		        </h1>
 		        						<!-- 등록일  -->
-		        <p class="grid__author">${feed.feed_reg_date}</p>
+		        <p class="grid__author">작성일: ${feed.feed_reg_date}</p>
+		        <p class="grid__author">글쓴이: ${feed.mem_id}</p>
 		      </div>
 		      <div class="mt-auto" >
 		      							<!-- 작성 내용  -->
