@@ -5,13 +5,17 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.board.feed.service.FeedService3;
@@ -25,6 +29,8 @@ public class FeedController3 {
 	//로거 생성
 	private Logger log = Logger.getLogger(this.getClass());
 	
+	private int rowCount = 10;
+	
 	//Service
 	@Resource
 	FeedService3 feedService3;
@@ -35,11 +41,15 @@ public class FeedController3 {
 		return new FeedVO();
 	}
 	
-	
+	@RequestMapping("/boardFeed/myFeed.do")
+	public String getMyFeedView() {
+		return "myFeed";
+	}
 
 	//전체 피드 리스트
-	@RequestMapping("/boardFeed/myFeed.do")
-	public ModelAndView getMyFeed(@RequestParam(value="pageNum",defaultValue="1") int currentPage, HttpSession session) {
+	@RequestMapping("/boardFeed/myFeedAjax.do")
+	@ResponseBody
+	public Map<String,Object> getMyFeed(@RequestParam(value="pageNum",defaultValue="1") int currentPage, HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
 		List<FeedVO> list = null;
@@ -47,13 +57,6 @@ public class FeedController3 {
 		//session에서 로그인한 id의 mem_num & mam_auth 받기
 		MemberVO memberVO = (MemberVO)session.getAttribute("user");
 		
-		if(memberVO == null) {//로그인 체크 :  로그인 안되어 있을 시
-			
-			mav.setViewName("loginForFeed");
-			return mav;
-			
-		} else { //로그인 체크 : 로그인 되어 있을 시
-			
 			//로그인한 회원의 mem_num, mem_auth 받기
 			int sessionMem_num = memberVO.getMem_num();
 			int sessionMem_auth = memberVO.getMem_auth();
@@ -76,7 +79,7 @@ public class FeedController3 {
 				if(log.isDebugEnabled()) { log.debug("<<검색된 피드 갯수>> : " + count); }
 				
 				//paging 처리
-				PagingUtil page = new PagingUtil(currentPage,count,10,10,"myFeed.do");
+				PagingUtil page = new PagingUtil(currentPage,count,rowCount,10,"myFeed.do");
 				map.put("start", page.getStartCount());
 				map.put("end", page.getEndCount());
 				mav.addObject("pagingHtml", page.getPagingHtml());
@@ -92,7 +95,7 @@ public class FeedController3 {
 				if(log.isDebugEnabled()) { log.debug("<<검색된 피드 갯수>> : " + count); }
 				
 				//paging 처리
-				PagingUtil page = new PagingUtil(currentPage,count,10,10,"myFeed.do");
+				PagingUtil page = new PagingUtil(currentPage,count,rowCount,10,"myFeed.do");
 				map.put("start", page.getStartCount());
 				map.put("end", page.getEndCount());
 				mav.addObject("pagingHtml", page.getPagingHtml());
@@ -107,7 +110,7 @@ public class FeedController3 {
 				if(log.isDebugEnabled()) { log.debug("<<검색된 피드 갯수>> : " + count); }
 				
 				//paging 처리
-				PagingUtil page = new PagingUtil(currentPage,count,10,10,"myFeed.do");
+				PagingUtil page = new PagingUtil(currentPage,count,rowCount,10,"myFeed.do");
 				map.put("start", page.getStartCount());
 				map.put("end", page.getEndCount());
 				mav.addObject("pagingHtml", page.getPagingHtml());
@@ -117,15 +120,14 @@ public class FeedController3 {
 				
 			}
 			
-			//mav에 담기
-			mav.addObject("list",list);
-			mav.addObject("count",count);
-			mav.setViewName("myFeed");
-			
+			Map<String,Object> mapJson = new HashMap<String,Object>();
+ 			
+			mapJson.put("list",list);
+			mapJson.put("count",count);
+			mapJson.put("rowCount",rowCount);
 		
-			return mav;
-	
-		}
+			return mapJson;
+		
 	}
 	
 	
@@ -196,5 +198,8 @@ public class FeedController3 {
 			
 		}
 	}
+
+
+
 
 }

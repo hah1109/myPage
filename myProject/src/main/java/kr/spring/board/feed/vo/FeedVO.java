@@ -11,7 +11,7 @@ public class FeedVO {
 	private String mem_id;
 	private int feed_type; //글 타입(1:식단 / 2:운동)
 	private String feed_content; //글 내용
-	private Date feed_reg_date; //글 등록일
+	private String feed_reg_date; //글 등록일
 	private byte[] feed_file; // 업로드한 파일
 	private String feed_filename; //업로드한 파일 명
 	private String feed_ip; //ip주소
@@ -62,11 +62,11 @@ public class FeedVO {
 		this.feed_content = feed_content;
 	}
 
-	public Date getFeed_reg_date() {
+	public String getFeed_reg_date() {
 		return feed_reg_date;
 	}
 
-	public void setFeed_reg_date(Date feed_reg_date) {
+	public void setFeed_reg_date(String feed_reg_date) {
 		this.feed_reg_date = feed_reg_date;
 	}
 

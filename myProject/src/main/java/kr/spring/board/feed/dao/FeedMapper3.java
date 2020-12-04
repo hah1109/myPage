@@ -10,7 +10,7 @@ import kr.spring.board.feed.vo.FeedVO;
 //홍아현
 public interface FeedMapper3 {
 	
-	/*****관리자용 모든 피드 보기 제외한 SQL문 전부 .xml에 기재*****/
+	/*****관리자용 모든 피드의 수 제외한 SQL문 전부 .xml에 기재*****/
 	
 	//(일반회원)전체 피드 리스트 받아오기(팔로워의 팔로워 공개 이상 글 + 내가 쓴 글 중 팔로워 공개 이상 글)
 	public List<FeedVO> selectFeedList(Map<String,Object> map);
@@ -30,7 +30,6 @@ public interface FeedMapper3 {
 	public int selectMyMemberFeedCount(Map<String,Object> map);
 	
 	//(관리자) 모든 피드 보기
-	@Select("SELECT * FROM feed")
 	public List<FeedVO> selectAllFeedList(Map<String,Object> map);
 	//(관리자) 모든 피드의 수 카운트
 	@Select("SELECT COUNT(*) FROM feed")
