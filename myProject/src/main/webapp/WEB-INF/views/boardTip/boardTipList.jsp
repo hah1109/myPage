@@ -64,12 +64,21 @@
 			</tr>
 			<c:forEach var="boardFree" items="${list}">
 				<tr>
-					<td width="350" style="border-right:none;"><a href="detail.do?free_num=${boardFree.free_num}">${boardFree.free_title}</a></td>
-					<td>
-					<c:if test="${!empty boardFree.free_filename}">
-					<img src="imageView.do?free_num=${boardFree.free_num}" style="max-width:70px; max-height:70px; margin:0;">
-					</c:if>
+					<td width="350" style="border-right:none;">
+						<a href="detail.do?free_num=${boardFree.free_num}">
+							${boardFree.free_title}
+							<c:if test="${boardFree.commentNum > 0}">
+								<b>[${boardFree.commentNum}]</b>
+							</c:if>
+						</a>
 					</td>
+					
+					<td>
+						<c:if test="${!empty boardFree.free_filename}">
+							<img src="imageView.do?free_num=${boardFree.free_num}" style="max-width:70px; max-height:70px; margin:0;">
+						</c:if>
+					</td>
+					
 					<td>
 						${boardFree.mem_id}
 						<c:if test="${boardFree.mem_auth==2}">

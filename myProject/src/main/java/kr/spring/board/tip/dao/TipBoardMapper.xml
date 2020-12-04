@@ -34,8 +34,39 @@
 		</where>		
 	</select>
 	
-	<select id="selectList" parameterType="map" resultType="freeBoardVO">	
+	<select id="selectList" parameterType="map" resultType="freeBoardVO">
 		SELECT
+				c.*, d.*
+			FROM (SELECT
+					a.*,
+					rownum rnum
+				  FROM (SELECT
+				  			*
+				  		FROM board_free b JOIN member m
+				  		ON b.mem_num = m.mem_num
+				  		<where>
+				  			free_type = 1
+				  			<if test="keyoword !='' and keyfield == 'title'">
+				  				AND b.free_title LIKE '%' || #{keyword} || '%'
+				  			</if>
+				  			<if test="keyword != '' and keyfield == 'id'">
+								AND m.id LIKE '%' || #{keyword} || '%'
+							</if>
+							<if test="keyword != '' and keyfield == 'content'">
+								AND b.free_content LIKE '%' || #{keyword} || '%'
+							</if>
+							<if test="keyword != '' and keyfield == 'all'">
+								AND b.free_title LIKE '%' || #{keyword} || '%' or
+								m.id LIKE '%' || #{keyword} || '%' or
+								b.free_content LIKE '%' || #{keyword} || '%'
+							</if>
+				  		</where>
+				  		ORDER BY b.free_num DESC)a)c LEFT JOIN (SELECT free_num, COUNT(*) commentNum FROM board_free_comment GROUP BY free_num) d
+				  		ON c.free_num=d.free_num
+		<![CDATA[
+			WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>	
+<!-- 		SELECT
 			*
 		FROM (SELECT
 				a.*,
@@ -64,7 +95,7 @@
 			  		ORDER BY b.free_num DESC)a)
 		<![CDATA[
 			WHERE rnum >= #{start} AND rnum <= #{end}
-		]]>	
+		]]>	 -->
 	</select>
 	
 	<update id="updateBoardFree" parameterType="freeBoardVO">
