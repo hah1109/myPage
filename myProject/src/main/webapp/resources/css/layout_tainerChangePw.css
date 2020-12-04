@@ -20,7 +20,7 @@ body {
     flex-direction: column;
     height: 630px;
     width: 320px;
-  }
+  } 
 }
 
 @media (max-width: 767px) {

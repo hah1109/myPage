@@ -61,7 +61,7 @@
            	<form:errors path="mem_pw"/><br>
          	
          	<!-- 일반회원/트레이너 선택란 -->    
-         	<img class="texts_img" src="../resources/images/text_Member.png">
+         	<img class="texts_img" src="../resources/images/text_Member.png"> 
          	<input type="radio" class="radio_btn"name="mem_auth" value="1" checked="checked">
          	<img class="texts_img" src="../resources/images/text_Trainer.png">
          	<input type="radio" class="radio_btn" name="mem_auth" value="2">

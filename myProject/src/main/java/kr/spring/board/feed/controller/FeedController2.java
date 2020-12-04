@@ -95,7 +95,7 @@ public class FeedController2 {
 		if(log.isDebugEnabled()) log.debug("<<피드 글쓰기 폼 진입 시도>>" );
 		return "feedWrite";
 		
-	}
+	} 
 
 	//게시물 등록 처리
 	@RequestMapping(value="/boardFeed/feedWrite.do",method=RequestMethod.POST)

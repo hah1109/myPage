@@ -60,7 +60,7 @@ $(document).ready(function(){
           <div class="row cf">
             <div class="four col">
               <input type="radio" name="r1" id="r1" checked>
-              <label for="r1">
+              <label for="r1"> 
                 <h4>Designer</h4>
               </label>
             </div>
