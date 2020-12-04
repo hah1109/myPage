@@ -56,9 +56,14 @@
 		<div class="align-center">등록된 게시물이 없습니다.</div>
 	</c:if>
 	
-	<img src="${pageContext.request.contextPath}/resources/images/header/grade_m.png" width="14px"> 모두공개<br>
-	<img src="${pageContext.request.contextPath}/resources/images/header/grade_t.png" width="14px"> 트레이너만 공개	
+	<a>
+	<img src="${pageContext.request.contextPath}/resources/images/header/grade_m.png" width="14px"> 모두공개
+	</a>
 	
+	<br>
+	<a>
+	<img src="${pageContext.request.contextPath}/resources/images/header/grade_t.png" width="14px"> 트레이너만 공개	
+	</a>
 	
 	<c:if test="${count > 0}">
 		<table class="TranqnaBoardTable">

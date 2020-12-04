@@ -26,7 +26,7 @@
 	</select>
 	
 	<select id="selectList" parameterType="map" resultType="sysQnABoardVO">	
-	 SELECT * FROM
+	 SELECT e.*, f.* FROM
 		 (SELECT 
 		    d.*, rownum rnum
 		 FROM 
@@ -35,7 +35,7 @@
 		    FROM
 		     (SELECT a.*, rownum asc_rnum
 		     FROM  (SELECT
-		                *
+		                b.sq_num,b.sq_title,b.sq_modify_date,b.sq_filename,m.mem_num,m.mem_id
 		          FROM 
 		            board_sysqna b JOIN member m
 		          ON 
@@ -57,10 +57,13 @@
 						</if>
 			  		</where>
 			  		ORDER BY b.sq_num) a) c
-		ORDER BY c.asc_rnum DESC) d)
+				ORDER BY c.asc_rnum DESC) d) e
+			LEFT JOIN (SELECT sq_num, count(*) commentNum FROM board_sysqna_comment GROUP BY sq_num) f
+        ON e.sq_num = f.sq_num
 		<![CDATA[
 			WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>	
+		ORDER BY e.sq_num DESC
 	</select>
 	
 	<update id="updateBoardSysqna" parameterType="sysQnABoardVO">

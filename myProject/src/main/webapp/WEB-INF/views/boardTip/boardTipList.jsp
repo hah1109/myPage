@@ -82,7 +82,7 @@
 					<td>
 						${boardFree.mem_id}
 						<c:if test="${boardFree.mem_auth==2}">
-						<img src="${pageContext.request.contextPath}/resources/images/header/grade_t.png" width="14px">
+							<img src="${pageContext.request.contextPath}/resources/images/header/grade_t.png" width="14px">
 						</c:if>					
 					</td>
 					<td>${boardFree.free_modify_date}</td>
