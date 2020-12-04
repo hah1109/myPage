@@ -71,6 +71,10 @@ public class MemberVO {
 
 	//회원의 가입일
 	private Date mem_date;
+	
+	//프로필사진 파일 명
+	private String mem_picName;
+
 
 	//비밀번호 변경시 현재 비밀번호를 저장하는 용도로 사용
 	@Size(min=4,max=10)
@@ -251,6 +255,14 @@ public class MemberVO {
 	public void setNow_passwd(String now_passwd) {
 		this.now_passwd = now_passwd;
 	}
+	
+	public String getMem_picName() {
+		return mem_picName;
+	}
+
+	public void setMem_picName(String mem_picName) {
+		this.mem_picName = mem_picName;
+	}
 
 	/******************************Getter&Setter*************************************/
 
@@ -263,7 +275,8 @@ public class MemberVO {
 				+ ", g_addr=" + g_addr + ", career=" + career + ", exp=" + exp + ", mem_gender=" + mem_gender
 				+ ", mem_name=" + mem_name + ", mem_pw=" + mem_pw + ", mem_cell=" + mem_cell + ", mem_email="
 				+ mem_email + ", mem_zipcode=" + mem_zipcode + ", mem_addr1=" + mem_addr1 + ", mem_addr2=" + mem_addr2
-				+ ", mem_intro=" + mem_intro + ", mem_date=" + mem_date + ", now_passwd=" + now_passwd + "]";
+				+ ", mem_intro=" + mem_intro + ", mem_date=" + mem_date + ", mem_picName=" + mem_picName
+				+ ", now_passwd=" + now_passwd + "]";
 	}
 
 	/******************************toString*************************************/
