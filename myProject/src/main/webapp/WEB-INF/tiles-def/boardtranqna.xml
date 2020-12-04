@@ -6,19 +6,19 @@
 
 <tiles-definitions>
     <definition name="boardTranqnaList" extends="main">
-    	<put-attribute name="title" value="게시판 목록"/>
+    	<put-attribute name="title" value="트레이너 게시판 목록"/>
     	<put-attribute name="body" value="/WEB-INF/views/boardTranqna/boardTranqnaList.jsp"/>  
     </definition>
     <definition name="boardTranqnaWrite" extends="main">
-    	<put-attribute name="title" value="게시판 목록"/>
+    	<put-attribute name="title" value="트레이너 게시판 글쓰기"/>
     	<put-attribute name="body" value="/WEB-INF/views/boardTranqna/boardTranqnaWrite.jsp"/>  
     </definition>
     <definition name="boardTranqnaView" extends="main">
-    	<put-attribute name="title" value="게시판 목록"/>
+    	<put-attribute name="title" value="트레이너 게시판 보기"/>
     	<put-attribute name="body" value="/WEB-INF/views/boardTranqna/boardTranqnaView.jsp"/>  
     </definition>
     <definition name="boardTranqnaModify" extends="main">
-    	<put-attribute name="title" value="게시판 목록"/>
+    	<put-attribute name="title" value="트레이너 게시판 수정"/>
     	<put-attribute name="body" value="/WEB-INF/views/boardTranqna/boardTranqnaModify.jsp"/>  
     </definition>
 </tiles-definitions>

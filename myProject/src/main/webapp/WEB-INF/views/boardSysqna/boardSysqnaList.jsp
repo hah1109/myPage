@@ -40,8 +40,8 @@
 				</select>
 			</li>
 			<li><input type="text" name="keyword" id="keyword"></li>
-			<li><input type="submit" value="찾기"> <input
-				type="button" value="목록" onclick="location.href='list.do'">
+			<li><input type="submit" value="찾기" style="width:60px;">
+				<input type="button" value="목록" onclick="location.href='list.do'" style="width:60px;">
 			</li>
 		</ul>
 	</form>
