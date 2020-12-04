@@ -112,9 +112,12 @@ public class TranQnABoardController {
 							HttpSession session,
 							Model model) {
 		
-		if(log.isDebugEnabled()) log.debug("<<게시판 글 저장>> :" + tranqnaBoardVO);
+		if(log.isDebugEnabled()) log.debug("<<트레이너 게시판 글 저장>> :" + tranqnaBoardVO);
 		
-		if(result.hasErrors()) return form();
+		if(result.hasErrors())	{
+			System.out.println(result.toString());
+			return form();
+		}
 		
 		MemberVO member = (MemberVO)session.getAttribute("user");
 		tranqnaBoardVO.setMem_num(member.getMem_num());
@@ -193,4 +196,5 @@ public class TranQnABoardController {
 		
 		return "common/result";
 	}
+	
 }

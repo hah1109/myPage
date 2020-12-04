@@ -22,6 +22,7 @@ public class TranQnABoardVO {
 	private byte[] tq_file;
 	private String tq_filename;
 	private String tq_ip;
+	
 	//0은 전체공개, 1은 트레이너에게만공개
 	private int tq_type;
 	

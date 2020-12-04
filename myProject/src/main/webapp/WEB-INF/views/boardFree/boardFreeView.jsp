@@ -191,27 +191,5 @@ function commentDelete(freec_num){
     </div>
     
     
-	 
 
-	
-<%-- 	<c:if test="${!empty boardFree.commentList }">
-		<c:forEach var="freeBoardComment" items="${freeCommentList}">			
-			<input type="hidden" id="mem_num" value="${freeBoardComment.freec_num}">
-			<p>
-			<b>${freeBoardComment.mem_id}</b>
-			<c:if test="${freeBoardComment.mem_auth==1}">
-			일반회원
-			</c:if>
-			<c:if test="${freeBoardComment.mem_auth==2}">
-			트레이너
-			</c:if>
-			${freeBoardComment.freec_modify_date}
-			<c:if test="${user.mem_num == freeBoardComment.mem_num}">
-				<input type="button" value="수정" id="modify_comment">
-				<input type="button" value="삭제" id="delete_comment">
-			</c:if>
-			</p>			
-			${freeBoardComment.free_comment}					
-		</c:forEach>
-	</c:if> --%>
 </div>

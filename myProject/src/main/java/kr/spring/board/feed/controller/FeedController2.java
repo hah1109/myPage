@@ -40,11 +40,6 @@ public class FeedController2 {
 		return new FeedVO();
 	}
 	
-	@ModelAttribute
-	public MemberVO initCmd() {
-		return new MemberVO();
-	}
-	
 	/*게시물 목록(현재 로그인된 아이디와 클릭된 아이디의 관계 파악하여 list 목록을 호출)
 	 * 	session_num과 profile_num이 같은 경우
 	  	=> 나만보기, 팔로우공개, 트레이너공개, 전체공개가 보여진다
@@ -94,8 +89,7 @@ public class FeedController2 {
 	public String feedWriteForm(){
 		if(log.isDebugEnabled()) log.debug("<<피드 글쓰기 폼 진입 시도>>" );
 		return "feedWrite";
-		
-	} 
+	}
 
 	//게시물 등록 처리
 	@RequestMapping(value="/boardFeed/feedWrite.do",method=RequestMethod.POST)
@@ -105,9 +99,9 @@ public class FeedController2 {
 			HttpSession session,
 			Model model) {
 
-		if(log.isDebugEnabled()) log.debug("<<마이 퍼스널 게시판 글 저장>> :" + feedVO);
+		if(log.isDebugEnabled()) log.debug("<<feedVO에 담긴것>> :" + feedVO);
 
-		if(result.hasErrors()) return "feedWrite";
+		
 		//회원번호, ID 셋팅
 		MemberVO member = (MemberVO)session.getAttribute("user");
 		feedVO.setMem_num(member.getMem_num());
@@ -115,15 +109,16 @@ public class FeedController2 {
 		
 		//ip 셋팅
 		feedVO.setFeed_ip(request.getRemoteAddr());
-		
+		if(log.isDebugEnabled()) log.debug("<<feedVO에 세션값 저장 후 마이 퍼스널 게시판 글 저장 시도>> :" + feedVO);
 		//글쓰기
 		feedService.insertFeedBoard(feedVO);
-
+		
+		if(result.hasErrors()) return "feedWrite";
 		model.addAttribute("message", "운동일지가 등록되었습니다.");
 		model.addAttribute("url",request.getContextPath() + "/boardFree/list.do");
 
 		return "common/result";
-	}	
+	}
 
 	//게시물 수정 폼
 

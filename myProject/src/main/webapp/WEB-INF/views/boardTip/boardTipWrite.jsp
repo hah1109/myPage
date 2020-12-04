@@ -48,28 +48,30 @@
 	<h2>팁 게시판</h2>
   	<form:form commandName="freeBoardVO" action="write.do" enctype="multipart/form-data" id="board_submit"> 
  		<form:errors element="div" cssClass="error-color"/>
-		<ul>
+		<ul style="margin-top:20px">
 			<li>
 				<label for="free_title">제목</label>
-				<form:input path="free_title"/>
+				<form:input path="free_title" class="title"/>
 				<form:errors path="free_title" cssClass="error-color"/>
 			</li>
 			<li>
 				<label for="free_content">내용</label>
-				<form:textarea path="free_content" cols="40" rows="10"/>
+				<form:textarea path="free_content" cols="45" rows="15"/>
 				<form:errors path="free_content" cssClass="error-color"/>
 			</li>
  			<li>
-				<label for="upload">이미지 파일업로드</label>
-				<input type="file" name="upload" id="upload"
-				                     accept="image/gif,image/png,image/jpeg">
-				<img id="free_file" class="free_file" alt="free image" style="max-width:400px; max-height:400px; display:none;">
+				<label for="upload" class="upload">이미지 파일업로드</label>
+				<input type="file" name="upload" id="upload" accept="image/gif,image/png,image/jpeg" style="visibility:hidden;">
 			</li>
 			<li>
-				<input type="button" value="파일업로드 취소" id="cancel_upload" style="display:none;">
+				<img id="free_file" class="free_file" alt="free image"
+				 style="max-width:350px; max-height:350px; display:none; position:relative; left:130px;">
+			</li>
+			<li>
+				<input type="button" value="파일업로드 취소" id="cancel_upload" style="display:none; width:130px; margin-left:130px;">
 			</li>
 		</ul>
-		<div class="align-center">
+		<div class="align-center" style="margin-top:30px;">
 			<input type="submit" value="글등록">
 			<input type="button" value="목록"
 			       onclick="location.href='list.do'">

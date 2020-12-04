@@ -37,8 +37,8 @@
 				</select>
 			</li>
 			<li><input type="text" name="keyword" id="keyword"></li>
-			<li><input type="submit" value="찾기"> <input
-				type="button" value="목록" onclick="location.href='list.do'">
+			<li><input type="submit" value="찾기" style="width:60px;">
+				<input type="button" value="목록" onclick="location.href='list.do'" style="width:60px;">
 			</li>
 		</ul>
 	</form>
@@ -57,7 +57,6 @@
 	<c:if test="${count > 0}">
 		<table class="tipBoardTable">
 			<tr>
-				<th>번호</th>
 				<th width="400" colspan="2">제목</th>
 				<th>작성자</th>
 				<th>최근수정일</th>
@@ -65,15 +64,27 @@
 			</tr>
 			<c:forEach var="boardFree" items="${list}">
 				<tr>
-					<td>${boardFree.free_num}</td>
-					<c:if test="${!empty boardFree.free_filename}">
-					<td width="350" style="border-right:none;"><a href="detail.do?free_num=${boardFree.free_num}">${boardFree.free_title}</a></td>
-					<td width="50" style="border-left:none;"><img src="imageView.do?free_num=${boardFree.free_num}" style="max-width:50px; max-height:50px;"></td>
-					</c:if>
-					<c:if test="${empty boardFree.free_filename}">
-					<td colspan="2"><a href="detail.do?free_num=${boardFree.free_num}">${boardFree.free_title}</a></td>
-					</c:if>
-					<td>${boardFree.mem_id}</td>
+					<td width="350" style="border-right:none;">
+						<a href="detail.do?free_num=${boardFree.free_num}">
+							${boardFree.free_title}
+							<c:if test="${boardFree.commentNum > 0}">
+								<b>[${boardFree.commentNum}]</b>
+							</c:if>
+						</a>
+					</td>
+					
+					<td>
+						<c:if test="${!empty boardFree.free_filename}">
+							<img src="imageView.do?free_num=${boardFree.free_num}" style="max-width:70px; max-height:70px; margin:0;">
+						</c:if>
+					</td>
+					
+					<td>
+						${boardFree.mem_id}
+						<c:if test="${boardFree.mem_auth==2}">
+						<img src="${pageContext.request.contextPath}/resources/images/header/grade_t.png" width="14px">
+						</c:if>					
+					</td>
 					<td>${boardFree.free_modify_date}</td>
 					<td>${boardFree.free_hit}</td>
 				</tr>
@@ -84,15 +95,13 @@
 			<div class="align-center">${pagingHtml}</div>
 			<div class="boardPaging-selectbox">
 				<ul class="selectbox-options">
-				    <li class="init">10개씩 보기</li>
-				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=10">10개씩 보기</a></li>
-				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=20">20개씩 보기</a></li>
-				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=30">30개씩 보기</a></li>
+				    <li class="init">5개씩 보기</li>
+				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=10">5개씩 보기</a></li>
+				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=20">10개씩 보기</a></li>
+				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=30">20개씩 보기</a></li>
 				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=50">50개씩 보기</a></li>
 				</ul>
 			</div>
 		</div>
 	</c:if>
 </div>
-
-<!-- https://jsfiddle.net/amitabhaghosh197/f69o462r/ -->

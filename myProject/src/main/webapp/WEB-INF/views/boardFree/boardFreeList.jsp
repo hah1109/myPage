@@ -37,8 +37,8 @@
 				</select>
 			</li>
 			<li><input type="text" name="keyword" id="keyword"></li>
-			<li><input type="submit" value="찾기"> <input
-				type="button" value="목록" onclick="location.href='list.do'">
+			<li><input type="submit" value="찾기" style="width:60px;"> 
+			<input type="button" value="목록" onclick="location.href='list.do'" style="width:60px;">
 			</li>
 		</ul>
 	</form>
@@ -67,7 +67,9 @@
 			<c:forEach var="boardFree" items="${list}">
 				<tr>
 					<td><img src="${pageContext.request.contextPath}/resources/images/board/dot.png" style="width:5px; position:relative; left:6px;"></td>
+					
 					<td style="text-align:left;">
+					
 						<c:if test="${boardFree.commentNum>0}">
 							<c:if test="${empty boardFree.free_filename}">	
 								<a href="detail.do?free_num=${boardFree.free_num}">${boardFree.free_title} <b>[${boardFree.commentNum}]</b></a>
@@ -80,6 +82,7 @@
 								</a>
 							</c:if>
 						</c:if>
+						
 						<c:if test="${boardFree.commentNum==0}">
 							<c:if test="${empty boardFree.free_filename}">	
 								<a href="detail.do?free_num=${boardFree.free_num}">${boardFree.free_title}</a>
@@ -91,7 +94,9 @@
 								</a>
 							</c:if>
 						</c:if>
+						
 					</td>
+					
 					<td>${boardFree.mem_id}</td>
 					<td>${boardFree.free_modify_date}</td>
 					<td>${boardFree.free_hit}</td>

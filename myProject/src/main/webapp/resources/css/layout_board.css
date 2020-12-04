@@ -2,7 +2,6 @@
 
 /*=========레이아웃=========*/
 div#main{
-	width:1024px;
 	margin:0 auto;
 	font-size:10pt;
 	font-family: "맑은 고딕";
@@ -26,7 +25,6 @@ div#main_body{
 div#main_footer{
 	clear:both;
 	width:100%;
-	background-color:yellow;
 } 
 
 /*==========메뉴==========*/
@@ -117,6 +115,7 @@ ul.search input[type="text"]{
     box-sizing: border-box;
     border: 2px solid #0ed9df;
 }
+
 div.page-main-style input[type="submit"],
 div.page-main-style input[type="button"]{
     display: inline;
@@ -125,6 +124,7 @@ div.page-main-style input[type="button"]{
     border-radius: 15px;
     box-sizing: border-box;
     border: none;
+    cursor: pointer;
 }
 
 table{
@@ -195,7 +195,7 @@ label.upload{
 
 input[type="button"].delete_img{
 	width:130px;
-	
+	cursor: pointer;
 }
 
 .tipBoardTable td{
@@ -278,8 +278,12 @@ form#commentbox{
 	border:none;
 }
 input#comment{
-	width:500px;
-	height:30px;
+    display: inline;
+    width: 400px;
+    height: 37px;
+    border-radius: 15px;
+    box-sizing: border-box;
+    border: 2px solid #0ed9df;
 }
 div.commentList a:hover{
 	cursor: pointer;

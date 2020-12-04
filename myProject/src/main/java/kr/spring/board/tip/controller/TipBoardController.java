@@ -47,7 +47,7 @@ public class TipBoardController {
 			String keyfield,
 			@RequestParam(value="keyword",defaultValue="")
 			String keyword,
-			@RequestParam(value="rowCount",defaultValue="10")
+			@RequestParam(value="rowCount",defaultValue="5")
 			int rowCount) {
 
 		Map<String,Object> map = 

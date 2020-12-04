@@ -53,35 +53,40 @@
 	                      		    enctype="multipart/form-data">
 	    <form:hidden path="sq_num"/>
  		<form:errors element="div" cssClass="error-color"/>
-		<ul>
+		<ul style="margin-top:20px">
 			<li>
 				<label for="sq_title">제목</label>
-				<form:input path="sq_title"/>
+				<form:input path="sq_title" class="title"/>
 				<form:errors path="sq_title" cssClass="error-color"/>
 			</li>
 			<li>
 				<label for="sq_content">내용</label>
-				<form:textarea path="sq_content" cols="40" rows="10"/>
+				<form:textarea path="sq_content" cols="45" rows="12"/>
 				<form:errors path="sq_content" cssClass="error-color"/>
 			</li>
 			
-			<c:if test="${empty boardSysqna.sq_filename}">
-	 			<li>
-					<img name="sq_file" id="sq_file" style="max-width:300px; max-height:300px; display:none;">
-				</li>
-			</c:if>
+			<li>
+				<c:if test="${empty boardSysqna.sq_filename}">		 			
+						<img name="sq_file" id="sq_file" style="max-width:350px; max-height:350px; display:none; position:relative; left:130px;">
+				</c:if>
 					
-			<c:if test="${!empty boardSysqna.sq_filename}">
-				<input type=hidden value="1" name="isImgUpdate" class="isImgUpdate">
-				<div class="align-center">
-					<img src="imageView.do?sq_num=${boardSysqna.sq_num}" name="sq_mfile" id="sq_mfile" style="max-width:300px; max-height:300px;">
-				</div>
-				<input type="button" value="이미지 되돌리기" class="reset_photo" style="display:none">
-			</c:if>	
+				<c:if test="${!empty boardSysqna.sq_filename}">
+					<input type=hidden value="1" name="isImgUpdate" class="isImgUpdate">
+					<div class="align-center">
+						<img src="imageView.do?sq_num=${boardSysqna.sq_num}" name="sq_mfile" id="sq_mfile" style="max-width:300px; max-height:300px;">
+					</div>					
+				</c:if>	
+			</li>
+			
+			<li>
+				<label for="upload" class="upload">이미지 파일업로드</label>
+			</li>
+			
 			<li>
 			<div class="align-center">
-				<input type="file" value="이미지 업로드 및 수정" name="upload" id="upload" accept="image/gif,image/png,image/jpeg">				
-				<input type="button" value="이미지 삭제" class="cancel_photo">
+				<input type="file" value="이미지 업로드 및 수정" name="upload" id="upload" accept="image/gif,image/png,image/jpeg" style="visibility:hidden;">					
+				<input type="button" value="이미지 삭제" class="cancel_photo delete_img" style="width:100px;">
+				<input type="button" value="이미지 되돌리기" class="reset_photo" style="display:none; width:120px;">
 			</div>
 			</li>	
 		</ul>

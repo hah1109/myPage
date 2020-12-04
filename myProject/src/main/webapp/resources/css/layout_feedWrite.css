@@ -108,7 +108,9 @@ fieldset{
 }
 
 /* FORM */
-
+.form-wrapper{
+	border:none;
+}
 .form-wrapper .section{
   padding: 0px 20px 30px 20px;
   -webkit-box-sizing: border-box;
@@ -171,21 +173,6 @@ fieldset{
 }
 
 .form-wrapper input[type="text"],
-.form-wrapper input[type="password"]{
-  display: block;
-  padding: 10px;
-  margin: 10px auto;
-  background-color: #f1f1f1;
-  border: none;
-  width: 50%;
-  outline: none;
-  font-size: 14px !important;
-  font-family: 'Open Sans', sans-serif !important;
-}
-
-.form-wrapper input[type="radio"]{
-  display: none;
-}
 
 .form-wrapper input[type="radio"] + label{
   display: block;

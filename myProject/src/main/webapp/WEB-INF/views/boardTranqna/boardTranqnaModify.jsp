@@ -63,39 +63,45 @@
 	    <form:hidden path="tq_num"/>
  		<form:errors element="div" cssClass="error-color"/>
 		<ul>
-			<!-- <li><p><input type="checkbox" name="tq_type" value="1">트레이너에게만 공개</p></li> -->
 			<li>
-				<form:checkbox path="tq_type" value="1" label="트레이너에게만 공개"/>
+				<form:radiobutton path="tq_type" value="0" name="tq_type_0" style="margin: 5px 0 15px 130px;"/>
+				<label for="tq_type_0" style="margin-top:5px; float:none;">모두에게 공개</label>
+				<form:radiobutton path="tq_type" value="1" name="tq_type_1" style="margin: 5px 0 15px 15px;"/>
+				<label for="tq_type_1" style="margin-top:5px; float:none;">트레이너에게만 공개</label>
 			</li>
 			<li>
 				<label for="tq_title">제목</label>
-				<form:input path="tq_title"/>
+				<form:input path="tq_title" class="title"/>
 				<form:errors path="tq_title" cssClass="error-color"/>
 			</li>
 			<li>
 				<label for="tq_content">내용</label>
-				<form:textarea path="tq_content" id="tq_content" cols="40" rows="10"/>
+				<form:textarea path="tq_content" id="tq_content" cols="45" rows="12"/>
 				<form:errors path="tq_content" cssClass="error-color"/>
 			</li>
 			
-			<c:if test="${empty boardTranqna.tq_filename}">
-	 			<li>
-					<img name="tq_file" id="tq_file" style="max-width:300px; max-height:300px; display:none;">
-				</li>
-			</c:if>
-					
-			<c:if test="${!empty boardTranqna.tq_filename}">
-				<input type=hidden value="1" name="isImgUpdate" class="isImgUpdate">
-				<div class="align-center">
-					<img src="imageView.do?tq_num=${boardTranqna.tq_num}" name="tq_mfile" id="tq_mfile" style="max-width:300px; max-height:300px;">
-				</div>
-				<input type="button" value="이미지 되돌리기" class="reset_photo" style="display:none">
-			</c:if>	
 			<li>
-			<div class="align-center">
-				<input type="file" value="이미지 업로드 및 수정" name="upload" id="upload" accept="image/gif,image/png,image/jpeg">				
-				<input type="button" value="이미지 삭제" class="cancel_photo">
-			</div>
+				<c:if test="${empty boardTranqna.tq_filename}">		 			
+						<img name="tq_file" id="tq_file" style="max-width:300px; max-height:300px; display:none; position:relative; left:130px;">					
+				</c:if>
+						
+				<c:if test="${!empty boardTranqna.tq_filename}">
+					<input type=hidden value="1" name="isImgUpdate" class="isImgUpdate">
+					<div class="align-center">
+						<img src="imageView.do?tq_num=${boardTranqna.tq_num}" name="tq_mfile" id="tq_mfile" style="max-width:300px; max-height:300px;">
+					</div>					
+				</c:if>	
+			</li>
+			<li>
+				<label for="upload" class="upload">이미지 파일업로드</label>
+			</li>
+			
+			<li>
+				<div class="align-center">
+					<input type="file" value="이미지 업로드 및 수정" name="upload" id="upload" accept="image/gif,image/png,image/jpeg" style="visibility:hidden;">				
+					<input type="button" value="이미지 삭제" class="cancel_photo delete_img" style="width:100px;">
+					<input type="button" value="이미지 되돌리기" class="reset_photo" style="display:none; width:120px;">
+				</div>
 			</li>	
 		</ul>
 		
