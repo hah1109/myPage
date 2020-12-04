@@ -38,8 +38,8 @@ div#main_menu ul li{
 
 /*==========페이지 기본 스타일======*/
 .page-main-style{
-	width:98%;
-	margin:0 auto;
+	width: 900px;
+    margin: 30px 200px 30px 350px;
 }
 .one-page{
 	width:600px;

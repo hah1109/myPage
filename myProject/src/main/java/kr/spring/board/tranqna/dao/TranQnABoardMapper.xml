@@ -7,18 +7,28 @@
 			COUNT(*)
 		FROM board_tranqna b JOIN member m
 		ON b.mem_num = m.mem_num
+		WHERE			  		
+	  		<if test="tq_type==2">
+	  			b.tq_type = 1 OR b.tq_type = 0
+	  		</if>
+	  		<if test="tq_type==0">
+	  			b.tq_type = 0
+	  		</if>
+	  		<if test="tq_type==1">
+	  			b.tq_type = 1
+	  		</if>
 		<where>
 			<if test="keyword != '' and keyfield == 'title'">
-				AND b.tq_title LIKE '%' || #{keyword} || '%'
+				b.tq_title LIKE '%' || #{keyword} || '%'
 			</if>
 			<if test="keyword != '' and keyfield == 'id'">
-				AND m.id LIKE '%' || #{keyword} || '%'
+				m.id LIKE '%' || #{keyword} || '%'
 			</if>
 			<if test="keyword != '' and keyfield == 'content'">
-				AND b.tq_content LIKE '%' || #{keyword} || '%'
+				b.tq_content LIKE '%' || #{keyword} || '%'
 			</if>
 			<if test="keyword != '' and keyfield == 'all'">
-				AND b.tq_title LIKE '%' || #{keyword} || '%' or
+				b.tq_title LIKE '%' || #{keyword} || '%' or
 				m.id LIKE '%' || #{keyword} || '%' or
 				b.tq_content LIKE '%' || #{keyword} || '%'
 			</if>
@@ -27,7 +37,7 @@
 	
 	<select id="selectList" parameterType="map" resultType="tranQnABoardVO">	
 		SELECT
-			*
+			e.*, f.* 
 		FROM (SELECT
 				a.*,
 				rownum rnum
@@ -35,26 +45,39 @@
 			  			*
 			  		FROM board_tranqna b JOIN member m
 			  		ON b.mem_num = m.mem_num
+			  		WHERE			  		
+			  		<if test="tq_type==2">
+			  			b.tq_type = 1 OR b.tq_type = 0
+			  		</if>
+			  		<if test="tq_type==0">
+			  			b.tq_type = 0
+			  		</if>
+			  		<if test="tq_type==1">
+			  			b.tq_type = 1
+			  		</if>
 			  		<where>
 			  			<if test="keyoword !='' and keyfield == 'title'">
-			  				b.tq_title LIKE '%' || #{keyword} || '%'
+			  				AND b.tq_title LIKE '%' || #{keyword} || '%'
 			  			</if>
 			  			<if test="keyword != '' and keyfield == 'id'">
-							m.id LIKE '%' || #{keyword} || '%'
+							AND m.id LIKE '%' || #{keyword} || '%'
 						</if>
 						<if test="keyword != '' and keyfield == 'content'">
-							b.tq_content LIKE '%' || #{keyword} || '%'
+							AND b.tq_content LIKE '%' || #{keyword} || '%'
 						</if>
 						<if test="keyword != '' and keyfield == 'all'">
-							b.tq_title LIKE '%' || #{keyword} || '%' or
+							AND b.tq_title LIKE '%' || #{keyword} || '%' or
 							m.id LIKE '%' || #{keyword} || '%' or
 							b.tq_content LIKE '%' || #{keyword} || '%'
-						</if>
-			  		</where>
-			  		ORDER BY b.tq_num DESC)a)
+						</if>						
+			  		</where>			  		
+			  		ORDER BY b.tq_num DESC)a) e
+			  LEFT JOIN (SELECT tq_num, count(*) commentNum FROM board_tranqna_comment GROUP BY tq_num) f
+        ON e.tq_num = f.tq_num
 		<![CDATA[
 			WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>	
+
 	</select>
 	
 	<select id="selectBoardTranqna" parameterType="integer" resultType="tranQnABoardVO">

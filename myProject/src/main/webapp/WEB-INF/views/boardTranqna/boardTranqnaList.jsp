@@ -56,13 +56,18 @@
 		<div class="align-center">등록된 게시물이 없습니다.</div>
 	</c:if>
 	
-	<a>
-	<img src="${pageContext.request.contextPath}/resources/images/header/grade_m.png" width="14px"> 모두공개
+	<a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=10&tq_type=2">
+	<img src="${pageContext.request.contextPath}/resources/images/header/grade_m.png" width="14px">
+	<img src="${pageContext.request.contextPath}/resources/images/header/grade_t.png" width="14px"> 전체글 보기
+	</a>
+	<br>
+	<a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=10&tq_type=0">
+	<img src="${pageContext.request.contextPath}/resources/images/header/grade_m.png" width="14px"> 전체공개 글만 보기
 	</a>
 	
 	<br>
-	<a>
-	<img src="${pageContext.request.contextPath}/resources/images/header/grade_t.png" width="14px"> 트레이너만 공개	
+	<a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=10&tq_type=1">
+	<img src="${pageContext.request.contextPath}/resources/images/header/grade_t.png" width="14px"> 트레이너만 공개 글만 보기	
 	</a>
 	
 	<c:if test="${count > 0}">
@@ -102,7 +107,11 @@
 							<a href="detail.do?tq_num=${boardTranqna.tq_num}">${boardTranqna.tq_title}
 							<span class="onlyTrainer">[내가쓴글] </span></a>
 						</c:if>
-
+						
+						<c:if test="${boardTranqna.commentNum > 0}">
+							<b style="color:grey">[${boardTranqna.commentNum}]</b>
+						</c:if>
+						
 					</td>
 					
 					<td>
