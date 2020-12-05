@@ -75,8 +75,11 @@
 <div>
 	<ul>
 		<li>
-			<!-- 경로 수정 필요 -->
-			<button type="button" onclick="location.href='prUpdate.do'">프로필,자기소개 수정하기</button>
+			<button type="button" onclick="location.href='prUpdate.do'">프로필사진 변경하기</button>
+		</li>
+		
+		<li>
+			<button type="button" onclick="location.href='introUpdate.do'">자기소개 수정하기</button>
 		</li>
 		
 		<li>

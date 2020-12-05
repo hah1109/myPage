@@ -82,7 +82,7 @@
 					<td>
 						${boardFree.mem_id}
 						<c:if test="${boardFree.mem_auth==2}">
-						<img src="${pageContext.request.contextPath}/resources/images/header/grade_t.png" width="14px">
+							<img src="${pageContext.request.contextPath}/resources/images/header/grade_t.png" width="14px">
 						</c:if>					
 					</td>
 					<td>${boardFree.free_modify_date}</td>
@@ -95,10 +95,10 @@
 			<div class="align-center">${pagingHtml}</div>
 			<div class="boardPaging-selectbox">
 				<ul class="selectbox-options">
-				    <li class="init">5개씩 보기</li>
-				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=10">5개씩 보기</a></li>
-				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=20">10개씩 보기</a></li>
-				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=30">20개씩 보기</a></li>
+				    <li class="init">${rowCount}개씩 보기</li>
+				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=5">5개씩 보기</a></li>
+				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=10">10개씩 보기</a></li>
+				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=20">20개씩 보기</a></li>
 				    <li><a href="list.do?keyfield=${keyfield}&keyword=${keyword}&pageNum=${pageNum}&rowCount=50">50개씩 보기</a></li>
 				</ul>
 			</div>

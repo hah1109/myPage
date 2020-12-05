@@ -6,16 +6,20 @@
 
 <tiles-definitions>
     <definition name="trainerList" extends="main">
-    	<put-attribute name="title" value="회원타입선택"/>
+    	<put-attribute name="title" value="트레이너 리스트 페이지"/>
     	<put-attribute name="body" value="/WEB-INF/views/trainerList/trainerList.jsp"/>  
     </definition>
     <definition name="trainerListDetail" extends="main">
-    	<put-attribute name="title" value="회원타입선택"/>
+    	<put-attribute name="title" value="트레이서 상세 정보 페이지"/>
     	<put-attribute name="body" value="/WEB-INF/views/trainerList/trainerListDetail.jsp"/>  
     </definition>
     <definition name="prUpdate" extends="main">
-    	<put-attribute name="title" value="회원타입선택"/>
+    	<put-attribute name="title" value="트레이너 프로필 사진 변경 페이지"/>
     	<put-attribute name="body" value="/WEB-INF/views/trainerList/prUpdate.jsp"/>  
+    </definition>
+    <definition name="introUpdate" extends="main">
+    	<put-attribute name="title" value="트레이너 자기소개 변경 페이지"/>
+    	<put-attribute name="body" value="/WEB-INF/views/trainerList/introUpdate.jsp"/>
     </definition>
 </tiles-definitions>
 

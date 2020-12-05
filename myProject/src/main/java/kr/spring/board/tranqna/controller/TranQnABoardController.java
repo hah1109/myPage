@@ -48,12 +48,15 @@ public class TranQnABoardController {
 					@RequestParam(value="keyword",defaultValue="")
 					String keyword,
 					@RequestParam(value="rowCount",defaultValue="10")
-					int rowCount) {
+					int rowCount,
+					@RequestParam(value="tq_type",defaultValue="2")
+					int tq_type) {
 
 		Map<String,Object> map = 
 				new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
+		map.put("tq_type", tq_type);
 		
 		//총 글의 갯수 또는 검색된 글의 갯수
 		int count = tranQnABoardMapper.selectRowCount(map);
@@ -80,6 +83,8 @@ public class TranQnABoardController {
 		mav.setViewName("boardTranqnaList");
 		mav.addObject("count",count);
 		mav.addObject("list", list);
+		mav.addObject("rowCount",rowCount);
+		mav.addObject("tq_type",tq_type);
 		mav.addObject("pagingHtml", page.getPagingHtml());
 		
 		return mav;

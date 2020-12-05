@@ -27,7 +27,11 @@ public class SysQnABoardVO {
 	//이미지도 같이 수정시 0, 이미지빼고 수정시 1
 	private int isImgUpdate;
 	
-	private int asc_rnum;	
+	//삭제한글을 제외하고 뷰에서 게시판 글 순서대로 나타나는 번호
+	private int asc_rnum;
+	
+	//댓글 수
+	private int commentNum;
 		
 	public int getAsc_rnum() {
 		return asc_rnum;
@@ -128,11 +132,20 @@ public class SysQnABoardVO {
 		this.mem_auth = mem_auth;
 	}
 
+	
+	public int getCommentNum() {
+		return commentNum;
+	}
+
+	public void setCommentNum(int commentNum) {
+		this.commentNum = commentNum;
+	}
+
 	@Override
 	public String toString() {
 		return "SysQnAVO [sq_num=" + sq_num + ", sq_title=" + sq_title + ", sq_content=" + sq_content + ", sq_hit="
 				+ sq_hit + ", sq_reg_date=" + sq_reg_date + ", sq_modify_date=" + sq_modify_date + ", sq_filename="
-				+ sq_filename + ", sq_ip=" + sq_ip + ", mem_num=" + mem_num + "]";
+				+ sq_filename + ", sq_ip=" + sq_ip + ", mem_num=" + mem_num + "commentNum=" + commentNum +"]";
 	}
 	
 }

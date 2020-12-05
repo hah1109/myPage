@@ -149,8 +149,12 @@ img {
 	<c:forEach var="trainer" items="${list}">
   <li class="cards__item">
     <div class="card">
-      <c:if test="${trainer.mem_pic == null}">기본이미지 보여주기</c:if>
-      <c:if test="${trainer.mem_pic != null}">${trainer.mem_pic}</c:if>
+      <c:if test="${empty trainer.mem_picName}">기본이미지 보여주기</c:if>
+      <c:if test="${!empty trainer.mem_picName}">
+      <img src="${pageContext.request.contextPath}/trainerList/trainerImage.do?mem_num=${trainer.mem_num}" 
+				width="200" height="150">
+      </c:if>
+      
       
       <div class="card__content">
         <div class="card__title">${trainer.mem_name}</div>

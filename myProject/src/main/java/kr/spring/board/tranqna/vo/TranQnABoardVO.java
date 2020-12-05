@@ -32,8 +32,19 @@ public class TranQnABoardVO {
 	
 	//이미지도 같이 수정시 0, 이미지빼고 수정시 1
 	private int isImgUpdate;
+	
+	//댓글 수
+	private int commentNum;
 
 	
+	public int getCommentNum() {
+		return commentNum;
+	}
+
+	public void setCommentNum(int commentNum) {
+		this.commentNum = commentNum;
+	}
+
 	public void setUpload(MultipartFile upload) throws IOException{
 		if(upload == null) return;
 		setTq_file(upload.getBytes());
