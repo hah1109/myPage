@@ -8,14 +8,14 @@
 $(document).ready(function(){
 	  $(".form-wrapper .button").click(function(){
 	  	if($('#feed_type').val()==100){
-			$('#feed_type').css('color','red').val('글 주제 선택 필수');
+			$('#feed_type').css('color','red').attr('label','글 주제를 선택해주세요');
 			$('#feed_type').focus();
-			if($('#feed_auth').val()==100){
-		    	$('#feed_auth').css('color','red').val('공개범위 선택 필수');
-	            $('#feed_auth').focus();
-	            return false;
-		    }
 			return false;
+	    }
+	  	if($('#feed_auth').val()==100){
+	    	$('#feed_auth').css('color','red').attr('label','글 공개범위를 선택해주세요');
+            $('#feed_auth').focus();
+            return false;
 	    }
 	    var button = $(this);
 	    var currentSection = button.parents(".section");
@@ -61,13 +61,12 @@ $(document).ready(function(){
           <div class="button">Next</div>
         </fieldset>
         <fieldset class="section">
-          <h3>업로드할 사진 혹은 동영상을 선택해주세요</h3>
+          <h3>업로드할 사진을 선택해주세요</h3>
           <div class="row cf">
-            <label for="upload" class="upload">파일업로드</label> 
-			<input type="file" name="upload" id="upload" accept="image/gif,image/png,image/jpeg">
-			<img id="feed_file" class="feed_file" alt="feed image" style="max-width: 350px; max-height: 350px; display: none; position: relative; left: 130px;">
-			<input type="button" value="파일업로드 취소" id="cancel_upload" style="display: none; width: 130px; margin-left: 130px">
+            <label for="feedUpload" class="feedUpload" ></label> 
+			<input type="file" name="feedUpload" id="feedUpload">
           </div>
+                 
           <div class="button">Next</div>
         </fieldset>
         <fieldset class="section">
