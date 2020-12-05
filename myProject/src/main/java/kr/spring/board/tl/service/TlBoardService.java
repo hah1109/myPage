@@ -16,4 +16,7 @@ public interface TlBoardService {
 
 	//트레이너의 프로필 사진을 업로드처리를 해줄 메서드
 	public void updateTrainerProfile(TlBoardVO tlboardVO);
+	
+	//트레이너의 간략 자기소개를 수정해줄 메서드
+	public void updateIntro(TlBoardVO tlBoardVO);
 }

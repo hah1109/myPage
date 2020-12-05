@@ -33,8 +33,12 @@ public class TlBoardServiceImpl implements TlBoardService {
 
 	@Override
 	public void updateTrainerProfile(TlBoardVO tlboardVO) {
-		// TODO Auto-generated method stub
-		
+		tlmapper.updateTrainerProfile(tlboardVO);
+	}
+
+	@Override
+	public void updateIntro(TlBoardVO tlBoardVO) {
+		tlmapper.updateIntro(tlBoardVO);	
 	}
 
  

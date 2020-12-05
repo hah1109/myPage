@@ -46,6 +46,7 @@ public class TlBoardVO {
 	public void setUpload(MultipartFile upload)throws IOException{
 		//MultipartFIle -> byte[]
 		setMem_pic(upload.getBytes());
+		setMem_picName(upload.getOriginalFilename());
 	}
 	
 	public int getMem_num() {

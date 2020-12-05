@@ -51,38 +51,39 @@ public class TlBoardController {
 
 		//총 글의 갯수를 가져옴
 		int count = tlBoardService.selectTrainerRowCount();
-		
+
 		//로그정보로 count 개수 잘들어왔는지 확인
 		if(log.isDebugEnabled()) {
 			log.debug("<<<count>>> :" + count);
 		}
-		
+
 		//페이징 설정
 		PagingUtil page = new PagingUtil(currentPage,count,10,10,"trainerList.do");
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
-		
+
 		List<TlBoardVO> list = null;
-		
+
 		//트레이너 리스트 정보가 있을 경우
 		if(count > 0) {
 			list = tlBoardService.selectTrainerList();
-			
+
 			//list가 제데로 담겼는지 로그정보로 확인
 			if(log.isDebugEnabled()) {
 				log.debug("<<<트레이너 리스트 목록>>> : " + list);
 			}
 		}
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("trainerList");//definition 설정명
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("pagingHtml", page.getPagingHtml());
-		
+
 		return mav;
 	}
 
+	//트레이너 리스트 페이지에서 원하는 트레이너를 눌렀을 시 작동할 메서드
 	//트레이너 상세정보페이지를 보여줄 메서드
 	@RequestMapping(value="/trainerList/trainerListDetail.do", method=RequestMethod.GET)
 	public String formTrainerListDetail(@RequestParam int mem_num, Model model) {
@@ -91,71 +92,125 @@ public class TlBoardController {
 		if(log.isDebugEnabled()) {
 			log.debug("<<<트레이너 mem_num 번호>>> :" + mem_num);
 		}
-		
+
 		//mem_num인 트레이너의 정보를 가져오는 메서드 필요
 		TlBoardVO vo = tlBoardService.selectTrainerDetail(mem_num);
-		
+
 		//읽어온 정보를 로그를 통해 보여줌
 		if(log.isDebugEnabled()) {
 			log.debug("<<<트레이너 상세 정보>>> : " + vo);
 		}
-		
+
 		//읽어온 정보를 모델을 정해서 request에 저장
 		model.addAttribute("trainer", vo);
-		
+
 		//definition 설정명을 호출
 		return "trainerListDetail";
 	}
-	
-	
-	//프로필사진 & 간략자기소개 수정 페이지를 보여줄 메서드
+
+
+	//트레이너 상세정보 페이지에서 프로필 사진 버튼을 눌렀을 시 작동할 메서드
+	//프로필사진 수정 페이지를 보여줄 메서드
 	@RequestMapping(value="/trainerList/prUpdate.do", method=RequestMethod.GET)
 	public String formPrUpdate(HttpSession session, Model model) {
-		
+
 		//세션에서 현재 로그인한 회원의 정보를 가져옴
 		//로그인 할 때 MemberVO타입으로 세션을 부여해줘서 가져올 때도 MemberVO타입으로 가져와야함
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		
+
 		//읽어온 정보를 로그를 통해 보여줌
 		if(log.isDebugEnabled()) {
 			log.debug("<<<로그인한 유저 정보>>> : " + user);
 		}
-		
+
 		//로그인한 회원의 mem_num으로 쿼리문 검색해서 trainer_detail의 정보를 가저옴
 		TlBoardVO tlboardVO = tlBoardService.selectTrainerDetail(user.getMem_num());
-		
+
 		//읽어온 정보를 로그를 통해 보여줌
 		if(log.isDebugEnabled()) {
 			log.debug("<<<로그인한 회원의 테이블 정보>>> : " + tlboardVO);
 		}
-		
+
 		//테이블에서 가저온 로그인한 회원 정보를 모델에 추가
 		model.addAttribute("trainer", tlboardVO);
-		
+
 		//definition 설정명을 호출
 		return "prUpdate";
 	}
 	
-	//업로드 처리 해야함 picName추가해서 
-	//이미지를 출력해줄 메서드
-	@RequestMapping("/trainerList/photoOutPut.do")
-	public ModelAndView outPutImage(HttpSession session) {
+	//트레이너 리스트페이지에서 자기소개 수정 버튼을 눌렀을 시 작동할 메서드
+	//자기소개 수정폼을 불러올 메서드
+	@RequestMapping(value="/trainerList/introUpdate.do",method=RequestMethod.GET)
+	public String formIntroUpdate() {
 		
-		//세션에서 현재 로그인한 회원의 정보를 가져옴
+		//definition 설정명 호출
+		return "introUpdate";
+	}
+	
+	//트레이너의 자기소개변졍을 처리해줄 메서드
+	@RequestMapping(value="/trainerList/introUpdate.do",method=RequestMethod.POST)
+	public String submitIntroUpdate(TlBoardVO tlboardVO, HttpSession session) {
+		
+		//폼에서 입력한 자기소개 내용
+		//읽어온 정보를 로그를 통해 보여줌
+		if(log.isDebugEnabled()) {
+			log.debug("<<<폼에서 작성한 intro>>> : " + tlboardVO);
+		}
+		
+		//세션에서 회원정보 가져옴
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
 		//읽어온 정보를 로그를 통해 보여줌
 		if(log.isDebugEnabled()) {
-			log.debug("<<<프로필과 자기소개 변경 페이지에서 세션정보>>> : " + user);
+			log.debug("<<<세션션션션>>> : " + user);
 		}
 		
+		//세션에서 가져온 mem_num을 tlBoardVO에 셋팅
+		tlboardVO.setMem_num(user.getMem_num());
+		
+		//intro수정
+		tlBoardService.updateIntro(tlboardVO);
+		
+		return "redirect:/trainerList/trainerList.do";
+	}
+	
+
+	//이미지를 출력해줄 메서드
+	@RequestMapping("/trainerList/photoOutPut.do")
+	public ModelAndView outPutImage(HttpSession session) {
+
+		//세션에서 현재 로그인한 회원의 정보를 가져옴
+		MemberVO user = (MemberVO)session.getAttribute("user");
+
+		//읽어온 정보를 로그를 통해 보여줌
+		if(log.isDebugEnabled()) {
+			log.debug("<<<프로필과 자기소개 변경 페이지에서 세션정보>>> : " + user);
+		}
+
 		//로그인한 회원의 테이블 정보를 가저옴
 		TlBoardVO vo = tlBoardService.selectTrainerDetail(user.getMem_num());
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("imageView");
 		mav.addObject("imageFile", vo.getMem_pic());
-		
+		mav.addObject("filename", vo.getMem_picName());
+
+		return mav;
+	}
+	
+	//누구나 볼 수 있음
+	//이미지를 출력해줄 메서드
+	@RequestMapping("/trainerList/trainerImage.do")
+	public ModelAndView outPutImage2(@RequestParam int mem_num) {
+
+		//로그인한 회원의 테이블 정보를 가저옴
+		TlBoardVO vo = tlBoardService.selectTrainerDetail(mem_num);
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		mav.addObject("imageFile", vo.getMem_pic());
+		mav.addObject("filename", vo.getMem_picName());
+
 		return mav;
 	}
 
