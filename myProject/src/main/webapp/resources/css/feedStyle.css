@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+
+/*상단버튼*/
+ul.topButton{
+	width:80%;
+	height:50px;
+	margin:0 auto;
+	text-align:center;
+}
+
+li.aBox{
+	display:inline-block;
+	width:300px;
+	height:50px;
+	border-radius:15px;
+	border:2px solid #0de9df;
+	margin:0 20px;
+}
+
+li.aBox > p{
+	font-size:17px;
+	margin-bottom: 30px;
+}
+
+/* img.bar{
+	float:left;
+	width:3px;
+	height:50px;
+	margin:0;
+	padding:0;
+} */
+/*상단버튼*/
+
+
+/*리스트*/
+div#feedList{
+	width:90%;
+	margin:30px auto;
+}
+
+div#output{
+	margin-left: 40px;
+}
+
+div.content{
+	width:500px;
+	height:600px;
+	margin:20px;
+	float:left;
+}
+
+p{
+	float:left;
+}
+
+
+img.thumbnail{
+	width: 500px;
+	height: 500px;
+	margin: 0 auto;
+	border-radius:15px;
+}
+
+
+/*리모컨 버튼*/
+.writeButton {
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 35px;
+}
+
+input.topButton {
+    width: 70px;
+    height: 70px;
+    background-color:#0de9df;
+    border: none;
+    border-radius: 35px;
+}

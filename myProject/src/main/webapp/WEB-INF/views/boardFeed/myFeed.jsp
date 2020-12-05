@@ -37,19 +37,31 @@
 					}else{
 						$(list).each(function(index,item){
 							
-							var output = '<tr>';
-							output += '<td>'+item.feed_num+'</td>';
-							output += '<td>'+item.mem_id+'</td>';
-							output += '<td>'+item.feed_type+'</td>';
-							output += '<td>'+item.feed_content+'</td>';
-							output += '<td>'+item.feed_reg_date+'</td>';
-							output += '<td>'+item.feed_file+'</td>';
-							output += '<td>'+item.feed_filename+'</td>';
-							output += '<td>'+item.feed_ip+'</td>';
-							output += '<td>'+item.mem_num+'</td>';
-							output += '<td>'+item.feed_auth+'</td>';
-							output += '</tr>';
-													
+							var output = '<div class="content">';
+							
+							output += '<div class="img">';
+							if(item.feed_filename == null){
+								output += '<img class="thumbnail" src="../resources/images/blank.jpg">';
+							} else {
+								output += '<img class="thumbnail" src="imageView.do?feed_num='+item.feed_num+'>';
+							}
+							
+							output += '</div>';
+							
+							output += '<div class="text">';
+							output += '<p class="feedType">[ ';
+							
+							if(item.feed_type == 1) {
+								output += '식단';
+							} else if(item.feed_type == 2) {
+								output += '운동';
+							}
+							output += ' ] 기록</p><br>';
+							output += '<p class="memId"> by[ ' + item.mem_id + ' ] </p>';
+							output += '<p class="date">' +item.feed_reg_date+'</p>';
+							output += '</div>';
+							output += '</div>';
+								
 							//문서 객체에 추가
 							$('#output').append(output);
 						});
@@ -105,65 +117,61 @@ if(currentPage>=Math.ceil(count/rowCount)){
 } */
 
 
-
-
 </script>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedStyle.css">
 <style>
-table{
-	width:80%;
-	margin:5px auto;
-	border:1px solid #000;
-	border-collapse:collapse;
+.writeButton{
+    background-image:url('../resources/images/Btn_write_board.png');
+    background-repeat: no-repeat;
 }
-table td, table th{
-	text-align:center;
-	border:1px solid #000;
-	padding:5px;
-}
+
 </style>
 
-
-
-<div >
-	<div>
-		<input type="button" value="내 피드" onclick="location.href='${pageContext.request.contextPath}/boardFeed/myFeed.do'"/>
-	</div>
-	<div>66${mem_auth}66</div>
-	<c:if test="${mem_auth == 2}">
-	<div>
-		<input type="button" value="내 회원의 피드" onclick="location.href='${pageContext.request.contextPath}/boardFeed/myMembersFeed.do'"/>
-	</div>
-	</c:if>
+<div>
+	
+	<!-- 상단 버튼 -->
+	<ul class="topButton">
+		<li class="aBox">
+			<p style="margin-left:40%;"><a href='${pageContext.request.contextPath}/boardFeed/myFeed.do'>내 피드</a></p>
+		</li>
+		<li class="aBox">
+			<p style="margin-left:30%;"><a href='${pageContext.request.contextPath}/boardFeed/myMembersFeed.do'>내 회원의 피드</a></p>
+		</li>
+	</ul>
+	<!-- 상단 버튼 -->
+	
+	<!-- 게시물이 없을 시 -->
 	<c:if test="${count == 0}">
 		<div class="align-center">등록된 게시물이 없습니다.</div>
 	</c:if>
+	<!-- 게시물이 없을 시 -->
+	
+	<!-- LIST -->
 	<div id="feedList">
-		<table>
-			<tr>
-				<th>글번호</th>
-				<th>글쓴이 아이디</th>
-				<th>글 타입</th>
-				<th>내용</th>
-				<th>글 등록일</th>
-				<th>파일</th>
-				<th>파일이름</th>
-				<th>아이피</th>
-				<th>mem_num</th>
-				<th>공개범위</th>
-			</tr>
-			<tbody id="output"></tbody>
-		</table>
-		<div class="paging-button" style="display:none;">
-			<input type="button" value="다음글 보기">
+		<div id="output">
+			<!-- Ajax 영역 -->
 		</div>
+		
+		<!-- feed로딩시 로딩 이미지 -->
 		<div id="loading" style="display:none;">
 			<img src="${pageContext.request.contextPath}/resources/images/ajax-loader.gif">
 		</div>
+		<!-- feed로딩시 로딩 이미지 -->
 	</div>
+	<!-- LIST -->
+	
+	<!-- TOP 버튼 -->
+	<div style="position:fixed; bottom: 80px; right:20px;">
+		<input type="button" class="topButton" value="TOP" onclick="location.href='#main'">
+	</div>
+	<!-- TOP 버튼 -->
+	
+	<!-- 글쓰기 리모컨 -->
+	<div style="position:fixed; bottom: 1px; right:20px;">
+		<input type="button" class="writeButton" onclick="location.href='feedWrite.do'">
+	</div>
+	<!-- 글쓰기 리모컨 -->
 	
 	
-
-	
-
 </div>
