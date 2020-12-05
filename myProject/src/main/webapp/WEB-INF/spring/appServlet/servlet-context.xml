@@ -114,6 +114,8 @@
 			<mapping path="/boardTranqna/detail.do"/>
 			<mapping path="/boardFeed/feedList.do"/>
 			<mapping path="/boardFeed/feedWrite.do"/>
+			<mapping path="/boardFeed/myFeed.do"/>
+			<mapping path="/boardFeed/myMembersFeed.do"/>
 			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/> 
 		</interceptor>
 		<interceptor>	
