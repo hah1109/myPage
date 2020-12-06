@@ -25,7 +25,7 @@ $(document).ready(function(){
 	    headerSection.removeClass("is-active").next().addClass("is-active");
 
 	    
-	    if(currentSectionIndex === 3){
+	    if(currentSectionIndex === 2){
 	        
 	      }
 	    
@@ -41,7 +41,7 @@ $(document).ready(function(){
         <li>Step 2</li>
         <li>Step 3</li>
       </ul>
-      <form:form class="form-wrapper" id="feedWrite" action="feedWrite.do" commandName="feedVO">
+      <form:form class="form-wrapper" id="feedWrite" action="feedWrite.do" commandName="feedVO" enctype="multipart/form-data">
         <fieldset class="section is-active">
           <h3>주제와 공개범위를 선택해주세요</h3>
 			<!-- 타입 정하는 버튼 -->
@@ -56,7 +56,7 @@ $(document).ready(function(){
 		         <form:option value="0" label="나만보기" />
 		         <form:option value="1" label="트레이너만 공개" />
 		         <form:option value="2" label="팔로워 공개" />
-		         <form:option value="3" label="전체공개" />
+		         <form:option value="3" label="전체공개" /> 
 		      </form:select>
           <div class="button">Next</div>
         </fieldset>
@@ -64,7 +64,7 @@ $(document).ready(function(){
           <h3>업로드할 사진을 선택해주세요</h3>
           <div class="row cf">
             <label for="feedUpload" class="feedUpload" ></label> 
-			<input type="file" name="feedUpload" id="feedUpload">
+			<input type="file" name="feedUpload" id="feedUpload" accept="imgage/gif,image/png,image/jpeg">
           </div>
                  
           <div class="button">Next</div>
@@ -73,13 +73,9 @@ $(document).ready(function(){
           <h3>글 내용을 작성해주세요</h3>
           <form:input type="text"  path="feed_content" placeholder="글 내용을 작성해주세요"/>
           <input type="submit" value="글 등록" class="submit button" />
+          <!-- <div class="button" onclick="location.href='feedReco.do'">취소</div> -->
         </fieldset>
-        <fieldset class="section">
-          <h3>글 등록 완료</h3>
-          <p>글 등록이 완료되었습니다.</p>
-         								 <!-- 여기에 마이피드 나중에 연결하기 -->
-          <div class="button" onclick="location.href='feedReco.do'">확인</div>
-        </fieldset>
+        
       </form:form>
     </div>
   </div>
