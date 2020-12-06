@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.spring.board.feed.dao.FeedMapper2;
 import kr.spring.board.feed.vo.FeedVO;
+import kr.spring.comment.feed.vo.FeedCommentVO;
 import kr.spring.member.vo.MemberVO;
 
 //조재희
@@ -65,6 +66,31 @@ public class FeedService2Impl implements FeedService2{
 	public FeedVO selectFeedDetail(Integer mem_num) {
 		
 		return feedMapper.selectFeedDetail(mem_num);
+	}
+
+	@Override
+	public int insertFeedComment(FeedCommentVO feed_comment) {
+		return feedMapper.insertFeedComment(feed_comment);
+	}
+
+	@Override
+	public List<FeedCommentVO> selectListFeedComment(Integer feed_num) {
+		return feedMapper.selectListFeedComment(feed_num);
+	}
+
+	@Override
+	public FeedCommentVO selectFeedComment(Integer feedc_num) {
+		return feedMapper.selectFeedComment(feedc_num);
+	}
+
+	@Override
+	public int updateFeedComment(FeedCommentVO feed_comment) {
+		return feedMapper.updateFeedComment(feed_comment);
+	}
+
+	@Override
+	public int deleteFeedComment(int feedc_num) {
+		return feedMapper.deleteFeedComment(feedc_num);
 	}
  
 }

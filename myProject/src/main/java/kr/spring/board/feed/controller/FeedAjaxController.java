@@ -1,6 +1,7 @@
 package kr.spring.board.feed.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -9,9 +10,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.board.feed.service.FeedService2;
+import kr.spring.comment.feed.vo.FeedCommentVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 
@@ -24,8 +27,7 @@ public class FeedAjaxController {
 	@Resource
 	private FeedService2 feedService;
 	
-	
-	
+	//=============사진 업로드하기================
 	@RequestMapping("/boardFeed/updateMyPhoto.do")
 	@ResponseBody
 	public Map<String, String> processProfile(MemberVO memberVO, HttpSession session){
@@ -50,6 +52,7 @@ public class FeedAjaxController {
 		return map;
 	}
 	
+	//==============나의 한마디 업로드하기 ====================
 	@RequestMapping("/boardFeed/updateIntro.do")
 	@ResponseBody
 	public Map<String, String> processIntro(MemberVO memberVO, HttpSession session){
@@ -71,4 +74,48 @@ public class FeedAjaxController {
 		}
 		return map;
 	}
+	
+	//=============댓글달아주기=======================
+
+	@RequestMapping("/boardFeed/list_feedcomment.do")
+	@ResponseBody
+	public List<FeedCommentVO> list(@RequestParam int feed_num){		
+		return feedService.selectListFeedComment(feed_num);
+	}
+	
+	@RequestMapping("/boardFeed/submit_feedcomment.do")
+	@ResponseBody
+	public int Commentprocess(@RequestParam String comment,
+						@RequestParam int feed_num,
+						@RequestParam int mem_num){
+		
+		if(log.isDebugEnabled()) log.debug("<<자유게시판 댓글등록>> : " + feed_num + ":" + comment);
+				
+		FeedCommentVO feed_comment = new FeedCommentVO();
+		feed_comment.setFeedc_comment(comment);
+		feed_comment.setFeed_num(feed_num);		
+		feed_comment.setMem_num(mem_num);
+				
+		return feedService.insertFeedComment(feed_comment);		
+	}
+	
+	//==============댓글 수정하기 =====================
+	@RequestMapping("/boardFeed/update_feedcomment.do")
+	@ResponseBody
+	public int updateComment(@RequestParam int feedc_num,@RequestParam String update_comment) {
+		if(log.isDebugEnabled()) log.debug("<<자유게시판 댓글수정>> : " + feedc_num);
+		FeedCommentVO feed_comment = feedService.selectFeedComment(feedc_num);
+		feed_comment.setFeedc_comment(update_comment);
+		return feedService.updateFeedComment(feed_comment);
+	}
+	
+	//===========댓글 지우기==============
+	@RequestMapping("/boardFeed/delete_feedcomment.do")
+	@ResponseBody
+	public int deleteComment(@RequestParam int feedc_num) {
+		if(log.isDebugEnabled()) log.debug("<<자유게시판 댓글 삭제>> : " + feedc_num);
+		return feedService.deleteFeedComment(feedc_num);
+	}
+	
+	
 }

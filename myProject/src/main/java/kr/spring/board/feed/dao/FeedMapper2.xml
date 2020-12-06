@@ -17,6 +17,16 @@
 		WHERE
 			feed_num = #{feed_num}
 	</update>
+	<select id="selectListFeedComment" parameterType="integer" resultType="FeedCommentVO">
+		SELECT
+			a.*, b.*, to_char(a.feedc_modify_date,'yyyy-mm-dd') str_date
+		FROM 
+		    (SELECT * FROM feed_comment c JOIN member m USING(mem_num) ORDER BY c.feedc_num DESC) a  
+		LEFT JOIN 
+		    (SELECT feedc_num, COUNT(*) countComment FROM feed_comment GROUP BY feedc_num) b 
+		ON a.feedc_num = b.feedc_num
+		WHERE a.feed_num = #{feed_num}
+	</select>
 </mapper>
 
 

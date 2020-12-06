@@ -68,6 +68,7 @@
 		                                           kr.spring.comment.freec.vo,
 		                                           kr.spring.comment.sysqnac.vo,
 		                                           kr.spring.comment.tranqnac.vo,
+		                                           kr.spring.comment.feed.vo,
 		                                           kr.spring.board.tip.vo,
 		                                           kr.spring.board.sysqna.vo,
 		                                           kr.spring.board.tranqna.vo,

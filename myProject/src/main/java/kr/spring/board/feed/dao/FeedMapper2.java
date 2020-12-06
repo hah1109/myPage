@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.board.feed.vo.FeedVO;
+import kr.spring.comment.feed.vo.FeedCommentVO;
 import kr.spring.member.vo.MemberVO;
 
 //조재희
@@ -46,5 +47,19 @@ public interface FeedMapper2 {
 	@Select("select * FROM feed where mem_num=#{mem_num}")
 	public FeedVO selectFeedDetail(Integer mem_num);
 	
+	//===================댓글 관련 =========================
+	@Insert("INSERT INTO feed_comment (feedc_num, feedc_comment, feed_num, mem_num) VALUES (feedc_num_seq.nextval,#{feedc_comment},#{feed_num},#{mem_num})")
+	public int insertFeedComment(FeedCommentVO feedc_comment);
+	
+	public List<FeedCommentVO> selectListFeedComment(Integer feed_num);
+	
+	@Select("SELECT * FROM feed_comment c JOIN member m USING(mem_num) WHERE c.feedc_num = #{feedc_num}")
+	public FeedCommentVO selectFeedComment(Integer feedc_num);
+	
+	@Update("UPDATE feed_comment SET feedc_comment = #{feedc_comment}, feedc_modify_date = SYSDATE  WHERE feedc_num = #{feedc_num}")
+	public int updateFeedComment(FeedCommentVO feedc_comment);
+	
+	@Delete("DELETE FROM feed_comment WHERE feedc_num = #{feedc_num}")
+	public int deleteFeedComment(int feedc_num);
 	
 } 
