@@ -1,6 +1,7 @@
 package kr.spring.board.tl.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -41,5 +42,11 @@ public class TlBoardServiceImpl implements TlBoardService {
 		tlmapper.updateIntro(tlBoardVO);	
 	}
 
+	
+	@Override
+	public void insertMatching(Map<String, Object> map) {
+		map.put("mat_num", tlmapper.selectMat_num()); 
+		tlmapper.insertMatching(map);
+	}
  
 }

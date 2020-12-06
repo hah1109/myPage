@@ -1,6 +1,7 @@
 package kr.spring.board.tl.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.spring.board.tl.vo.TlBoardVO;
 
@@ -19,4 +20,13 @@ public interface TlBoardService {
 	
 	//트레이너의 간략 자기소개를 수정해줄 메서드
 	public void updateIntro(TlBoardVO tlBoardVO);
+	
+	/*----------------트랜젝션 처리 예정---------------------------------------*/
+	//시퀀스 가져올 메서드
+	//public int selectMat_num();
+	
+	//테이블에 트레이닝 신청 내역 저장할 메서드
+	public void insertMatching(Map<String, Object> map);
+	/*-------------------------------------------------------*/
+	
 }

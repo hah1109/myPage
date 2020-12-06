@@ -92,7 +92,6 @@ public class TlBoardController {
 		if(log.isDebugEnabled()) {
 			log.debug("<<<트레이너 mem_num 번호>>> :" + mem_num);
 		}
-
 		//mem_num인 트레이너의 정보를 가져오는 메서드 필요
 		TlBoardVO vo = tlBoardService.selectTrainerDetail(mem_num);
 
@@ -106,6 +105,61 @@ public class TlBoardController {
 
 		//definition 설정명을 호출
 		return "trainerListDetail";
+	}
+	
+	//트레이너 상세정보 페이지에서 트레이닝 신청하기 버튼 눌렀을 시 작동할 메서드
+	@RequestMapping(value="/trainerList/matching.do", method=RequestMethod.GET)
+	public String matching(@RequestParam int mem_num,Model model,HttpSession session) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		//트레이너상세정보 페이지에서 선택한 트레이너 mem_num이 잘 전송되었는지 확인
+		if(log.isDebugEnabled()) {
+			log.debug("<<<매칭할 트레이너 mem_num 번호>>> :" + mem_num);
+		}
+		
+		TlBoardVO tlboardVO = new TlBoardVO();
+		
+		//가져온 트레이너 mem_num을 vo에 셋팅
+		tlboardVO.setMem_num(mem_num); //트레이너 list에서 받아온 mem_num(트레이닝 신청 당하는 mem_num)
+		map.put("trainer_num", mem_num);
+		
+		//로그인한 회원의 mem_num
+		MemberVO memberVO = (MemberVO) session.getAttribute("user");
+		
+		//로그인 상태가 아닌 경우
+		if(memberVO == null) {
+			return "redirect:/member/login.do";
+		}else {//누구든 로그인을 한 상태일 경우
+		
+			map.put("member_num", memberVO.getMem_num());
+			
+			if(log.isDebugEnabled()) {
+				log.debug("<<<매칭하기위해 세션에서 가져온 로그인한 회원의 번호>>> :" + memberVO.getMem_num());
+			}
+		
+			//일반회원일 경우
+			if(memberVO.getMem_auth() == 1) {
+				//2가지로 나뉨
+				int tNum = memberVO.getT_num();
+				
+				if(log.isDebugEnabled()) {
+					log.debug("<<<회원의 매칭된 트레이너 회원 번호>>> :" + tNum);
+				} 
+				
+				if(tNum == 0) {//매칭상대가 없는경우
+					//매칭테이블에 신청 내역 저장
+					tlBoardService.insertMatching(map);
+					return "redirect:/trainerList/trainerList.do";
+					
+				}else{//있는경우
+					return "redirect:/trainerList/trainerList.do";
+				}
+			}else{//일반회원이 아닌 나머지 피플
+				//여기는 성사가 되면 안되니까 
+				return "redirect:/trainerList/trainerList.do";
+			}
+		}
 	}
 
 
