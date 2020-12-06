@@ -14,37 +14,37 @@
 					</li>
 					<li>
 						<label for="food_g">단위 그램(g)</label><br>
-						<form:input path="food_g"/>g
+						<form:input path="food_g"/>g<br>
 						<form:errors path="food_g" cssClass="error-color"/>
 					</li>
 					<li>
 						<label for="food_kcal">총 열량</label><br>
-						<form:input path="food_kcal"/>kcal
+						<form:input path="food_kcal"/>kcal<br>
 						<form:errors path="food_kcal" cssClass="error-color"/>
 					</li>
 					<li>
 						<label for="food_fat">총 지방</label><br>
-						<form:input path="food_fat"/>g
+						<form:input path="food_fat"/>g<br>
 						<form:errors path="food_fat" cssClass="error-color"/>
 					</li>
 					<li>
 						<label for="food_col">콜레스테롤</label><br>
-						<form:input path="food_col"/>mg
+						<form:input path="food_col"/>mg<br>
 						<form:errors path="food_col" cssClass="error-color"/>
 					</li>
 					<li>
 						<label for="food_na">나트륨 </label><br>
-						<form:input path="food_na"/>mg
+						<form:input path="food_na"/>mg<br>
 						<form:errors path="food_na" cssClass="error-color"/>
 					</li>
 					<li>
 						<label for="food_carb">총 탄수화물</label><br>
-						<form:input path="food_carb"/>g
+						<form:input path="food_carb"/>g<br>
 						<form:errors path="food_carb" cssClass="error-color"/>
 					</li>
 					<li>
 						<label for="food_df">식이섬유</label><br>
-						<form:input path="food_df"/>g
+						<form:input path="food_df"/>g<br>
 						<form:errors path="food_df" cssClass="error-color"/>
 					</li>
 					<li>
@@ -54,7 +54,7 @@
 					</li>
 					<li>
 						<label for="food_protein">단백질</label><br>
-						<form:input path="food_protein"/>g
+						<form:input path="food_protein"/>g<br>
 						<form:errors path="food_protein" cssClass="error-color"/>
 					</li>
 		

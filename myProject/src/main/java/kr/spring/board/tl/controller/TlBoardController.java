@@ -267,6 +267,44 @@ public class TlBoardController {
 
 		return mav;
 	}
+	
+	//매칭신청온거 리스트 뽑는 메서드
+	@RequestMapping("/trainerList/matchingList.do")
+	public ModelAndView matchingList(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+									 HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		//로그인한 아이디의 mem_num 구하기
+		MemberVO memberVO = (MemberVO)session.getAttribute("user");
+		//map에 mem_num 넣기
+		map.put("mem_num", memberVO.getMem_num());
+		
+		//받은 매칭 신청의 개수
+		int count = tlBoardService.matchingCount(memberVO.getMem_num());
+		if(log.isDebugEnabled()) { log.debug("<<검색된 영양성분 갯수>> : " + count); }
+		
+		//paging 처리
+		PagingUtil page = new PagingUtil(currentPage,count,10,10,"matchingList.do");
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
+		
+		List<TlBoardVO> list = null;
+		
+		list = tlBoardService.matchingList(map);
+		
+		mav.addObject("result",1);
+		mav.addObject("list", list);
+		mav.addObject("count", count);
+		mav.addObject("pagingHtml", page.getPagingHtml());
+		mav.setViewName("matchingList");
+		
+		return mav;
+		
+
+		
+	}
 
 
 }

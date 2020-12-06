@@ -67,6 +67,7 @@
 				<a href="${pageContext.request.contextPath}/boardFeed/myFeed.do">트레이닝 다이어리</a>
 				<ul class="dt-sub submenu" style="z-index: 2;">
 					<li><a href="${pageContext.request.contextPath}/boardFeed/myFeed.do">피드</a></li>
+					<li><a href="${pageContext.request.contextPath}/boardFeed/myMembersFeed.do">내 회원의 피드</a></li>
 					<li><a href="${pageContext.request.contextPath}/boardFeed/feedList.do">마이 퍼스널</a></li>
 					<li><a href="${pageContext.request.contextPath}/boardFeed/feedReco.do">탐색</a></li>
 				</ul>

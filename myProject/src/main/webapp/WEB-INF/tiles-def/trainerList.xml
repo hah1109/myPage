@@ -21,6 +21,10 @@
     	<put-attribute name="title" value="트레이너 자기소개 변경 페이지"/>
     	<put-attribute name="body" value="/WEB-INF/views/trainerList/introUpdate.jsp"/>
     </definition>
+    <definition name="matchingList" extends="main">
+    	<put-attribute name="title" value="트레이너 신청 내역 확인 페이지"/>
+    	<put-attribute name="body" value="/WEB-INF/views/trainerList/matchingList.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

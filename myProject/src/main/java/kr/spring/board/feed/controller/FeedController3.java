@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.board.feed.service.FeedService3;
 import kr.spring.board.feed.vo.FeedVO;
@@ -58,6 +59,8 @@ public class FeedController3 {
 		
 		int sessionMem_num = memberVO.getMem_num();
 		int sessionMem_auth = memberVO.getMem_auth();
+		
+		model.addAttribute("mem_auth", sessionMem_auth);
 		
 		if(log.isDebugEnabled()) { log.debug("<<로그인한 회원의 mem_num>> : " + sessionMem_num);}
 		if(log.isDebugEnabled()) { log.debug("<<로그인한 회원의 mem_auth>> : " + sessionMem_auth);}
@@ -129,8 +132,28 @@ public class FeedController3 {
 	
 	//(트레이너)내 회원 피드 리스트 받아오기
 	@RequestMapping("/boardFeed/myMembersFeed.do")
-	public String getMyMembersFeed() {
-		return "myMembersFeed";
+	public ModelAndView getMyMembersFeed(HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//회원 등급 체크
+		//session에서 로그인한 id의 mem_num & mam_auth 받기
+		MemberVO memberVO = (MemberVO)session.getAttribute("user");		
+		int mem_auth = memberVO.getMem_auth();
+				
+		if(mem_auth == 1) { //일반회원 접근시
+			mav.addObject("message", "트레이너회원 전용 페이지입니다.");
+			mav.addObject("url","myFeed.do");
+			mav.setViewName("common/result");
+			
+			return mav;
+			
+		} else { //그외
+			mav.setViewName("myMembersFeed");
+			return mav;
+			
+		}
+		
 	}
 	
 	//(트레이너)내 회원 피드 리스트 받아오기

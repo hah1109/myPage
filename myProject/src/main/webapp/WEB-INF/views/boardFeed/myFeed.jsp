@@ -1,9 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!-- 홍아현  -->
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedStyle.css">
+<style>
+.writeButton{
+	background-image:url('../resources/images/feed/writeButtonForFeed.png');
+    background-repeat: no-repeat;
+}
+
+</style>
+
+
 <script type="text/javaScript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>   
 <script>
 	$(document).ready(function(){
+		
 		var currentPage;
 		var count;
 		var rowCount;
@@ -15,6 +27,7 @@
 				//처음 호출시는 해당 ID의 div의 내부 내용물을 제거
 				$('#output').empty();
 			}
+			
 			//로딩 이미지 노출
 			$('#loading').show();
 			
@@ -36,7 +49,7 @@
 						alert('목록 호출 오류 발생!');
 					}else{
 						$(list).each(function(index,item){
-							
+
 							var output = '<div class="content">';
 							
 							output += '<div class="img">';
@@ -80,11 +93,12 @@
 	
 	//스크롤시 데이터 추가
 	$(window).scroll(function(){
+		
 		var scrollTop = $(document).scrollTop();
 		var docHeight = $(document).height();
 		var winHeight = $(window).height();
 		
-		if(scrollTop == docHeight - winHeight)
+		if(scrollTop >= docHeight - winHeight){
 			if(currentPage>=Math.ceil(count/rowCount)){
 				//다음 페이지가 없음
 				return;
@@ -93,7 +107,7 @@
 				var pageNum = currentPage + 1;
 				selectData(pageNum);
 			}
-		
+		 }
 	});
 	
 	//1페이지 호출
@@ -119,27 +133,9 @@ if(currentPage>=Math.ceil(count/rowCount)){
 
 </script>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedStyle.css">
-<style>
-.writeButton{
-    background-image:url('../resources/images/Btn_write_board.png');
-    background-repeat: no-repeat;
-}
 
-</style>
 
 <div>
-	
-	<!-- 상단 버튼 -->
-	<ul class="topButton">
-		<li class="aBox">
-			<p style="margin-left:40%;"><a href='${pageContext.request.contextPath}/boardFeed/myFeed.do'>내 피드</a></p>
-		</li>
-		<li class="aBox">
-			<p style="margin-left:30%;"><a href='${pageContext.request.contextPath}/boardFeed/myMembersFeed.do'>내 회원의 피드</a></p>
-		</li>
-	</ul>
-	<!-- 상단 버튼 -->
 	
 	<!-- 게시물이 없을 시 -->
 	<c:if test="${count == 0}">

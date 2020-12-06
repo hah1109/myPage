@@ -48,5 +48,15 @@ public class TlBoardServiceImpl implements TlBoardService {
 		map.put("mat_num", tlmapper.selectMat_num()); 
 		tlmapper.insertMatching(map);
 	}
+
+	@Override
+	public List<TlBoardVO> matchingList(Map<String, Object> map) {
+		return tlmapper.matchingList(map);
+	}
+
+	@Override
+	public int matchingCount(int mem_num) {
+		return tlmapper.matchingCount(mem_num);
+	}
  
 }

@@ -3,6 +3,8 @@ package kr.spring.board.tl.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Select;
+
 import kr.spring.board.tl.vo.TlBoardVO;
 
 public interface TlBoardService {
@@ -28,5 +30,12 @@ public interface TlBoardService {
 	//테이블에 트레이닝 신청 내역 저장할 메서드
 	public void insertMatching(Map<String, Object> map);
 	/*-------------------------------------------------------*/
+	
+	//트레이너의 myPage에 매칭 신청 내역 표시
+	public List<TlBoardVO> matchingList(Map<String,Object> map);
+	
+	//매칭 내역 카운트
+	public int matchingCount(int mem_num);
+
 	
 }

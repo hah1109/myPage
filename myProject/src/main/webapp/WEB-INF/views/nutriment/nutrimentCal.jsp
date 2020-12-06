@@ -47,15 +47,15 @@
 					<ul>
 						<li>
 							<label for="height">[나의 키]</label><br>
-							<input type="number" id="height" name="height"/>
+							<input type="number" id="height" name="height" value="${height}"/>
 						</li>
 						<li>
 							<label for="weight">[나의 체중]</label><br>
-							<input type="number" id="weight" name="weight"/>
+							<input type="number" id="weight" name="weight" value="${weight}"/>
 						</li>
 						<li>
 							<label for="age">[나의 나이]</label><br>
-							<input type="number" id="age" name="age"/>
+							<input type="number" id="age" name="age" value="${age}"/>
 						</li>
 						<li> <label for="gender">[성별]</label><br>
 							<ul style="display:inline-flex;">

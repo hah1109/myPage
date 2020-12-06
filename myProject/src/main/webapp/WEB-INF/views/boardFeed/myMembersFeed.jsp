@@ -4,10 +4,12 @@
 <script type="text/javaScript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>   
 <script>
 	$(document).ready(function(){
+		
 		var currentPage;
 		var count;
 		var rowCount;
-		//댓글 목록
+		
+		//글 목록
 		function selectData(pageNum){
 			currentPage = pageNum;
 			
@@ -84,7 +86,7 @@
 		var docHeight = $(document).height();
 		var winHeight = $(window).height();
 		
-		if(scrollTop == docHeight - winHeight)
+		if(scrollTop >= docHeight - winHeight)
 			if(currentPage>=Math.ceil(count/rowCount)){
 				//다음 페이지가 없음
 				return;
@@ -98,6 +100,7 @@
 	
 	//1페이지 호출
 	selectData(1);
+	
 	
 });
 
@@ -120,25 +123,14 @@ if(currentPage>=Math.ceil(count/rowCount)){
 </script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedStyle.css">
+<style>
+	.writeButton{
+	    background-image:url('../resources/images/feed/writeButtonForFeed.png');
+	    background-repeat: no-repeat;
+	}
+</style>
 
 <div>
-	
-	<!-- 상단 버튼 -->
-	<ul class="topButton">
-		<li class="aBox">
-			<p style="margin-left:40%;"><a href='${pageContext.request.contextPath}/boardFeed/myFeed.do'>내 피드</a></p>
-		</li>
-		<li class="aBox">
-			<p style="margin-left:30%;"><a href='${pageContext.request.contextPath}/boardFeed/myMembersFeed.do'>내 회원의 피드</a></p>
-		</li>
-	</ul>
-	<!-- 상단 버튼 -->
-	
-	<!-- 게시물이 없을 시 -->
-	<c:if test="${count == 0}">
-		<div class="align-center">등록된 게시물이 없습니다.</div>
-	</c:if>
-	<!-- 게시물이 없을 시 -->
 	
 	<!-- LIST -->
 	<div id="feedList">
@@ -148,11 +140,22 @@ if(currentPage>=Math.ceil(count/rowCount)){
 		
 		<!-- feed로딩시 로딩 이미지 -->
 		<div id="loading" style="display:none;">
-			<img src="${pageContext.request.contextPath}/resources/images/ajax-loader.gif">
+			<img src="/MyFirstTrainer/resources/images/ajax-loader.gif">
 		</div>
 		<!-- feed로딩시 로딩 이미지 -->
 	</div>
 	<!-- LIST -->
 	
+	<!-- TOP 버튼 -->
+	<div style="position:fixed; bottom: 80px; right:20px;">
+		<input type="button" class="topButton" value="TOP" onclick="location.href='#main'">
+	</div>
+	<!-- TOP 버튼 -->
+	
+	<!-- 글쓰기 리모컨 -->
+	<div style="position:fixed; bottom: 1px; right:20px;">
+		<input type="button" class="writeButton" onclick="location.href='feedWrite.do'">
+	</div>
+	<!-- 글쓰기 리모컨 -->	
 	
 </div>

@@ -39,10 +39,14 @@ public interface TlBoardMapper {
 	public int selectMat_num();
 	
 	//매칭 테이블에 정보 입력
-	@Insert("insert into matching values(#{mat_num},#{trainer_num},#{member_num})")
+	@Insert("insert into matching values(#{mat_num},#{member_num},#{trainer_num})")
 	public void insertMatching(Map<String, Object> map);
 	
 	//트레이너의 myPage에 매칭 신청 내역 표시
-	//@Select(select mat_from from matching where mat_to = ${트레이너의 mem_num})
- 
+	@Select("select * from(select a.*, rownum rnum from (select * from matching where mat_to=#{mem_num})a) where rnum>=#{start} and rnum <= #{end}")
+	public List<TlBoardVO> matchingList(Map<String,Object> map);
+	
+	//매칭 신청 내역 카운트
+	@Select("select count(*) from matching where mat_to=#{mem_num}")
+	public int matchingCount(int mem_num);
 }

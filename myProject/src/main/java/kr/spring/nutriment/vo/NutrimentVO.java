@@ -27,6 +27,9 @@ public class NutrimentVO {
 	private int food_sugars; // 당
 	@Range(min=0,max=1000)
 	private int food_protein; //단백질
+	
+	
+	
 	public int getFood_num() {
 		return food_num;
 	}
