@@ -116,7 +116,7 @@ public class FeedController2 {
 		
 		if(log.isDebugEnabled()) log.debug("<<feedVO에 세션값 저장 후 마이 퍼스널 게시판 글 저장 시도>> :" + feedVO);
 		
-		
+		 
 		//글쓰기
 		feedService.insertFeedBoard(feedVO);
 		

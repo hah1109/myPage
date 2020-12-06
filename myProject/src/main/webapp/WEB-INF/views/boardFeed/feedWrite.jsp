@@ -56,7 +56,7 @@ $(document).ready(function(){
 		         <form:option value="0" label="나만보기" />
 		         <form:option value="1" label="트레이너만 공개" />
 		         <form:option value="2" label="팔로워 공개" />
-		         <form:option value="3" label="전체공개" />
+		         <form:option value="3" label="전체공개" /> 
 		      </form:select>
           <div class="button">Next</div>
         </fieldset>
