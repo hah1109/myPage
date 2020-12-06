@@ -41,6 +41,13 @@ public class TlBoardVO {
 	private Date mem_date;//회원의 가입일
 	private String mem_picName;//회원의 프로필 사진 파일명
 	/*-------------------------------------------------------------*/
+	
+	/*-------------------------------------------------------------*/
+	/*matching 테이블*/
+	private int mat_num;
+	private int mat_from;
+	private int mat_to;
+	/*-------------------------------------------------------------*/
 
 	//프로필 사진 처리를 위한 이미지 BLOB 처리
 	public void setUpload(MultipartFile upload)throws IOException{
@@ -158,13 +165,38 @@ public class TlBoardVO {
 		this.mem_picName = mem_picName;
 	}
 
+	public int getMat_num() {
+		return mat_num;
+	}
+
+	public void setMat_num(int mat_num) {
+		this.mat_num = mat_num;
+	}
+
+	public int getMat_from() {
+		return mat_from;
+	}
+
+	public void setMat_from(int mat_from) {
+		this.mat_from = mat_from;
+	}
+
+	public int getMat_to() {
+		return mat_to;
+	}
+
+	public void setMat_to(int mat_to) {
+		this.mat_to = mat_to;
+	}
+
 	@Override
 	public String toString() {
 		return "TlBoardVO [mem_num=" + mem_num + ", mem_id=" + mem_id + ", mem_auth=" + mem_auth + ", g_addr=" + g_addr
 				+ ", career=" + career + ", mem_gender=" + mem_gender + ", exp=" + exp + ", mem_name=" + mem_name
 				+ ", mem_pw=" + mem_pw + ", mem_cell=" + mem_cell + ", mem_email=" + mem_email + ", mem_zipcode="
 				+ mem_zipcode + ", mem_addr1=" + mem_addr1 + ", mem_addr2=" + mem_addr2 + ", mem_intro=" + mem_intro
-				+ ", mem_date=" + mem_date + ", mem_picName=" + mem_picName + "]";
+				+ ", mem_date=" + mem_date + ", mem_picName=" + mem_picName + ", mat_num=" + mat_num + ", mat_from="
+				+ mat_from + ", mat_to=" + mat_to + "]";
 	}
 	
 

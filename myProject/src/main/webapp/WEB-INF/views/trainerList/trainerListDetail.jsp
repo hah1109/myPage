@@ -33,7 +33,10 @@
 			if(로그인 상태 && 트레이너 일 경우 일반회원만 매칭 가능합니다.)
 			ajax로 처리할 예정
 			 -->
-			<input type="button" value="매칭신청하기">
+			 <button>
+        	<a href="matching.do?mem_num=${trainer.mem_num}">트레이닝 신청하기</a>
+        	</button>
+			
 		</li>
 	</ul>
 </div>
@@ -92,6 +95,15 @@
 		</ul>
 	</div>
 </c:if>
+
+<div>
+	<ul>
+		<li>
+			<button type="button" onclick="location.href='trainerList.do'">돌아가기</button>
+		</li>
+	</ul>
+</div>
+
 </div>
 
 
