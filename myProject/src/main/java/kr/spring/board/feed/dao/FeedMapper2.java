@@ -40,9 +40,9 @@ public interface FeedMapper2 {
 	@Delete("delete from follower where follower_to = #{follower_to}")
 	public void deleteFollow();*/
 	//=========================회원정보======
-	@Update("update spmember_detail set mem_pic=#{mem_pic} mem_picname=#{mem_picname} where mem_num=#{mem_num}")
+	@Update("update member_detail set mem_pic=#{mem_pic}, mem_picname=#{mem_picName} where mem_num=#{mem_num}")
 	public void updateProfile(MemberVO member);
-	@Update("update spmember_detail set mem_intro=#{mem_intro} where mem_num=#{mem_num}")
+	@Update("update member_detail set mem_intro=#{mem_intro} where mem_num=#{mem_num}")
 	public void updateIntro(MemberVO member);
 	@Select("select * FROM feed where mem_num=#{mem_num}")
 	public FeedVO selectFeedDetail(Integer mem_num);

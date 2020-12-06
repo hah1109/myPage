@@ -129,14 +129,24 @@ public class FeedController2 {
 	
 	//게시물 상세 페이지 진입 폼
 	@RequestMapping("/boardFeed/feedDetail.do")
-	public ModelAndView process(@RequestParam int feed_num) {
+	public ModelAndView process(@RequestParam int feed_num, HttpSession session) {
+
+		//회원번호를 얻기위해 세션에 저장된 회원 정보를 반환
+	    MemberVO vo = (MemberVO)session.getAttribute("user");
+	    MemberVO memberVO = memberService.selectMember_detail(vo.getMem_num());
+		
 		if(log.isDebugEnabled()) {
 			log.debug("<<글 상세>> : " + feed_num);
 		}
 		
 		FeedVO feed = feedService.selectFeedBoard(feed_num);
 		
-		return new ModelAndView("feedDetail","feed",feed);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("feedDetail");
+		mav.addObject("feed", feed);
+		mav.addObject("member", memberVO);
+		
+		return mav;
 	}
 
 	//게시물 수정 폼

@@ -75,9 +75,9 @@ $(document).ready(function(){
 					alert('파일전송 오류 발생');
 				}
 			},
-			error:function(){
-				alert('네트워크 오류 발생');
-			}
+			error:function(request,status,error){
+	            alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+	           }
 		});
 		
 	});
@@ -109,14 +109,14 @@ $(document).ready(function(){
 		$.ajax({
 			url:'updateIntro.do',
 			type:'POST',
-			data:af_intro,
+			data: {af_intro : af_intro},
 			dataType:'json',
 			cache:false,
 			success:function(data){
 				if(data.result =='logout'){
 					alert('로그인 후 사용하세요');
 				}else if(data.result == 'success'){
-					alert('프로필 사진이 수정 되었습니다.');
+					alert('나의 한마디가 수정 되었습니다.');
 					$('#intro_change').hide();
 					$('#intro_btn').show();
 				}else{
@@ -129,6 +129,9 @@ $(document).ready(function(){
 		});
 		
 	});
+	
+	//==============무한스크롤이면 좋겠지만 ===============
+	
 });
 /*
  * 사진 수정 버튼, 소개글 수정 버튼 안보이도록 설정
@@ -160,10 +163,9 @@ $(document).ready(function(){
 				<input type="button" value="수정" id="photo_btn">
 			</div>
 			<div id="photo_choice" style="display: none;">
-				<input type="file" id="upload"
-					accept="image/gif,image/png,image/jpeg"> <input
-					type="button" value="전송" id="photo_submit"> <input
-					type="button" value="취소" id="photo_reset">
+				<input type="file" id="upload" accept="image/gif,image/png,image/jpeg">
+				<input type="button" value="전송" id="photo_submit">
+				<input type="button" value="취소" id="photo_reset">
 			</div>
 		</li>
 	</ul>

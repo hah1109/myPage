@@ -131,11 +131,12 @@ function commentDelete(feedc_num){
 <h2>프로필 사진</h2>
 	<ul>
 		<li>
-			<c:if test="${empty member.mem_pic }">
+			<c:if test="${empty member.mem_picName }">
 				<img
 					src="${pageContext.request.contextPath }/resources/images/blank.jpg"
 					width="100" height="100" class="my-photo">
-			</c:if> <c:if test="${!empty member.mem_pic }">
+			</c:if> 
+			<c:if test="${!empty member.mem_picName }">
 				<img src="${pageContext.request.contextPath }/member/photoView.do"
 					width="100" height="100" class="my-photo">
 			</c:if>

@@ -97,9 +97,9 @@ public class MemberVO {
 	//mybatis가 byte타입으로 테이블에 저장해주기에 작성한 코드
 	public void setUpload(MultipartFile upload) throws IOException{
 		//MultipartFile -> byte[]
-		//setPhoto(upload.getBytes());
+		setMem_pic(upload.getBytes());
 		//파일 이름
-		//setPhotoname(upload.getOriginalFilename());
+		setMem_picName(upload.getOriginalFilename());
 	}
 
 	/******************************Getter&Setter*************************************/
