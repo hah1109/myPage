@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.board.feed.service.FeedService2;
@@ -59,7 +60,9 @@ public class FeedController2 {
 		//회원번호를 얻기위해 세션에 저장된 회원 정보를 반환
 	    MemberVO vo = (MemberVO)session.getAttribute("user");
 	    MemberVO memberVO = memberService.selectMember_detail(vo.getMem_num());
-	    int count = feedService.countingFeedList(memberVO.getMem_num());
+
+	    System.out.println(memberVO);
+	    int count = feedService.countingFeedList(vo.getMem_num());
 		
 		if(log.isDebugEnabled()) {
 			log.debug("<<FeedCount>>" + count);
@@ -68,7 +71,7 @@ public class FeedController2 {
 		List<FeedVO> list = null;
 		
 		if(count>0) {
-			list = feedService.myPersnolList(memberVO.getMem_num());
+			list = feedService.myPersnolList(vo.getMem_num());
 			
 			if(log.isDebugEnabled()) {
 				log.debug("<<피드 목록>> : " + list);
@@ -122,21 +125,96 @@ public class FeedController2 {
 
 		return "common/result";
 	}
+	
+	//게시물 상세 페이지 진입 폼
+	@RequestMapping("/boardFeed/feedDetail.do")
+	public ModelAndView process(@RequestParam int feed_num) {
+		if(log.isDebugEnabled()) {
+			log.debug("<<글 상세>> : " + feed_num);
+		}
+		
+		FeedVO feed = feedService.selectFeedBoard(feed_num);
+		
+		return new ModelAndView("feedDetail","feed",feed);
+	}
 
 	//게시물 수정 폼
+	@RequestMapping(value="/boardFeed/feedUpdate.do",
+			method=RequestMethod.GET)
+	public String form(@RequestParam int feed_num,
+			Model model) {
+
+		FeedVO feed = feedService.selectFeedBoard(feed_num);
+
+		model.addAttribute("feedVO", feed);
+
+		return "feedModify";
+	}
 
 	//게시물 수정 처리
-
+	@RequestMapping(value="/boardFeed/feedUpdate.do",
+			        method=RequestMethod.POST)
+	public String submitUpdate(@Valid FeedVO feedVO,
+			             BindingResult result,
+			             HttpServletRequest request,
+			             HttpSession session,
+			             Model model) {
+		
+		if(log.isDebugEnabled()) {
+			log.debug("<<글 정보 수정>> : " + feedVO);
+		}
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return "boardModify";
+		}
+		
+		//회원 번호 셋팅
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		feedVO.setMem_num(user.getMem_num());
+		
+		//ip 셋팅
+		feedVO.setFeed_ip(request.getRemoteAddr());
+		
+		//글 수정
+		feedService.updateFeedBoard(feedVO);
+		
+		//View에 표시할 메시지
+		model.addAttribute("message", "글 수정 완료!!");
+		model.addAttribute("url", 
+				request.getContextPath()+"/boardFeed/feedList.do");
+		
+		//타일스 설정에 아래 뷰이름이 없으면 단독으로 JSP 호출
+		return "common/result";
+	}
+	
+	//게시물 삭제 
+	@RequestMapping("/boardFeed/feedDelete.do")
+	public String submitDelete(@RequestParam int feed_num,
+			                   Model model,
+			                   HttpServletRequest request) {
+		
+		if(log.isDebugEnabled()) {
+			log.debug("<<게시판 글 삭제>> : " + feed_num);
+		}
+		
+		//글 삭제
+		feedService.deleteFeedBoard(feed_num);
+		
+		model.addAttribute("message", "글 삭제 완료!!");
+		model.addAttribute("url", 
+				request.getContextPath()+"/boardFeed/feedList.do");
+		
+		return "common/result";
+	}
 	//이미지 출력
 	@RequestMapping("/boardFeed/photoView.do")
-	public ModelAndView viewImage(HttpSession session)	{
+	public ModelAndView viewFeedImage(@RequestParam int feed_num)	{
 
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		MemberVO memberVO = memberService.selectMember_detail(user.getMem_num());
+		FeedVO feedVO = feedService.selectFeedBoard(feed_num);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("imageView");
-		mav.addObject("imageFile", memberVO.getMem_pic());
-		//mav.addObject("filename", memberVO.getMem_name());
+		mav.addObject("imageFile", feedVO.getFeed_file());
+		mav.addObject("filename", feedVO.getFeed_filename());
 
 		return mav;
 

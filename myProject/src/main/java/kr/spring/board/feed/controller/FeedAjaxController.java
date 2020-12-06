@@ -24,7 +24,9 @@ public class FeedAjaxController {
 	@Resource
 	private FeedService2 feedService;
 	
-	@RequestMapping("/feedBoard/updateMyPhoto.do")
+	
+	
+	@RequestMapping("/boardFeed/updateMyPhoto.do")
 	@ResponseBody
 	public Map<String, String> processProfile(MemberVO memberVO, HttpSession session){
 		Map<String, String> map = new HashMap<String, String>();
@@ -38,17 +40,17 @@ public class FeedAjaxController {
 		}else {
 			//로그인이 된 경우
 			memberVO.setMem_num(user.getMem_num());
-			System.out.println(memberVO.getMem_pic());
+			System.out.println(memberVO);
 			feedService.updateProfile(memberVO);
 			
 			//이미지를 업로드 한 후 세션에 저장된 회원 정보의 이미지 이름 교체
-			//user.setPhotoname(memberVO.getPhotoname());
+			user.setMem_picName(memberVO.getMem_picName());
 			map.put("result", "success");
 		}
 		return map;
 	}
 	
-	@RequestMapping("/feedBoard/updateIntro.do")
+	@RequestMapping("/boardFeed/updateIntro.do")
 	@ResponseBody
 	public Map<String, String> processIntro(MemberVO memberVO, HttpSession session){
 		Map<String, String> map = new HashMap<String, String>();

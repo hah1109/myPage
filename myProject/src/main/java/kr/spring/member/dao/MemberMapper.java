@@ -69,7 +69,7 @@ public interface MemberMapper {
 	public void updateTrainer_detail(MemberVO member);
 
 	//개인정보 마이페이지에 불러오기
-	@Select("SELECT m.mem_id,d.t_num,d.mem_gender,d.mem_name,d.mem_pw,d.mem_cell,d.mem_email,d.mem_pic,d.mem_zipcode,d.mem_addr1,d.mem_addr2,d.mem_intro,d.mem_date FROM member m LEFT OUTER JOIN member_detail d ON m.mem_num=d.mem_num WHERE m.mem_num=#{mem_num}")
+	@Select("SELECT m.mem_id,d.t_num,d.mem_gender,d.mem_name,d.mem_pw,d.mem_cell,d.mem_email,d.mem_pic,d.mem_picname,d.mem_zipcode,d.mem_addr1,d.mem_addr2,d.mem_intro,d.mem_date FROM member m LEFT OUTER JOIN member_detail d ON m.mem_num=d.mem_num WHERE m.mem_num=#{mem_num}")
 	public MemberVO selectMember_detail(Integer mem_num);
 	@Select("SELECT m.mem_id,d.g_addr,d.career,d.mem_gender,d.exp,d.mem_name,d.mem_pw,d.mem_cell,d.mem_email,d.mem_pic,d.mem_zipcode,d.mem_addr1,d.mem_addr2,d.mem_intro,d.mem_date FROM member m LEFT OUTER JOIN trainer_detail d ON m.mem_num=d.mem_num WHERE m.mem_num=#{mem_num}")
 	public MemberVO selectTrainer_detail(Integer mem_num);

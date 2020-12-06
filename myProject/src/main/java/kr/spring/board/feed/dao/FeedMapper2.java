@@ -21,7 +21,7 @@ public interface FeedMapper2 {
 	//피드등록
 		@Insert("Insert into feed (feed_num, feed_type, feed_content, feed_file, feed_filename, feed_ip, mem_num, mem_id, feed_auth, feed_reg_date)"
 				+" values(feed_num.nextval, #{feed_type}, #{feed_content}, #{feed_file}, #{feed_filename}, #{feed_ip}, #{mem_num}, #{mem_id}, #{feed_auth}, SYSDATE)")
-		public void insertFeedBoard(FeedVO feedBoard);
+	public void insertFeedBoard(FeedVO feedBoard);
 	//피드선택(상세글)
 	@Select("SELECT * FROM feed b JOIN member m USING(mem_num) WHERE feed_num = #{feed_num}")
 	public FeedVO selectFeedBoard(Integer feedBoard_num);
@@ -39,7 +39,7 @@ public interface FeedMapper2 {
 	@Delete("delete from follower where follower_to = #{follower_to}")
 	public void deleteFollow();*/
 	//=========================회원정보======
-	@Update("update spmember_detail set mem_pic=#{mem_pic} where mem_num=#{mem_num}")
+	@Update("update spmember_detail set mem_pic=#{mem_pic} mem_picname=#{mem_picname} where mem_num=#{mem_num}")
 	public void updateProfile(MemberVO member);
 	@Update("update spmember_detail set mem_intro=#{mem_intro} where mem_num=#{mem_num}")
 	public void updateIntro(MemberVO member);

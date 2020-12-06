@@ -138,15 +138,18 @@ $(document).ready(function(){
 
 <div class="page-main-style">
 
+<!-- 아이디 노출 -->
+	<h1>${member.mem_id }</h1>
 <!-- 프로필 사진 노출 -->
 	<h2>프로필 사진</h2>
 	<ul>
 		<li>
-			<c:if test="${empty member.mem_pic }">
+			<c:if test="${empty member.mem_picName }">
 				<img
 					src="${pageContext.request.contextPath }/resources/images/blank.jpg"
 					width="100" height="100" class="my-photo">
-			</c:if> <c:if test="${!empty member.mem_pic }">
+			</c:if> 
+			<c:if test="${!empty member.mem_picName }">
 				<img src="${pageContext.request.contextPath }/member/photoView.do"
 					width="100" height="100" class="my-photo">
 			</c:if>
@@ -198,18 +201,23 @@ $(document).ready(function(){
 	<div class="align-center">등록된 게시물이 없습니다.</div>
 </c:if>
 <c:if test="${count != 0 }">
-	<c:forEach var="Feed" items="${list}">
+	<c:forEach var="feed" items="${list}">
 		<div class="masonry">
 			<div class="grid">
-				<img src="https://source.unsplash.com/random/1">
+				<img src="photoView.do?feed_num=${feed.feed_num}">
 				<div class="grid__body">
 					<div class="relative">
-						<a class="grid__link" target="_blank" href="/"></a>
-						<h1 class="grid__title">Title 1</h1>
-						<p class="grid__author">Mario Rossi</p>
+						<a class="grid__link" target="_blank" href="feedDetail.do?feed_num=${feed.feed_num }"></a>
+						<c:if test="${feed.feed_type == 1 }">
+						<h1 class="grid__title">식단</h1>
+						</c:if>
+						<c:if test="${feed.feed_type == 2 }">
+						<h1 class="grid__title">운동</h1>
+						</c:if>
+						<p class="grid__author">${feed.feed_auth }</p>
 					</div>
 					<div class="mt-auto">
-						<span class="grid__tag">#tag1</span>
+						<span class="grid__tag">#${feed.feed_content }</span>
 					</div>
 				</div>
 			</div>

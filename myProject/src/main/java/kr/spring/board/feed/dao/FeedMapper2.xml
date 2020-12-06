@@ -4,7 +4,19 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="kr.spring.board.feed.dao.FeedMapper2">  
 
-
+<update id="updateFeedBoard" parameterType="feedVO">
+		UPDATE 
+			feed
+		SET 
+			feed_type = #{feed_type},
+			feed_auth = #{feed_auth},
+			feed_content = #{feed_content},
+			feed_file = #{feed_file},
+			feed_filename = #{feed_filename},
+			feed_ip = #{feed_ip}
+		WHERE
+			feed_num = #{feed_num}
+	</update>
 </mapper>
 
 
