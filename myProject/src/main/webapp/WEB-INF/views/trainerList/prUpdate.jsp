@@ -29,6 +29,7 @@
   position: relative;
   width:500px;
   height:480px;
+  margin:0 auto;
 }
 @media (max-width: 767px) {
   .right {
@@ -181,6 +182,10 @@ input::-moz-focus-inner {
 			<input type="button" class="submit" value="전송" id="pic_submit">
 			<input type="button" class="submit" value="취소" id="pic_reset">
 			</div>
+		</li>
+		<li>
+			<br>
+			<input type="button" value="돌아가기" onclick="location.href='trainerList.do'">
 		</li>
 	</ul>
 </div>

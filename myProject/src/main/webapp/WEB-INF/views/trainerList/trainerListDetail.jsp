@@ -16,9 +16,12 @@
 <div>
 	<ul>
 		<li>
-			<c:if test="${trainer.mem_pic == null}">기본 이미지 보여주기</c:if>
-			<c:if test="${trainer.mem_pic != null}">${trainer.mem_pic}</c:if>
-		</li>
+			<c:if test="${empty trainer.mem_picName}">기본이미지 보여주기</c:if>
+			<c:if test="${!empty trainer.mem_picName}">
+	        <img src="${pageContext.request.contextPath}/trainerList/trainerImage.do?mem_num=${trainer.mem_num}" 
+					width="250" height="200">
+	        </c:if>
+		</li>	
 		
 		<li>
 			<!-- 
@@ -66,28 +69,29 @@
 		
 		<li>
 			<c:if test="${trainer.career == null}">작성된 이력 정보가 없습니다.</c:if>
-			<c:if test="${trainer.career != null}">${trainer.career}</c:if>
+			<c:if test="${trainer.career != null}">이력: ${trainer.career}</c:if>
 		</li>
 	</ul>
 </div>
 
-<!-- 본인이 로그인 한 상태일 경우에만 보여질 2개의 버튼 -->
-<div>
-	<ul>
-		<li>
-			<button type="button" onclick="location.href='prUpdate.do'">프로필사진 변경하기</button>
-		</li>
-		
-		<li>
-			<button type="button" onclick="location.href='introUpdate.do'">자기소개 수정하기</button>
-		</li>
-		
-		<li>
-			<button type="button" onclick="location.href='${pageContext.request.contextPath}/member/myPage.do'">개인정보 수정하기</button>
-		</li>
-	</ul>
-</div>
-
+<!-- 본인이 로그인 한 상태일 경우에만 보여질 3개의 버튼 -->
+<c:if test="${user.mem_num == trainer.mem_num}">
+	<div>
+		<ul>
+			<li>
+				<button type="button" onclick="location.href='prUpdate.do'">프로필사진 변경하기</button>
+			</li>
+			
+			<li>
+				<button type="button" onclick="location.href='introUpdate.do'">자기소개 수정하기</button>
+			</li>
+			
+			<li>
+				<button type="button" onclick="location.href='${pageContext.request.contextPath}/member/myPage.do'">마이페이지</button>
+			</li>
+		</ul>
+	</div>
+</c:if>
 </div>
 
 

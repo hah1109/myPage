@@ -116,6 +116,9 @@
 			<mapping path="/boardFeed/feedWrite.do"/>
 			<mapping path="/boardFeed/myFeed.do"/>
 			<mapping path="/boardFeed/myMembersFeed.do"/>
+			<mapping path="/trainerList/prUpdate.do"/>
+			<mapping path="/trainerList/introUpdate.do"/>
+			<mapping path="/member/myPage.do"/>
 			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/> 
 		</interceptor>
 		<interceptor>	

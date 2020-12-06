@@ -28,7 +28,7 @@
   color: #000;
   position: relative;
   width:450px;
-  height:200px;
+  height:220px;
   margin:0 auto;
   margin-top:15%;
 }
@@ -95,6 +95,7 @@ input::-moz-focus-inner {
 			<div class="form">
 			<form:input path="mem_intro" id="intro_write" placeholder="최선을 다해 몸짱을 만들어드리겠습니다!!"/><br>
 			<input type="submit" id="submit" name="intro_modify" value="수정">
+			<input type="button" id="submit" value="돌아가기" onclick="location.href='trainerList.do'">
 			</div>
 		</form:form>
 
