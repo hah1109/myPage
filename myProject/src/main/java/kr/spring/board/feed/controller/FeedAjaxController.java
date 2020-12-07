@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -55,7 +56,7 @@ public class FeedAjaxController {
 	//==============나의 한마디 업로드하기 ====================
 	@RequestMapping("/boardFeed/updateIntro.do")
 	@ResponseBody
-	public Map<String, String> processIntro(MemberVO memberVO, HttpSession session){
+	public Map<String, String> processIntro(HttpServletRequest req, HttpSession session){
 		Map<String, String> map = new HashMap<String, String>();
 		System.out.println("진입");
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -64,8 +65,10 @@ public class FeedAjaxController {
 			map.put("result", "logout");
 		}else {
 			//로그인이 된 경우
+			MemberVO memberVO = new MemberVO();
 			memberVO.setMem_num(user.getMem_num());
-			System.out.println(memberVO.getMem_intro() + memberVO.getMem_name() + memberVO.getMem_num());
+			memberVO.setMem_intro(req.getParameter("af_intro"));
+			System.out.println(memberVO);
 			feedService.updateIntro(memberVO);
 			
 			//이미지를 업로드 한 후 세션에 저장된 회원 정보의 이미지 이름 교체
