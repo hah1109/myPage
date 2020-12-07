@@ -335,9 +335,40 @@ public class TlBoardController {
 		
 		tlBoardService.deleteMatchingCancle(mem_num);
 		
-		
 		return "redirect:/trainerList/trainerList.do";
 	}
+
+/*	//매칭신청 수락을 눌렀을 경우 작동할 메서드
+	@RequestMapping("/trainerList/matchingOk.do")
+	public String matchingOk(@RequestParam int mem_num, HttpSession session) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		 * 1.현재 로그인중인 트레이너의 mem_num을 가져온다
+		 * 2.매개변수로 받은 mem_num은 매칭신청한 일반회원의 mem_num
+		 * 3.member_detail테이블에서 t_num에 트레이너의 mem_num을 업데이트
+		 * 4.training 테이블 속성들 (insert 해줘야함)
+		 *     training_num(시퀀스) 
+		 *     mem_num(로그인중인 트레이너의 mem_num)
+		 *     traing_to (트레이닝 받을 일반회원의 mem_num)
+		 * 5.follow관계맺기
+		 * 6.매칭테이블에 매칭성공한 일반회원 찾아 신청 내역 [제거or변경]한 후에 알림보냄? 
+		 
+		
+		//현재 로그인 중인 트레이너의 mem_num을 얻기위해 세션에서 가져옴
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		map.put("t_num", user.getMem_num());
+		map.put("mem_num", mem_num);
+
+		//t_num 변경헤줄 메서드 호출					
+		TlBoardVO vo = tlBoardService.updateTNum(map);
+
+		//training테이블에 insert해줄 메서드					  
+		TlBoardVO vo2 = tlBoardService.insertTrainingTable(map);
+				 
+			
+		return "redirect:/trainerList/trainerList.do";
+	}*/
 
 
 }

@@ -44,7 +44,7 @@ public interface TlBoardMapper {
 	public void insertMatching(Map<String, Object> map);
 	
 	//트레이너의 myPage에 매칭 신청 내역 표시
-	@Select("SELECT * FROM( SELECT a.*, b.*, rownum rnum FROM (SELECT * FROM matching WHERE mat_to=#{mem_num})a, (SELECT mem_pic, mem_picName FROM member_detail WHERE mem_num IN (SELECT mat_from FROM matching WHERE mat_to=#{mem_num}))b) WHERE rnum>=#{start} and rnum <= #{end}")
+	@Select("SELECT * FROM(SELECT a.*, rownum rnum FROM(SELECT * from matching m JOIN member_detail d ON m.mem_num=d.mem_num where mat_to=105 order by mat_num)a) WHERE rnum>=#{start} and rnum <= #{end}")
 	public List<TlBoardVO> matchingList(Map<String,Object> map);
 	
 	//매칭 신청 내역 카운트
@@ -58,5 +58,17 @@ public interface TlBoardMapper {
 	//매칭 신청온걸 거절할 메서드
 	@Delete("delete from matching where mat_from = #{mem_num}")
 	public void deleteMatchingCancle(Integer mem_num);
+	
+	//t_num에 트레이너의 mem_num을 넣어줄 메서드
+	@Update("update member_detail set t_num=#{t_num} where mem_num=#{mem_num}")
+	public void updateTNum(Map<String,Object> map);
+	
+	//training테이블에 연결할 시퀀스를 가져올 메서드
+	@Select("select training_number.nextval from dual") 
+	public int selectTrainingNumber();
+	
+	//training 테이블에 트레이닝 관계 넣어줄 메서드
+	@Insert("insert into training values(#{training_num},#{t_num},#{mem_num})")
+	public void insertTrainingTable(Map<String,Object> map);
 	
 }

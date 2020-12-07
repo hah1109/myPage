@@ -39,7 +39,7 @@ table td, table th{
 					</td>
 				</tr>
 				<tr>
-					<td><a href="#">수락</a></td>
+					<td><a href="matchingOk.do?mem_num=${list.mat_from}">수락</a></td>
 					<td><a href="matchingCancle.do?mem_num=${list.mat_from}">거절</a></td>
 				</tr>
 			</c:forEach>
