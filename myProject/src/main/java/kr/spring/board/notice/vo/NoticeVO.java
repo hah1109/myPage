@@ -4,20 +4,38 @@ import java.sql.Date;
 
 public class NoticeVO {
 	
+	//알림의 고유 번호(notice_num_seq)
 	private int notice_num;
+	//알림을 보내는 기준(댓글이 달리는 게시판 번호 또는 첫번째 댓글에 두번째 댓글을 달때 첫번쨰 댓글번호)
 	private int board_num;
+	//알림 받는 사람의 멤버번호
 	private int writer_memnum;
+	//댓글을 단 사람(알림주게되는 사람)의 아이디
 	private int reply_mem_num;
+	//댓글 내용
 	private String board_comment;
+	//등록한 날짜(default sysdate)
 	private Date reg_date;
+	//알림주는 내용(예시:자유게시판 글에 댓글을 달았습니다.)
 	private String notice_comment;
+	//이동 눌렀을때 이동하는 화면
 	private String return_url;
+	//앎림을 받은 사람이 확인을 누르면 그날자로 업데이트 됨(처음에는 널값으로 입력)
 	private Date check_date;
 
-	//댓글 단 사람의 아이디
+	//댓글을 단 사람의 아이디
 	private String mem_id;
 	
+	//알림 받는 사람의 아이디
+	private String writer_memid;
 	
+	
+	public String getWriter_memid() {
+		return writer_memid;
+	}
+	public void setWriter_memid(String writer_memid) {
+		this.writer_memid = writer_memid;
+	}
 	public int getNotice_num() {
 		return notice_num;
 	}
