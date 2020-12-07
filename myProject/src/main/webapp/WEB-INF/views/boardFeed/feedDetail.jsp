@@ -142,7 +142,7 @@ function commentDelete(feedc_num){
 			</c:if>
 		</li>
 		<li>
-			작성자 : ${feed.mem_id}
+			<a href="feedList.do?mem_num=${member.mem_num}">작성자 : ${feed.mem_id}</a>
 		</li>
 <!-- 타입 보이기 -->
 		<li>
@@ -187,7 +187,7 @@ function commentDelete(feedc_num){
 		</script>              
 		</c:if>
 		<input type="button" value="목록"
-		       onclick="location.href='feedList.do'">
+		       onclick="location.href='feedList.do?mem_num=${user.mem_num}'">
 	</div>
 	
 	<form id="commentbox">

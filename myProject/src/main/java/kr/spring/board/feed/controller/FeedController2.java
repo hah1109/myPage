@@ -55,15 +55,27 @@ public class FeedController2 {
 		다른 사람의 프로필 사진을 누르면서 training이 아닌 경우 => 팔로우공개, 트레이너공개, 전체공개가 보여진다
 	 */
 	//mypersonal 게시판 호출
-	@RequestMapping("/boardFeed/feedList.do")
-	public ModelAndView feedList(HttpSession session) {
+	@RequestMapping(value="/boardFeed/feedList.do")
+	public ModelAndView feedList(@RequestParam int mem_num ,HttpSession session) {
 		//회원번호를 얻기위해 세션에 저장된 회원 정보를 반환
-	    MemberVO vo = (MemberVO)session.getAttribute("user");
-	    MemberVO memberVO = memberService.selectMember_detail(vo.getMem_num());
 
+	    MemberVO vo = (MemberVO)session.getAttribute("user");
+		if(mem_num == 0) {
+			mem_num = vo.getMem_num();
+		}
+	    System.out.println(vo);
+	    MemberVO memberVO = memberService.selectMember_detail(vo.getMem_num());
+	    
+	    //클릭된 mem_num의 정보
+	    MemberVO feedMember = memberService.selectMember_detail(mem_num);
+	    
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myPersonalList");
-		mav.addObject("member", memberVO);
+		if(vo.getMem_num() == feedMember.getMem_num()) {
+			mav.addObject("member", memberVO);
+		}else {
+			mav.addObject("member", feedMember);
+		}
 		
 		return mav;
 	}
@@ -114,12 +126,25 @@ public class FeedController2 {
 		//회원번호를 얻기위해 세션에 저장된 회원 정보를 반환
 	    MemberVO vo = (MemberVO)session.getAttribute("user");
 	    MemberVO memberVO = memberService.selectMember_detail(vo.getMem_num());
+	    memberVO.setMem_num(vo.getMem_num());
 		
 		if(log.isDebugEnabled()) {
 			log.debug("<<글 상세>> : " + feed_num);
 		}
 		
 		FeedVO feed = feedService.selectFeedBoard(feed_num);
+		
+		System.out.println(memberVO+"////"+feed);
+		
+		if(memberVO.getMem_id() == feed.getMem_id()) {
+			//세션의 아이디와 			피드의 아이디가 같을 경우
+			
+		}else {
+			//세션의 아이디와 피드의 아이디가 다를경우
+			memberVO = memberService.selectMember_detail(feed.getMem_num());
+			memberVO.setMem_num(feed.getMem_num());
+		}
+		System.out.println("////////"+memberVO +"//////////"+feed);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("feedDetail");

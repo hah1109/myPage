@@ -166,7 +166,7 @@ $(document).ready(function(){
 						$(list).each(function(index,item){
 							
 							var output = '<div class="masonry">';
-							output = '<div class="grid">';
+							output += '<div class="grid">';
 							
 							output += '<img ';
 							if(item.feed_filename == null){
