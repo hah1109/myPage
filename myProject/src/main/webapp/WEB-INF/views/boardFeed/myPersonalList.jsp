@@ -131,6 +131,109 @@ $(document).ready(function(){
 	});
 	
 	//==============무한스크롤이면 좋겠지만 ===============
+		var currentPage;
+		var count;
+		var rowCount;
+		
+		//글 목록
+		function selectData(pageNum){
+			currentPage = pageNum;
+			
+			if(pageNum == 1){
+				//처음 호출시는 해당 ID의 div의 내부 내용물을 제거
+				$('#output').empty();
+			}
+			//로딩 이미지 노출
+			$('#loading').show();
+			
+			$.ajax({
+				type:'post',
+				data:{pageNum:pageNum},
+				url:'myPersonalListAjax.do',
+				dataType:'json',
+				cache:false,
+				timeout:30000,
+				success:function(data){
+					//로딩 이미지 감추기
+					$('#loading').hide();
+					count = data.count;
+					rowCount = data.rowCount;
+					var list = data.list;
+					
+					if(count < 0 || list == null){
+						alert('목록 호출 오류 발생!');
+					}else{
+						$(list).each(function(index,item){
+							
+							var output = '<div class="masonry">';
+							output += '<div class="grid">';
+							
+							output += '<img ';
+							if(item.feed_filename == null){
+								output += 'src="../resources/images/blank.jpg">';
+							} else {
+								output += 'src="photoView.do?feed_num='+item.feed_num+'">';
+							}
+							
+							output += '<div class="grid__body">';
+							
+							output += '<div class="relative">';
+							output += '<a class="grid__link" target="_blank" href="feedDetail.do?feed_num='+item.feed_num+'"></a>';
+							
+							output +='<h1 class="grid__title">';
+							if(item.feed_type == 1) {
+								output += '식단';
+							} else if(item.feed_type == 2) {
+								output += '운동';
+							}
+							output += ' </h1>';
+							
+							output += '<p class="grid__author">'+item.feed_auth+'</p>';
+							output += '</div>';
+							output += '<div class="mt-auto">';
+							output += '<span class="grid__tag">'+item.feed_content+'</span>';
+							output += '</div>';
+							output += '</div>';
+							output += '</div>';
+							output += '</div>';
+							
+								
+							//문서 객체에 추가
+							$('#output').append(output);
+						});
+						
+					}
+				},
+				error:function(){
+					//로딩 이미지 감추기
+					$('#loading').hide();
+					alert('네트워크 오류');
+				}
+		});
+	}
+	
+	
+	
+	//스크롤시 데이터 추가
+	$(window).scroll(function(){
+		var scrollTop = $(document).scrollTop();
+		var docHeight = $(document).height();
+		var winHeight = $(window).height();
+		
+		if(scrollTop >= docHeight - winHeight)
+			if(currentPage>=Math.ceil(count/rowCount)){
+				//다음 페이지가 없음
+				return;
+			}else{
+				//다음 페이지가 존재
+				var pageNum = currentPage + 1;
+				selectData(pageNum);
+			}
+		
+	});
+	
+	//1페이지 호출
+	selectData(1);
 	
 });
 /*
@@ -198,7 +301,31 @@ $(document).ready(function(){
 		<input type="button" value="글쓰기" onclick="location.href='feedWrite.do'">
 	</p>
 </div>
-<!-- 썸네일, type, content 노출 -->	
+<div>
+	
+	<!-- LIST -->
+	<div id="feedList">
+		<div id="output">
+			<!-- Ajax 영역 -->
+		</div>
+		
+		<!-- feed로딩시 로딩 이미지 -->
+		<div id="loading" style="display:none;">
+			<img src="/MyFirstTrainer/resources/images/ajax-loader.gif">
+		</div>
+		<!-- feed로딩시 로딩 이미지 -->
+	</div>
+	<!-- LIST -->
+	
+	<!-- TOP 버튼 -->
+	<div style="position:fixed; bottom: 80px; right:20px;">
+		<input type="button" class="topButton" value="TOP" onclick="location.href='#main'">
+	</div>
+	<!-- TOP 버튼 -->
+		
+</div>
+
+<!-- 썸네일, type, content 노출 	
 <c:if test="${count == 0}">
 	<div class="align-center">등록된 게시물이 없습니다.</div>
 </c:if>
@@ -225,7 +352,7 @@ $(document).ready(function(){
 			</div>
 		</div>	
 	</c:forEach>
-</c:if>
+</c:if>-->
 <!-- 마이 퍼스널 게시판 -->
 <!-- 
 			<td><a href="feedDetail.do?feed_num=${feed.feed_num}"><img

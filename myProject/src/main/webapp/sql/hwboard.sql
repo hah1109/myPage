@@ -12,4 +12,4 @@ insert into hwboard values (hwboard_seq.nextval, '땅크부부  하체 홈트','
 
 insert into hwboard values (hwboard_seq.nextval, '다노티비 전신 홈트','cMkZ6A7wngk','전신',150);
 
-insert into hwboard values (hwboard_seq.nextval, '권혁 가슴 홈트','c_5ENJWekbQ','가슴',150)
+insert into hwboard values (hwboard_seq.nextval, '권혁 가슴 홈트','c_5ENJWekbQ','가슴',150);

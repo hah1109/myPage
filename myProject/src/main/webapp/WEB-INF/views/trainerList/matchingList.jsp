@@ -20,15 +20,27 @@ table td, table th{
 	<c:if test="${count > 0}">
 		<table>
 			<tr>
-				<th>신청인</th>
-				<th></th>
-				<th></th>
+				<th colspan="3">트레이닝 신청 내역</th>
+				
 			</tr>
 			<c:forEach var="list" items="${list}">
 				<tr>
-					<td><a href="#">${list.mat_from}</a></td>
-					<td><a href="#">수락</a></td>
-					<td><a href="#">거절</a></td>
+					<td colspan="3">
+							<c:if test="${empty list.mem_picName}">
+							<img src="../resources/images/cameraImage.jpg" width="100" height="100">
+							</c:if>
+							<c:if test="${!empty list.mem_picName}">
+								<img src="${pageContext.request.contextPath}/trainerList/memberOfpic.do?mem_num=${list.mem_num}" 
+								width="200" height="200">
+							</c:if>
+							<div style="text-align:center;">
+							${list.mat_id} 님이 트레이닝 신청을 하셨습니다.
+							</div>
+					</td>
+				</tr>
+				<tr>
+					<td><a href="matchingOk.do?mem_num=${list.mat_from}">수락</a></td>
+					<td><a href="matchingCancle.do?mem_num=${list.mat_from}">거절</a></td>
 				</tr>
 			</c:forEach>
 		</table>

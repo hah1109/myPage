@@ -56,7 +56,7 @@
 							if(item.feed_filename == null){
 								output += '<img class="thumbnail" src="../resources/images/blank.jpg">';
 							} else {
-								output += '<img class="thumbnail" src="imageView.do?feed_num='+item.feed_num+'>';
+								output += '<img class="thumbnail" src="photoView.do?feed_num='+item.feed_num+'">';
 							}
 							
 							output += '</div>';

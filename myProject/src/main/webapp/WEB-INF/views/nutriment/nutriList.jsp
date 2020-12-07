@@ -22,7 +22,6 @@
 </script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nutrimentSearch.css">
 <div id="nutriList">
-	<h2>영양성분 검색</h2>
 	<div id="main-div">
 		<div id="sub-div">
 		

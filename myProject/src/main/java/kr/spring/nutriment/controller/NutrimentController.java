@@ -119,11 +119,17 @@ public class NutrimentController {
 	@RequestMapping("/nutriment/nutrimentDetail.do")
 	public ModelAndView nutriDetail (@RequestParam int food_num,HttpSession session) {
 		
+
+		ModelAndView mav = new ModelAndView();
+		
 		//관리자 로그인 확인 체크 (버튼으로 접근이 아닌 주소로 접근할 때를 위해)
 		//session에 로그인 되어 있는 아이디의 auth값 받기
 		MemberVO memberVO = (MemberVO)session.getAttribute("user");
-		int auth = memberVO.getMem_auth();
 		
+		if(memberVO != null) {//로그인 되어 있을 시
+			int auth = memberVO.getMem_auth();
+			mav.addObject("auth",auth); //수정/삭제버튼 활성화를 위해 auth값 보내기
+		}
 		
 		//인자로 들어온 food_num 확인
 		if(log.isDebugEnabled()) log.debug("<<상세>> : " + food_num);
@@ -134,9 +140,6 @@ public class NutrimentController {
 		if(log.isDebugEnabled()) log.debug("<<선택된 정보>> : " + nutrimentVO);
 		
 		
-		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("auth",auth); //삭제버튼 활성화를 위해 auth값 보내기
 		mav.addObject("NutrimentVO",nutrimentVO); //출력할 VO
 		mav.setViewName("nutrimentDetail"); //view의 이름
 
@@ -156,9 +159,7 @@ public class NutrimentController {
 		
 		if(memberVO != null) { //로그인 상태일 시
 			
-			
 			if(memberVO.getMem_auth() == 0) {//로그인 된 id의 auth 값이 0(관리자 일 때)
-				
 				//insert form 호출
 				return "nutrimentInsertForm";
 				
@@ -172,15 +173,9 @@ public class NutrimentController {
 				return "common/result";
 			}
 			
-		
 		} else { //비로그인 상태 일시
 			
-			model.addAttribute("message", "관리자 전용 페이지 입니다.");
-			model.addAttribute("url", "nutriList.do");
-			
-			
-			//model에 값 2개 넘긴 후 result.jsp 리턴
-			return "common/result";
+			return "login";
 		}
 
 	}
@@ -207,6 +202,63 @@ public class NutrimentController {
 		
 	}
 	
+	//영양성분 수정 폼
+	@RequestMapping(value="/nutriment/nutrimentUpdate.do",method=RequestMethod.GET)
+	public String nutriUpdateForm(@RequestParam int food_num, HttpSession session, Model model) {
+		
+		if(log.isDebugEnabled()) { log.debug("<<수정 요청 food_num>> :" + food_num);}
+		
+		//관리자 로그인 확인 체크 (버튼으로 접근이 아닌 주소로 접근할 때를 위해)
+		//session에 로그인 되어 있는 아이디의 auth값 받기
+		MemberVO memberVO = (MemberVO)session.getAttribute("user");
+				
+		if(memberVO != null) { //로그인 상태일 시
+			
+			if(memberVO.getMem_auth() == 0) {//로그인 된 id의 auth 값이 0(관리자 일 때)
+				
+				NutrimentVO nutrimentVO = nutrimentService.selectNutriDetail(food_num);
+				model.addAttribute("food_num",food_num);
+				model.addAttribute("nutrimentVO", nutrimentVO);
+				return "nutrimentModify";
+				
+			} else { //로그인 된 id가 일반회원/트레이너 일 경우
+				
+				//model에 값 2개 넘긴 후 result.jsp 리턴
+				model.addAttribute("message", "관리자 전용 페이지 입니다.");
+				model.addAttribute("url", "nutriList.do");
+
+				return "common/result";
+			}
+		} else { //비로그인 상태
+			
+			return "login";
+		}
+		
+	}
+	
+	//영양성분 수정 처리
+	@RequestMapping(value="/nutriment/nutrimemtUpdate.do", method=RequestMethod.POST)
+	public String nutriUpdateSubmit(@RequestParam int food_num, @Valid NutrimentVO nutrimentVO, BindingResult result, HttpSession session, Model model){
+		
+		//유효성 체크 결과 에러가 있으면 수정폼 호출
+		if(result.hasErrors()) { return "nutrimentModify"; }
+		
+		if(log.isDebugEnabled()) { log.debug("<<영양성분 수정>> :" + nutrimentVO);}
+		
+		//food_num 저장
+		nutrimentVO.setFood_num(food_num);
+		//영양성분 등록
+		nutrimentService.updateNutriment(nutrimentVO);
+		
+		//result 페이지 셋팅
+		model.addAttribute("food_num",nutrimentVO.getFood_num());
+		model.addAttribute("message", "수정이 완료되었습니다.");
+		model.addAttribute("url", "nutrimentDetail.do?food_num="+nutrimentVO.getFood_num());
+		
+		return "common/result";
+		
+	}
+
 	
 	//영양성분 삭제 처리
 	@RequestMapping("/nutriment/nutrimentDelete.do")

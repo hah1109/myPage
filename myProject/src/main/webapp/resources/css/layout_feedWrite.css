@@ -22,7 +22,8 @@ p, li, a{
 fieldset{
   margin: 0;
   padding: 0;
-  border: none;
+  border: 1px solid #0de9df;
+  border-radius: 15px;
 }
 
 /* GRID */
@@ -52,9 +53,24 @@ fieldset{
   margin-left: 0;
 }
 
+.feed_type{
+	width: 100%;
+	height: 40px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.feed_auth{
+	width: 100%;
+	height: 40px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
 .container{
   width: 100%;
   max-width: 700px;
+  height: 500px;
   margin: 0 auto;
   position: relative;
 }
@@ -88,7 +104,7 @@ fieldset{
 
 .steps{
   list-style-type: none;
-  margin: 0;
+  margin-left: 100px;
   padding: 0;
   background-color: #fff;
   text-align: center;
@@ -97,15 +113,14 @@ fieldset{
 
 .steps li{
   display: inline-block;
-  margin: 20px;
+  padding: 20px;
   color: #ccc;
-  padding-bottom: 5px;
+  border: 1px solid;
 }
 
 .steps li.is-active{
   border-bottom: 1px solid #3498db;
   color: #3498db;
-  border: 1px solid #0de9df;
 }
 
 /* FORM */
@@ -139,6 +154,7 @@ fieldset{
 
 .form-wrapper .section h3{
   margin-bottom: 30px;
+  border: 1px solid #0de9df;
 }
 
 .form-wrapper .section.is-active{
@@ -149,7 +165,7 @@ fieldset{
   transform: scale(1, 1);
 }
 
-.form-wrapper .button, .form-wrapper .submit{
+.form-wrapper .button_next, .form-wrapper .submit, .form-wrapper .button_before, .form-wrapper .button{
   background-color: #3498db;
   display: inline-block;
   padding: 8px 30px;
@@ -157,9 +173,9 @@ fieldset{
   cursor: pointer;
   font-size: 14px !important;
   font-family: 'Open Sans', sans-serif !important;
-  position: absolute;
   right: 20px;
   bottom: 20px;
+  margin-top: 10px;
 }
 
 .form-wrapper .submit{

@@ -1,6 +1,7 @@
 package kr.spring.board.feed.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -19,13 +20,13 @@ public class FeedService2Impl implements FeedService2{
 	FeedMapper2 feedMapper;
 
 	@Override
-	public List<FeedVO> myPersnolList(Integer mem_num) {
-		return feedMapper.myPersnolList(mem_num);
+	public List<FeedVO> myPersnolList(Map<String,Object> map) {
+		return feedMapper.myPersnolList(map);
 	}
 	
 	@Override
-	public int countingFeedList(Integer mem_num) {
-		return feedMapper.countingFeedList(mem_num);
+	public int countingFeedList(Map<String,Object> map) {
+		return feedMapper.countingFeedList(map);
 	}
 
 	@Override
@@ -91,6 +92,17 @@ public class FeedService2Impl implements FeedService2{
 	@Override
 	public int deleteFeedComment(int feedc_num) {
 		return feedMapper.deleteFeedComment(feedc_num);
+	}
+	
+	//==============팔로우 관련
+	@Override
+	public void insertFollow(FeedVO feedVO) {
+		feedMapper.insertFollow(feedVO);
+	}
+
+	@Override
+	public void deleteFollow(FeedVO feedVO) {
+		feedMapper.deleteFollow(feedVO);
 	}
  
 }

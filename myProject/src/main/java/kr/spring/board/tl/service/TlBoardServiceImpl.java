@@ -58,5 +58,15 @@ public class TlBoardServiceImpl implements TlBoardService {
 	public int matchingCount(int mem_num) {
 		return tlmapper.matchingCount(mem_num);
 	}
+
+	@Override
+	public TlBoardVO selectMemberDetail(Integer mem_num) {
+		return tlmapper.selectMemberDetail(mem_num);
+	}
+
+	@Override
+	public void deleteMatchingCancle(Integer mem_num) {
+		tlmapper.deleteMatchingCancle(mem_num);
+	}
  
 }

@@ -15,10 +15,9 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout_feedReco.css">
 <div class="page-main-style">
-	
+	<input type="button" class="write_Btn" value="" onclick="location.href='feedWrite.do'">
 	<c:if test="${count == 0}">
 		<div class="masonry">
-			<input type="button" class="write_Btn" value="" onclick="location.href='feedWrite.do'">
 			<div class="grid">
 				<img src="../resources/images/cameraImage.jpg">
 				<div class="grid__body">
@@ -33,7 +32,6 @@
 	</c:if>
 	<c:if test="${count > 0}">
 		<div class="masonry">
-		<input type="button" class="write_Btn" value="" onclick="location.href='feedWrite.do'">
 		<c:forEach var="feed" items="${list}">
 		  <div class="grid">
 		  	<c:if test="${empty feed.feed_filename}"><img src="../resources/images/cameraImage.jpg"></c:if>
@@ -41,7 +39,16 @@
 		    <div class="grid__body">
 		      <div class="relative">
 		      								<!-- @@@@@@@@@@여기에 글상세 링크 넣기  @@@@@@@@@@@@-->
+				<c:if test="${user.mem_num == feed.mem_num}">
+				user.mem_num = ${user.mem_num } //// feed.mem_num = ${feed.mem_num }
+				aaaaaaaaaaaaaaaa
 		        <a class="grid__link" target="_blank" href="feedDetail.do?feed_num=${feed.feed_num }" ></a>
+				</c:if>
+				<c:if test="${user.mem_num != feed.mem_num}">
+				user.mem_num = ${user.mem_num } //// feed.mem_num = ${feed.mem_num }
+				bbbbbbbbbbbbbbb
+		        <a class="grid__link" target="_blank" href="otherFeedDetail.do?feed_num=${feed.feed_num }" ></a>
+				</c:if>
 		        <h1 class="grid__title">
 		        	<c:if test="${feed.feed_type == 1}"> 식단 </c:if>
 		        	<c:if test="${feed.feed_type == 2}"> 운동 </c:if>

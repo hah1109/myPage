@@ -162,7 +162,7 @@ input::-moz-focus-inner {
 }
 .right {
   background: #0de9df;
-  height: 150px;
+  height:200px;
   top: 20px;
   position: relative;
   width: 10%;
