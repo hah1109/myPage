@@ -13,7 +13,7 @@ public class NoticeVO {
 	private String notice_comment;
 	private String return_url;
 	private Date check_date;
-	
+
 	//댓글 단 사람의 아이디
 	private String mem_id;
 	
