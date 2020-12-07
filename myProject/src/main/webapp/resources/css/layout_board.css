@@ -301,6 +301,15 @@ div.list_boardcofc{
 	padding : 0px 0px 10px 20px;
 }
 
+#replyComment_content{
+	display: inline;
+    width: 300px;
+    height: 25px;
+    border-radius: 15px;
+    box-sizing: border-box;
+    border: 2px solid #0ed9df;
+    margin-left:10px;
+}
 /*=========================트레이너게시판===========================*/
 .onlyTrainerimg{
 	max-width:16px;
@@ -312,4 +321,12 @@ div.list_boardcofc{
 	font-weight:bold;
 }
 
-
+/*=====================알림=====================*/
+.table_notice a{
+	color:grey;
+	font-weight:bold;
+	cursor:pointer;
+}
+.confirmed{
+	color:black;
+}

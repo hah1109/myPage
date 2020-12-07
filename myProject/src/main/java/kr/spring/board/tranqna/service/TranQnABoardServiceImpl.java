@@ -98,6 +98,14 @@ public class TranQnABoardServiceImpl implements TranQnABoardService {
 		return tranQnABoardMapper.deleteReplyComment(rtqc_num);
 	}
 
+	@Override
+	public int selectBoardWriterMemNum(int tq_num) {
+		return tranQnABoardMapper.selectBoardWriterMemNum(tq_num);
+	}
 	
+	@Override
+	public int selectBoardCommentWriterMemnum(int tqc_num) {
+		return tranQnABoardMapper.selectBoardCommentWriterMemnum(tqc_num);
+	}
 	
 }

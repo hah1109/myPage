@@ -19,6 +19,7 @@ public class FreeBoardCommentVO {
 	private int countComment;
 	
 	private String str_date;
+		
 	
 	public String getStr_date() {
 		return str_date;

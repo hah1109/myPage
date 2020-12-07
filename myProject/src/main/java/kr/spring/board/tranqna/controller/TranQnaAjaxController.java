@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.spring.board.notice.service.NoticeService;
+import kr.spring.board.notice.vo.NoticeVO;
 import kr.spring.board.tranqna.dao.TranQnABoardMapper;
 import kr.spring.comment.tranqnac.vo.TranQnABoardCommentReplyVO;
 import kr.spring.comment.tranqnac.vo.TranQnABoardCommentVO;
@@ -22,6 +24,8 @@ public class TranQnaAjaxController {
 	@Resource
 	TranQnABoardMapper tranQnABoardMapper;
 	
+	@Resource
+	NoticeService noticeService;
 	
 	//댓글부분
 	@RequestMapping("/boardTranqna/list_comment.do")
@@ -38,6 +42,19 @@ public class TranQnaAjaxController {
 		
 		if(log.isDebugEnabled()) log.debug("<<트레이너 게시판 댓글등록>> : " + tq_num + ":" + comment);
 				
+		//댓글등록 알림 데이터 넣기
+		int writer_memNum = tranQnABoardMapper.selectBoardWriterMemNum(tq_num);
+		NoticeVO notice = new NoticeVO();
+		notice.setBoard_num(tq_num);
+		notice.setWriter_memnum(writer_memNum);
+		notice.setReply_mem_num(mem_num);
+		notice.setBoard_comment(comment);
+		notice.setNotice_comment("트레이너 게시판 글에 댓글을 등록했습니다.");
+		notice.setReturn_url("boardTranqna/detail.do?tq_num="+tq_num);
+		noticeService.insertNoticeVO(notice);
+		if(log.isDebugEnabled()) log.debug("<<알림전달>> :" + notice);
+		
+		
 		TranQnABoardCommentVO tq_comment = new TranQnABoardCommentVO();
 		tq_comment.setTq_comment(comment);
 		tq_comment.setTq_num(tq_num);		
@@ -73,9 +90,23 @@ public class TranQnaAjaxController {
 	@RequestMapping("/boardTranqna/submit_replyComment.do")
 	@ResponseBody
 	public int submitReplyComment(@RequestParam String replyComment_content,
+									@RequestParam int tq_num,
 									@RequestParam int tqc_num,
 									@RequestParam int mem_num) {
 		if(log.isDebugEnabled()) log.debug("<<댓글의댓글입력>> : " + replyComment_content);
+		
+		//댓글등록 알림 데이터 넣기
+		int writer_memNum = tranQnABoardMapper.selectBoardCommentWriterMemnum(tqc_num);
+		NoticeVO notice = new NoticeVO();
+		notice.setBoard_num(tqc_num);
+		notice.setWriter_memnum(writer_memNum);
+		notice.setReply_mem_num(mem_num);
+		notice.setBoard_comment(replyComment_content);
+		notice.setNotice_comment("트레이너 게시판 댓글에 댓글을 등록했습니다.");
+		notice.setReturn_url("boardTranqna/detail.do?tq_num="+tq_num);
+		noticeService.insertNoticeVO(notice);
+		if(log.isDebugEnabled()) log.debug("<<댓글의댓글등록알림전달>> :" + notice);
+					
 		TranQnABoardCommentReplyVO replyComment = new TranQnABoardCommentReplyVO();
 		replyComment.setTqc_num(tqc_num);
 		replyComment.setMem_num(mem_num);

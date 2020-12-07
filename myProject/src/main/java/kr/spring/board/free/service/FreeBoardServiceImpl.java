@@ -82,7 +82,9 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		return freeBoardMapper.deleteFreeComment(freec_num);
 	}
 	
-	
-	
+	@Override
+	public int selectBoardWriterMemNum(int free_num) {
+		return freeBoardMapper.selectBoardWriterMemNum(free_num);
+	}
 	
 }

@@ -3,6 +3,7 @@ package kr.spring.board.tranqna.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Select;
 
 import kr.spring.board.tranqna.vo.TranQnABoardVO;
 import kr.spring.comment.tranqnac.vo.TranQnABoardCommentReplyVO;
@@ -30,5 +31,9 @@ public interface TranQnABoardService {
 	public List<TranQnABoardCommentReplyVO> selectReplyComment(Integer tqc_num);
 	public int insertReplyComment(TranQnABoardCommentReplyVO replyComment);
 	public int deleteReplyComment(int rtqc_num);
+	
+	//알림전달에 필요한 데이터 :글 쓴 사람의 멤버번호
+	public int selectBoardWriterMemNum(int tq_num);
+	public int selectBoardCommentWriterMemnum(int tqc_num);
 	
 }

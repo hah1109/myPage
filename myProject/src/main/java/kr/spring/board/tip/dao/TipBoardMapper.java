@@ -64,6 +64,12 @@ public interface TipBoardMapper {
 	//Mapper
 	public int deleteReplyComment(int rfreec_num);
 	
+	//댓글등록알림
+	//댓글이 달리는 사람의 멤버번호
+	@Select("SELECT mem_num FROM board_free WHERE free_num=#{free_num}")
+	public int selectBoardWriterMemNum(int free_num);
 	
+	@Select("SELECT mem_num FROM board_free_comment WHERE freec_num=#{freec_num}")
+	public int selectBoardCommentWriterMemnum(int freec_num);
 
 }

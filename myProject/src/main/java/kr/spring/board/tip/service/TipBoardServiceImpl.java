@@ -98,6 +98,15 @@ public class TipBoardServiceImpl implements TipBoardService{
 	public int deleteReplyComment(int rfreec_num) {
 		return tipBoardMapper.deleteReplyComment(rfreec_num);
 	}
-	
 
+	@Override
+	public int selectBoardWriterMemNum(int free_num) {
+		return tipBoardMapper.selectBoardWriterMemNum(free_num);
+	}	
+
+	@Override
+	public int selectBoardCommentWriterMemnum(int freec_num) {
+		return tipBoardMapper.selectBoardCommentWriterMemnum(freec_num);
+	}
+	
 }

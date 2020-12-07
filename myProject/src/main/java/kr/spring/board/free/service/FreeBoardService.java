@@ -22,5 +22,5 @@ public interface FreeBoardService {
 	public FreeBoardCommentVO selectOneFreeComment(Integer freec_num);
 	public int updateFreeComment(FreeBoardCommentVO free_comment);
 	public int deleteFreeComment(int freec_num);
-
+	public int selectBoardWriterMemNum(int free_num);
 }

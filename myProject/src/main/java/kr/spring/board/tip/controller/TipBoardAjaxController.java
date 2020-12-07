@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.spring.board.notice.service.NoticeService;
+import kr.spring.board.notice.vo.NoticeVO;
 import kr.spring.board.tip.service.TipBoardService;
 import kr.spring.comment.freec.vo.FreeBoardCommentReplyVO;
 import kr.spring.comment.freec.vo.FreeBoardCommentVO;
@@ -21,6 +23,9 @@ public class TipBoardAjaxController {
 	
 	@Resource
 	TipBoardService tipBoardService;
+	
+	@Resource
+	NoticeService noticeService;
 	
 	//댓글부분
 	@RequestMapping("/boardTip/list_comment.do")
@@ -41,6 +46,18 @@ public class TipBoardAjaxController {
 		free_comment.setFree_comment(comment);
 		free_comment.setFree_num(free_num);		
 		free_comment.setMem_num(mem_num);
+		
+		//댓글등록 알림 데이터 넣기
+		int writer_memNum = tipBoardService.selectBoardWriterMemNum(free_num);
+		NoticeVO notice = new NoticeVO();
+		notice.setBoard_num(free_num);
+		notice.setWriter_memnum(writer_memNum);
+		notice.setReply_mem_num(mem_num);
+		notice.setBoard_comment(comment);
+		notice.setNotice_comment("팁게시판 글에 댓글을 등록했습니다.");
+		notice.setReturn_url("boardTip/detail.do?free_num="+free_num);
+		noticeService.insertNoticeVO(notice);
+		if(log.isDebugEnabled()) log.debug("<<알림전달>> :" + notice);
 				
 		return tipBoardService.insertFreeComment(free_comment);		
 	}
@@ -72,9 +89,23 @@ public class TipBoardAjaxController {
 	@RequestMapping("/boardTip/submit_replyComment.do")
 	@ResponseBody
 	public int submitReplyComment(@RequestParam String replyComment_content,
+									@RequestParam int free_num,
 									@RequestParam int freec_num,
 									@RequestParam int mem_num) {
 		if(log.isDebugEnabled()) log.debug("<<댓글의댓글입력>> : " + replyComment_content);
+		
+		//댓글등록 알림 데이터 넣기
+		int writer_memNum = tipBoardService.selectBoardCommentWriterMemnum(freec_num);
+		NoticeVO notice = new NoticeVO();
+		notice.setBoard_num(freec_num);
+		notice.setWriter_memnum(writer_memNum);
+		notice.setReply_mem_num(mem_num);
+		notice.setBoard_comment(replyComment_content);
+		notice.setNotice_comment("팁게시판 댓글에 댓글을 등록했습니다.");
+		notice.setReturn_url("boardTip/detail.do?free_num="+free_num);
+		noticeService.insertNoticeVO(notice);
+		if(log.isDebugEnabled()) log.debug("<<댓글의댓글등록알림전달>> :" + notice);
+		
 		FreeBoardCommentReplyVO replyComment = new FreeBoardCommentReplyVO();
 		replyComment.setFreec_num(freec_num);
 		replyComment.setMem_num(mem_num);

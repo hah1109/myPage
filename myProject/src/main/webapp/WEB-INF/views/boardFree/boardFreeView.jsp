@@ -29,7 +29,7 @@ $(document).ready(function(){
 				commentList();
 			},
 			error:function(){
-				alert('네트워크 오류 발생!');
+				alert('댓글 입력 네트워크 오류 발생!');
 			}
 		});
 	});	

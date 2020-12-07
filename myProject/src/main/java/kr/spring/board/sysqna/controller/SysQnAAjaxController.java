@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.spring.board.notice.service.NoticeService;
+import kr.spring.board.notice.vo.NoticeVO;
 import kr.spring.board.sysqna.service.SysQnABoardService;
 import kr.spring.comment.sysqnac.vo.SysQnABoardCommentVO;
 
@@ -20,6 +22,9 @@ public class SysQnAAjaxController {
 	
 	@Resource
 	SysQnABoardService sysQnABoardService;
+	
+	@Resource
+	NoticeService noticeService;
 	
 	//댓글 리스트 불러오기
 	@RequestMapping("/boardSysqna/list_comment.do")
@@ -36,7 +41,19 @@ public class SysQnAAjaxController {
 					   @RequestParam int mem_num){
 
 		if(log.isDebugEnabled()) log.debug("<<자유게시판 댓글등록>> : " + sq_num + ":" + comment);
-				
+		
+		//댓글등록 알림 데이터 넣기
+		int writer_memNum = sysQnABoardService.selectBoardWriterMemNum(sq_num);
+		NoticeVO notice = new NoticeVO();
+		notice.setBoard_num(sq_num);
+		notice.setWriter_memnum(writer_memNum);
+		notice.setReply_mem_num(mem_num);
+		notice.setBoard_comment(comment);
+		notice.setNotice_comment("시스템문의 글에 댓글을 등록했습니다.");
+		notice.setReturn_url("boardSysqna/detail.do?sq_num="+sq_num);
+		noticeService.insertNoticeVO(notice);
+		if(log.isDebugEnabled()) log.debug("<<알림전달>> :" + notice);
+			
 		SysQnABoardCommentVO sq_comment = new SysQnABoardCommentVO();
 		sq_comment.setSq_comment(comment);
 		sq_comment.setSq_num(sq_num);		

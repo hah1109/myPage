@@ -58,7 +58,7 @@ function commentList(){
                 a += '&nbsp;|&nbsp;<a onclick="commentDelete('+value.tqc_num+');">삭제</a> </span>'; 
 				}            	                	                
                 a += '<div class="commentContent'+value.tqc_num+'"> <p>'+value.tq_comment +'</p></div></div>';
-                a += '<div class="replyComment'+value.tqc_num+'"> <a onclick="select_replyComment('+value.tqc_num+')"> 댓글 '+value.countComment+'</a></div>'
+                a += '<div class="replyComment'+value.tqc_num+'"> <a onclick="select_replyComment('+value.tq_num + ',' + value.tqc_num+')"> 댓글 '+value.countComment+'</a></div>'
 				a += '</div>';
             });		
 			            
@@ -92,7 +92,6 @@ function commentUpdateCommit(tqc_num){
 		timeout:30000,
 		success:function(data){
 			if(data == 1){
-				alert('댓글 수정 완료');
 				commentList();
 			}
 		},
@@ -126,7 +125,7 @@ function commentDelete(tqc_num){
 }
 
 /* 댓글의댓글 글읽기 및 쓰기 */
-function select_replyComment(tqc_num){
+function select_replyComment(tq_num,tqc_num){
 	commentList();
  	 $.ajax({
     	url : 'list_replyComment.do',
@@ -139,12 +138,12 @@ function select_replyComment(tqc_num){
 	            a += '<div class="list_replyComment" style="border-top:1px solid darkgray; margin:10px; padding:10px;"><b>'+value.mem_id + '</b>';
 	            a += '&nbsp;&nbsp;'+value.rtqc_comment + '&nbsp;&nbsp;';
 	            if(mem_num == value.mem_num){
-	            a += '|&nbsp;<a onclick="delete_replyComment(' + value.rtqc_num +','+ tqc_num + ');">삭제</a>';
+	            a += '|&nbsp;<a onclick="delete_replyComment(' + tq_num + ',' +value.rtqc_num +','+ tqc_num + ');">삭제</a>';
 	            }
 	            a += '</div>';
             });
 			a += '<input type="text" id="replyComment_content" style="padding-left: 10px;" placeholder="답댓글을 입력해주세요">';
-			a += '<input type="button" value="등록" onclick="submit_replyComment('+tqc_num+');">';
+			a += '<input type="button" value="등록" onclick="submit_replyComment('+tq_num+','+tqc_num+');">';
 			a += '<input type="button" value="취소" onclick="cancel_replyComment('+tqc_num+');">';
 			$('.replyComment'+tqc_num).html(a);
 		},
@@ -160,7 +159,7 @@ function reset_replyComment(tqc_num){
 }
 
 /* 댓글의 댓글 글 입력하기 */
-function submit_replyComment(tqc_num){
+function submit_replyComment(tq_num,tqc_num){
 	if($('#replyComment_content').val()==''){
 		alert('내용을 입력해주세요');
 		return;
@@ -170,13 +169,13 @@ function submit_replyComment(tqc_num){
 		url:'submit_replyComment.do',
 		type:'post',
 		data:{replyComment_content:$('#replyComment_content').val(),
+			  'tq_num':tq_num,
 			  'tqc_num':tqc_num,
 			  'mem_num':mem_num},
 		success:function(data){
 			if(data==1){
-				alert('댓글이 입력되었습니다.');
 				$('#replyComment_content').val('');
-				select_replyComment(tqc_num);
+				select_replyComment(tq_num,tqc_num);
 			}
 		},
 		error:function(){
@@ -191,7 +190,7 @@ function cancel_replyComment(tqc_num){
 }
 
 /* 댓글의 댓글 삭제하기 */
-function delete_replyComment(rtqc_num,tqc_num){
+function delete_replyComment(tq_num,rtqc_num,tqc_num){
 	var choice = window.confirm('삭제하시겠습니까?');
 	if(choice){
 		$.ajax({
@@ -200,7 +199,7 @@ function delete_replyComment(rtqc_num,tqc_num){
 			data:{'rtqc_num':rtqc_num},
 			success:function(data){
 				if(data==1){
-					select_replyComment(tqc_num);
+					select_replyComment(tq_num,tqc_num);
 				}				
 			},
 			error:function(){

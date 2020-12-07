@@ -63,6 +63,13 @@ public interface TranQnABoardMapper {
 	
 	//Mapper
 	public int deleteReplyComment(int rtqc_num);
-		
+	
+	//댓글등록알림
+	//댓글이 달리는 사람의 멤버번호
+	@Select("SELECT mem_num FROM board_tranqna WHERE tq_num=#{tq_num}")
+	public int selectBoardWriterMemNum(int tq_num);
+	
+	@Select("SELECT mem_num FROM board_tranqna_comment WHERE tqc_num=#{tqc_num}")
+	public int selectBoardCommentWriterMemnum(int tqc_num);
 
 }

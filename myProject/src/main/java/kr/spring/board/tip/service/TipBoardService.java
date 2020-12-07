@@ -31,5 +31,8 @@ public interface TipBoardService {
 	public int inserReplyComment(FreeBoardCommentReplyVO replyComment);	
 	public int deleteReplyComment(int rfreec_num);
 	
+	//댓글 등록 알림: 댓글이 달리는 사람의 번호
+	public int selectBoardWriterMemNum(int free_num);
+	public int selectBoardCommentWriterMemnum(int freec_num);
 	
 }

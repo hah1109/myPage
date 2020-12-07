@@ -5,9 +5,9 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-    <definition name="boardNoticeList" extends="main">
+    <definition name="NoticeList" extends="main">
     	<put-attribute name="title" value="알림 목록"/>
-    	<put-attribute name="body" value="/WEB-INF/views/boardFree/boardFreeList.jsp"/>  
+    	<put-attribute name="body" value="/WEB-INF/views/boardNotice/NoticeList.jsp"/>  
     </definition>
 
 </tiles-definitions>

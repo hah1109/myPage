@@ -52,5 +52,9 @@ public interface SysQnABoardMapper {
 	
 	@Delete("DELETE FROM board_sysqna_comment WHERE sqc_num = #{sqc_num}")
 	public int deleteSysqnaComment(int sqc_num);
+	
+	//댓글알림기능에 필요한 글쓴 사람의 멤버번호
+	@Select("SELECT mem_num FROM board_sysqna WHERE sq_num=#{sq_num}")
+	public int selectBoardWriterMemNum(int sq_num);
 
 }

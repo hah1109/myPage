@@ -84,6 +84,9 @@ public class SysQnABoardServiceImple implements SysQnABoardService {
 		return sysQnaBoardMapper.deleteSysqnaComment(sqc_num);
 	}
 
-	
+	@Override
+	public int selectBoardWriterMemNum(int sq_num) {
+		return sysQnaBoardMapper.selectBoardWriterMemNum(sq_num);
+	}
 
 }
