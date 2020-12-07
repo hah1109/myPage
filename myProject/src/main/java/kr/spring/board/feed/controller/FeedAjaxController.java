@@ -46,8 +46,9 @@ public class FeedAjaxController {
 		
 		model.addAttribute("mem_auth", sessionMem_auth);
 		
-		if(log.isDebugEnabled()) { log.debug("<<로그인한 회원의 mem_num>> : " + sessionMem_num);}
-		if(log.isDebugEnabled()) { log.debug("<<로그인한 회원의 mem_auth>> : " + sessionMem_auth);}
+		if(log.isDebugEnabled()) { 
+			log.debug("/////"+memberVO);
+		}
 		
 		//map에 mem_num put
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -80,7 +81,61 @@ public class FeedAjaxController {
 		
 	}
 	
+	@RequestMapping("/boardFeed/otherPersonalListAjax.do")
+	@ResponseBody
+	public Map<String,Object> getOtherFeed(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+											@RequestParam(value="mem_num") String mem_num, HttpSession session, Model model) {
+		
+		List<FeedVO> list = null;
+		
+		//feed_num을 받아온것
+		int num = Integer.parseInt(mem_num);
+		
+		//session에서 로그인한 id의 mem_num & mam_auth 받기
+		MemberVO memberVO = memberService.selectMember_detail(num);//pic name 을 받아올 수있음 
+		MemberVO member = memberService.selectCheckMember_detail(memberVO.getMem_id());// mem_auth를 받아 올 수있음
+		memberVO.setMem_auth(member.getMem_auth());
+		memberVO.setMem_num(num);
+		
+		int sessionMem_num = memberVO.getMem_num();
+		int sessionMem_auth = memberVO.getMem_auth();
+		
+		model.addAttribute("mem_auth", sessionMem_auth);
+		
+		if(log.isDebugEnabled()) { 
+			log.debug("/////"+memberVO);
+		}
+		
+		//map에 mem_num put
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("mem_num", sessionMem_num);
+		map.put("mem_auth", sessionMem_auth);
+		
+		//총 글의 갯수
+		int count = 0;
+
+		//총 글의 갯수
+		count = feedService.countingFeedList(map);
+		if(log.isDebugEnabled()) { log.debug("<<검색된 피드 갯수>> : " + count); }
+
+		//paging 처리
+		PagingUtil page = new PagingUtil(currentPage,count,rowCount,10,"myFeed.do");
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
+
+		//모든 피드 list에 담기
+		list = feedService.myPersnolList(map);
+		model.addAttribute("mem_auth", sessionMem_auth);
+
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		
+		mapJson.put("list",list);
+		mapJson.put("count",count);
+		mapJson.put("rowCount",rowCount);
 	
+		return mapJson;
+		
+	}
 	
 	//=============사진 업로드하기================
 	@RequestMapping("/boardFeed/updateMyPhoto.do")

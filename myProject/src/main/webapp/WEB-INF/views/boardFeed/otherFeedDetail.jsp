@@ -128,6 +128,9 @@ function commentDelete(feedc_num){
 }
 </script>
 <!-- 프로필 사진, 프로필 아이디 보이기 (클릭가능)-->
+
+				user.mem_num = ${user.mem_num } //// feed.mem_num = ${feed.mem_num }/////member.mem_num = ${member.mem_num }
+				bbbbbbbbbbbbbbb
 <h2>프로필 사진</h2>
 	<ul>
 		<li>
@@ -137,11 +140,13 @@ function commentDelete(feedc_num){
 					width="100" height="100" class="my-photo">
 			</c:if> 
 			<c:if test="${!empty member.mem_picName }">
-				<img src="${pageContext.request.contextPath }/member/photoView.do"
+				<img src="${pageContext.request.contextPath }/member/photoOtherView.do?=${member.mem_num}"
 					width="100" height="100" class="my-photo">
 			</c:if>
 		</li>
 		<li>
+			
+				user.mem_num = ${user.mem_num } //// feed.mem_num = ${feed.mem_num }
 			<c:if test="${user.mem_num == feed.mem_num}">
 				<a href="feedList.do">작성자 : ${feed.mem_id}</a>
 			</c:if>

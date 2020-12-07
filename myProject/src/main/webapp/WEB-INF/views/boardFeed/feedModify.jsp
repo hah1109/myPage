@@ -92,7 +92,7 @@
 			
 		<div class="align-right" style="padding-top:30px;">
 			<input type="submit" value="수정">
-			<input type="button" value="목록으로" onclick="location.href='feedList.do?mem_num=${user.mem_num}'">
+			<input type="button" value="목록으로" onclick="location.href='feedList.do'">
 		</div> 
 		
 	</form:form> 

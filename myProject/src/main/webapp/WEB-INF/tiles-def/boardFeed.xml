@@ -33,6 +33,14 @@
        <put-attribute name="title" value="내 회원의 피드"/>
        <put-attribute name="body" value="/WEB-INF/views/boardFeed/myMembersFeed.jsp"/>  
     </definition>
+    <definition name="otherPersonalList" extends="main">
+    	<put-attribute name="title" value="다른사람의 퍼스널게시판"/>
+    	<put-attribute name="body" value="/WEB-INF/views/boardFeed/otherPersonalList.jsp"/>  
+    </definition>
+    <definition name="otherFeedDetail" extends="main">
+    	<put-attribute name="title" value="다른사람의 글 상세"/>
+    	<put-attribute name="body" value="/WEB-INF/views/boardFeed/otherFeedDetail.jsp"/>  
+    </definition>
 </tiles-definitions>
 
 

@@ -56,26 +56,29 @@ public class FeedController2 {
 	 */
 	//mypersonal 게시판 호출
 	@RequestMapping(value="/boardFeed/feedList.do")
-	public ModelAndView feedList(@RequestParam int mem_num ,HttpSession session) {
+	public ModelAndView feedList(HttpSession session) {
 		//회원번호를 얻기위해 세션에 저장된 회원 정보를 반환
-
 	    MemberVO vo = (MemberVO)session.getAttribute("user");
-		if(mem_num == 0) {
-			mem_num = vo.getMem_num();
-		}
 	    System.out.println(vo);
 	    MemberVO memberVO = memberService.selectMember_detail(vo.getMem_num());
 	    
-	    //클릭된 mem_num의 정보
-	    MemberVO feedMember = memberService.selectMember_detail(mem_num);
 	    
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myPersonalList");
-		if(vo.getMem_num() == feedMember.getMem_num()) {
-			mav.addObject("member", memberVO);
-		}else {
-			mav.addObject("member", feedMember);
-		}
+		mav.addObject("member", memberVO);
+		
+		return mav;
+	}
+	@RequestMapping(value="/boardFeed/otherFeedList.do")
+	public ModelAndView otherFeedList(@RequestParam int mem_num) {
+		//회원번호를 얻기위해 세션에 저장된 회원 정보를 반환
+	    MemberVO memberVO = memberService.selectMember_detail(mem_num);
+	    memberVO.setMem_num(mem_num);
+	    
+	    
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("otherPersonalList");
+		mav.addObject("member", memberVO);
 		
 		return mav;
 	}
@@ -126,7 +129,6 @@ public class FeedController2 {
 		//회원번호를 얻기위해 세션에 저장된 회원 정보를 반환
 	    MemberVO vo = (MemberVO)session.getAttribute("user");
 	    MemberVO memberVO = memberService.selectMember_detail(vo.getMem_num());
-	    memberVO.setMem_num(vo.getMem_num());
 		
 		if(log.isDebugEnabled()) {
 			log.debug("<<글 상세>> : " + feed_num);
@@ -134,20 +136,29 @@ public class FeedController2 {
 		
 		FeedVO feed = feedService.selectFeedBoard(feed_num);
 		
-		System.out.println(memberVO+"////"+feed);
-		
-		if(memberVO.getMem_id() == feed.getMem_id()) {
-			//세션의 아이디와 			피드의 아이디가 같을 경우
-			
-		}else {
-			//세션의 아이디와 피드의 아이디가 다를경우
-			memberVO = memberService.selectMember_detail(feed.getMem_num());
-			memberVO.setMem_num(feed.getMem_num());
-		}
-		System.out.println("////////"+memberVO +"//////////"+feed);
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("feedDetail");
+		mav.addObject("feed", feed);
+		mav.addObject("member", memberVO);
+		
+		return mav;
+	}
+	//다른 사람의 feed상세 페이지 
+	@RequestMapping("/boardFeed/otherFeedDetail.do")
+	public ModelAndView otherFeedprocess(@RequestParam int feed_num) {
+
+		//회원번호를 얻기위해 세션에 저장된 회원 정보를 반환
+		FeedVO feed = feedService.selectFeedBoard(feed_num);
+	    MemberVO memberVO = memberService.selectMember_detail(feed.getMem_num());
+	    memberVO.setMem_num(feed.getMem_num());
+		
+		if(log.isDebugEnabled()) {
+			log.debug("<<글 상세>> : " + feed_num);
+			log.debug("//////////"+memberVO);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("otherFeedDetail");
 		mav.addObject("feed", feed);
 		mav.addObject("member", memberVO);
 		

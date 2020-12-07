@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.service.MemberService;
@@ -542,6 +543,22 @@ public class MemberController {
 
 		//한건의 레코드를 가져옴
 		MemberVO memberVO = memberService.selectMember_detail(user.getMem_num());
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		mav.addObject("imageFile", memberVO.getMem_pic());
+		mav.addObject("filename", memberVO.getMem_picName());
+
+		return mav;
+	}
+	
+	//보여야할 사용자 정보랑 로그인된 회원 정보와 다를 경우
+	@RequestMapping("/member/photoOtherView.do")
+	public ModelAndView viewOtherImage(@RequestParam int mem_num) {
+
+
+		//한건의 레코드를 가져옴
+		MemberVO memberVO = memberService.selectMember_detail(mem_num);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("imageView");
