@@ -1,6 +1,6 @@
 create table notice(
-    notice_num number,
-    board_num number not null,
+    notice_num number not null,
+    board_num number,
     writer_memnum number not null,
     reply_mem_num number not null,
     board_comment varchar2(100), 
