@@ -94,6 +94,10 @@ public class FeedAjaxController {
 		//session에서 로그인한 id의 mem_num & mam_auth 받기
 		MemberVO memberVO = memberService.selectMember_detail(num);//pic name 을 받아올 수있음 
 		MemberVO member = memberService.selectCheckMember_detail(memberVO.getMem_id());// mem_auth를 받아 올 수있음
+		if(member.getMem_auth() == 2) {
+			memberVO = memberService.selectTrainer_detail(num);
+			member = memberService.selectCheckTrainer_detail(memberVO.getMem_id());
+		}
 		memberVO.setMem_auth(member.getMem_auth());
 		memberVO.setMem_num(num);
 		
@@ -152,8 +156,12 @@ public class FeedAjaxController {
 		}else {
 			//로그인이 된 경우
 			memberVO.setMem_num(user.getMem_num());
-			System.out.println(memberVO);
-			feedService.updateProfile(memberVO);
+			log.debug("사진 업로드 하기 진입");
+			if(user.getMem_auth() == 1) {
+				feedService.updateProfile(memberVO);
+			}else if(user.getMem_auth() == 2) {
+				feedService.updateTrainerProfile(memberVO);
+			}
 			
 			//이미지를 업로드 한 후 세션에 저장된 회원 정보의 이미지 이름 교체
 			user.setMem_picName(memberVO.getMem_picName());
@@ -178,7 +186,12 @@ public class FeedAjaxController {
 			memberVO.setMem_num(user.getMem_num());
 			memberVO.setMem_intro(req.getParameter("af_intro"));
 			System.out.println(memberVO);
-			feedService.updateIntro(memberVO);
+			if(user.getMem_auth() == 1) {
+				feedService.updateIntro(memberVO);
+			}else if(user.getMem_auth() == 2) {
+				feedService.updateTrainerIntro(memberVO);
+			}
+			
 			
 			//이미지를 업로드 한 후 세션에 저장된 회원 정보의 이미지 이름 교체
 			user.setMem_intro(memberVO.getMem_intro());

@@ -63,6 +63,16 @@ public class FeedService2Impl implements FeedService2{
 		
 	}
 
+
+	@Override
+	public void updateTrainerProfile(MemberVO member) {
+		feedMapper.updateTrainerProfile(member);
+	}
+
+	@Override
+	public void updateTrainerIntro(MemberVO member) {
+		feedMapper.updateTrainerIntro(member);
+	}
 	@Override
 	public FeedVO selectFeedDetail(Integer mem_num) {
 		

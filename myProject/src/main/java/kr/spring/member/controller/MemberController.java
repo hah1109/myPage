@@ -540,9 +540,16 @@ public class MemberController {
 	public ModelAndView viewImage(HttpSession session) {
 
 		MemberVO user = (MemberVO)session.getAttribute("user");
-
+		MemberVO memberVO = new MemberVO();
 		//한건의 레코드를 가져옴
-		MemberVO memberVO = memberService.selectMember_detail(user.getMem_num());
+		if(user.getMem_auth() == 1) {
+			memberVO = memberService.selectMember_detail(user.getMem_num());
+		}else if(user.getMem_auth() == 2) {
+			memberVO = memberService.selectTrainer_detail(user.getMem_num());
+		}else {
+			memberVO = memberService.selectMember_detail(user.getMem_num());			
+		}
+		
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("imageView");
@@ -553,13 +560,20 @@ public class MemberController {
 	}
 	
 	//보여야할 사용자 정보랑 로그인된 회원 정보와 다를 경우
-	@RequestMapping("/member/photoOtherView.do")
+	@RequestMapping(value="/member/photoOtherView.do", method=RequestMethod.GET)
 	public ModelAndView viewOtherImage(@RequestParam int mem_num) {
 
 
 		//한건의 레코드를 가져옴
-		MemberVO memberVO = memberService.selectMember_detail(mem_num);
-
+		MemberVO memberVO = memberService.selectMember_detail(mem_num);//pic name 을 받아올 수있음 
+		MemberVO member = memberService.selectCheckMember_detail(memberVO.getMem_id());// mem_auth를 받아 올 수있음
+		if(member.getMem_auth() == 2) {
+			memberVO = memberService.selectTrainer_detail(mem_num);
+			member = memberService.selectCheckTrainer_detail(memberVO.getMem_id());
+		}
+		memberVO.setMem_auth(member.getMem_auth());
+		memberVO.setMem_num(mem_num);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("imageView");
 		mav.addObject("imageFile", memberVO.getMem_pic());

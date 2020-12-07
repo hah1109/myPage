@@ -22,7 +22,9 @@ public interface FeedService2 {
 	public FeedVO selectFeedDetail(Integer mem_num);
 //=============ajax==================
 	public void updateProfile(MemberVO member);
+	public void updateTrainerProfile(MemberVO member);
 	public void updateIntro(MemberVO member);
+	public void updateTrainerIntro(MemberVO member);
 	
 	public int insertFeedComment(FeedCommentVO feed_comment);
 	public List<FeedCommentVO> selectListFeedComment(Integer feed_num);

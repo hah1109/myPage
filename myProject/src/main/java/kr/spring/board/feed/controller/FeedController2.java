@@ -59,10 +59,21 @@ public class FeedController2 {
 	public ModelAndView feedList(HttpSession session) {
 		//회원번호를 얻기위해 세션에 저장된 회원 정보를 반환
 	    MemberVO vo = (MemberVO)session.getAttribute("user");
+	    MemberVO memberVO = new MemberVO();
+	    log.debug("트레이너 호출 vo" + vo);
 	    System.out.println(vo);
-	    MemberVO memberVO = memberService.selectMember_detail(vo.getMem_num());
+	    if(vo.getMem_auth() == 1) {
+	    	memberVO = memberService.selectMember_detail(vo.getMem_num());
+	    }else if(vo.getMem_auth() == 2) {
+	    	
+	    	memberVO = memberService.selectTrainer_detail(vo.getMem_num());
+
+		    log.debug("트레이너 호출 if문" + memberVO);
+	    }else{
+	    	memberVO = memberService.selectMember_detail(vo.getMem_num());
+	    }
 	    
-	    
+	    log.debug("트레이너 호출 수행후" + memberVO);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myPersonalList");
 		mav.addObject("member", memberVO);
@@ -71,10 +82,15 @@ public class FeedController2 {
 	}
 	@RequestMapping(value="/boardFeed/otherFeedList.do")
 	public ModelAndView otherFeedList(@RequestParam int mem_num) {
-		//회원번호를 얻기위해 세션에 저장된 회원 정보를 반환
-	    MemberVO memberVO = memberService.selectMember_detail(mem_num);
-	    memberVO.setMem_num(mem_num);
-	    
+		
+	    MemberVO memberVO = memberService.selectMember_detail(mem_num);//pic name 을 받아올 수있음 
+		MemberVO member = memberService.selectCheckMember_detail(memberVO.getMem_id());// mem_auth를 받아 올 수있음
+		if(member.getMem_auth() == 2) {
+			memberVO = memberService.selectTrainer_detail(mem_num);
+			member = memberService.selectCheckTrainer_detail(memberVO.getMem_id());
+		}
+		memberVO.setMem_auth(member.getMem_auth());
+		memberVO.setMem_num(mem_num);
 	    
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("otherPersonalList");
@@ -150,7 +166,13 @@ public class FeedController2 {
 		//회원번호를 얻기위해 세션에 저장된 회원 정보를 반환
 		FeedVO feed = feedService.selectFeedBoard(feed_num);
 	    MemberVO memberVO = memberService.selectMember_detail(feed.getMem_num());
-	    memberVO.setMem_num(feed.getMem_num());
+	    MemberVO member = memberService.selectCheckMember_detail(memberVO.getMem_id());// mem_auth를 받아 올 수있음
+		if(member.getMem_auth() == 2) {
+			memberVO = memberService.selectTrainer_detail(feed.getMem_num());
+			member = memberService.selectCheckTrainer_detail(memberVO.getMem_id());
+		}
+		memberVO.setMem_auth(member.getMem_auth());
+		memberVO.setMem_num(member.getMem_num());
 		
 		if(log.isDebugEnabled()) {
 			log.debug("<<글 상세>> : " + feed_num);

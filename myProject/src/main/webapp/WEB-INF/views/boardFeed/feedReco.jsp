@@ -40,13 +40,9 @@
 		      <div class="relative">
 		      								<!-- @@@@@@@@@@여기에 글상세 링크 넣기  @@@@@@@@@@@@-->
 				<c:if test="${user.mem_num == feed.mem_num}">
-				user.mem_num = ${user.mem_num } //// feed.mem_num = ${feed.mem_num }
-				aaaaaaaaaaaaaaaa
 		        <a class="grid__link" target="_blank" href="feedDetail.do?feed_num=${feed.feed_num }" ></a>
 				</c:if>
 				<c:if test="${user.mem_num != feed.mem_num}">
-				user.mem_num = ${user.mem_num } //// feed.mem_num = ${feed.mem_num }
-				bbbbbbbbbbbbbbb
 		        <a class="grid__link" target="_blank" href="otherFeedDetail.do?feed_num=${feed.feed_num }" ></a>
 				</c:if>
 		        <h1 class="grid__title">

@@ -42,31 +42,39 @@ $(document).ready(function(){
 					alert('목록 호출 오류 발생!');
 				}else{
 					$(list).each(function(index,item){
-
-						var output = '<div class="content">';
 						
-						output += '<div class="img">';
+						var output = '<div class="masonry">';
+						output += '<div class="grid">';
+						
+						output += '<img ';
 						if(item.feed_filename == null){
-							output += '<img class="thumbnail" src="../resources/images/blank.jpg">';
+							output += 'src="../resources/images/blank.jpg">';
 						} else {
-							output += '<img class="thumbnail" src="imageView.do?feed_num='+item.feed_num+'>';
+							output += 'src="photoView.do?feed_num='+item.feed_num+'">';
 						}
 						
-						output += '</div>';
+						output += '<div class="grid__body">';
 						
-						output += '<div class="text">';
-						output += '<p class="feedType">[ ';
+						output += '<div class="relative">';
+						output += '<a class="grid__link" target="_blank" href="feedDetail.do?feed_num='+item.feed_num+'"></a>';
 						
+						output +='<h1 class="grid__title">';
 						if(item.feed_type == 1) {
 							output += '식단';
 						} else if(item.feed_type == 2) {
 							output += '운동';
 						}
-						output += ' ] 기록</p><br>';
-						output += '<p class="memId"> by[ ' + item.mem_id + ' ] </p>';
-						output += '<p class="date">' +item.feed_reg_date+'</p>';
+						output += ' </h1>';
+						
+						output += '<p class="grid__author">'+item.feed_auth+'</p>';
+						output += '</div>';
+						output += '<div class="mt-auto">';
+						output += '<span class="grid__tag">'+item.feed_content+'</span>';
 						output += '</div>';
 						output += '</div>';
+						output += '</div>';
+						output += '</div>';
+						
 							
 						//문서 객체에 추가
 						$('#output').append(output);
@@ -127,7 +135,7 @@ selectData(1);
 					width="100" height="100" class="my-photo">
 			</c:if> 
 			<c:if test="${!empty member.mem_picName }">
-				<img src="${pageContext.request.contextPath }/member/photoOtherView.do?=${member.mem_num}"
+				<img src="${pageContext.request.contextPath }/member/photoOtherView.do?mem_num=${member.mem_num}"
 					width="100" height="100" class="my-photo">
 			</c:if>
 		</li>
@@ -146,6 +154,21 @@ selectData(1);
 		</li>
 	</ul>
 	<hr size="1" width="100%">
+	<div>
+		<!-- 로그인 아이디 일반회원			피드 아이디 트레이너 회원 -->
+		<c:if test="${user.mem_auth == 1 && member.mem_auth ==2 }">
+			<input type="button" value="트레이닝 맺기" >
+		</c:if>
+		<c:if test="${user.mem_auth == 1 && member.mem_auth ==1 }">
+			<input type="button" value="팔로우 하기" >
+		</c:if>
+		<c:if test="${user.mem_auth == 2 && member.mem_auth ==1 }">
+			<input type="button" value="팔로우 하기" >
+		</c:if>
+		<c:if test="${user.mem_auth == 2 && member.mem_auth ==2 }">
+			<input type="button" value="팔로우 하기" >
+		</c:if>
+	</div>
 </div>
 <div>
 	
