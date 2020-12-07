@@ -3,10 +3,10 @@ create table notice(
     board_num number not null,
     writer_memnum number not null,
     reply_mem_num number not null,
-    board_comment varchar2(100) not null, 
+    board_comment varchar2(100), 
     reg_date Date default sysdate not null,
     notice_comment varchar2(100) not null,
-    return_url varchar2(100) not null,
+    return_url varchar2(100),
     check_date Date,
     constraint notice_num_pk primary key (notice_num)   
 );
