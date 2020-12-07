@@ -63,8 +63,20 @@
 	        <input type="button" class="detail_modify_btn" onclick="location.href='update.do'" />
 			<input type="button" class="password_modify_btn" onclick="location.href='updatePw.do'">
 			<input type="button" class="delete_btn" onclick="location.href='delete.do'">
+			<input type="button" id="cutRelation" value="트레이닝 중단">			
 	      </div>
       </form:form>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+var cutRelation = document.getElementById('cutRelation');
+
+cutRelation.onclick=function(){
+   var choice = window.confirm('트레이닝을 중단하시겠습니까?');
+   if(choice){
+	      location.href='${pageContext.request.contextPath}/trainerList/trainingDelete.do';
+	   }
+};
+</script>

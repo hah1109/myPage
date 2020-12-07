@@ -68,5 +68,26 @@ public class TlBoardServiceImpl implements TlBoardService {
 	public void deleteMatchingCancle(Integer mem_num) {
 		tlmapper.deleteMatchingCancle(mem_num);
 	}
+
+	@Override
+	public void updateTNum(Map<String, Object> map) {
+		tlmapper.updateTNum(map);
+	}
+
+	@Override
+	public void insertTrainingTable(Map<String, Object> map) {
+		map.put("training_num", tlmapper.selectMat_num()); 
+		tlmapper.insertTrainingTable(map);	
+	}
+
+	@Override
+	public void deleteTnum(Integer mem_num) {
+		tlmapper.deleteTnum(mem_num);
+	}
+
+	@Override
+	public void deleteTraining(Integer mem_num) {
+		tlmapper.deleteTraining(mem_num);
+	}
  
 }

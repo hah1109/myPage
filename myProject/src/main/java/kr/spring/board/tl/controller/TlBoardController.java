@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.board.feed.service.FeedService2;
+import kr.spring.board.feed.vo.FeedVO;
+import kr.spring.board.notice.service.NoticeService;
+import kr.spring.board.notice.vo.NoticeVO;
 import kr.spring.board.tl.service.TlBoardService;
 import kr.spring.board.tl.vo.TlBoardVO;
 import kr.spring.member.vo.MemberVO;
@@ -29,12 +33,28 @@ public class TlBoardController {
 
 	@Resource
 	private TlBoardService tlBoardService;
+	
+	@Resource
+	private FeedService2 feedService;
+	
+	@Resource
+	private NoticeService noticeService;
 
 	//자바빈(VO) 초기화
 	//서버 유효성 체크시 필수로 필요
 	@ModelAttribute
 	public TlBoardVO initCommand() {
 		return new TlBoardVO();
+	}
+	
+	@ModelAttribute
+	public FeedVO initCommandFeed() {
+		return new FeedVO();
+	}
+	
+	@ModelAttribute
+	public NoticeVO initCommandNotice() { 
+		return new NoticeVO(); 
 	}
 
 
@@ -156,6 +176,16 @@ public class TlBoardController {
 				if(tNum == 0) {//매칭상대가 없는경우
 					//매칭테이블에 신청 내역 저장
 					tlBoardService.insertMatching(map);
+					
+					//알림추가 트레이너한테 매칭신청왔다고 알림 보내기 노티스에 데이터 안들간다잠만잠만잠만
+					NoticeVO noticeVO = new NoticeVO();
+					noticeVO.setWriter_memnum(mem_num); //트레이너 멤넘
+					noticeVO.setReply_mem_num(memberVO.getMem_num()); //신청보낸 회원 멤넘
+					noticeVO.setBoard_comment("트레이닝 신청 도착");
+					noticeVO.setNotice_comment("트레이닝 신청이 도착했습니다"); //경로 지웠자너그래서 없네
+					noticeVO.setReturn_url("/trainerList/trainerList");
+					noticeService.insertNoticeVO(noticeVO);  
+					
 					return "redirect:/trainerList/trainerList.do";
 					
 				}else{//있는경우
@@ -331,18 +361,31 @@ public class TlBoardController {
 	
 	//매칭신청 거절을 눌렀을 경우 작동할 메서드
 	@RequestMapping("/trainerList/matchingCancle.do")
-	public String matchingCancle(@RequestParam int mem_num) {
+	public String matchingCancle(@RequestParam int mem_num, HttpSession session) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		//알림추가
+		NoticeVO noticeVO = new NoticeVO();
+		noticeVO.setWriter_memnum(mem_num);
+		noticeVO.setReply_mem_num(user.getMem_num());
+		noticeVO.setBoard_comment("거절 완료");
+		noticeVO.setNotice_comment("트레이너 신청이 거절 되었습니다");
+		noticeVO.setReturn_url("main/main"); 
+		noticeService.insertNoticeVO(noticeVO);  
 		
 		tlBoardService.deleteMatchingCancle(mem_num);
 		
-		return "redirect:/trainerList/trainerList.do";
+		
+		return "/trainerList/matchingList";
 	}
 
-/*	//매칭신청 수락을 눌렀을 경우 작동할 메서드
+	//매칭신청 수락을 눌렀을 경우 작동할 메서드
 	@RequestMapping("/trainerList/matchingOk.do")
 	public String matchingOk(@RequestParam int mem_num, HttpSession session) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		
+		/*
 		 * 1.현재 로그인중인 트레이너의 mem_num을 가져온다
 		 * 2.매개변수로 받은 mem_num은 매칭신청한 일반회원의 mem_num
 		 * 3.member_detail테이블에서 t_num에 트레이너의 mem_num을 업데이트
@@ -350,25 +393,108 @@ public class TlBoardController {
 		 *     training_num(시퀀스) 
 		 *     mem_num(로그인중인 트레이너의 mem_num)
 		 *     traing_to (트레이닝 받을 일반회원의 mem_num)
-		 * 5.follow관계맺기
+		 *  
+		 * 5.follow관계맺기 ????? 어케할지 잠만
 		 * 6.매칭테이블에 매칭성공한 일반회원 찾아 신청 내역 [제거or변경]한 후에 알림보냄? 
-		 
+		 */
 		
 		//현재 로그인 중인 트레이너의 mem_num을 얻기위해 세션에서 가져옴
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
+		if(log.isDebugEnabled()) { log.debug("<<세션에로그인한 트레이너 정보 확인>> : " + user); }
+		
 		map.put("t_num", user.getMem_num());
 		map.put("mem_num", mem_num);
+		
+		if(log.isDebugEnabled()) { log.debug("<<map에 잘 들어갔는지 확인>> : " + map); }
 
 		//t_num 변경헤줄 메서드 호출					
-		TlBoardVO vo = tlBoardService.updateTNum(map);
-
+		tlBoardService.updateTNum(map);
+		
 		//training테이블에 insert해줄 메서드					  
-		TlBoardVO vo2 = tlBoardService.insertTrainingTable(map);
-				 
+		tlBoardService.insertTrainingTable(map);
+		
+		//팔로우 테이블에 데이터 추가
+		// mem_num 일반회원 mem_num / user.getMem_num() 로그인한 트레이너회원의 mem_num
+		
+		FeedVO feedVO1 = new FeedVO(); //멤버 정보 저장용
+		FeedVO feedVO2 = new FeedVO(); //트레이너 정보 저장용
+		
+		//follow_from : mem_num / follow_to : user.getMem_num()
+		//일반회원이 트레이너한테 팔로우 신청할 경우
+		feedVO1.setMem_num(mem_num);
+		feedVO1.setFollower_to(user.getMem_num());
+		
+		//follow_from : user.getMem_num() / follow_to : mem_num
+		//트레이너가 일반회원한테 팔로우 신청할 경우
+		feedVO2.setMem_num(user.getMem_num());
+		feedVO2.setFollower_to(mem_num);
+		
+		feedService.insertFollow(feedVO1);
+		feedService.insertFollow(feedVO2);
+		
+		
+		//알림 to 회원 
+		NoticeVO noticeVO = new NoticeVO();
+		noticeVO.setWriter_memnum(mem_num);
+		noticeVO.setReply_mem_num(user.getMem_num());
+		noticeVO.setBoard_comment("수락 완료");
+		noticeVO.setNotice_comment("트레이너 신청이 수락 되었습니다");
+		noticeVO.setReturn_url("main/main");
+		noticeService.insertNoticeVO(noticeVO);  
+		
+		//매칭테이블에서 삭제
+		tlBoardService.deleteMatchingCancle(mem_num);
 			
-		return "redirect:/trainerList/trainerList.do";
-	}*/
+		return "redirect:/trainerList/matchingList.do"; 
+	}
+	
+	//관계 끊기
+	@RequestMapping("trainerList/trainingDelete.do")
+	public String trainingDelete(HttpSession session, Model model) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		if(user.getT_num() != 0) {
+			
+			//팔로우 테이블에 데이터 삭제
+			// user.getMem_num 일반회원 mem_num / user.getT_num() 트레이너회원의 mem_num
+			
+			FeedVO feedVO1 = new FeedVO(); //멤버 정보 저장용
+			FeedVO feedVO2 = new FeedVO(); //트레이너 정보 저장용
+			
+			//follow_from : mem_num / follow_to : user.getMem_num()
+			//일반회원이 트레이너한테 팔로우 신청할 경우
+			feedVO1.setMem_num(user.getT_num());
+			feedVO1.setFollower_to(user.getMem_num());
+			
+			//follow_from : user.getMem_num() / follow_to : mem_num
+			//트레이너가 일반회원한테 팔로우 신청할 경우
+			feedVO2.setMem_num(user.getMem_num());
+			feedVO2.setFollower_to(user.getT_num()); 
+			
+			feedService.deleteFollow(feedVO1);
+			feedService.deleteFollow(feedVO2);
+			
+			//매칭테이블에서 삭제
+			tlBoardService.deleteTnum(user.getMem_num());
+			tlBoardService.deleteTraining(user.getMem_num());
+			
+			
+			//result 페이지 셋팅
+			model.addAttribute("message", "트레이닝 관계 해제가 완료되었습니다.");
+			model.addAttribute("url", "/MyFirstTrainer/member/myPage.do");
+			
+			return "common/result";
+		} else {
+			//result 페이지 셋팅
+			model.addAttribute("message", "현재 회원님과 매칭된 트레이너가 없습니다.");
+			model.addAttribute("url", "/MyFirstTrainer/member/myPage.do");
+			
+			return "common/result";
+		}
+		
+	}
 
 
 }

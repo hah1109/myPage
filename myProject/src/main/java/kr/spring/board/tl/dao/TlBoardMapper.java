@@ -59,7 +59,7 @@ public interface TlBoardMapper {
 	@Delete("delete from matching where mat_from = #{mem_num}")
 	public void deleteMatchingCancle(Integer mem_num);
 	
-	//t_num에 트레이너의 mem_num을 넣어줄 메서드
+	//t_num에 트레이너의 mem_num을 엎데이트 해줄 메서드
 	@Update("update member_detail set t_num=#{t_num} where mem_num=#{mem_num}")
 	public void updateTNum(Map<String,Object> map);
 	
@@ -71,4 +71,25 @@ public interface TlBoardMapper {
 	@Insert("insert into training values(#{training_num},#{t_num},#{mem_num})")
 	public void insertTrainingTable(Map<String,Object> map);
 	
+	//관계 끊을시 t_num 삭제
+	@Update("update member_detail set t_num = null where mem_num=#{mem_num}")
+	public void deleteTnum(Integer mem_num);
+	
+	//관계 끊을시 training테이블 데이터 삭제
+	@Delete("delete training where training_to=#{mem_num}")
+	public void deleteTraining(Integer mem_num);
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

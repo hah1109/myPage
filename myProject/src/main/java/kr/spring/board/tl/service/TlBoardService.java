@@ -3,7 +3,6 @@ package kr.spring.board.tl.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Delete;
 
 import kr.spring.board.tl.vo.TlBoardVO;
 
@@ -41,8 +40,24 @@ public interface TlBoardService {
 	public TlBoardVO selectMemberDetail(Integer mem_num);
 	
 	//매칭 신청온걸 거절할 메서드
-	@Delete("delete from matching where mat_from = #{mem_num}")
 	public void deleteMatchingCancle(Integer mem_num);
+	
+	//t_num에 트레이너의 mem_num을 엎데이트 해줄 메서드
+	public void updateTNum(Map<String,Object> map);
+	
+	/*----------------트랜젝션 처리 예정---------------------------------------*/
+	//training테이블에 연결할 시퀀스를 가져올 메서드 
+	//public int selectTrainingNumber();
+		
+	//training 테이블에 트레이닝 관계 넣어줄 메서드
+	public void insertTrainingTable(Map<String,Object> map);
+	/*----------------트랜젝션 처리 예정---------------------------------------*/
+	
+	//관계 끊을시 t_num 삭제
+	public void deleteTnum(Integer mem_num);
+		
+	//관계 끊을시 training테이블 데이터 삭제
+	public void deleteTraining(Integer mem_num);
 
 	
 }
