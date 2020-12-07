@@ -17,8 +17,8 @@
 									  WHERE mem_num=#{mem_num} <![CDATA[AND feed_auth > 1]]>
 									  ) 
 								  OR mem_num=#{mem_num} <![CDATA[ AND feed_auth > 1]]>
-					ORDER BY feed_reg_date DESC
-				  )a	
+				  )a
+			  ORDER BY feed_num DESC	
 			  )
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}	]]>
@@ -51,8 +51,8 @@
 					                  FROM training 
 					                  WHERE mem_num=#{mem_num} AND feed_auth=1)                     
 					   OR mem_num=#{mem_num} <![CDATA[AND feed_auth > 0]]>
-					ORDER BY feed_reg_date
-					)a	
+					)a
+					ORDER BY feed_num DESC	
 			  )
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}]]>
@@ -84,8 +84,8 @@
 									  FROM training 
 									  WHERE mem_num=#{mem_num}) 
 					<![CDATA[AND feed_auth > 0]]>
-					ORDER BY feed_reg_date DESC
 				   )a
+			  ORDER BY feed_num DESC
 			  )
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
@@ -105,11 +105,12 @@
 	
 	<select id="selectAllFeedList" parameterType="map" resultType="feedVO">
 		SELECT feed_num,feed_type,feed_content,
-		TO_CHAR(feed_reg_date,'YYYY-MM-DD HH24:MI:SS') feed_reg_date,
-		feed_file,feed_filename,feed_ip,mem_num,mem_id,feed_auth 
+				TO_CHAR(feed_reg_date,'YYYY-MM-DD HH24:MI:SS') feed_reg_date,
+				feed_file,feed_filename,feed_ip,mem_num,mem_id,feed_auth 
 		FROM (SELECT a.*, rownum rnum
 			  FROM (SELECT *
 			  		FROM feed)a
+			  ORDER BY feed_num DESC
 			  )
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}

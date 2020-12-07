@@ -46,6 +46,12 @@ public class NutrimentServiceImpl implements NutrimentService{
 		return nutrimentMapper.selectNutriDetail(food_num);
 	}
 
+	@Override
+	public void updateNutriment(NutrimentVO nutrimentVO) {
+		
+		nutrimentMapper.updateNutriment(nutrimentVO);
+	}
+
 	
 
 }
