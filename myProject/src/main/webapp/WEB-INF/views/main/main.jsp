@@ -79,7 +79,7 @@
 				[ <img class="grade-icon" alt="" src="${pageContext.request.contextPath}/resources/images/header/grade_t.png"> ]
 			</c:if>
 			[<span>${user.mem_id}</span>]
-			<a href="${pageContext.request.contextPath}">알림</a>
+			<a href="${pageContext.request.contextPath}/boardNotice/list.do">알림</a>
 			<a href="${pageContext.request.contextPath}/member/myPage.do">MyPage</a>
 			<a href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a>
 			<a href="${pageContext.request.contextPath}/boardSysqna/list.do">QnA</a>
