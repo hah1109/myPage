@@ -69,7 +69,7 @@ function updateCheck_date(board_num,writer_memnum){
 					<td>
 						<a onclick="updateCheck_date(${Notice.board_num},${Notice.writer_memnum});" id="confirmcheck + ${Notice.notice_num}">[확인]</a>
 						<br>
-						<c:if test="${Notice.return_url != 0}">
+						<c:if test="${Notice.return_url != '0'}">
 							<a href="${pageContext.request.contextPath}/${Notice.return_url}"
 								onclick="updateCheck_date(${Notice.board_num},${Notice.writer_memnum})">[이동]</a>
 						</c:if>
