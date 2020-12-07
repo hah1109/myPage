@@ -84,7 +84,6 @@ public class NoticeVO {
 				+ ", reply_mem_num=" + reply_mem_num + ", board_comment=" + board_comment + ", reg_date=" + reg_date
 				+ ", notice_comment=" + notice_comment + ", return_url=" + return_url + ", check_date=" + check_date
 				+ ", reply_mem_id=" + mem_id + "]";
-	}
-	
+	}	
 
 }
