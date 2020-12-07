@@ -17,6 +17,7 @@
   display: inline-block;
   margin-bottom: 16px;
   position: relative;
+  height: 350px;
 }
 .masonry .grid:before {
   border-radius: 5px;

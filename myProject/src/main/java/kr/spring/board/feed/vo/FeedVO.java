@@ -30,7 +30,7 @@ public class FeedVO {
 	/*@@@@@@@@@@@@@@@@@training 테이블@@@@@@@@@@@@@@@@@*/
 	
 	//이미지 업로드 파일 처리
-	public void setUpload(MultipartFile feedUpload)throws IOException{
+	public void setFeedUpload(MultipartFile feedUpload)throws IOException{
 		//MultipartFile -> byte[] 반환
 		setFeed_file(feedUpload.getBytes());
 		//파일명 구하기

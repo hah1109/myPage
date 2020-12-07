@@ -25,9 +25,9 @@ $(document).ready(function(){
 	    headerSection.removeClass("is-active").next().addClass("is-active");
 
 	    
-	    if(currentSectionIndex === 2){
+	    //if(currentSectionIndex === 2){}
 	        
-	      }
+	      
 	    
 	  });
 });
@@ -66,7 +66,6 @@ $(document).ready(function(){
             <label for="feedUpload" class="feedUpload" ></label> 
 			<input type="file" name="feedUpload" id="feedUpload" accept="imgage/gif,image/png,image/jpeg">
           </div>
-                 
           <div class="button">Next</div>
         </fieldset>
         <fieldset class="section">
@@ -75,7 +74,6 @@ $(document).ready(function(){
           <input type="submit" value="글 등록" class="submit button" />
           <!-- <div class="button" onclick="location.href='feedReco.do'">취소</div> -->
         </fieldset>
-        
       </form:form>
     </div>
   </div>

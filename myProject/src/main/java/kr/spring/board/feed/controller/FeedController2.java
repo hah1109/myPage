@@ -122,7 +122,7 @@ public class FeedController2 {
 		
 		if(result.hasErrors()) return "feedWrite";
 		model.addAttribute("message", "운동일지가 등록되었습니다.");
-		model.addAttribute("url",request.getContextPath() + "/boardFree/list.do");
+		model.addAttribute("url",request.getContextPath() + "/boardFeed/feedList.do");
 
 		return "common/result";
 	}
