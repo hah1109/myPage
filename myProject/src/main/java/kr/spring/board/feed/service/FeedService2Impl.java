@@ -93,5 +93,16 @@ public class FeedService2Impl implements FeedService2{
 	public int deleteFeedComment(int feedc_num) {
 		return feedMapper.deleteFeedComment(feedc_num);
 	}
+	
+	//==============팔로우 관련
+	@Override
+	public void insertFollow(FeedVO feedVO) {
+		feedMapper.insertFollow(feedVO);
+	}
+
+	@Override
+	public void deleteFollow(FeedVO feedVO) {
+		feedMapper.deleteFollow(feedVO);
+	}
  
 }

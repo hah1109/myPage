@@ -33,49 +33,47 @@ $(document).ready(function(){
 });
 
 </script>
-<div class="page-main-style">
-	<div class="container">
-    <div class="wrapper">
-      <ul class="steps">
-        <li class="is-active">Step 1</li>
-        <li>Step 2</li>
-        <li>Step 3</li>
-      </ul>
-      <form:form class="form-wrapper" id="feedWrite" action="feedWrite.do" commandName="feedVO" enctype="multipart/form-data">
-        <fieldset class="section is-active">
-          <h3>주제와 공개범위를 선택해주세요</h3>
-			<!-- 타입 정하는 버튼 -->
-		      <form:select path="feed_type">
-		         <form:option value="100" label="글 주제 선택 " />
-		         <form:option value="1" label="식단" />
-		         <form:option value="2" label="운동" />
-		      </form:select>
-			<!-- 공개범위 설정하는 버튼 -->
-		      <form:select path="feed_auth">
-		         <form:option value="100" label="공개범위를 선택해주세요" />
-		         <form:option value="0" label="나만보기" />
-		         <form:option value="1" label="트레이너만 공개" />
-		         <form:option value="2" label="팔로워 공개" />
-		         <form:option value="3" label="전체공개" /> 
-		      </form:select>
-          <div class="button">Next</div>
-        </fieldset>
-        <fieldset class="section">
-          <h3>업로드할 사진을 선택해주세요</h3>
-          <div class="row cf">
-            <label for="feedUpload" class="feedUpload" ></label> 
-			<input type="file" name="feedUpload" id="feedUpload" accept="imgage/gif,image/png,image/jpeg">
-          </div>
-          <div class="button">Next</div>
-        </fieldset>
-        <fieldset class="section">
-          <h3>글 내용을 작성해주세요</h3>
-          <form:input type="text"  path="feed_content" placeholder="글 내용을 작성해주세요"/>
-          <input type="submit" value="글 등록" class="submit button" />
-          <!-- <div class="button" onclick="location.href='feedReco.do'">취소</div> -->
-        </fieldset>
-      </form:form>
-    </div>
-  </div>
-
+<div class="container">
+   <div class="wrapper">
+     <ul class="steps">
+       <li class="is-active">Step 1</li>
+       <li>Step 2</li>
+       <li>Step 3</li>
+     </ul>
+     <form:form class="form-wrapper" id="feedWrite" action="feedWrite.do" commandName="feedVO" enctype="multipart/form-data">
+       <fieldset class="section is-active">
+         <h3>주제와 공개범위를 선택해주세요</h3>
+		<!-- 타입 정하는 버튼 -->
+	      <form:select path="feed_type">
+	         <form:option value="100" label="글 주제 선택 " />
+	         <form:option value="1" label="식단" />
+	         <form:option value="2" label="운동" />
+	      </form:select>
+		<!-- 공개범위 설정하는 버튼 -->
+	      <form:select path="feed_auth">
+	         <form:option value="100" label="공개범위를 선택해주세요" />
+	         <form:option value="0" label="나만보기" />
+	         <form:option value="1" label="트레이너만 공개" />
+	         <form:option value="2" label="팔로워 공개" />
+	         <form:option value="3" label="전체공개" /> 
+	      </form:select>
+         <div class="button">Next</div>
+       </fieldset>
+       <fieldset class="section">
+         <h3>업로드할 사진을 선택해주세요</h3>
+         <div class="row cf">
+           <label for="feedUpload" class="feedUpload" ></label> 
+		<input type="file" name="feedUpload" id="feedUpload" accept="imgage/gif,image/png,image/jpeg">
+         </div>
+         <div class="button">Next</div>
+       </fieldset>
+       <fieldset class="section">
+         <h3>글 내용을 작성해주세요</h3>
+         <form:input type="text"  path="feed_content" placeholder="글 내용을 작성해주세요"/>
+         <input type="submit" value="글 등록" class="submit button" />
+         <!-- <div class="button" onclick="location.href='feedReco.do'">취소</div> -->
+       </fieldset>
+     </form:form>
+   </div>
 </div>
+

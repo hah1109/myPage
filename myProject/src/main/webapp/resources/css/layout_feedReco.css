@@ -11,10 +11,10 @@
 @media (max-width: 992px) {
   .masonry {
     columns: 2;
+    margin-bottom: 10px;
   }
 }
 .masonry .grid {
-  display: inline-block;
   margin-bottom: 16px;
   position: relative;
   height: 350px;
@@ -31,6 +31,7 @@
 }
 .masonry .grid img {
   width: 100%;
+  height: 350px;
   border-radius: 5px;
 }
 .masonry .grid__title {

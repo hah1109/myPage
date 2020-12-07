@@ -16,8 +16,8 @@ public interface FeedService2 {
 	public void updateFeedBoard(FeedVO feedBoard);
 	public void deleteFeedBoard(Integer feedBoard_num);
 
-	//public void insertFollow(FeedVO feedVO);
-	//public void deleteFollow();
+	public void insertFollow(FeedVO feedVO);
+	public void deleteFollow(FeedVO feedVO);
 	
 	public FeedVO selectFeedDetail(Integer mem_num);
 //=============ajax==================

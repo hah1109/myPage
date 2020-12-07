@@ -34,12 +34,13 @@ public interface FeedMapper2 {
 	
 	//==============================================
 	//팔로우하기
-	/*@Insert("Insert into follower (follower_num, mem_num,follower_to)"+
+	@Insert("Insert into follower (follower_num, mem_num,follower_to)"+
 	" values(follower_number.nextval, #{mem_num}, #{follower_to}")
 	public void insertFollow(FeedVO feedVO);
+	
 	//팔로우끊기
-	@Delete("delete from follower where follower_to = #{follower_to}")
-	public void deleteFollow();*/
+	@Delete("delete from follower where mem_num=#{mem_num} AND follower_to = #{follower_to}")
+	public void deleteFollow(FeedVO feedVO);
 	//=========================회원정보======
 	@Update("update member_detail set mem_pic=#{mem_pic}, mem_picname=#{mem_picName} where mem_num=#{mem_num}")
 	public void updateProfile(MemberVO member);

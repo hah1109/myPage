@@ -15,10 +15,9 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout_feedReco.css">
 <div class="page-main-style">
-	
+	<input type="button" class="write_Btn" value="" onclick="location.href='feedWrite.do'">
 	<c:if test="${count == 0}">
 		<div class="masonry">
-			<input type="button" class="write_Btn" value="" onclick="location.href='feedWrite.do'">
 			<div class="grid">
 				<img src="../resources/images/cameraImage.jpg">
 				<div class="grid__body">
@@ -33,7 +32,6 @@
 	</c:if>
 	<c:if test="${count > 0}">
 		<div class="masonry">
-		<input type="button" class="write_Btn" value="" onclick="location.href='feedWrite.do'">
 		<c:forEach var="feed" items="${list}">
 		  <div class="grid">
 		  	<c:if test="${empty feed.feed_filename}"><img src="../resources/images/cameraImage.jpg"></c:if>
