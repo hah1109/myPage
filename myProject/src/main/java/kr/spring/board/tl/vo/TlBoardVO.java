@@ -43,8 +43,14 @@ public class TlBoardVO {
 	/*-------------------------------------------------------------*/
 	
 	/*-------------------------------------------------------------*/
-	/*matching 테이블*/
+	/*member_detail 테이블 중 trainer_detail과 속성이 다른 것만*/
+	private int t_num;
+	/*-------------------------------------------------------------*/
+		
+	/*-------------------------------------------------------------*/
+	/*matching 테이블 중 mem_num은 이미 있어서 안씀*/
 	private int mat_num;
+	private String mat_id;
 	private int mat_from;
 	private int mat_to;
 	/*-------------------------------------------------------------*/
@@ -188,6 +194,22 @@ public class TlBoardVO {
 	public void setMat_to(int mat_to) {
 		this.mat_to = mat_to;
 	}
+	
+	public String getMat_id() {
+		return mat_id;
+	}
+
+	public void setMat_id(String mat_id) {
+		this.mat_id = mat_id;
+	}
+
+	public int getT_num() {
+		return t_num;
+	}
+
+	public void setT_num(int t_num) {
+		this.t_num = t_num;
+	}
 
 	@Override
 	public String toString() {
@@ -195,9 +217,9 @@ public class TlBoardVO {
 				+ ", career=" + career + ", mem_gender=" + mem_gender + ", exp=" + exp + ", mem_name=" + mem_name
 				+ ", mem_pw=" + mem_pw + ", mem_cell=" + mem_cell + ", mem_email=" + mem_email + ", mem_zipcode="
 				+ mem_zipcode + ", mem_addr1=" + mem_addr1 + ", mem_addr2=" + mem_addr2 + ", mem_intro=" + mem_intro
-				+ ", mem_date=" + mem_date + ", mem_picName=" + mem_picName + ", mat_num=" + mat_num + ", mat_from="
-				+ mat_from + ", mat_to=" + mat_to + "]";
+				+ ", mem_date=" + mem_date + ", mem_picName=" + mem_picName + ", t_num=" + t_num + ", mat_num="
+				+ mat_num + ", mat_id=" + mat_id + ", mat_from=" + mat_from + ", mat_to=" + mat_to + "]";
 	}
-	
 
+	
 }

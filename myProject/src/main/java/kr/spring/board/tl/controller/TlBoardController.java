@@ -127,11 +127,17 @@ public class TlBoardController {
 		//로그인한 회원의 mem_num
 		MemberVO memberVO = (MemberVO) session.getAttribute("user");
 		
+		if(log.isDebugEnabled()) {
+			log.debug("<<<로그인한 회원의 정보 알아보기>>> :" + memberVO);
+		}
+		
 		//로그인 상태가 아닌 경우
 		if(memberVO == null) {
 			return "redirect:/member/login.do";
 		}else {//누구든 로그인을 한 상태일 경우
 		
+			map.put("mem_num", memberVO.getMem_num());
+			map.put("member_id", memberVO.getMem_id());
 			map.put("member_num", memberVO.getMem_num());
 			
 			if(log.isDebugEnabled()) {
@@ -251,6 +257,24 @@ public class TlBoardController {
 
 		return mav;
 	}
+
+	//트레이닝을 신청한 일반회원의 프로필 사진을 출력해줄 메서드
+	@RequestMapping("/trainerList/memberOfpic.do")
+	public ModelAndView memberOfpic(@RequestParam int mem_num) {
+		
+		//로그인한 일반회원의 mem_num으로 회원정보 전부 다 가져오기
+		TlBoardVO vo= tlBoardService.selectMemberDetail(mem_num);
+		
+		if(log.isDebugEnabled()) {log.debug("<<<로그인한 일반회원의 정보를 쿼리문에서 가져옴>>> :" + vo);}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		mav.addObject("imageFile", vo.getMem_pic());
+		mav.addObject("filename", vo.getMem_picName());
+		
+		
+		return mav;
+	}
 	
 	//누구나 볼 수 있음
 	//이미지를 출력해줄 메서드
@@ -276,6 +300,7 @@ public class TlBoardController {
 		ModelAndView mav = new ModelAndView();
 		Map<String,Object> map = new HashMap<String,Object>();
 		
+		//현재 페이지에는 트레이너 밖에 들어올 수 없음 즉 여기서 mem_num은 트레이너꺼임
 		//로그인한 아이디의 mem_num 구하기
 		MemberVO memberVO = (MemberVO)session.getAttribute("user");
 		//map에 mem_num 넣기
@@ -283,7 +308,7 @@ public class TlBoardController {
 		
 		//받은 매칭 신청의 개수
 		int count = tlBoardService.matchingCount(memberVO.getMem_num());
-		if(log.isDebugEnabled()) { log.debug("<<검색된 영양성분 갯수>> : " + count); }
+		if(log.isDebugEnabled()) { log.debug("<<검색된 트레이닝 신청 개수>> : " + count); }
 		
 		//paging 처리
 		PagingUtil page = new PagingUtil(currentPage,count,10,10,"matchingList.do");
@@ -302,8 +327,16 @@ public class TlBoardController {
 		
 		return mav;
 		
-
+	}
+	
+	//매칭신청 거절을 눌렀을 경우 작동할 메서드
+	@RequestMapping("/trainerList/matchingCancle.do")
+	public String matchingCancle(@RequestParam int mem_num) {
 		
+		tlBoardService.deleteMatchingCancle(mem_num);
+		
+		
+		return "redirect:/trainerList/trainerList.do";
 	}
 
 

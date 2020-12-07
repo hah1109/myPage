@@ -64,6 +64,8 @@
 	        <input type="button" class="detail_modify_btn" onclick="location.href='update.do'" />
 			<input type="button" class="password_modify_btn" onclick="location.href='updatePw.do'">
 			<input type="button" class="delete_btn" onclick="location.href='delete.do'">
+			<input type="button" value="트레이닝신청내역" 
+			onclick='location.href="${pageContext.request.contextPath}/trainerList/matchingList.do"'>
 	      </div>
       </form:form>
     </div>

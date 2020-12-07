@@ -3,6 +3,7 @@ package kr.spring.board.tl.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -39,14 +40,23 @@ public interface TlBoardMapper {
 	public int selectMat_num();
 	
 	//매칭 테이블에 정보 입력
-	@Insert("insert into matching values(#{mat_num},#{member_num},#{trainer_num})")
+	@Insert("insert into matching values(#{mat_num},#{mem_num},#{member_id},#{member_num},#{trainer_num})")
 	public void insertMatching(Map<String, Object> map);
 	
 	//트레이너의 myPage에 매칭 신청 내역 표시
-	@Select("select * from(select a.*, rownum rnum from (select * from matching where mat_to=#{mem_num})a) where rnum>=#{start} and rnum <= #{end}")
+	@Select("SELECT * FROM( SELECT a.*, b.*, rownum rnum FROM (SELECT * FROM matching WHERE mat_to=#{mem_num})a, (SELECT mem_pic, mem_picName FROM member_detail WHERE mem_num IN (SELECT mat_from FROM matching WHERE mat_to=#{mem_num}))b) WHERE rnum>=#{start} and rnum <= #{end}")
 	public List<TlBoardVO> matchingList(Map<String,Object> map);
 	
 	//매칭 신청 내역 카운트
 	@Select("select count(*) from matching where mat_to=#{mem_num}")
 	public int matchingCount(int mem_num);
+	
+	//매칭 신청할 일반회원의 정보를 가져올 메서드
+	@Select("select m.mem_pic,m.mem_picName from member_detail m, matching c where m.mem_num = c.mem_num and c.mem_num=#{mem_num}")
+	public TlBoardVO selectMemberDetail(Integer mem_num);
+	
+	//매칭 신청온걸 거절할 메서드
+	@Delete("delete from matching where mat_from = #{mem_num}")
+	public void deleteMatchingCancle(Integer mem_num);
+	
 }

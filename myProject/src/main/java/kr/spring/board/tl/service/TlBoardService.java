@@ -3,7 +3,7 @@ package kr.spring.board.tl.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Delete;
 
 import kr.spring.board.tl.vo.TlBoardVO;
 
@@ -36,6 +36,13 @@ public interface TlBoardService {
 	
 	//매칭 내역 카운트
 	public int matchingCount(int mem_num);
+	
+	//매칭 신청할 일반회원의 정보를 가져올 메서드
+	public TlBoardVO selectMemberDetail(Integer mem_num);
+	
+	//매칭 신청온걸 거절할 메서드
+	@Delete("delete from matching where mat_from = #{mem_num}")
+	public void deleteMatchingCancle(Integer mem_num);
 
 	
 }
