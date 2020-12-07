@@ -47,6 +47,8 @@
 		base-package="kr.spring.board.feed.controller" />
 	<context:component-scan
 		base-package="kr.spring.board.tl.controller" />
+	<context:component-scan
+		base-package="kr.spring.board.notice.controller" />
 
 	<!-- tiles 설정 -->
 	<beans:bean id="tilesConfigurer"
@@ -63,6 +65,7 @@
 				<beans:value>/WEB-INF/tiles-def/hwboard.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/trainerList.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/boardFeed.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/boardNotice.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
@@ -119,6 +122,7 @@
 			<mapping path="/trainerList/prUpdate.do"/>
 			<mapping path="/trainerList/introUpdate.do"/>
 			<mapping path="/member/myPage.do"/>
+			<mapping path="/boardNotice/list.do"/>
 			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/> 
 		</interceptor>
 		<interceptor>	
