@@ -17,6 +17,7 @@ public class NoticeVO {
 	//댓글 단 사람의 아이디
 	private String mem_id;
 	
+	
 	public int getNotice_num() {
 		return notice_num;
 	}
