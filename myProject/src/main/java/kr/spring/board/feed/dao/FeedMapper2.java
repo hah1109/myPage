@@ -35,7 +35,7 @@ public interface FeedMapper2 {
 	//==============================================
 	//팔로우하기
 	@Insert("Insert into follower (follower_num, mem_num,follower_to)"+
-	" values(follower_number.nextval, #{mem_num}, #{follower_to}")
+	" values(follower_number.nextval, #{mem_num}, #{follower_to})")
 	public void insertFollow(FeedVO feedVO);
 	
 	//팔로우끊기
