@@ -1,6 +1,7 @@
 package kr.spring.board.feed.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.spring.board.feed.vo.FeedVO;
 import kr.spring.comment.feed.vo.FeedCommentVO;
@@ -8,8 +9,8 @@ import kr.spring.member.vo.MemberVO;
 
 //조재희
 public interface FeedService2 {
-	public List<FeedVO> myPersnolList(Integer mem_num);
-	public int countingFeedList(Integer mem_num);
+	public List<FeedVO> myPersnolList(Map<String,Object> map);
+	public int countingFeedList(Map<String,Object> map);
 	public void insertFeedBoard(FeedVO feedBoard);
 	public FeedVO selectFeedBoard(Integer feedBoard_num);
 	public void updateFeedBoard(FeedVO feedBoard);

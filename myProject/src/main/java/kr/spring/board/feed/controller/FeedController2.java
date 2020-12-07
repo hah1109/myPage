@@ -54,39 +54,19 @@ public class FeedController2 {
 		session_num과 profile_num이 다르면서 training이 맞는 경우
 		다른 사람의 프로필 사진을 누르면서 training이 아닌 경우 => 팔로우공개, 트레이너공개, 전체공개가 보여진다
 	 */
-	@RequestMapping(value="/boardFeed/feedList.do",method=RequestMethod.GET)
+	//mypersonal 게시판 호출
+	@RequestMapping("/boardFeed/feedList.do")
 	public ModelAndView feedList(HttpSession session) {
-
 		//회원번호를 얻기위해 세션에 저장된 회원 정보를 반환
 	    MemberVO vo = (MemberVO)session.getAttribute("user");
 	    MemberVO memberVO = memberService.selectMember_detail(vo.getMem_num());
 
-	    System.out.println(memberVO);
-	    int count = feedService.countingFeedList(vo.getMem_num());
-		
-		if(log.isDebugEnabled()) {
-			log.debug("<<FeedCount>>" + count);
-		}
-		
-		List<FeedVO> list = null;
-		
-		if(count>0) {
-			list = feedService.myPersnolList(vo.getMem_num());
-			
-			if(log.isDebugEnabled()) {
-				log.debug("<<피드 목록>> : " + list);
-			}
-		}
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myPersonalList");
-		mav.addObject("count", count);
-		mav.addObject("list", list);
 		mav.addObject("member", memberVO);
 		
 		return mav;
 	}
-	
 	//게시물 등록 폼
 	@RequestMapping(value="/boardFeed/feedWrite.do", method=RequestMethod.GET)
 	public String feedWriteForm(){
