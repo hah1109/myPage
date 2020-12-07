@@ -75,7 +75,7 @@
 			<li>
 				<img class="bar" alt="" src="${pageContext.request.contextPath}/resources/images/header/bar.png">
 			</li>
-			<li class="board">
+			<li class="board"> 
 				<a href="${pageContext.request.contextPath}/boardFree/list.do">게시판</a>
 				<ul class="board-sub submenu" style="z-index: 2;">
 					<li><a href="${pageContext.request.contextPath}/boardFree/list.do">자유 게시판</a></li>
