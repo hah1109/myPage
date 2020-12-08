@@ -55,7 +55,6 @@ body {
   display: flex;
   padding: 1rem;
   width: 25%;
-
 }
 
 .card {
@@ -102,21 +101,6 @@ body {
   }
 }
 
-.card__image--flowers {
-  background-image: url(https://unsplash.it/800/600?image=82);
-}
-
-.card__image--river {
-  background-image: url(https://unsplash.it/800/600?image=11);
-}
-
-.card__image--record {
-  background-image: url(https://unsplash.it/800/600?image=39);
-}
-
-.card__image--fence {
-  background-image: url(https://unsplash.it/800/600?image=59);
-}
 
 .card__title {
   color: @gray-dark;
@@ -146,11 +130,11 @@ body {
   <li class="cards__item">
     <div class="card">
       <c:if test="${empty trainer.mem_picName}">
-      	<img src="../resources/images/cameraImage.jpg" style="max-width:200px; max-height:200px;">
+      	<img class="card__image" src="../resources/images/cameraImage.jpg" style="max-width:200px; max-height:200px;">
       </c:if>
       <c:if test="${!empty trainer.mem_picName}">
-      	<img src="${pageContext.request.contextPath}/trainerList/trainerImage.do?mem_num=${trainer.mem_num}" 
-				style="max-width:200px; max-height:200px;">
+      	<img class="card__image" src="${pageContext.request.contextPath}/trainerList/trainerImage.do?mem_num=${trainer.mem_num}" 
+				style="width:292px; height:200px;">
       </c:if>
       
       
