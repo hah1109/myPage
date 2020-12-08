@@ -35,7 +35,7 @@
 					var list = data.list;
 					
 					if(count < 0 || list == null){
-						alert('목록 호출 오류 발생!');
+						alert('목록 호출 오류 발생 !');
 					}else{
 						$(list).each(function(index,item){
 							
@@ -43,7 +43,7 @@
 							
 							output += '<div class="img">';
 							if(item.feed_filename == null){
-								output += '<img class="thumbnail" src="../resources/images/feed/defaultImage.jpg">';
+								output += '<img class="thumbnail" src="../resources/images/feed/defaultImg.jpg">';
 							} else {
 								output += '<img class="thumbnail" src="imageView.do?feed_num='+item.feed_num+'>';
 							}

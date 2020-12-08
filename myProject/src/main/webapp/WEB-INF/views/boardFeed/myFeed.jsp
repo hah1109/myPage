@@ -43,7 +43,7 @@
 							
 							output += '<div class="img">';
 							if(item.feed_filename == null){
-								output += '<img class="thumbnail" src="../resources/images/feed/defaultImage.jpg">';
+								output += '<img class="thumbnail" src="../resources/images/feed/defaultImg.jpg">';
 							} else {
 								output += '<img class="thumbnail" src="photoView.do?feed_num='+item.feed_num+'">';
 							}
@@ -163,7 +163,7 @@ if(currentPage>=Math.ceil(count/rowCount)){
 	<div style="position:fixed; bottom: 1px; right:20px;">
 		<input type="button" class="writeButton" onclick="location.href='feedWrite.do'">
 	</div>
-	<!-- 글쓰기 리모컨 -->
+	<!-- 글쓰기 리모컨  -->
 	
 	
 </div>
