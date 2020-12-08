@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/layout_feedReco.css">
+	href="${pageContext.request.contextPath}/resources/css/layout_myPersonalList.css">
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
@@ -235,6 +237,19 @@ $(document).ready(function(){
 	//1페이지 호출
 	selectData(1);
 	
+	//팝업창 관련
+	
+	function myFunction() {
+		var popup = document.getElementById("Myfollower");
+		popup.classList.toggle("show");
+	}
+	
+	function myFunction() {
+		var popup = document.getElementById("Followme");
+		popup.classList.toggle("show");
+	}
+	
+	
 });
 /*
  * 사진 수정 버튼, 소개글 수정 버튼 안보이도록 설정
@@ -271,6 +286,7 @@ $(document).ready(function(){
 				<input type="button" value="취소" id="photo_reset">
 			</div>
 		</li>
+		
 	</ul>
 	<!-- 프로필 소개 노출 -->
 	<ul>
@@ -296,6 +312,30 @@ $(document).ready(function(){
 		</li>
 	</ul>
 	<hr size="1" width="100%">
+	
+	<!-- 팔로우 관련 태그 -->
+<div class="tabs">
+	<div class="tab-2">
+	    <label for="tab2-1">내가 팔로우하는 사람</label>
+	    <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
+	    <div>
+	      <c:forEach var="myFollower" items="${followerList}">
+	      	
+	      </c:forEach>
+	    </div>
+	</div>
+	<div class="tab-2">
+	    <label for="tab2-2">나를 팔로우하는 사람</label>
+	    <input id="tab2-2" name="tabs-two" type="radio">
+	    <div>
+	      <h4></h4>
+	      <p>여기에 나를 팔로우하는 사람 넣기</p>
+	    </div>
+	</div>
+</div>
+	
+	<!-- 팔로우 관련 태그 -->
+	
 	<!-- 글쓰기 버튼 -->
 	<p class="align-right">
 		<input type="button" value="글쓰기" onclick="location.href='feedWrite.do'">

@@ -119,5 +119,15 @@ public class FeedService2Impl implements FeedService2{
 	public FeedVO checkFollowing(Map<String,Object> map) {
 		return feedMapper.checkFollowing(map);
 	}
+
+	@Override
+	public List<FeedVO> findFollower(Integer mem_num) {
+		return feedMapper.findFollower(mem_num);
+	}
+
+	@Override
+	public List<FeedVO> findFollowMe(Integer mem_num) {
+		return feedMapper.findfollowMe(mem_num);
+	}
  
 }

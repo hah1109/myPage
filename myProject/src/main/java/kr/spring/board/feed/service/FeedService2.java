@@ -22,6 +22,11 @@ public interface FeedService2 {
 	public FeedVO selectFeedDetail(Integer mem_num);
 	
 	public FeedVO checkFollowing(Map<String,Object> map);
+	
+	
+	public List<FeedVO> findFollower(Integer mem_num);
+	public List<FeedVO> findFollowMe(Integer mem_num);
+	
 //=============ajax==================
 	public void updateProfile(MemberVO member);
 	public void updateTrainerProfile(MemberVO member);

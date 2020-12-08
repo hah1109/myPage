@@ -43,8 +43,17 @@ public interface FeedMapper2 {
 	public void deleteFollow(FeedVO feedVO);
 	
 	//팔로우 관계 확인
-	@Select("SELECT * FROM follower WHERE mem_num=#{user}")
+	@Select("SELECT * FROM follower WHERE mem_num=#{user} AND follower_to=#{owner}")
 	public FeedVO checkFollowing(Map<String,Object> map);
+	
+	//내가 팔로우하는사람 찾기
+	@Select("SELECT * FROM follower WHERE mem_num=#{mem_num}")
+	public List<FeedVO> findFollower(Integer mem_num);
+	
+	//나를 팔로우하는 사람 찾기
+	@Select("SELECT * FROM follower WHERE follower_to=#{mem_num}")
+	public List<FeedVO> findfollowMe(Integer mem_num);
+	
 	//=========================회원정보======
 	@Update("update member_detail set mem_pic=#{mem_pic}, mem_picname=#{mem_picName} where mem_num=#{mem_num}")
 	public void updateProfile(MemberVO member);

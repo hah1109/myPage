@@ -1,6 +1,7 @@
 package kr.spring.board.feed.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.board.feed.service.FeedService2;
 import kr.spring.board.feed.vo.FeedVO;
+import kr.spring.board.tl.vo.TlBoardVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 
@@ -62,8 +64,20 @@ public class FeedController2 {
 	    MemberVO memberVO = new MemberVO();
 	    log.debug("트레이너 호출 vo" + vo);
 	    System.out.println(vo);
+	    
+	    //리스트 호출
+	    List<FeedVO> followerList = null;
+	    //리스트에 로그인한 회원의 mem_num 넣기
+	    followerList = feedService.findFollower(vo.getMem_num());
+	    
+	  //리스트 호출
+	    List<FeedVO> followMeList = null;
+	    //리스트에 로그인한 회원의 mem_num 넣기
+	    followMeList = feedService.findFollowMe(vo.getMem_num());
+	    
 	    if(vo.getMem_auth() == 1) {
 	    	memberVO = memberService.selectMember_detail(vo.getMem_num());
+	    	
 	    }else if(vo.getMem_auth() == 2) {
 	    	
 	    	memberVO = memberService.selectTrainer_detail(vo.getMem_num());
@@ -77,7 +91,8 @@ public class FeedController2 {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myPersonalList");
 		mav.addObject("member", memberVO);
-		
+		mav.addObject("followerList",followerList);
+		mav.addObject("followMeList",followMeList);
 		return mav;
 	}
 	@RequestMapping(value="/boardFeed/otherFeedList.do")
@@ -88,7 +103,11 @@ public class FeedController2 {
 		//세션에서 로그인한 회원의 정보를 user에 담음
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		//로그인한 회원의 mem_num을 user라는 이름으로 map 객체에 담음
+		log.debug("user에 담긴 팔로우관계 확인 결과" + user);
+		log.debug("mem_num에 담긴 팔로우관계 확인 결과" + mem_num);
+		
 		map.put("user", user.getMem_num());
+		map.put("owner", mem_num);
 		//쿼리문이 작동한 결과를 vo에 담음
 		FeedVO vo = feedService.checkFollowing(map);
 		
@@ -330,8 +349,7 @@ public class FeedController2 {
 		return "common/result";
 	}
 
-
-
+	
 
 
 }
