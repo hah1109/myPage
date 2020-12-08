@@ -178,7 +178,7 @@ $(document).ready(function(){
 							output += '<div class="grid__body">';
 							
 							output += '<div class="relative">';
-							output += '<a class="grid__link" target="_blank" href="feedDetail.do?feed_num='+item.feed_num+'"></a>';
+							output += '<a class="grid__link" href="feedDetail.do?feed_num='+item.feed_num+'"></a>';
 							
 							output +='<h1 class="grid__title">';
 							if(item.feed_type == 1) {

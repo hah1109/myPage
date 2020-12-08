@@ -22,7 +22,7 @@
 				<img src="../resources/images/cameraImage.jpg">
 				<div class="grid__body">
 					<div class="relative">
-						<a class="grid__link" target="_blank" href="/" ></a>
+						<a class="grid__link" href="/" ></a>
 						<h1 class="grid__title">등록된 게시물이 <br>없습니다.</h1>
 						<p class="grid__author">게시물을 등록해주세요</p>
 					</div>
@@ -40,10 +40,10 @@
 		      <div class="relative">
 		      								<!-- @@@@@@@@@@여기에 글상세 링크 넣기  @@@@@@@@@@@@-->
 				<c:if test="${user.mem_num == feed.mem_num}">
-		        <a class="grid__link" target="_blank" href="feedDetail.do?feed_num=${feed.feed_num }" ></a>
+		        <a class="grid__link"  href="feedDetail.do?feed_num=${feed.feed_num }" ></a>
 				</c:if>
 				<c:if test="${user.mem_num != feed.mem_num}">
-		        <a class="grid__link" target="_blank" href="otherFeedDetail.do?feed_num=${feed.feed_num }" ></a>
+		        <a class="grid__link"  href="otherFeedDetail.do?feed_num=${feed.feed_num }" ></a>
 				</c:if>
 		        <h1 class="grid__title">
 		        	<c:if test="${feed.feed_type == 1}"> 식단 </c:if>
