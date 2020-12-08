@@ -19,7 +19,7 @@ public class NoticeAjaxController {
 	@Resource
 	NoticeService noticeService;
 	
-	@RequestMapping("/boardNotice/c")
+	@RequestMapping("/boardNotice/confirmOneNotice.do")
 	@ResponseBody
 	public void confirmOneNotice(@RequestParam int notice_num) {
 		if(log.isDebugEnabled()) log.debug("<<알림 하나만 체크>> : " + notice_num);
