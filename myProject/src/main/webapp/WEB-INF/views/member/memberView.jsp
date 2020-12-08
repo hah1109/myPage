@@ -36,7 +36,7 @@
 		
 		<a><img class="mypage_texts" src="../resources/images/text_myTrainer.png"></a>
 		<c:if test="${member.t_num==0}"><li>매칭된 트레이너가 없습니다.</li></c:if>
-		<c:if test="${member.t_num!=0}"><li>${member.t_num}</li></c:if>
+		<c:if test="${member.t_num!=0}"><li>${trainerId.mem_id}님과 트레이닝중	</li></c:if>
 		
 		<a><img class="mypage_texts" src="../resources/images/text_cell.png"></a>
 		<li>${member.mem_cell}</li>

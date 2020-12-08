@@ -145,9 +145,11 @@ body {
 	<c:forEach var="trainer" items="${list}">
   <li class="cards__item">
     <div class="card">
-      <c:if test="${empty trainer.mem_picName}">기본이미지 보여주기</c:if>
+      <c:if test="${empty trainer.mem_picName}">
+      	<img src="../resources/images/cameraImage.jpg" style="max-width:200px; max-height:200px;">
+      </c:if>
       <c:if test="${!empty trainer.mem_picName}">
-      <img src="${pageContext.request.contextPath}/trainerList/trainerImage.do?mem_num=${trainer.mem_num}" 
+      	<img src="${pageContext.request.contextPath}/trainerList/trainerImage.do?mem_num=${trainer.mem_num}" 
 				style="max-width:200px; max-height:200px;">
       </c:if>
       

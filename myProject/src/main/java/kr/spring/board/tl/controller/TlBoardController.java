@@ -106,7 +106,7 @@ public class TlBoardController {
 	//트레이너 리스트 페이지에서 원하는 트레이너를 눌렀을 시 작동할 메서드
 	//트레이너 상세정보페이지를 보여줄 메서드
 	@RequestMapping(value="/trainerList/trainerListDetail.do", method=RequestMethod.GET)
-	public String formTrainerListDetail(@RequestParam int mem_num, Model model) {
+	public String formTrainerListDetail(@RequestParam int mem_num, Model model, HttpSession session) {
 
 		//트레이너리스트 페이지에서 선택한 트레이너 mem_num이 잘 전송되었는지 확인
 		if(log.isDebugEnabled()) {
@@ -119,9 +119,17 @@ public class TlBoardController {
 		if(log.isDebugEnabled()) {
 			log.debug("<<<트레이너 상세 정보>>> : " + vo);
 		}
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		//읽어온 정보를 로그를 통해 보여줌
+		if(log.isDebugEnabled()) {
+			log.debug("<<<로그인 유저의 정보>>> : " + user);
+		}
 
 		//읽어온 정보를 모델을 정해서 request에 저장
 		model.addAttribute("trainer", vo);
+		model.addAttribute("user", user);
 
 		//definition 설정명을 호출
 		return "trainerListDetail";
@@ -377,7 +385,7 @@ public class TlBoardController {
 		tlBoardService.deleteMatchingCancle(mem_num);
 		
 		
-		return "/trainerList/matchingList";
+		return "redirect:/trainerList/matchingList.do";
 	}
 
 	//매칭신청 수락을 눌렀을 경우 작동할 메서드

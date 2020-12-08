@@ -167,7 +167,9 @@ input::-moz-focus-inner {
 <div class="form">
 	<ul>
 		<li>
-			<c:if test="${empty trainer.mem_picName}">기본 이미지 표시</c:if>
+			<c:if test="${empty trainer.mem_picName}">
+				<img src="../resources/images/cameraImage.jpg" style="max-width:200px; max-height:200px;">
+			</c:if>
 			<c:if test="${!empty trainer.mem_picName}">
 				<img src="${pageContext.request.contextPath}/trainerList/photoOutPut.do" 
 				width="200" height="200" class="change_pic">
