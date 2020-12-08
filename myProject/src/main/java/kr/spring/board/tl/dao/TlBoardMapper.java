@@ -44,7 +44,7 @@ public interface TlBoardMapper {
 	public void insertMatching(Map<String, Object> map);
 	
 	//트레이너의 myPage에 매칭 신청 내역 표시
-	@Select("SELECT * FROM(SELECT a.*, rownum rnum FROM(SELECT * from matching m JOIN member_detail d ON m.mem_num=d.mem_num where mat_to=105 order by mat_num)a) WHERE rnum>=#{start} and rnum <= #{end}")
+	@Select("SELECT * FROM(SELECT a.*, rownum rnum FROM(SELECT * from matching m JOIN member_detail d ON m.mem_num=d.mem_num where mat_to=#{mem_num} order by mat_num)a) WHERE rnum>=#{start} and rnum <= #{end}")
 	public List<TlBoardVO> matchingList(Map<String,Object> map);
 	
 	//매칭 신청 내역 카운트

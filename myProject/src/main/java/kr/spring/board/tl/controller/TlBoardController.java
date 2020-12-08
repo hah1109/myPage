@@ -354,9 +354,10 @@ public class TlBoardController {
 		map.put("end", page.getEndCount());
 		
 		List<TlBoardVO> list = null;
-		
-		list = tlBoardService.matchingList(map);
-		
+		if(count > 0) {
+			list = tlBoardService.matchingList(map);
+			if(log.isDebugEnabled()) { log.debug("<<검색된 트레이닝 신청 리스트>> : " + list); }
+		}
 		mav.addObject("result",1);
 		mav.addObject("list", list);
 		mav.addObject("count", count);

@@ -43,22 +43,22 @@ function commentList(){
         data : {free_num:$('#free_num').val()},
         success : function(data){					
             var a ='';
-            $.each(data, function(key, value){
+            $.each(data, function(index,item){
                 a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-                a += '<div><b>'+value.mem_id + '</b>';
-                if(value.mem_auth == 1){
+                a += '<div><b>'+item.mem_id + '</b>';
+                if(item.mem_auth == 1){
                 	a += '&nbsp;일반회원';	
-                }else if(value.mem_auth == 2){
+                }else if(item.mem_auth == 2){
                 	a += '&nbsp;트레이너';
-                }else if(value.mem_auth == 0){
+                }else if(item.mem_auth == 0){
                 	a += '&nbsp;관리자';
                 }
-                a += '&nbsp;' + value.str_date;
-				if(value.mem_num == mem_num){
-				a += '&nbsp;|&nbsp;<span class="commentModify'+value.freec_num+'"><a onclick="commentUpdate('+value.freec_num+',\''+value.free_comment+'\');">수정</a>';
-                a += '&nbsp;|&nbsp;<a onclick="commentDelete('+value.freec_num+');">삭제</a> </span>'; 
+                a += '&nbsp;' + item.str_date;
+				if(item.mem_num == mem_num){
+				a += '&nbsp;|&nbsp;<span class="commentModify'+item.freec_num+'"><a onclick="commentUpdate('+item.freec_num+',\''+item.free_comment+'\');">수정</a>';
+                a += '&nbsp;|&nbsp;<a onclick="commentDelete('+item.freec_num+');">삭제</a> </span>'; 
 				}	            	                	                
-                a += '<div class="commentContent'+value.freec_num+'"> <p>'+value.free_comment +'</p></div>';						
+                a += '<div class="commentContent'+item.freec_num+'"> <p>'+item.free_comment +'</p></div>';						
 				a += '</div></div>';
             });		
 			            

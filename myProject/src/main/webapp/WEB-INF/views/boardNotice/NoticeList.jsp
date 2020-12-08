@@ -24,7 +24,8 @@
 		
 	});
 	
-function updateCheck_date(board_num,writer_memnum){
+function updateCheck_date(board_num,writer_memnum,notice_num){
+	
 	$.ajax({
 		url:'update_checkdate.do',
 		type:'post',
@@ -33,11 +34,28 @@ function updateCheck_date(board_num,writer_memnum){
 		cache:false,
 		timeout:30000,
 		success:function(data){
-			$('#confirmcheck' + notice_num).addClass('confirmed');
+			$('#confirmcheck' + notice_num).css('font-weight','normal').css('color','grey');
 		},
 		error:function(){
 			alert('알림 확인 오류');
 		}		
+	});
+}
+
+function confirmAllNotice(writer_memnum){
+	$.ajax({
+		url:'confirmAll.do',
+		type:'post',
+		data:{'writer_memnum':writer_memnum},
+		cache:false,
+		timeout:30000,
+		success:function(data){
+			location.href='list.do';
+			alert('tjdrhd');
+		},
+		error:function(){
+			
+		}
 	});
 }
 </script>
@@ -47,6 +65,10 @@ function updateCheck_date(board_num,writer_memnum){
 	<c:if test="${count == 0}">
 		<div class="align-center">등록된 알림 없습니다.</div>
 	</c:if>
+	
+	<div class="align-right">
+		<input type="button" value="알림 전체 확인" onclick="confirmAllNotice(${user.mem_num});" style="width:98px">
+	</div>
 	
 	<c:if test="${count > 0}">
 		<table class="table_notice">
@@ -67,11 +89,11 @@ function updateCheck_date(board_num,writer_memnum){
 					</td>
 					<td>${Notice.reg_date}</td>
 					<td>
-						<a onclick="updateCheck_date(${Notice.board_num},${Notice.writer_memnum});" id="confirmcheck + ${Notice.notice_num}">[확인]</a>
+						<a onclick="updateCheck_date(${Notice.board_num},${Notice.writer_memnum},${Notice.notice_num});" id="confirmcheck${Notice.notice_num}">[확인]</a>
 						<br>
 						<c:if test="${Notice.return_url != '0'}">
 							<a href="${pageContext.request.contextPath}/${Notice.return_url}"
-								onclick="updateCheck_date(${Notice.board_num},${Notice.writer_memnum})">[이동]</a>
+								onclick="updateCheck_date(${Notice.board_num},${Notice.writer_memnum},${Notice.notice_num})">[이동]</a>
 						</c:if>
 					</td>
 				</tr>

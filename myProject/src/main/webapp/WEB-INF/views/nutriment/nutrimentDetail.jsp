@@ -1,15 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<script>
-	var btn_delete = document.getElementById('btn_delete');
-	btn_delete.onclick=function(){
-		var choice = window.confirm('삭제하시겠습니까?');
-		if(choice){
-			location.href='nutrimentDelete.do?food_num=${NutrimentVO.food_num}';
-		}
-	};
-</script>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nutrimentCal.css">
 <div id="nutrimentDetail">
 	<div id="bg1">
@@ -67,6 +59,15 @@
 					<div>
 						<input type="button" value="삭제" id="btn_delete"/>
 					</div>
+					<script>
+					var btn_delete = document.getElementById('btn_delete');
+					btn_delete.onclick=function(){
+						var choice = window.confirm('삭제하시겠습니까?');
+						if(choice){
+							location.href='nutrimentDelete.do?food_num=${NutrimentVO.food_num}';
+						}
+					};
+					</script>
 				</c:if>
 			</div>
 		</div>

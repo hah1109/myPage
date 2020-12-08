@@ -36,5 +36,8 @@ public class NoticeServiceImpl implements NoticeService {
 		noticeMapper.updateNoticeCheckdate(notice);
 	}
 	
-	
+	@Override
+	public void confirmAllNotice(Integer writer_memnum) {
+		noticeMapper.confirmAllNotice(writer_memnum);
+	}
 }

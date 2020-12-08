@@ -69,7 +69,7 @@ border:1px solid black;
 			        	</button>
 			        </c:if>
 			        <!-- 일반회원일 경우  && 현재 트레이너가 아닌 다른사람과 매칭관계인 경우 -->	
-		        	<c:if test="${user.mem_auth == 1 && user.t_num != trainer.mem_num}">
+		        	<c:if test="${user.mem_auth == 1 && user.t_num != trainer.mem_num && user.t_num != 0}">
 		        	현재 다른 트레이너와 트레이닝중입니다.
 		        	</c:if>
 		        	<!-- 트레이너일 경우 -->
