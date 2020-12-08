@@ -309,7 +309,7 @@ public class FeedController2 {
 	public String deleteFollow(@Valid FeedVO feedVO, BindingResult result, HttpServletRequest request, HttpSession session, Model model) {
 		//feedVO에 담긴것
 		if(log.isDebugEnabled()) log.debug("<<feedVO에 담긴것>> :" + feedVO);
-		
+	
 		//로그인한 회원 정보를 memberVO에 담기
 		MemberVO member = (MemberVO)session.getAttribute("user");
 		//기존 feedVO에 담겨있는 mem_num을 follower_to로 셋팅
