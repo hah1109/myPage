@@ -62,6 +62,7 @@ public interface TipBoardMapper {
 	public int inserReplyComment(FreeBoardCommentReplyVO replyComment);
 	
 	//Mapper
+	@Select("DELETE FROM board_free_comment_reply rfreec_num=#{rfreec_num}")
 	public int deleteReplyComment(int rfreec_num);
 	
 	//댓글등록알림

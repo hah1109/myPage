@@ -18,4 +18,7 @@ public interface NoticeMapper {
 	@Update("UPDATE notice SET check_date=SYSDATE WHERE board_num=#{board_num} AND writer_memnum=#{writer_memnum}")
 	public void updateNoticeCheckdate(NoticeVO notice);
 	
+	@Update("UPDATE notice SET check_date=SYSDATE WHERE writer_memnum=#{writer_memnum}")
+	public void confirmAllNotice(Integer writer_memnum);
+	
 }

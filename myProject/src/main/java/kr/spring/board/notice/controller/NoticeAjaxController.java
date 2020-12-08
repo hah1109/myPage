@@ -29,5 +29,11 @@ public class NoticeAjaxController {
 		noticeService.updateNoticeCheckdate(notice);	
 	}
 	
+	@RequestMapping("/boardNotice/confirmAll.do")
+	@ResponseBody
+	public void confirmAllNotice(@RequestParam int writer_memnum) {
+		if(log.isDebugEnabled()) log.debug("<<알림전체확인>> : " + writer_memnum);
+		noticeService.confirmAllNotice(writer_memnum);
+	}
 	
 }

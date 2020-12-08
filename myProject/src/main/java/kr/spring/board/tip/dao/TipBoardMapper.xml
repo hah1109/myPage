@@ -124,10 +124,10 @@
 			(rfreec_num_seq.nextval,#{rfreec_comment},#{freec_num},#{mem_num})
 	</insert>
 	
-	<delete id="deleteReplyComment" parameterType="integer">
+<!-- 	<delete id="deleteReplyComment" parameterType="integer">
 		DELETE FROM
 			board_free_comment_reply
 		WHERE
 			rfreec_num=#{rfreec_num}
-	</delete>
+	</delete> -->
 </mapper>

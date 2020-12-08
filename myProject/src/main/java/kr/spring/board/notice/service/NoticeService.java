@@ -12,4 +12,5 @@ public interface NoticeService {
 	public void insertNoticeVO(NoticeVO notice);
 	
 	public void updateNoticeCheckdate(NoticeVO notice);
+	public void confirmAllNotice(Integer writer_memnum);
 }
