@@ -47,11 +47,11 @@ public interface FeedMapper2 {
 	public FeedVO checkFollowing(Map<String,Object> map);
 	
 	//내가 팔로우하는사람 찾기
-	@Select("SELECT * FROM follower WHERE mem_num=#{mem_num}")
+	@Select("select * from member m left outer join follower f ON m.mem_num = f.follower_to where f.mem_num=#{mem_num}")
 	public List<FeedVO> findFollower(Integer mem_num);
 	
 	//나를 팔로우하는 사람 찾기
-	@Select("SELECT * FROM follower WHERE follower_to=#{mem_num}")
+	@Select("select * from member m left outer join follower f ON m.mem_num = f.mem_num where f.follower_to=#{mem_num}")
 	public List<FeedVO> findfollowMe(Integer mem_num);
 	
 	//=========================회원정보======
