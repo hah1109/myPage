@@ -43,7 +43,7 @@
 							
 							output += '<div class="img">';
 							if(item.feed_filename == null){
-								output += '<img class="thumbnail" src="../resources/images/blank.jpg">';
+								output += '<img class="thumbnail" src="../resources/images/feed/defaultImage.jpg">';
 							} else {
 								output += '<img class="thumbnail" src="photoView.do?feed_num='+item.feed_num+'">';
 							}
