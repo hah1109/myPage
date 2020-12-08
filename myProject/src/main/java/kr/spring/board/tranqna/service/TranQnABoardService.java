@@ -3,8 +3,6 @@ package kr.spring.board.tranqna.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Select;
-
 import kr.spring.board.tranqna.vo.TranQnABoardVO;
 import kr.spring.comment.tranqnac.vo.TranQnABoardCommentReplyVO;
 import kr.spring.comment.tranqnac.vo.TranQnABoardCommentVO;
