@@ -15,6 +15,19 @@ create table feed(
 );
 create sequence feed_num;
 
+create table feed_comment(
+    feedc_num number not null,
+    feedc_comment varchar2(50) not null,
+    feedc_reg_date date default sysdate not null,
+    feedc_modify_date date default sysdate not null,
+    feed_num number not null,
+    mem_num number not null,
+    constraint feedc_num_pk primary key (feedc_num),
+    constraint feed_num_fk1 foreign key (feed_num) references feed(feed_num),
+    constraint mem_num_fk1 foreign key (mem_num) references member(mem_num)
+);
+create sequence feed_num_seq;
+
 create table follower(
 	follower_num number not null,/*팔로우번호(보드의 글번호와 같은 개념)*/
 	mem_num number not null,/*현재 로그인한 회원의 mem_num*/
