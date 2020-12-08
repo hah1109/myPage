@@ -320,7 +320,7 @@ $(document).ready(function(){
 	    <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
 	    <div>
 	      <c:forEach var="myFollower" items="${followerList}">
-	      	
+	      	 
 	      </c:forEach>
 	    </div>
 	</div>

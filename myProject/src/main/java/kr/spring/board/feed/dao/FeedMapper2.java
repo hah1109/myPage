@@ -44,7 +44,7 @@ public interface FeedMapper2 {
 	
 	//팔로우 관계 확인
 	@Select("SELECT * FROM follower WHERE mem_num=#{user} AND follower_to=#{owner}")
-	public FeedVO checkFollowing(Map<String,Object> map);
+	public FeedVO checkFollowing(Map<String,Object> map);  
 	
 	//내가 팔로우하는사람 찾기
 	@Select("SELECT * FROM follower WHERE mem_num=#{mem_num}")

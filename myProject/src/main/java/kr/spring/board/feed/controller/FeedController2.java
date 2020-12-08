@@ -94,7 +94,7 @@ public class FeedController2 {
 		mav.addObject("followerList",followerList);
 		mav.addObject("followMeList",followMeList);
 		return mav;
-	}
+	} 
 	@RequestMapping(value="/boardFeed/otherFeedList.do")
 	public ModelAndView otherFeedList(@RequestParam int mem_num, HttpSession session) {
 		

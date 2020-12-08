@@ -106,7 +106,7 @@ public class FeedService2Impl implements FeedService2{
 	
 	//==============팔로우 관련
 	@Override
-	public void insertFollow(FeedVO feedVO) {
+	public void insertFollow(FeedVO feedVO) { 
 		feedMapper.insertFollow(feedVO);
 	}
 
