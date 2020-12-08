@@ -39,8 +39,8 @@ ul.main-menu { height:60px;}
 ul.main-menu > li { display:inline-block; background:#fff; position:relative;}
 ul.main-menu > li:hover { background:#fff; }
 ul.main-menu > li ul.submenu { display:none; position:absolute; top:30px; left:0; }
-ul.main-menu > li:hover ul.submenu { display:block; }
-ul.main-menu > li ul.submenu > li { display:inline-block; background:#fff; width:80px; padding:5px 10px; text-align:center; }
+ul.main-menu > li:hover ul.submenu { display:block;}
+ul.main-menu > li ul.submenu > li { display:inline-block; background:#fff; /* width:80px; padding:5px 10px; */ text-align:center; }
 ul.main-menu > li ul.submenu > li:hover { background:#fff; }
 
 div#main-header{
@@ -51,18 +51,22 @@ div#main-header{
 
 div#main-header > ul > .main-logo{}
 
+ul.main-menu > li{
+	padding-left : 25px;
+	padding-right : 25px;
+}
+
 div#main-header > ul > li > img{
 	width:3px;
 	height:20px;
-	margin-bottom : 40px;
-	margin-left : 50px;
-	margin-right : 50px;
+	margin-bottom :40px;
 }
 
 div#main-header> ul >.main-logo >a{
 	width: 100px; 
 	height: 50px;
 	margin-bottom: 25px;
+	margin-right:150px;
 	background: url(../images/header/main_logo_for_header.png);
 	text-indent: -6000px;
 	overflow: hidden;
@@ -78,14 +82,21 @@ div#main-header> ul >.homeTraining >a{
 	text-indent: -6000px;
 	overflow: hidden;
 	clear: both;
-	margin-left : 200px;
 	margin-bottom : 40px;
 	display: inline-block;
 	background-repeat: no-repeat;
 }
+ul.main-menu > li ul.ht-sub > li{
+	width:85px;
+	padding:15px 25px;
+	top:10px;
+}
 
+div#main-header> ul >.nutriment{
+	padding-left:35px;
+}
 div#main-header> ul >.nutriment >a{
-	width: 35px; 
+	width: 50px; 
 	height: 20px;
 	background: url(../images/header/btn_nutriment.png);
 	text-indent: -6000px;
@@ -94,6 +105,10 @@ div#main-header> ul >.nutriment >a{
 	margin-bottom : 40px;
 	display: inline-block;
 	background-repeat: no-repeat;
+}
+ul.main-menu > li ul.nutri-sub > li{
+	width:110px;
+	padding:15px 5px;
 }
 
 div#main-header> ul >.training-diary >a{
@@ -107,6 +122,10 @@ div#main-header> ul >.training-diary >a{
 	display: inline-block;
 	background-repeat: no-repeat;
 }
+ul.main-menu > li ul.dt-sub > li{
+	width:180px;
+	padding:15px 5px;
+}
 
 div#main-header> ul >.board >a{
 	width: 50px; 
@@ -119,6 +138,10 @@ div#main-header> ul >.board >a{
 	display: inline-block;
 	background-repeat: no-repeat;
 }
+ul.main-menu > li ul.board-sub > li{
+	width:100px;
+	padding:15px 5px;
+}
 
 div#main-header> ul >.trainer >a{
 	width: 65px; 
@@ -130,6 +153,11 @@ div#main-header> ul >.trainer >a{
 	margin-bottom : 40px;
 	display: inline-block;
 	background-repeat: no-repeat;
+}
+
+ul.main-menu > li ul.trainer-sub > li{
+	width:120px;
+	padding:15px 5px;
 }
 
 
