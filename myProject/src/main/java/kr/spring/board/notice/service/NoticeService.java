@@ -11,6 +11,7 @@ public interface NoticeService {
 	public int selectRowCount(Map<String,Object> map);
 	public void insertNoticeVO(NoticeVO notice);
 	
+	public void confirmOneNotice(Integer notice_num);
 	public void updateNoticeCheckdate(NoticeVO notice);
 	public void confirmAllNotice(Integer writer_memnum);
 }
