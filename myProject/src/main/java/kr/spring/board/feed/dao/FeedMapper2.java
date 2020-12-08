@@ -16,9 +16,14 @@ import kr.spring.member.vo.MemberVO;
 public interface FeedMapper2 {
 	//내가 쓴 모든 글 받아오기
 	public List<FeedVO> myPersnolList(Map<String,Object> map);
+	//관계의 의하여 글 받아오기 (0:트레이너 , 1:팔로우 , 2:모르는 사람 )
+	public List<FeedVO> otherPersnolList(Map<String,Object> map);
+	
 	//내가 쓴 글의 갯수 구하기
 	@Select("select count(*) from feed where mem_num=#{mem_num}")
 	public int countingFeedList(Map<String,Object> map);
+	//관계의 의한 글 갯수 구하기 
+	public int countingOtherFeedList(Map<String,Object> map);
 
 	//피드등록
 	@Insert("Insert into feed (feed_num, feed_type, feed_content, feed_file, feed_filename, feed_ip, mem_num, mem_id, feed_auth, feed_reg_date)"

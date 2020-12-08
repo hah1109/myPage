@@ -29,6 +29,16 @@ public class FeedService2Impl implements FeedService2{
 		return feedMapper.countingFeedList(map);
 	}
 
+
+	@Override
+	public List<FeedVO> otherPersnolList(Map<String, Object> map) {
+		return feedMapper.otherPersnolList(map);
+	}
+
+	@Override
+	public int countingOtherFeedList(Map<String, Object> map) {
+		return feedMapper.countingOtherFeedList(map);
+	}
 	@Override
 	public void insertFeedBoard(FeedVO feedBoard) {
 		feedMapper.insertFeedBoard(feedBoard);

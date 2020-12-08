@@ -18,7 +18,7 @@ $(document).ready(function(){
 		
 		if(pageNum == 1){
 			//처음 호출시는 해당 ID의 div의 내부 내용물을 제거
-			$('#output').empty();
+			$('.masonry').empty();
 		}
 		
 		//로딩 이미지 노출
@@ -43,8 +43,7 @@ $(document).ready(function(){
 				}else{
 					$(list).each(function(index,item){
 						
-						var output = '<div class="masonry">';
-						output += '<div class="grid">';
+						var output = '<div class="grid">';
 						
 						output += '<img ';
 						if(item.feed_filename == null){
@@ -73,11 +72,10 @@ $(document).ready(function(){
 						output += '</div>';
 						output += '</div>';
 						output += '</div>';
-						output += '</div>';
 						
 							
 						//문서 객체에 추가
-						$('#output').append(output);
+						$('.masonry').append(output);
 					});
 					
 				}
@@ -126,7 +124,6 @@ selectData(1);
 <!-- 아이디 노출 -->
 	<h1>${member.mem_id }</h1>
 <!-- 프로필 사진 노출 -->
-	<h2>프로필 사진</h2>
 	<ul>
 		<li>
 			<c:if test="${empty member.mem_picName }">
@@ -157,7 +154,7 @@ selectData(1);
 	<div>
 	
 	
-	${member.mem_num} 
+	${member.mem_num}
 		<!-- 로그인 아이디 일반회원			피드 아이디 트레이너 회원 -->
 		<c:if test="${user.mem_auth == 1 && member.mem_auth ==2 }">
 			<button type="button" onclick="location.href='${pageContext.request.contextPath}/trainerList/matching.do?mem_num=${member.mem_num}'">트레이닝 신청하기</button>
@@ -180,9 +177,7 @@ selectData(1);
 </div>
 <div>
 	
-	<!-- LIST -->
-	<div id="feedList">
-		<div id="output">
+		<div class="masonry">
 			<!-- Ajax 영역 -->
 		</div>
 		
@@ -191,8 +186,7 @@ selectData(1);
 			<img src="/MyFirstTrainer/resources/images/ajax-loader.gif">
 		</div>
 		<!-- feed로딩시 로딩 이미지 -->
-	</div>
-	<!-- LIST -->
+	
 	
 	<!-- TOP 버튼 -->
 	<div style="position:fixed; bottom: 80px; right:20px;">

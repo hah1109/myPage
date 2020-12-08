@@ -87,9 +87,19 @@ public class FeedAjaxController {
 											@RequestParam(value="mem_num") String mem_num, HttpSession session, Model model) {
 		
 		List<FeedVO> list = null;
-		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		Map<String,Object> checkMap = new HashMap<String,Object>();
+
 		//feed_num을 받아온것
 		int num = Integer.parseInt(mem_num);
+		int relation = 2;
+		
+		
+		checkMap.put("user", user.getMem_num());
+		checkMap.put("owner", num);
+		
+		FeedVO feed = feedService.checkFollowing(checkMap);
+		
 		
 		//session에서 로그인한 id의 mem_num & mam_auth 받기
 		MemberVO memberVO = memberService.selectMember_detail(num);//pic name 을 받아올 수있음 
@@ -100,6 +110,24 @@ public class FeedAjaxController {
 		}
 		memberVO.setMem_auth(member.getMem_auth());
 		memberVO.setMem_num(num);
+		
+		log.debug("트레이닝 관계" + user.getMem_num()+","+ memberVO.getT_num() + "," + feed);
+		//로그인한 유저와 피드글 유저와 의 관계 확인
+		if(user.getMem_auth() == 1) {
+			//일반 회원일 경우
+			if(feed != null) {//팔로우하는 관계
+				relation = 1;
+			}
+		}else if(user.getMem_auth() == 2) {
+			//트레이너 회원일 경우
+		}else {
+			if (user.getMem_num() == memberVO.getT_num()) {// 트레이닝 관계
+				relation = 0;
+			}
+			else if(feed != null) {//팔로우하는 관계
+				relation = 1;
+			}
+		}
 		
 		int sessionMem_num = memberVO.getMem_num();
 		int sessionMem_auth = memberVO.getMem_auth();
@@ -114,21 +142,23 @@ public class FeedAjaxController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("mem_num", sessionMem_num);
 		map.put("mem_auth", sessionMem_auth);
+		map.put("relation", relation);
 		
 		//총 글의 갯수
 		int count = 0;
 
 		//총 글의 갯수
-		count = feedService.countingFeedList(map);
+		count = feedService.countingOtherFeedList(map);
 		if(log.isDebugEnabled()) { log.debug("<<검색된 피드 갯수>> : " + count); }
 
 		//paging 처리
 		PagingUtil page = new PagingUtil(currentPage,count,rowCount,10,"myFeed.do");
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
+		map.put("relation", relation);
 
 		//모든 피드 list에 담기
-		list = feedService.myPersnolList(map);
+		list = feedService.otherPersnolList(map);
 		model.addAttribute("mem_auth", sessionMem_auth);
 
 		Map<String,Object> mapJson = new HashMap<String,Object>();

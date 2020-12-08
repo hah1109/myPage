@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/layout_myPersonalList.css">
+	href="${pageContext.request.contextPath}/resources/css/layout_feedReco.css">
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
@@ -143,7 +141,7 @@ $(document).ready(function(){
 			
 			if(pageNum == 1){
 				//처음 호출시는 해당 ID의 div의 내부 내용물을 제거
-				$('#output').empty();
+				$('.masonry').empty();
 			}
 			//로딩 이미지 노출
 			$('#loading').show();
@@ -167,8 +165,7 @@ $(document).ready(function(){
 					}else{
 						$(list).each(function(index,item){
 							
-							var output = '<div class="masonry">';
-							output += '<div class="grid">';
+							var output = '<div class="grid">';
 							
 							output += '<img ';
 							if(item.feed_filename == null){
@@ -196,12 +193,10 @@ $(document).ready(function(){
 							output += '<span class="grid__tag">'+item.feed_content+'</span>';
 							output += '</div>';
 							output += '</div>';
-							output += '</div>';
-							output += '</div>';
-							
+							output += '</div>';							
 								
 							//문서 객체에 추가
-							$('#output').append(output);
+							$('.masonry').append(output);
 						});
 						
 					}
@@ -237,19 +232,6 @@ $(document).ready(function(){
 	//1페이지 호출
 	selectData(1);
 	
-	//팝업창 관련
-	
-	function myFunction() {
-		var popup = document.getElementById("Myfollower");
-		popup.classList.toggle("show");
-	}
-	
-	function myFunction() {
-		var popup = document.getElementById("Followme");
-		popup.classList.toggle("show");
-	}
-	
-	
 });
 /*
  * 사진 수정 버튼, 소개글 수정 버튼 안보이도록 설정
@@ -260,11 +242,9 @@ $(document).ready(function(){
 <div class="page-main-style">
 
 <!-- 아이디 노출 -->
-	<h1>${member.mem_id }</h1>
 <!-- 프로필 사진 노출 -->
-	<h2>프로필 사진</h2>
-	<ul>
-		<li>
+	<ul id="upperNotice">
+		<li id="image">
 			<c:if test="${empty member.mem_picName }">
 				<img
 					src="${pageContext.request.contextPath }/resources/images/blank.jpg"
@@ -274,6 +254,9 @@ $(document).ready(function(){
 				<img src="${pageContext.request.contextPath }/member/photoView.do"
 					width="100" height="100" class="my-photo">
 			</c:if>
+		</li>
+		<li>
+			<h1>${member.mem_id }</h1>
 		</li>
 		<!-- 프로필 사진 수정버튼 -->
 		<li>
@@ -286,7 +269,6 @@ $(document).ready(function(){
 				<input type="button" value="취소" id="photo_reset">
 			</div>
 		</li>
-		
 	</ul>
 	<!-- 프로필 소개 노출 -->
 	<ul>
@@ -312,94 +294,34 @@ $(document).ready(function(){
 		</li>
 	</ul>
 	<hr size="1" width="100%">
-	
-	<!-- 팔로우 관련 태그 -->
-<div class="tabs">
-	<div class="tab-2">
-	    <label for="tab2-1">내가 팔로우하는 사람</label>
-	    <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
-	    <div>
-	      <c:forEach var="myFollower" items="${followerList}">
-	      	   
-	      </c:forEach>
-	    </div>
-	</div>
-	<div class="tab-2">
-	    <label for="tab2-2">나를 팔로우하는 사람</label>
-	    <input id="tab2-2" name="tabs-two" type="radio">
-	    <div>
-	      <h4></h4>
-	      <p>여기에 나를 팔로우하는 사람 넣기</p>
-	    </div>
-	</div>
-</div>
-	
-	<!-- 팔로우 관련 태그 -->
-	
 	<!-- 글쓰기 버튼 -->
 	<p class="align-right">
 		<input type="button" value="글쓰기" onclick="location.href='feedWrite.do'">
 	</p>
 </div>
+<!-- 하단 리스트 영역 -->
 <div>
-	
-	<!-- LIST -->
-	<div id="feedList">
-		<div id="output">
-			<!-- Ajax 영역 -->
-		</div>
-		
-		<!-- feed로딩시 로딩 이미지 -->
-		<div id="loading" style="display:none;">
-			<img src="/MyFirstTrainer/resources/images/ajax-loader.gif">
-		</div>
-		<!-- feed로딩시 로딩 이미지 -->
+
+	<div class="masonry">
+		<!-- Ajax 영역 -->
 	</div>
-	<!-- LIST -->
-	
+
+	<!-- feed로딩시 로딩 이미지 -->
+	<div id="loading" style="display: none;">
+		<img src="/MyFirstTrainer/resources/images/ajax-loader.gif">
+	</div>
+	<!-- feed로딩시 로딩 이미지 -->
+
+
 	<!-- TOP 버튼 -->
-	<div style="position:fixed; bottom: 80px; right:20px;">
-		<input type="button" class="topButton" value="TOP" onclick="location.href='#main'">
+	<div style="position: fixed; bottom: 80px; right: 20px;">
+		<input type="button" class="topButton" value="TOP"
+			onclick="location.href='#main'">
 	</div>
 	<!-- TOP 버튼 -->
-		
+
 </div>
 
-<!-- 썸네일, type, content 노출 	
-<c:if test="${count == 0}">
-	<div class="align-center">등록된 게시물이 없습니다.</div>
-</c:if>
-<c:if test="${count != 0 }">
-	<c:forEach var="feed" items="${list}">
-		<div class="masonry">
-			<div class="grid">
-				<img src="photoView.do?feed_num=${feed.feed_num}">
-				<div class="grid__body">
-					<div class="relative">
-						<a class="grid__link" target="_blank" href="feedDetail.do?feed_num=${feed.feed_num }"></a>
-						<c:if test="${feed.feed_type == 1 }">
-						<h1 class="grid__title">식단</h1>
-						</c:if>
-						<c:if test="${feed.feed_type == 2 }">
-						<h1 class="grid__title">운동</h1>
-						</c:if>
-						<p class="grid__author">${feed.feed_auth }</p>
-					</div>
-					<div class="mt-auto">
-						<span class="grid__tag">#${feed.feed_content }</span>
-					</div>
-				</div>
-			</div>
-		</div>	
-	</c:forEach>
-</c:if>-->
-<!-- 마이 퍼스널 게시판 -->
-<!-- 
-			<td><a href="feedDetail.do?feed_num=${feed.feed_num}"><img
-					width="460" height="300"
-					src="https://img.youtube.com/vi/${hwBoard.hw_link}/0.jpg"></img></a></td> -->
-<!-- 전송될때 mem_num을 전송한다 -->
-<!-- 프로필 사진 클릭할 경우 사진의 mem_num과 현재 로그인된 mem_num과의 관계 파악 -->
 
 
 

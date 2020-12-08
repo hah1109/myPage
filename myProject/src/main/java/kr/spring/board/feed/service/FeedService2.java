@@ -11,6 +11,9 @@ import kr.spring.member.vo.MemberVO;
 public interface FeedService2 {
 	public List<FeedVO> myPersnolList(Map<String,Object> map);
 	public int countingFeedList(Map<String,Object> map);
+	public List<FeedVO> otherPersnolList(Map<String,Object> map);
+	public int countingOtherFeedList(Map<String,Object> map);
+	
 	public void insertFeedBoard(FeedVO feedBoard);
 	public FeedVO selectFeedBoard(Integer feedBoard_num);
 	public void updateFeedBoard(FeedVO feedBoard);
