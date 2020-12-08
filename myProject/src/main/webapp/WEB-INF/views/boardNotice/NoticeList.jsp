@@ -74,6 +74,7 @@ function confirmAllNotice(writer_memnum){
 		}
 	});
 }
+
 </script>
 <div class="page-main-style">
 	<h2>알림 목록</h2>
