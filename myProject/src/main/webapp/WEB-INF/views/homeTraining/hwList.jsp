@@ -13,7 +13,7 @@
 .search_btn:hover{
 	transform: scale(0.96);
 	cursor:pointer;
-}
+} 
 </style>
 <div class="page-main-style">
 	<h2 class="hw_title">게시판 목록</h2>

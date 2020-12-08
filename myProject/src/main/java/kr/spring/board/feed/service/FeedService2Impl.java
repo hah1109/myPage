@@ -85,7 +85,7 @@ public class FeedService2Impl implements FeedService2{
 	}
 
 	@Override
-	public List<FeedCommentVO> selectListFeedComment(Integer feed_num) {
+	public List<FeedCommentVO> selectListFeedComment(Integer feed_num){
 		return feedMapper.selectListFeedComment(feed_num);
 	}
 

@@ -25,7 +25,7 @@ public interface FeedService2 {
 	
 	
 	public List<FeedVO> findFollower(Integer mem_num);
-	public List<FeedVO> findFollowMe(Integer mem_num); 
+	public List<FeedVO> findFollowMe(Integer mem_num);
 	
 //=============ajax==================
 	public void updateProfile(MemberVO member);
