@@ -63,7 +63,7 @@ border:1px solid black;
 				<li>
 					 
 					<!-- 일반회원일 경우 && 매칭한 사람이 없을 경우 -->
-					<c:if test="${user.mem_auth == 1 && user.t_num == 0}">
+					<c:if test="${user.mem_auth == 1 && user.t_num == 0 && empty matching.mat_from}">
 						<button type="button" onclick="location.href='matching.do?mem_num=${trainer.mem_num}'">
 			        	트레이닝 신청하기
 			        	</button>
@@ -79,6 +79,10 @@ border:1px solid black;
 		        	<!-- 일반회원일경우 && 해당 트레이너와 이미 매칭관계일 경우 -->
 		        	<c:if test="${user.mem_auth ==1 && user.t_num == trainer.mem_num}">
 					현재 ${trainer.mem_name}에게 트레이닝 받는 중입니다.        	
+		        	</c:if>
+		        	<!-- 일반회원일경우 && 해당 트레이너에게 이미 매칭신청을 했을 경우 -->
+		        	<c:if test="${user.mem_auth ==1 && matching.mat_to == trainer.mem_num}">
+		        	트레이너의 수락을 기다리는 중입니다.
 		        	</c:if>
 		        		
 				</li>

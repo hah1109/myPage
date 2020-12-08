@@ -3,7 +3,6 @@ package kr.spring.board.tl.service;
 import java.util.List;
 import java.util.Map;
 
-
 import kr.spring.board.tl.vo.TlBoardVO;
 
 public interface TlBoardService {
@@ -58,6 +57,9 @@ public interface TlBoardService {
 		
 	//관계 끊을시 training테이블 데이터 삭제
 	public void deleteTraining(Integer mem_num);
+	
+	//로그인한 일반회원이 매칭신청을 했는지 확인해줄 메서드
+	public TlBoardVO selectMatchingInfo(Integer mem_num);
 
 	
 }

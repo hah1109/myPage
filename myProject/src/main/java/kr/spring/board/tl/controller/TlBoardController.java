@@ -126,10 +126,14 @@ public class TlBoardController {
 		if(log.isDebugEnabled()) {
 			log.debug("<<<로그인 유저의 정보>>> : " + user);
 		}
+		
+		//로그인한 유저가 해당 트레이너에게 매칭신청을 보냈는지 확인하기 위한 메서드
+		TlBoardVO vo2 = tlBoardService.selectMatchingInfo(user.getMem_num());
 
 		//읽어온 정보를 모델을 정해서 request에 저장
 		model.addAttribute("trainer", vo);
 		model.addAttribute("user", user);
+		model.addAttribute("matching",vo2);
 
 		//definition 설정명을 호출
 		return "trainerListDetail";
@@ -191,7 +195,7 @@ public class TlBoardController {
 					noticeVO.setReply_mem_num(memberVO.getMem_num()); //신청보낸 회원 멤넘
 					noticeVO.setBoard_comment("트레이닝 신청 도착");
 					noticeVO.setNotice_comment("트레이닝 신청이 도착했습니다"); //경로 지웠자너그래서 없네
-					noticeVO.setReturn_url("/trainerList/trainerList");
+					noticeVO.setReturn_url("0");
 					noticeService.insertNoticeVO(noticeVO);  
 					
 					return "redirect:/trainerList/trainerList.do";
@@ -380,7 +384,7 @@ public class TlBoardController {
 		noticeVO.setReply_mem_num(user.getMem_num());
 		noticeVO.setBoard_comment("거절 완료");
 		noticeVO.setNotice_comment("트레이너 신청이 거절 되었습니다");
-		noticeVO.setReturn_url("main/main"); 
+		noticeVO.setReturn_url("0"); 
 		noticeService.insertNoticeVO(noticeVO);  
 		
 		tlBoardService.deleteMatchingCancle(mem_num);
@@ -449,7 +453,7 @@ public class TlBoardController {
 		noticeVO.setReply_mem_num(user.getMem_num());
 		noticeVO.setBoard_comment("수락 완료");
 		noticeVO.setNotice_comment("트레이너 신청이 수락 되었습니다");
-		noticeVO.setReturn_url("main/main");
+		noticeVO.setReturn_url("0");
 		noticeService.insertNoticeVO(noticeVO);  
 		
 		//매칭테이블에서 삭제

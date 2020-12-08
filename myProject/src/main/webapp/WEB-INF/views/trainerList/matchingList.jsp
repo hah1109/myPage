@@ -2,14 +2,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 table{
-	width:50%;
+	width:30%;
 	margin:5px auto;
 	border:1px solid #000;
 	border-collapse:collapse;
 	text-align:center;
+	box-sizing: border-box;
+	border-radious: 80px;
+	
 }
 table td, table th{
-	border:1px solid #000;
+	border:3px solid #0de9df;
 	padding:5px;
 }
 </style>
@@ -20,7 +23,7 @@ table td, table th{
 	<c:if test="${count > 0}">
 		<table>
 			<tr>
-				<th colspan="3">트레이닝 신청 내역</th>
+				<th colspan="3" style="font-size:20px;">트레이닝 신청 내역</th>
 				
 			</tr>
 			<c:forEach var="list" items="${list}">
@@ -34,7 +37,8 @@ table td, table th{
 								width="200" height="200">
 							</c:if>
 							<div style="text-align:center;">
-							${list.mat_id} 님이 트레이닝 신청을 하셨습니다.
+							<a href="${pageContext.request.contextPath}/boardFeed/otherFeedList.do?mem_num=${list.mem_num}">
+							${list.mat_id}</a> 님이 트레이닝 신청을 하셨습니다.
 							</div>
 					</td>
 				</tr>

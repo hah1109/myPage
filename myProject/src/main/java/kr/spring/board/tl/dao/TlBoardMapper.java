@@ -79,6 +79,11 @@ public interface TlBoardMapper {
 	@Delete("delete training where training_to=#{mem_num}")
 	public void deleteTraining(Integer mem_num);
 	
+	//로그인한 일반회원이 매칭신청을 했는지 확인해줄 메서드
+	@Select("select * from matching where mat_from=#{mem_num}")
+	public TlBoardVO selectMatchingInfo(Integer mem_num);
+	
+	
 }
 
 

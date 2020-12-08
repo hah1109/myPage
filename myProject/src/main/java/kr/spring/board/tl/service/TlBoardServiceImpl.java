@@ -89,5 +89,10 @@ public class TlBoardServiceImpl implements TlBoardService {
 	public void deleteTraining(Integer mem_num) {
 		tlmapper.deleteTraining(mem_num);
 	}
+
+	@Override
+	public TlBoardVO selectMatchingInfo(Integer mem_num) {
+		return tlmapper.selectMatchingInfo(mem_num);
+	}
  
 }
