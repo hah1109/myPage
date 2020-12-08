@@ -20,6 +20,8 @@ public interface FeedService2 {
 	public void deleteFollow(FeedVO feedVO);
 	
 	public FeedVO selectFeedDetail(Integer mem_num);
+	
+	public FeedVO checkFollowing(Map<String,Object> map);
 //=============ajax==================
 	public void updateProfile(MemberVO member);
 	public void updateTrainerProfile(MemberVO member);

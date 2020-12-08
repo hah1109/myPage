@@ -1,6 +1,8 @@
 package kr.spring.board.feed.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -81,7 +83,19 @@ public class FeedController2 {
 		return mav;
 	}
 	@RequestMapping(value="/boardFeed/otherFeedList.do")
-	public ModelAndView otherFeedList(@RequestParam int mem_num) {
+	public ModelAndView otherFeedList(@RequestParam int mem_num, HttpSession session) {
+		
+		//맵 객체 생성
+		Map<String,Object> map = new HashMap<String,Object>();
+		//세션에서 로그인한 회원의 정보를 user에 담음
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		//로그인한 회원의 mem_num을 user라는 이름으로 map 객체에 담음
+		map.put("user", user.getMem_num());
+		//쿼리문이 작동한 결과를 vo에 담음
+		FeedVO vo = feedService.checkFollowing(map);
+		
+		log.debug("vo에 담긴 팔로우관계 확인 결과" + vo);
+		
 		
 	    MemberVO memberVO = memberService.selectMember_detail(mem_num);//pic name 을 받아올 수있음 
 		MemberVO member = memberService.selectCheckMember_detail(memberVO.getMem_id());// mem_auth를 받아 올 수있음
@@ -95,6 +109,7 @@ public class FeedController2 {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("otherPersonalList");
 		mav.addObject("member", memberVO);
+		mav.addObject("member2", vo);
 		
 		return mav;
 	}
@@ -269,53 +284,53 @@ public class FeedController2 {
 
 	}
 	//팔로우 하기
-		@RequestMapping("/boardFeed/insertFollow.do")
-		public String insertFollow(@Valid FeedVO feedVO, BindingResult result, HttpServletRequest request, HttpSession session, Model model) {
-			//feedVO에 담긴것
-			if(log.isDebugEnabled()) log.debug("<<feedVO에 담긴것>> :" + feedVO);
-			
-			//로그인한 회원 정보를 memberVO에 담기
-			MemberVO member = (MemberVO)session.getAttribute("user");
-			//글 상세정보에 있는 mem_num을 follower_to로 셋팅
-			feedVO.setFollower_to(feedVO.getMem_num());
-			//로그인한 회원의 mem_num을 feedVO에 담기
-			feedVO.setMem_num(member.getMem_num());
-			
-			//정보 처리 후 feedFO에 담긴것 출력
-			if(log.isDebugEnabled()) log.debug("<<정보처리 후 feedVO에 담긴것>> :" + feedVO);
-			
-			feedService.insertFollow(feedVO);
-			//안내메세지 노출
-			model.addAttribute("message", "팔로우 완료");
-			model.addAttribute("url", request.getContextPath()+"/boardFeed/feedList.do");
-			return "common/result";
-		}
+	@RequestMapping("/boardFeed/insertFollow.do")
+	public String insertFollow(@RequestParam int mem_num, HttpSession session, Model model) {
+		//feedVO에 담긴것
+		if(log.isDebugEnabled()) log.debug("<<상세정보창에 포함되어있는 회원번호>> :" + mem_num);
+		FeedVO feedVO = new FeedVO();
+		//로그인한 회원 정보를 memberVO에 담기
+		MemberVO member = (MemberVO)session.getAttribute("user");
+		//글 상세정보에 있는 mem_num을 follower_to로 셋팅
+		feedVO.setFollower_to(mem_num);
+		//로그인한 회원의 mem_num을 feedVO에 담기
+		feedVO.setMem_num(member.getMem_num());
 		
-		//팔로우 끊기
-		@RequestMapping("boardFeed/deleteFollow.do")
-		public String deleteFollow(@Valid FeedVO feedVO, BindingResult result, HttpServletRequest request, HttpSession session, Model model) {
-			//feedVO에 담긴것
-			if(log.isDebugEnabled()) log.debug("<<feedVO에 담긴것>> :" + feedVO);
-			
-			//로그인한 회원 정보를 memberVO에 담기
-			MemberVO member = (MemberVO)session.getAttribute("user");
-			//기존 feedVO에 담겨있는 mem_num을 follower_to로 셋팅
-			feedVO.setFollower_to(feedVO.getMem_num());
-			//로그인한 회원의 mem_num을 feedVO에 담기
-			feedVO.setMem_num(member.getMem_num());
-			
-			//정보 처리 후 feedFO에 담긴것 출력
-			if(log.isDebugEnabled()) log.debug("<<정보처리 후 feedVO에 담긴것>> :" + feedVO);
-			
-			//mem_num과 follower_to가 같은 것을 찾아서 삭제
-			feedService.deleteFollow(feedVO);
-			
-			//안내메세지 노출
-			model.addAttribute("message", "언팔로우 완료");
-			model.addAttribute("url", request.getContextPath()+"/boardFeed/feedList.do");
-			
-			return "common/result";
-		}
+		//정보 처리 후 feedFO에 담긴것 출력
+		if(log.isDebugEnabled()) log.debug("<<정보처리 후 feedVO에 담긴것>> :" + feedVO);
+		
+		feedService.insertFollow(feedVO);
+		//안내메세지 노출
+		model.addAttribute("message", "팔로우 완료");
+		model.addAttribute("url", "/MyFirstTrainer/boardFeed/otherFeedList.do?mem_num="+mem_num);
+		return "common/result";
+	}
+	
+	//팔로우 끊기
+	@RequestMapping("boardFeed/deleteFollow.do")
+	public String deleteFollow(@Valid FeedVO feedVO, BindingResult result, HttpServletRequest request, HttpSession session, Model model) {
+		//feedVO에 담긴것
+		if(log.isDebugEnabled()) log.debug("<<feedVO에 담긴것>> :" + feedVO);
+		
+		//로그인한 회원 정보를 memberVO에 담기
+		MemberVO member = (MemberVO)session.getAttribute("user");
+		//기존 feedVO에 담겨있는 mem_num을 follower_to로 셋팅
+		feedVO.setFollower_to(feedVO.getMem_num());
+		//로그인한 회원의 mem_num을 feedVO에 담기
+		feedVO.setMem_num(member.getMem_num());
+		
+		//정보 처리 후 feedFO에 담긴것 출력
+		if(log.isDebugEnabled()) log.debug("<<정보처리 후 feedVO에 담긴것>> :" + feedVO);
+		
+		//mem_num과 follower_to가 같은 것을 찾아서 삭제
+		feedService.deleteFollow(feedVO);
+		
+		//안내메세지 노출
+		model.addAttribute("message", "언팔로우 완료");
+		model.addAttribute("url", request.getContextPath()+"/boardFeed/feedList.do");
+		
+		return "common/result";
+	}
 
 
 

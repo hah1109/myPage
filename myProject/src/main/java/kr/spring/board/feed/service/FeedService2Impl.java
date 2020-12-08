@@ -114,5 +114,10 @@ public class FeedService2Impl implements FeedService2{
 	public void deleteFollow(FeedVO feedVO) {
 		feedMapper.deleteFollow(feedVO);
 	}
+
+	@Override
+	public FeedVO checkFollowing(Map<String,Object> map) {
+		return feedMapper.checkFollowing(map);
+	}
  
 }

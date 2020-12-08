@@ -41,6 +41,10 @@ public interface FeedMapper2 {
 	//팔로우끊기
 	@Delete("delete from follower where mem_num=#{mem_num} AND follower_to = #{follower_to}")
 	public void deleteFollow(FeedVO feedVO);
+	
+	//팔로우 관계 확인
+	@Select("SELECT * FROM follower WHERE mem_num=#{user}")
+	public FeedVO checkFollowing(Map<String,Object> map);
 	//=========================회원정보======
 	@Update("update member_detail set mem_pic=#{mem_pic}, mem_picname=#{mem_picName} where mem_num=#{mem_num}")
 	public void updateProfile(MemberVO member);
