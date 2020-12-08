@@ -1,17 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!-- 홍아현  -->
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedStyle.css">
-<style>
-.writeButton{
-	background-image:url('../resources/images/feed/writeButtonForFeed.png');
-    background-repeat: no-repeat;
-}
-
-</style>
-
-
 <script type="text/javaScript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>   
 <script>
 	$(document).ready(function(){
@@ -61,8 +50,10 @@
 							
 							output += '</div>';
 							
-							output += '<div class="text">';
+							output += '<div class="textArea" style="cursor: pointer;" onclick="location.href=\'feedDetail.do?feed_num='+item.feed_num+'\'">';
 							output += '<p class="feedType">[ ';
+							
+							
 							
 							if(item.feed_type == 1) {
 								output += '식단';
@@ -133,7 +124,13 @@ if(currentPage>=Math.ceil(count/rowCount)){
 
 </script>
 
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedStyle.css">
+<style>
+.writeButton{
+	background-image:url('../resources/images/feed/writeButtonForFeed.png');
+    background-repeat: no-repeat;
+}
+</style>
 
 <div>
 	
