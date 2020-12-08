@@ -48,6 +48,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
+  margin-left:5%;
 
 }
 
@@ -130,7 +131,7 @@ body {
   <li class="cards__item">
     <div class="card">
       <c:if test="${empty trainer.mem_picName}">
-      	<img class="card__image" src="../resources/images/cameraImage.jpg" style="max-width:200px; max-height:200px;">
+      	<img class="card__image" src="../resources/images/cameraImage.jpg" style="width:292px;height:200px;">
       </c:if>
       <c:if test="${!empty trainer.mem_picName}">
       	<img class="card__image" src="${pageContext.request.contextPath}/trainerList/trainerImage.do?mem_num=${trainer.mem_num}" 
