@@ -19,6 +19,13 @@ public class NoticeAjaxController {
 	@Resource
 	NoticeService noticeService;
 	
+	@RequestMapping("/boardNotice/confirmOneNotice.do")
+	@ResponseBody
+	public void confirmOneNotice(@RequestParam int notice_num) {
+		if(log.isDebugEnabled()) log.debug("<<알림 하나만 체크>> : " + notice_num);
+		noticeService.confirmOneNotice(notice_num);
+	}
+	
 	@RequestMapping("/boardNotice/update_checkdate.do")
 	@ResponseBody
 	public void updateComment(@RequestParam int board_num, @RequestParam int writer_memnum) {

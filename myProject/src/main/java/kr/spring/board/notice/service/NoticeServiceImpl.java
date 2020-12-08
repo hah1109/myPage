@@ -32,6 +32,11 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
+	public void confirmOneNotice(Integer notice_num) {
+		noticeMapper.confirmOneNotice(notice_num);
+	}
+	
+	@Override
 	public void updateNoticeCheckdate(NoticeVO notice) {
 		noticeMapper.updateNoticeCheckdate(notice);
 	}

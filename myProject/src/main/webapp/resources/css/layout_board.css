@@ -25,13 +25,12 @@ div#main_body{
 div#main_footer{
 	clear:both;
 	width:100%;
-} 
+}
 
 /*==========메뉴==========*/
 div#main_menu ul{
 	list-style:none;
 }
-
 div#main_menu ul li{
 	margin-bottom:5px; 
 }

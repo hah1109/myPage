@@ -23,9 +23,25 @@
 		});
 		
 	});
+
+function confirmOneNotice(notice_num){
 	
-function updateCheck_date(board_num,writer_memnum,notice_num){
-	
+	$.ajax({
+		url:'confirmOneNotice.do',
+		type:'post',
+		data:{'notice_num':notice_num},
+		cache:false,
+		timeout:30000,
+		success:function(data){
+			$('#confirmcheck' + notice_num).css('font-weight','normal').css('color','grey');
+		},
+		error:function(data){
+			alert('알림 확인 오류 발생!');
+		}
+	});
+}
+
+function updateCheck_date(board_num,writer_memnum,notice_num,link){
 	$.ajax({
 		url:'update_checkdate.do',
 		type:'post',
@@ -34,10 +50,10 @@ function updateCheck_date(board_num,writer_memnum,notice_num){
 		cache:false,
 		timeout:30000,
 		success:function(data){
-			$('#confirmcheck' + notice_num).css('font-weight','normal').css('color','grey');
+			location.href = '${pageContext.request.contextPath}/'+link;
 		},
 		error:function(){
-			alert('알림 확인 오류');
+			alert('알림 이동 오류');
 		}		
 	});
 }
@@ -58,6 +74,7 @@ function confirmAllNotice(writer_memnum){
 		}
 	});
 }
+
 </script>
 <div class="page-main-style">
 	<h2>알림 목록</h2>
@@ -78,22 +95,22 @@ function confirmAllNotice(writer_memnum){
 				<th>알림일</th>
 				<th>확인</th>
 			</tr>
-			<c:forEach var="Notice" items="${list}">
+			<c:forEach var="notice" items="${list}">
 				<tr>
 					<td style="text-align:left;">
-						${Notice.mem_id}님이
-						${Notice.notice_comment}
+						${notice.mem_id}님이
+						${notice.notice_comment}
 					</td>
 					<td>
-						${Notice.board_comment}
+						${notice.board_comment}
 					</td>
-					<td>${Notice.reg_date}</td>
+					<td>${notice.reg_date}</td>
 					<td>
-						<a onclick="updateCheck_date(${Notice.board_num},${Notice.writer_memnum},${Notice.notice_num});" id="confirmcheck${Notice.notice_num}">[확인]</a>
+						<a onclick="confirmOneNotice(${notice.notice_num});" id="confirmcheck${notice.notice_num}">
+						[확인]</a>
 						<br>
-						<c:if test="${Notice.return_url != '0'}">
-							<a href="${pageContext.request.contextPath}/${Notice.return_url}"
-								onclick="updateCheck_date(${Notice.board_num},${Notice.writer_memnum},${Notice.notice_num})">[이동]</a>
+						<c:if test="${notice.return_url != '0'}">
+							<a onclick="updateCheck_date(${notice.board_num},${notice.writer_memnum},${notice.notice_num},'${notice.return_url}')">[이동]</a>
 						</c:if>
 					</td>
 				</tr>

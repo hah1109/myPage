@@ -35,30 +35,30 @@
 					var list = data.list;
 					
 					if(count < 0 || list == null){
-						alert('목록 호출 오류 발생!');
+						alert('목록 호출 오류 발생 !');
 					}else{
 						$(list).each(function(index,item){
 							
-							var output = '<div class="content">';
+							var output = '<div class="content" style="cursor: pointer;" onclick="location.href=\'feedDetail.do?feed_num='+item.feed_num+'\'">';
 							
 							output += '<div class="img">';
 							if(item.feed_filename == null){
-								output += '<img class="thumbnail" src="../resources/images/blank.jpg">';
+								output += '<img class="thumbnail" src="../resources/images/feed/defaultImg.jpg">';
 							} else {
 								output += '<img class="thumbnail" src="imageView.do?feed_num='+item.feed_num+'>';
 							}
 							
 							output += '</div>';
 							
-							output += '<div class="text">';
-							output += '<p class="feedType">[ ';
+							output += '<div class="textArea">';
+							output += '<h1 class="feedType">[ ';
 							
 							if(item.feed_type == 1) {
 								output += '식단';
 							} else if(item.feed_type == 2) {
 								output += '운동';
 							}
-							output += ' ] 기록</p><br>';
+							output += ' ] 기록</h1><br>';
 							output += '<p class="memId"> by[ ' + item.mem_id + ' ] </p>';
 							output += '<p class="date">' +item.feed_reg_date+'</p>';
 							output += '</div>';

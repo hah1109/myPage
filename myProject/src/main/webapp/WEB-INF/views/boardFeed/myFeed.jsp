@@ -39,19 +39,19 @@
 					}else{
 						$(list).each(function(index,item){
 
-							var output = '<div class="content">';
+							var output = '<div class="content" style="cursor: pointer;" onclick="location.href=\'feedDetail.do?feed_num='+item.feed_num+'\'">';
 							
 							output += '<div class="img">';
 							if(item.feed_filename == null){
-								output += '<img class="thumbnail" src="../resources/images/blank.jpg">';
+								output += '<img class="thumbnail" src="../resources/images/feed/defaultImg.jpg">';
 							} else {
 								output += '<img class="thumbnail" src="photoView.do?feed_num='+item.feed_num+'">';
 							}
 							
 							output += '</div>';
 							
-							output += '<div class="textArea" style="cursor: pointer;" onclick="location.href=\'feedDetail.do?feed_num='+item.feed_num+'\'">';
-							output += '<p class="feedType">[ ';
+							output += '<div class="textArea">';
+							output += '<h1 class="feedType">[ ';
 							
 							
 							
@@ -60,7 +60,7 @@
 							} else if(item.feed_type == 2) {
 								output += '운동';
 							}
-							output += ' ] 기록</p><br>';
+							output += ' ] 기록</h1><br>';
 							output += '<p class="memId"> by[ ' + item.mem_id + ' ] </p>';
 							output += '<p class="date">' +item.feed_reg_date+'</p>';
 							output += '</div>';
@@ -126,17 +126,16 @@ if(currentPage>=Math.ceil(count/rowCount)){
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedStyle.css">
 <style>
-.writeButton{
-	background-image:url('../resources/images/feed/writeButtonForFeed.png');
-    background-repeat: no-repeat;
-}
+	.writeButton{
+		background-image:url('../resources/images/feed/writeButtonForFeed.png');
+	    background-repeat: no-repeat;
+	}
 </style>
 
 <div>
-	
 	<!-- 게시물이 없을 시 -->
 	<c:if test="${count == 0}">
-		<div class="align-center">등록된 게시물이 없습니다.</div>
+		<div style="text-align: center;">등록된 게시물이 없습니다.</div>
 	</c:if>
 	<!-- 게시물이 없을 시 -->
 	
@@ -164,7 +163,7 @@ if(currentPage>=Math.ceil(count/rowCount)){
 	<div style="position:fixed; bottom: 1px; right:20px;">
 		<input type="button" class="writeButton" onclick="location.href='feedWrite.do'">
 	</div>
-	<!-- 글쓰기 리모컨 -->
+	<!-- 글쓰기 리모컨  -->
 	
 	
 </div>

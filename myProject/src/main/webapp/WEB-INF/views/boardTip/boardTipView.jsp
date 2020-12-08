@@ -175,7 +175,6 @@ function submit_replyComment(free_num,freec_num){
 			  'mem_num':mem_num},
 		success:function(data){
 			if(data==1){
-				alert('댓글이 입력되었습니다.');
 				$('#replyComment_content').val('');
 				select_replyComment(free_num,freec_num);
 			}
