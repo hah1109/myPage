@@ -1,15 +1,13 @@
 package kr.spring.board.feed.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import javax.xml.ws.Response;
+
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
