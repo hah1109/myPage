@@ -332,7 +332,9 @@ public class MemberController {
 			//일반회원의 t_num에있는 트레이너의 id를 구해야함
 			MemberVO member2 = memberService.selectTrainer_detail(member.getT_num());
 			model.addAttribute("trainerId", member2);
-			
+			if(log.isDebugEnabled()) {
+				log.debug("<<<member에 들어오는 정보>>> : " + member);
+			}
 			return "memberView";
 		}else if(memberVO.getMem_auth() == 2) {
 			//회원번호를 넣어준 다음 정보를 읽어옴
@@ -352,10 +354,21 @@ public class MemberController {
 		//회원 번호가 필요함
 		//회원 번호를 구하기 위해 session에 저장된 회원 정보 반환
 		MemberVO memberVO = (MemberVO)session.getAttribute("user");
+		
+		
 
 		if(memberVO.getMem_auth() == 1) {
 			MemberVO member = memberService.selectMember_detail(memberVO.getMem_num());
 			model.addAttribute("memberVO", member);
+			
+			//일반회원의 t_num에있는 트레이너의 id를 구해야함
+			MemberVO member2 = memberService.selectTrainer_detail(member.getT_num());
+			model.addAttribute("trainerId", member2);
+			//로그 정보로 데이터가 넘어오는 과정을 보여줌
+			if(log.isDebugEnabled()) {
+				log.debug("<<<맴버의 tnum으로 찾은 트레이너 정보>>> : " + member2);
+			}
+			
 			return "memberModify";
 		}else if(memberVO.getMem_auth() == 2) {
 			MemberVO member = memberService.selectTrainer_detail(memberVO.getMem_num());

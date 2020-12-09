@@ -69,43 +69,52 @@
       $('#member_register_form').submit(function(){
          if(checkId==0){
             $('#confirmTrainerId').css('color','red').val('아이디 중복 체크 필수');
+            alert("아이디 중복체크를 해주세요");
             $('#mem_id').focus();
             return false;
          }
          if($('#mem_name').val()==''){
             $('#mem_name').attr('placeholder','이름을 입력하세요');
+            alert("이름을 입력해주세요");
             $('#mem_name').focus();
             return false;
          }
          if($('#mem_pw').val()==''){
             $('#mem_pw').attr('placeholder','비밀번호를 입력하세요');
+            alert("비밀번호를 입력해주세요");
             $('#mem_pw').focus();
             return false;
          }
          if($('#mem_gender').val()==''){
+        	 alert("성별을 선택해주세요");
             $('#mem_gender').focus();
             return false;
          }
          if($('#mem_cell').val()==''){
             $('#mem_cell').attr('placeholder','전화번호를 입력하세요(숫자만)');
+            alert("전화번호를 입력해주세요");
             $('#mem_cell').focus();
             return false;
          }
          if($('#g_addr').val()==''){
             $('#g_addr').attr('placeholder','근무지 주소를 입력해주세요(예/서울시 서초구 반포동)');
+            alert("근무지 주소를 입력해주세요");
             $('#g_addr').focus();
             return false;
          }
          if($('#exp').val()==''){
+        	 alert("경력사항을 선택해주세요");
             $('#exp').focus();
             return false;
          }
          if($('#career').val()==''){
+        	 alert("이력사항을 입력해주세요");
             $('#career').attr('placeholder','자기자랑 꼭 해주세요(예/서울시 몸짱대회 1등)');
             $('#career').focus();
             return false;
          }
          if($('#mem_email').val()==''){
+        	 alert("이메일을 입력해주세요");
             $('#mem_email').attr('placeholder','이메일을 입력해주세요');
             $('#mem_email').focus();
             return false;

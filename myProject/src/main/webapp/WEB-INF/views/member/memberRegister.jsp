@@ -68,31 +68,37 @@
       //submit 이벤트 발생시 아이디 중복 체크 여부 확인
       $('#member_register_form').submit(function(){
          if(checkId==0){
-            $('#confirmMemberId').css('color','red')
-                            .val('아이디 중복 체크 필수');
+            $('#confirmMemberId').css('color','red').val('아이디 중복 체크 필수');
+            alert("아이디 중복체크 필수");
             $('#mem_id').focus();
             return false;
          }
          if($('#mem_name').val()==''){
             $('#mem_name').attr('placeholder','이름을 입력하세요');
+            alert("이름을 입력해주세요");
             $('#mem_name').focus();
             return false;
          }
          if($('#mem_pw').val()==''){
             $('#mem_pw').attr('placeholder','비밀번호를 입력하세요');
+            alert("비밀번호를 입력해주세요");
             $('#mem_pw').focus();
             return false;
          }
          if($('#mem_gender').val()==''){
+        	 $('#mem_gender').focus();
+        	 alert("성별을 선택해주세요");
             return false;
          }
          if($('#mem_cell').val()==''){
             $('#mem_cell').attr('placeholder','전화번호를 입력하세요(숫자만)');
+            alert("전화번호를 입력해주세요");
             $('#mem_cell').focus();
             return false;
          }
          if($('#mem_email').val()==''){
             $('#mem_email').attr('placeholder','이메일을 입력하세요');
+            alert("이메일을 입력해주세요");
             $('#mem_email').focus();
             return false;
          }

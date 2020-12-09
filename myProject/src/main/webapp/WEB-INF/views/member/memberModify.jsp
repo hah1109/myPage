@@ -49,13 +49,6 @@
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 
-<script type="text/javascript">
-if($('#t_num').val()== ''){
-	$('#t_num').val('매칭된 트레이너가 없습니다.');
-}else if($('#t_num').val()!= ''){
-	$('#t_num').val('${member.t_num}');
-}
-</script>
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -133,7 +126,10 @@ function findCode() {
 			
 			<a><img class="mypage_texts" src="../resources/images/text_myTrainer.png"></a>
 			<li>
-				<form:input path="t_num" value="" readonly="true"/>
+				<c:if test="${member.t_num==null}"><form:input path="t_num" value="매칭된 트레이너가 없습니다." readonly="true"/></c:if>
+				<c:if test="${member.t_num==0}"><form:input path="t_num" value="매칭된 트레이너가 없습니다." readonly="true"/></c:if>
+				<c:if test="${member.t_num!=0}"><form:input path="t_num" value="${trainerId.mem_id}님과 트레이닝중" readonly="true"/></c:if>
+			
 			</li>
 			
 			<a><img class="mypage_texts" src="../resources/images/text_cell.png"></a>
