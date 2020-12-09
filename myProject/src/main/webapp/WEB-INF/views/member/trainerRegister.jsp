@@ -192,25 +192,25 @@ function findCode() {
    <form:form id="member_register_form" action="trainerRegister.do" commandName="memberVO" >
       <form:errors element="div" cssClass="error-color"/>
       
-      <form:input path="mem_name" placeholder="이름" />
+      <form:input path="mem_name" placeholder="이름 : 필수입력사항" />
       
       <form:input id="mem_id" path="mem_id" placeholder="ID" autocomplete="off" />
       <input type="button" id="confirmTrainerId" value="ID 중복체크">
       
-      <form:password id="mem_pw" path="mem_pw" placeholder="비밀번호" />
+      <form:password id="mem_pw" path="mem_pw" placeholder="비밀번호 : 필수입력사항" />
       
       <form:select id="mem_gender" path="mem_gender" >
-         <form:option id="mem_gender" value="" label="성별을 선택해주세요(!!!필수!!!)" />
+         <form:option id="mem_gender" value="" label="성별을 선택해주세요 : 필수입력사항" />
          <form:option value="1" label="남자" />
          <form:option value="2" label="여자" />
       </form:select>
       
-      <form:input id="mem_cell" path="mem_cell" placeholder="전화번호(숫자만 입력하세요)" />
+      <form:input id="mem_cell" path="mem_cell" placeholder="전화번호(숫자만 입력하세요) : 필수입력사항" />
       
-      <form:input id="g_addr" path="g_addr" placeholder="근무지 주소(예/서울시 서초구 반포동)" />
+      <form:input id="g_addr" path="g_addr" placeholder="근무지 주소(예/서울시 서초구 반포동) : 필수입력사항" />
       
       <form:select id="exp" path="exp" >
-         <form:option id="exp" value="" label="경력사항을 선택해주세요(!!!필수!!!)" />
+         <form:option id="exp" value="" label="경력사항을 선택해주세요 : 필수입력사항" />
          <form:option value="0" label="신입 트레이너" />
          <form:option value="1" label="1년 이상" />
          <form:option value="2" label="2년 이상" />
@@ -219,9 +219,9 @@ function findCode() {
          <form:option value="5" label="5년 이상" />
       </form:select>
       
-      <form:input id="career" path="career" placeholder="이력" />
+      <form:input id="career" path="career" placeholder="이력 : 필수입력사항(예/서울시 몸짱대회 1등)" />
       
-      <form:input id="mem_email" path="mem_email" placeholder="이메일" />
+      <form:input id="mem_email" path="mem_email" placeholder="이메일 : 필수입력사항" />
       
       <form:input path="mem_zipcode" placeholder="우편번호" />
       <form:input type="button" class="btn_findZip" value="우편번호 찾기" onclick="findCode()" path="mem_zipcode"/>

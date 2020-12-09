@@ -25,6 +25,10 @@
 	background-image: url('../resources/images/Btn_applyList.png');
 	height:39px;
 }
+.matchingFrom:hover{
+	transform:scale(1.05);
+	cursor:pointer;
+}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 

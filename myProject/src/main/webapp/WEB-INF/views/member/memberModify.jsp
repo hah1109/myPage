@@ -126,9 +126,8 @@ function findCode() {
 			
 			<a><img class="mypage_texts" src="../resources/images/text_myTrainer.png"></a>
 			<li>
-				<c:if test="${member.t_num==null}"><form:input path="t_num" value="매칭된 트레이너가 없습니다." readonly="true"/></c:if>
-				<c:if test="${member.t_num==0}"><form:input path="t_num" value="매칭된 트레이너가 없습니다." readonly="true"/></c:if>
-				<c:if test="${member.t_num!=0}"><form:input path="t_num" value="${trainerId.mem_id}님과 트레이닝중" readonly="true"/></c:if>
+				<c:if test="${empty trainerId.mem_id}"><form:input path="t_num" value="매칭된 트레이너가  없습니다." readonly="true"/></c:if>
+				<c:if test="${!empty trainerId.mem_id}"><form:input path="t_num" value="${trainerId.mem_id}님과 트레이닝중" readonly="true"/></c:if>
 			
 			</li>
 			
