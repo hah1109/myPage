@@ -29,7 +29,10 @@
 	background-image: url('../resources/images/Btn_stopTraining.png');
 	height:41px;
 }
-
+.training:hover{
+	transform:scale(1.05);
+	cursor:pointer;
+}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 

@@ -43,7 +43,7 @@
   
     <div class="left">
       <div class="login">Login</div>
-      <div class="eula">@여기에 페이지에 대한 짧은 설명 글 넣기</div>
+      <div class="eula">로그인을 통해 마음에 드는 트레이너분께 트레이닝부터 식단 조절까지 받으면서 건강을 향한 첫 발걸음을 디딜 수 있습니다.</div>
     </div>
     
     <div class="right">

@@ -12,8 +12,8 @@ create table trainer_detail(
   career clob,
   mem_gender number not null,/*1:여성회원,2:남성회원*/
   exp varchar2(10) not null,
-  mem_name varchar2(15) not null,
-  mem_pw varchar2(15) not null,
+  mem_name varchar2(30) not null,
+  mem_pw varchar2(30) not null,
   mem_cell varchar2(15) not null,
   mem_email varchar2(50) not null,
   mem_pic blob,
@@ -31,8 +31,8 @@ create table member_detail(
   mem_num number not null,
   t_num number(10),
   mem_gender number not null,/*1:여성회원,2:남성회원*/
-  mem_name varchar2(15) not null,
-  mem_pw varchar2(15) not null,
+  mem_name varchar2(30) not null,
+  mem_pw varchar2(30) not null,
   mem_cell varchar2(15) not null,
   mem_email varchar2(50) not null,
   mem_pic blob,
