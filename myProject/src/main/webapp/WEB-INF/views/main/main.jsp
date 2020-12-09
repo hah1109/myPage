@@ -164,12 +164,12 @@
   	<div class="swiper-container" style="z-index: 1;">
         <div class="swiper-wrapper">
             <div class="swiper-slide"><img class="swiper-image" alt="" src="${pageContext.request.contextPath}/resources/images/swiper/image1.png"></div>
-            <div class="swiper-slide"><img class="swiper-image" alt="" src="${pageContext.request.contextPath}/resources/images/swiper/image1.png"></div>
-            <div class="swiper-slide">Balanced Meal</div>
-            <div class="swiper-slide">Board</div>
-            <div class="swiper-slide">Trainer</div>
+            <div class="swiper-slide"><img class="swiper-image" alt="" src="${pageContext.request.contextPath}/resources/images/swiper/image2.png"></div>
+            <div class="swiper-slide"><img class="swiper-image" alt="" src="${pageContext.request.contextPath}/resources/images/swiper/image3.png"></div>
+            <div class="swiper-slide"><img class="swiper-image" alt="" src="${pageContext.request.contextPath}/resources/images/swiper/image4.png"></div>
+            <div class="swiper-slide"><img class="swiper-image" alt="" src="${pageContext.request.contextPath}/resources/images/swiper/image5.png"></div>
         </div>
-        <!-- Add Pagination -->
+        <!-- Add Pagination -->  
         <div class="swiper-pagination"></div>
     </div>
       
