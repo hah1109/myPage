@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.spring.board.tl.dao.TlBoardMapper;
 import kr.spring.board.tl.vo.TlBoardVO;
+import kr.spring.comment.tl.vo.TlBoardCommentVO;
 
 
 @Service("TlBoardService")
@@ -93,6 +94,38 @@ public class TlBoardServiceImpl implements TlBoardService {
 	@Override
 	public TlBoardVO selectMatchingInfo(Integer mem_num) {
 		return tlmapper.selectMatchingInfo(mem_num);
+	}
+
+	@Override
+	public void insertTlBoardComment(TlBoardCommentVO tlBoardCommentVO) {
+		tlmapper.insertTlBoardComment(tlBoardCommentVO);
+	}
+
+	@Override
+	public List<TlBoardCommentVO> selectTlBoardCommentList(Map<String,Object> map) {
+		return tlmapper.selectTlBoardCommentList(map);
+	}
+
+	@Override
+	public void updateTlBoardComment(TlBoardCommentVO tlBoardCommentVO) {
+		tlmapper.updateTlBoardComment(tlBoardCommentVO);
+	}
+
+	@Override
+	public void deleteTlBoardComment(int tlc_num) {
+		tlmapper.deleteTlBoardComment(tlc_num);
+	}
+
+	@Override
+	public int selectTlBoardCommentCount(Map<String, Object> map) {
+		
+		return tlmapper.selectTlBoardCommentCount(map);
+	}
+
+	@Override
+	public TlBoardCommentVO selectOneComment(int tlc_num) {
+		
+		return tlmapper.selectOneComment(tlc_num);
 	}
  
 }

@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.board.tl.vo.TlBoardVO;
+import kr.spring.comment.sysqnac.vo.SysQnABoardCommentVO;
+import kr.spring.comment.tl.vo.TlBoardCommentVO;
 
 public interface TlBoardMapper {
 	//트레이너 리스트를 불러올 메서드
@@ -83,6 +85,33 @@ public interface TlBoardMapper {
 	@Select("select * from matching where mat_from=#{mem_num}")
 	public TlBoardVO selectMatchingInfo(Integer mem_num);
 	
+	
+	/*************************************댓글 관련**********************************************/
+	//댓글 쓰기
+	@Insert("INSERT INTO board_tl_comment (tlc_num, tl_comment, tl_mem_num, writer_mem_num) VALUES (sqc_num_seq.nextval,#{tl_comment},#{tl_mem_num},#{writer_mem_num})")
+	public void insertTlBoardComment(TlBoardCommentVO tlBoardCommentVO);
+	
+	//댓글 리스트
+	@Select("SELECT FROM (SELECT b.*, rownum rnum FROM (SELECT a.*, to_char(a.tlc_modify_date,'yyyy-mm-dd') str_date FROM (SELECT * FROM board_tl_comment c JOIN member m ON c.writer_mem_num=m.mem_num )a WHERE a.tl_mem_num=#{tl_mem_num})b ORDER BY tlc_num DESC) WHERE rnum >= #{start} AND rnum <= #{end}") 
+	public List<TlBoardCommentVO> selectTlBoardCommentList(Map<String,Object> map);
+	
+	//댓글 수 카운트
+	@Select("SELECT COUNT(*) FROM (SELECT * FROM board_tl_comment c JOIN member m ON c.writer_mem_num=m.mem_num ) WHERE tl_mem_num=#{tl_mem_num}")
+	public int selectTlBoardCommentCount(Map<String,Object> map);
+	
+	//댓글 수정 삭제를 위한 한개의 특정 댓글 선택
+	@Select("SELECT * FROM board_tl_comment c JOIN member m ON c.writer_mem_num=m.mem_num WHERE c.tlc_num = #{tlc_num}")
+	public TlBoardCommentVO selectOneComment(int tlc_num);
+	
+	//댓글 수정
+	@Update("UPDATE board_tl_comment SET tl_comment = #{tl_comment}, tlc_modify_date = SYSDATE  WHERE tlc_num = #{tlc_num}")
+	public void updateTlBoardComment(TlBoardCommentVO tlBoardCommentVO);
+	
+	//댓글 삭제
+	@Delete("DELETE FROM board_tl_comment WHERE tlc_num = #{tlc_num}")
+	public void deleteTlBoardComment(int tlc_num);
+	
+	/*************************************댓글 관련**********************************************/
 	
 }
 

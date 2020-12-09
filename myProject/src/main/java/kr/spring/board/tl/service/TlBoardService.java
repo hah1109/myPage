@@ -3,7 +3,13 @@ package kr.spring.board.tl.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
 import kr.spring.board.tl.vo.TlBoardVO;
+import kr.spring.comment.tl.vo.TlBoardCommentVO;
 
 public interface TlBoardService {
 	//트레이너 리스트를 불러올 메서드
@@ -61,5 +67,18 @@ public interface TlBoardService {
 	//로그인한 일반회원이 매칭신청을 했는지 확인해줄 메서드
 	public TlBoardVO selectMatchingInfo(Integer mem_num);
 
+	/********************댓글 관련**********************/
+	public void insertTlBoardComment(TlBoardCommentVO tlBoardCommentVO);
+	
+	public List<TlBoardCommentVO> selectTlBoardCommentList(Map<String,Object> map);
+	
+	public int selectTlBoardCommentCount(Map<String,Object> map);
+	
+	public TlBoardCommentVO selectOneComment(int tlc_num);
+	
+	public void updateTlBoardComment(TlBoardCommentVO tlBoardCommentVO);
+	
+	public void deleteTlBoardComment(int tlc_num);
+	/********************댓글 관련**********************/
 	
 }

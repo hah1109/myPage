@@ -98,9 +98,18 @@ background-color: white;
 			<li style="margin-top:1%; margin-bottom:1%; color:red;"> 
 					<!-- 일반회원일 경우 && 매칭한 사람이 없을 경우 -->
 					<c:if test="${user.mem_auth == 1 && user.t_num == 0 && empty matching.mat_from}">
-						<button class="btns" type="button" onclick="location.href='matching.do?mem_num=${trainer.mem_num}'">
+						<button id="tButton" class="btns" type="button">
 			        	트레이닝 신청하기
 			        	</button>
+			        	<script>
+							var tButton = document.getElementById('tButton');
+							tButton.onclick=function(){
+								var choice = window.confirm('신청하시겠습니까?');
+								if(choice){
+									location.href='matching.do?mem_num=${trainer.mem_num}';
+								}
+							};
+						</script>
 			        </c:if>
 			        <!-- 일반회원일 경우  && 현재 트레이너가 아닌 다른사람과 매칭관계인 경우 -->	
 		        	<c:if test="${user.mem_auth == 1 && user.t_num != trainer.mem_num && user.t_num != 0}">

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout_board.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedDetailStyle.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 var mem_num = ${user.mem_num};
@@ -127,84 +128,90 @@ function commentDelete(feedc_num){
 	});
 }
 </script>
-<!-- 프로필 사진, 프로필 아이디 보이기 (클릭가능)-->
-<h2>프로필 사진</h2>
-	<ul>
-		<li>
+
+<!-- ----------------------------------------BODY 시작--------------------------------------------------- -->
+<div id="feedDetail">
+	<!-- 프로필 사진, 프로필 아이디 보이기 (클릭가능)-->
+	<div id="userInfo">
+		<div id="memberPhoto">
 			<c:if test="${empty member.mem_picName }">
 				<img
 					src="${pageContext.request.contextPath }/resources/images/blank.jpg"
-					width="100" height="100" class="my-photo">
+					width="150" height="150" class="my-photo">
 			</c:if> 
 			<c:if test="${!empty member.mem_picName }">
 				<img src="${pageContext.request.contextPath }/member/photoView.do"
-					width="100" height="100" class="my-photo">
+					width="150" height="150" class="my-photo">
 			</c:if>
-		</li>
-		<li>
+		</div>
+		<div id="userText">
 			<c:if test="${user.mem_num == feed.mem_num}">
-				<a href="feedList.do">작성자 : ${feed.mem_id}</a>
+				<h2><a href="feedList.do">${feed.mem_id}</a></h2>
 			</c:if>
 			<c:if test="${user.mem_num != feed.mem_num}">
-				<a href="otherFeedList.do?mem_num=${feed.mem_num }">작성자 : ${feed.mem_id}</a>
+				<h2><a href="otherFeedList.do?mem_num=${feed.mem_num }">작성자 : ${feed.mem_id}</a></h2>
 			</c:if>
-		</li>
-<!-- 타입 보이기 -->
-		<li>
-			타입 :${feed.feed_type }
-		</li>
-<!-- 공개범위 보이기 버튼 -->
-		<li>
-			공개범위 : ${feed.feed_auth }
-		</li>
-<!-- 사진 미리보기 -->
-		<li>
+		</div>
+	</div>
+	
+	<div id="content">
+		<hr style="width:100%; border:2px solid #0de0df;">
+		<!-- 타입 보이기 -->
+		<c:if test="${feed.feed_type == 1 }">
+			<p id="feedType">[ 식단 기록 ]</p>
+		</c:if>
+		<c:if test="${feed.feed_type == 2 }">
+			<p id="feedType">[ 운동 기록 ]</p>
+		</c:if>
+		<!-- 사진 미리보기 -->
+		<div id="photo">
 			<c:if test="${empty feed.feed_filename }">
 				<p>저장한 사진이 없습니다 </p>
 			</c:if> 
 			<c:if test="${!empty feed.feed_filename }">
 			<!-- photoview 부분은 수정을 해줘야 한다 어떤 controller에서 사용하는지 확인  -->
-				<img src="photoView.do?feed_num=${feed.feed_num}" style="max-width:500px;">
+				<img src="photoView.do?feed_num=${feed.feed_num}" style="width:700px;">
 			</c:if>
-		</li>
-	</ul>
-<!-- content 보이기 -->
-	<p>
-		${feed.feed_content}
-	</p>
-<!-- 취소(목록으로 이동), 수정 버튼 -->
-	<div class="align-right">
-	    <%--수정 삭제의 경우는 로그인이 되어있고 로그인한 회원번호와 작성자 회원번호가
-	               일치해야 함 --%>
-		<c:if test="${!empty user && user.mem_num == feed.mem_num}">
-		<input type="button" value="수정"
-		       onclick="location.href='feedUpdate.do?feed_num=${feed.feed_num}'">
-		<input type="button" value="삭제" id="delete_btn">
-		<script>
-			var delete_btn = document.getElementById('delete_btn');
-			//이벤트 연결
-			delete_btn.onclick=function(){
-				var choice = window.confirm('삭제하시겠습니까?');
-				if(choice){
-					location.href='feedDelete.do?feed_num=${feed.feed_num}';
-				}
-			};
-		</script>              
-		</c:if>
-		<input type="button" value="목록"
-		       onclick="location.href='feedList.do'">
+		</div>
+	<!-- content 보이기 -->
+		<div id="textContent">
+			<p id="acc">>>  </p><p>${feed.feed_content}</p>
+		</div>
+	<!-- 취소(목록으로 이동), 수정 버튼 -->
+		<div id="buttonContainer">
+		    <%--수정 삭제의 경우는 로그인이 되어있고 로그인한 회원번호와 작성자 회원번호가 일치해야 함 --%>
+			<c:if test="${!empty user && user.mem_num == feed.mem_num}">
+				<input type="button" value="수정" onclick="location.href='feedUpdate.do?feed_num=${feed.feed_num}'">
+				<input type="button" value="삭제" id="delete_btn">
+				<script>
+					var delete_btn = document.getElementById('delete_btn');
+					//이벤트 연결
+					delete_btn.onclick=function(){
+						var choice = window.confirm('삭제하시겠습니까?');
+						if(choice){
+							location.href='feedDelete.do?feed_num=${feed.feed_num}';
+						}
+					};
+				</script>              
+			</c:if>
+			<input type="button" value="목록" onclick="location.href='feedList.do'">
+		</div>
+		<hr style="width:100%; border:2px solid #0de0df;">
 	</div>
 	
-	<form id="commentbox">
-		<input type="hidden" id="feed_num" value="${feed.feed_num}">
-		<input type="text" id="comment" name="comment" placeholder="댓글을 입력하세요.">
-		<input type="button" id="submit_comment" value="등록">
-	</form>
-	<h3>댓글</h3>
-	<hr>
-
-
 	
-	<div class="container">
-        <div class="commentList"></div>
+	
+	<div id="commentContainer">
+		<form id="commentbox">
+			<input type="hidden" id="feed_num" value="${feed.feed_num}">
+			<input type="text" id="comment" name="comment" placeholder="댓글을 입력하세요.">
+			<input type="button" id="submit_comment" value="등록">
+		</form>
+		<h3>댓글</h3>
+		<hr>
+		<div class="container">
+	        <div class="commentList"></div>
+	    </div>
     </div>
+    
+</div>
