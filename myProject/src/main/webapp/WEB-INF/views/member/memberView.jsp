@@ -24,6 +24,12 @@
 	height:26px;
 }
 
+.training{
+	margin-top:4px;
+	background-image: url('../resources/images/Btn_stopTraining.png');
+	height:41px;
+}
+
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 
@@ -63,7 +69,7 @@
 	        <input type="button" class="detail_modify_btn" onclick="location.href='update.do'" />
 			<input type="button" class="password_modify_btn" onclick="location.href='updatePw.do'">
 			<input type="button" class="delete_btn" onclick="location.href='delete.do'">
-			<input type="button" id="cutRelation" value="트레이닝 중단">			
+			<input type="button" id="cutRelation" class="training">			
 	      </div>
       </form:form>
     </div>

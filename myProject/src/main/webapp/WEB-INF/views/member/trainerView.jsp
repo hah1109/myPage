@@ -20,6 +20,11 @@
 	background-image: url('../resources/images/btn_delete_member.png');
 	height:26px;
 }
+.matchingFrom{
+	margin-top:4px;
+	background-image: url('../resources/images/Btn_applyList.png');
+	height:39px;
+}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 
@@ -64,8 +69,7 @@
 	        <input type="button" class="detail_modify_btn" onclick="location.href='update.do'" />
 			<input type="button" class="password_modify_btn" onclick="location.href='updatePw.do'">
 			<input type="button" class="delete_btn" onclick="location.href='delete.do'">
-			<input type="button" value="트레이닝신청내역" 
-			onclick='location.href="${pageContext.request.contextPath}/trainerList/matchingList.do"'>
+			<input type="button" class="matchingFrom" onclick="location.href='${pageContext.request.contextPath}/trainerList/matchingList.do'">
 	      </div>
       </form:form>
     </div>

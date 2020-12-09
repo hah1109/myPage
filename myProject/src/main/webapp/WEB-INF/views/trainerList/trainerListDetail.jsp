@@ -7,41 +7,49 @@
 
 .wrap{
 	text-align:center;
-	margin-left:20%;
-	margin-right:20%;
-	
+	margin-left:35%;
+	margin-right:35%;
+	background-color:#CEF6EC;
+	margin-bottom:1%;
+	border-radius:40px;
+	box-shadow: 10px 10px #D8D8D8;
 }
 .info{
-	border:1px solid black;
 	width:100%;
-	height:250px;
+	height:220px;
 	flex-wrap:wrap;
 }
 
 .profile_matching{
-border:1px solid black;
+margin-top:2%;
 width:50%;
+height:200px;
 float:left;
-height:250px;
 }
 
 .trainer_info{
-border:1px solid black;
-width:49%;
+
+width:35%;
 float:left;
-height:250px;
+height:130px;
+margin-top:10%;
+margin-left:5%;
 }
 
-.trainer_info2{
-border:1px solid black;
+.btns{
+background-color: white;
+  border: 1px solid @gray-light;
+  border-radius: 1rem;
+  color: @gray-dark;
+  padding: 0.5rem;
+  text-transform: lowercase;
+  margin-top:2%;
+  margin-bottom:1%;
 }
 
-.modify_btns{
-border:1px solid black;
-}
-
-.goback{
-border:1px solid black;
+.btns:hover{
+	color:red;
+	cursor:pointer;
 }
 
 </style>
@@ -49,7 +57,7 @@ border:1px solid black;
 <div class="wrap">
 	<div class="info">
 		<div class="profile_matching">
-			<ul>
+			<ul style="text-align:right;">
 				<li>
 					<c:if test="${empty trainer.mem_picName}">
 						<img src="../resources/images/cameraImage.jpg" style="max-width:200px; max-height:200px;">
@@ -59,12 +67,38 @@ border:1px solid black;
 							width="250" height="200">
 			        </c:if>
 				</li>	
-				
+			</ul>
+		</div>
+		
+		<div class="trainer_info">
+			<ul style="text-align:left;">
+				<li>이름 : ${trainer.mem_name}</li>
+		
 				<li>
-					 
+					<c:if test="${trainer.mem_gender == 1}">성별: 남자</c:if> 
+					<c:if test="${trainer.mem_gender == 2}">성별: 여자</c:if>
+				</li>
+		
+				<li>
+					<c:if test="${trainer.exp == 0}">신입 트레이너</c:if> 
+					<c:if test="${trainer.exp > 0 && trainer.exp < 5}">경력 : ${trainer.exp}년 </c:if>
+					<c:if test="${trainer.exp == 5}">경력 : ${trainer.exp}년 이상 </c:if>
+				</li>
+		
+				<li>이메일 : ${trainer.mem_email}</li>
+				
+				<li>근무지 : ${trainer.g_addr}</li>
+		
+			</ul>
+		</div>
+	</div>
+	<hr style="height:4px; background-color:black;">
+	<div class="trainer_info2">
+		<ul>
+			<li style="margin-top:1%; margin-bottom:1%; color:red;"> 
 					<!-- 일반회원일 경우 && 매칭한 사람이 없을 경우 -->
 					<c:if test="${user.mem_auth == 1 && user.t_num == 0 && empty matching.mat_from}">
-						<button type="button" onclick="location.href='matching.do?mem_num=${trainer.mem_num}'">
+						<button class="btns" type="button" onclick="location.href='matching.do?mem_num=${trainer.mem_num}'">
 			        	트레이닝 신청하기
 			        	</button>
 			        </c:if>
@@ -84,35 +118,9 @@ border:1px solid black;
 		        	<c:if test="${user.mem_auth ==1 && matching.mat_to == trainer.mem_num}">
 		        	트레이너의 수락을 기다리는 중입니다.
 		        	</c:if>
-		        		
-				</li>
-			</ul>
-		</div>
-		
-		<div class="trainer_info">
-			<ul>
-				<li>이름 : ${trainer.mem_name}</li>
-		
-				<li>
-					<c:if test="${trainer.mem_gender == 1}">남자</c:if> 
-					<c:if test="${trainer.mem_gender == 2}">여자</c:if>
-				</li>
-		
-				<li>
-					<c:if test="${trainer.exp == 0}">신입 트레이너</c:if> 
-					<c:if test="${trainer.exp > 0 && trainer.exp < 5}">경력 ${trainer.exp}년 </c:if>
-					<c:if test="${trainer.exp == 5}">경력 ${trainer.exp}년 이상 </c:if>
-				</li>
-		
-				<li>이메일 : ${trainer.mem_email}</li>
-				
-				<li>근무지 : ${trainer.g_addr}</li>
-		
-			</ul>
-		</div>
-	</div>
-	<div class="trainer_info2">
-		<ul>
+		        	<br>		
+			</li>
+			
 			<li>
 				<c:if test="${trainer.mem_intro == null}">자기소개: 최선을 다해 몸짱을 만들어 드리겠습니다!!</c:if>
 				<c:if test="${trainer.mem_intro != null}">자기소개: ${trainer.mem_intro}</c:if>
@@ -131,9 +139,9 @@ border:1px solid black;
 			<div class="modify_btns">
 				<ul>
 					<li>
-						<button type="button" onclick="location.href='prUpdate.do'">프로필사진 변경하기</button>
-						<button type="button" onclick="location.href='introUpdate.do'">자기소개 수정하기</button>
-						<button type="button" onclick="location.href='${pageContext.request.contextPath}/member/myPage.do'">마이페이지</button>
+						<button class="btns" type="button" onclick="location.href='prUpdate.do'">프로필사진 변경</button>
+						<button class="btns" type="button" onclick="location.href='introUpdate.do'">자기소개 수정</button>
+						<button class="btns" type="button" onclick="location.href='${pageContext.request.contextPath}/member/myPage.do'">마이페이지</button>
 					</li>
 				</ul>
 			</div>
@@ -142,7 +150,7 @@ border:1px solid black;
 	<div class="goback">
 		<ul>
 			<li>
-				<button type="button" onclick="location.href='trainerList.do'">돌아가기</button>
+				<button class="btns" type="button" onclick="location.href='trainerList.do'">돌아가기</button>
 			</li>
 		</ul>
 	</div>

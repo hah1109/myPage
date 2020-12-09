@@ -125,6 +125,7 @@
 			<mapping path="/boardNotice/list.do"/>
 			<mapping path="/boardFeed/otherFeedList.do"/>
 			<mapping path="/boardFeed/feedReco.do"/>
+			<mapping path="/trainerList/trainerListDetail.do"/>
 			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/> 
 		</interceptor>
 		<interceptor>	
