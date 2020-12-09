@@ -131,7 +131,7 @@ public class TlBoardAjaxController {
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		mapJson.put("result", "success");
 		
-		return mapJson;
+		return mapJson; 
 	}
 		
 	//댓글 수정
