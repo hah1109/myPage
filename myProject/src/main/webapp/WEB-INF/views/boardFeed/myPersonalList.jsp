@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/layout_feedReco.css">
+	href="${pageContext.request.contextPath}/resources/css/layout_myPersonalList.css">
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
@@ -294,6 +294,30 @@ $(document).ready(function(){
 		</li>
 	</ul>
 	<hr size="1" width="100%">
+		<!-- 팔로우 관련 태그 -->
+<div class="tabs">
+	<div class="tab-2">
+	    <label for="tab2-1">내가 팔로우하는 사람</label>
+	    <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
+	    <div>
+	      <c:forEach var="myFollower" items="${followerList}">
+	      	   <a href="otherFeedList.do?mem_num=${myFollower.mem_num}">@${myFollower.mem_id}</a>
+	      </c:forEach>
+	    </div>
+	</div>
+	<div class="tab-2">
+	    <label for="tab2-2">나를 팔로우하는 사람</label>
+	    <input id="tab2-2" name="tabs-two" type="radio">
+	    <div>
+	      <c:forEach var="followMe" items="${followMeList}">
+	      	   <a href="otherFeedList.do?mem_num=${followMe.mem_num}">@${followMe.mem_id}</a>
+	      </c:forEach>
+	    </div>
+	</div>
+</div>
+	
+	<!-- 팔로우 관련 태그 -->
+	
 	<!-- 글쓰기 버튼 -->
 	<p class="align-right">
 		<input type="button" value="글쓰기" onclick="location.href='feedWrite.do'">
