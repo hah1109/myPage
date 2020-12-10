@@ -14,8 +14,15 @@ public class TlBoardCommentVO {
     private String mem_id;
     private int tl_mem_num;
     private int writer_mem_num;
+    String str_date;
     
     
+	public String getStr_date() {
+		return str_date;
+	}
+	public void setStr_date(String str_date) {
+		this.str_date = str_date;
+	}
 	public int getTlc_num() {
 		return tlc_num;
 	}
@@ -62,8 +69,10 @@ public class TlBoardCommentVO {
 	public String toString() {
 		return "TlBoardCommentVO [tlc_num=" + tlc_num + ", tl_comment=" + tl_comment + ", tlc_reg_date=" + tlc_reg_date
 				+ ", tlc_modify_date=" + tlc_modify_date + ", mem_id=" + mem_id + ", tl_mem_num=" + tl_mem_num
-				+ ", writer_mem_num=" + writer_mem_num + "]";
+				+ ", writer_mem_num=" + writer_mem_num + ", str_date=" + str_date + "]";
 	}
+	
+	
     
     
 

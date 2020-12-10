@@ -88,11 +88,10 @@ public interface TlBoardMapper {
 	
 	/*************************************댓글 관련**********************************************/
 	//댓글 쓰기
-	@Insert("INSERT INTO board_tl_comment (tlc_num, tl_comment, tl_mem_num, writer_mem_num) VALUES (sqc_num_seq.nextval,#{tl_comment},#{tl_mem_num},#{writer_mem_num})")
+	@Insert("INSERT INTO board_tl_comment (tlc_num, tl_comment, tl_mem_num, writer_mem_num) VALUES (tlc_num_seq.nextval,#{tl_comment},#{tl_mem_num},#{writer_mem_num})")
 	public void insertTlBoardComment(TlBoardCommentVO tlBoardCommentVO);
 	
-	//댓글 리스트
-	@Select("SELECT FROM (SELECT b.*, rownum rnum FROM (SELECT a.*, to_char(a.tlc_modify_date,'yyyy-mm-dd') str_date FROM (SELECT * FROM board_tl_comment c JOIN member m ON c.writer_mem_num=m.mem_num )a WHERE a.tl_mem_num=#{tl_mem_num})b ORDER BY tlc_num DESC) WHERE rnum >= #{start} AND rnum <= #{end}") 
+	//댓글 리스트	 
 	public List<TlBoardCommentVO> selectTlBoardCommentList(Map<String,Object> map);
 	
 	//댓글 수 카운트

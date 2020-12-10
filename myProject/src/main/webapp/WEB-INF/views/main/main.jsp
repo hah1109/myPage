@@ -103,12 +103,12 @@
 			<li class="homeTraining">
 				<a href="${pageContext.request.contextPath}/homeTraining/hwList.do">홈트레이닝</a>
 				<ul class="ht-sub submenu" style="z-index: 2;">
-					<li><a href="${pageContext.request.contextPath}/main/main.do">전신</a></li>
-					<li><a href="${pageContext.request.contextPath}/main/main.do">어깨</a></li>
-					<li><a href="${pageContext.request.contextPath}/main/main.do">가슴</a></li>
-					<li><a href="${pageContext.request.contextPath}/main/main.do">등</a></li>
-					<li><a href="${pageContext.request.contextPath}/main/main.do">하체</a></li>
-					<li><a href="${pageContext.request.contextPath}/main/main.do">스트레칭</a></li>
+					<li><a href="${pageContext.request.contextPath}/homeTraining/hwList.do?part=전신">전신</a></li>
+					<li><a href="${pageContext.request.contextPath}/homeTraining/hwList.do?part=어깨">어깨</a></li>
+					<li><a href="${pageContext.request.contextPath}/homeTraining/hwList.do?part=가슴">가슴</a></li>
+					<li><a href="${pageContext.request.contextPath}/homeTraining/hwList.do?part=등">등</a></li>
+					<li><a href="${pageContext.request.contextPath}/homeTraining/hwList.do?part=하체">하체</a></li>
+					<li><a href="${pageContext.request.contextPath}/homeTraining/hwList.do?part=스트레칭">스트레칭</a></li>
 				</ul>
 			</li>
 			<li>

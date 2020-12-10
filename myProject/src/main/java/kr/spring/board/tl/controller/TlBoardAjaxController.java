@@ -23,6 +23,7 @@ import kr.spring.util.PagingUtil;
 
 @Controller
 public class TlBoardAjaxController {
+	
 	private Logger log = Logger.getLogger(this.getClass());
 
 	//트레이너 프로필 사진 변경은 trainer_detail테이블에 수정해야함
@@ -63,7 +64,7 @@ public class TlBoardAjaxController {
 	//댓글 리스트
 	@RequestMapping("/trainerList/trainer_comment.do")
 	@ResponseBody
-	public Map<String,Object> list(@RequestParam(value="mem_num") int tl_mem_num, @RequestParam(value="pageNum",defaultValue="1") int currentPage){
+	public Map<String,Object> list(@RequestParam int tl_mem_num, @RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		//SQL문 ?에 들어갈 값 : int tl_mem_num
 		
 		List<TlBoardCommentVO> list = null;
@@ -80,15 +81,19 @@ public class TlBoardAjaxController {
 		PagingUtil page = new PagingUtil(currentPage,count,10,10,"trainerListDetail.do");
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
-		
+
 		//모든 댓글 list에 담기
 		list = tlBoardService.selectTlBoardCommentList(map);
+		
+		if(log.isDebugEnabled()) { log.debug("<<검색된 댓글>> : " + list);} 
+		
 		
 		//ajax 처리를 위해 리턴해 줄 map
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		mapJson.put("list", list);
 		mapJson.put("count",count);
 		mapJson.put("rowCount", 10);
+		mapJson.put("pagingHtml", page.getPagingHtml());
 		
 		return mapJson;
 	}
@@ -97,19 +102,21 @@ public class TlBoardAjaxController {
 	//댓글 입력
 	@RequestMapping("/trainerList/submit_tlcomment.do")
 	@ResponseBody
-	public Map<String,Object> process(@RequestParam String comment,@RequestParam(value="mem_num") int tl_mem_num, HttpSession session){
+	public Map<String,Object> process(@RequestParam String comment,@RequestParam int tl_mem_num,@RequestParam int writer_mem_num){
 		
 		//글의 주인(트레이너 리스트 디테일 주인) : 트레이너(tl_mem_num)
 		//댓글다는 사람 : 로그인한 사람(session의 mem_num)
 		
-		//로그인한 사람의 정보 얻기 
+		/*//로그인한 사람의 정보 얻기 
 		MemberVO memberVO = (MemberVO)session.getAttribute("user");
-		int mem_num = memberVO.getMem_num();
+		int mem_num = memberVO.getMem_num();*/
+		
+		int mem_num = writer_mem_num;
 
 		if(log.isDebugEnabled()) {log.debug("<<트레이너 상세정보 댓글등록>> 트레이너 번호 : " + tl_mem_num + "댓글 내용 :" + comment);}
 		
 		//댓글등록 알림 데이터 넣기
-		int writer_memNum = tl_mem_num;
+		int writer_memNum = tl_mem_num; //알림 받을 사람 mem_num
 		NoticeVO notice = new NoticeVO();
 		notice.setWriter_memnum(writer_memNum);
 		notice.setReply_mem_num(mem_num);
@@ -129,7 +136,7 @@ public class TlBoardAjaxController {
 		
 		//ajax 처리를 위해 리턴해 줄 map
 		Map<String,Object> mapJson = new HashMap<String,Object>();
-		mapJson.put("result", "success");
+		mapJson.put("result", true);
 		
 		return mapJson; 
 	}
@@ -147,7 +154,7 @@ public class TlBoardAjaxController {
 		
 		//ajax 처리를 위해 리턴해 줄 map
 		Map<String,Object> mapJson = new HashMap<String,Object>();
-		mapJson.put("result", "success");
+		mapJson.put("result", true);
 		
 		return mapJson;
 	}
@@ -163,7 +170,7 @@ public class TlBoardAjaxController {
 		
 		//ajax 처리를 위해 리턴해 줄 map
 		Map<String,Object> mapJson = new HashMap<String,Object>();
-		mapJson.put("result", "success");
+		mapJson.put("result", true);
 		
 		return mapJson;
 	}
