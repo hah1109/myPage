@@ -36,6 +36,7 @@
 	 		board_num,
 	 		writer_memnum,
 	 		reply_mem_num,
+	 		writer_board,
 	 		board_comment,
 	 		notice_comment,
 	 		return_url
@@ -44,6 +45,7 @@
 	 		#{board_num},
 	 		#{writer_memnum},
 	 		#{reply_mem_num},
+	 		#{writer_board},
 	 		#{board_comment},
 	 		#{notice_comment},
 	 		#{return_url}

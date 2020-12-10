@@ -321,6 +321,13 @@ div.list_boardcofc{
 }
 
 /*=====================알림=====================*/
+
+.table_notice #more1,
+.table_notice #more2{
+	color:grey;
+	font-size:12px;
+}
+
 .table_notice a{
 	/*메인색보다는 좀더 진하게 설정함*/
 	color:#0cdacf;
@@ -330,3 +337,16 @@ div.list_boardcofc{
 .confirmed{
 	color:black;
 }
+
+.text_overflow{
+	display: -webkit-box;
+	margin:1px; 
+	max-height:40px; 
+	overflow:hidden; 
+	vertical-align:top; 
+	text-overflow: ellipsis; 
+	word-break:break-all; 
+	-webkit-box-orient:vertical; 
+	-webkit-line-clamp:2;
+}
+

@@ -56,5 +56,8 @@ public interface FreeBoardMapper {
 	//댓글이 달리는 사람의 멤버번호
 	@Select("SELECT mem_num FROM board_free WHERE free_num=#{free_num}")
 	public int selectBoardWriterMemNum(int free_num);
+	//댓글이 달리는 사람이 쓴 글
+	@Select("SELECT free_content FROM board_free WHERE free_num=#{free_num}")
+	public String selectBoardWriterContent(int free_num);
 	
 }

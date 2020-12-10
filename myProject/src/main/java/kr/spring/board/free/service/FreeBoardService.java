@@ -22,5 +22,8 @@ public interface FreeBoardService {
 	public FreeBoardCommentVO selectOneFreeComment(Integer freec_num);
 	public int updateFreeComment(FreeBoardCommentVO free_comment);
 	public int deleteFreeComment(int freec_num);
+	
+	//댓글 알림에 필요한 내용
 	public int selectBoardWriterMemNum(int free_num);
+	public String selectBoardWriterContent(int free_num);
 }
