@@ -172,6 +172,7 @@ public class TlBoardController {
 			map.put("member_id", memberVO.getMem_id());
 			map.put("member_num", memberVO.getMem_num());
 			
+			
 			if(log.isDebugEnabled()) {
 				log.debug("<<<매칭하기위해 세션에서 가져온 로그인한 회원의 번호>>> :" + memberVO.getMem_num());
 			}
@@ -194,7 +195,8 @@ public class TlBoardController {
 					noticeVO.setWriter_memnum(mem_num); //트레이너 멤넘
 					noticeVO.setReply_mem_num(memberVO.getMem_num()); //신청보낸 회원 멤넘
 					noticeVO.setBoard_comment("트레이닝 신청 도착");
-					noticeVO.setNotice_comment("트레이닝 신청이 도착했습니다"); //경로 지웠자너그래서 없네
+					noticeVO.setNotice_comment("트레이닝 신청을 하였습니다.");
+					noticeVO.setWriter_board("-");
 					noticeVO.setReturn_url("0");
 					noticeService.insertNoticeVO(noticeVO);  
 					
@@ -383,8 +385,9 @@ public class TlBoardController {
 		noticeVO.setWriter_memnum(mem_num);
 		noticeVO.setReply_mem_num(user.getMem_num());
 		noticeVO.setBoard_comment("거절 완료");
-		noticeVO.setNotice_comment("트레이너 신청이 거절 되었습니다");
+		noticeVO.setNotice_comment("트레이너 신청을 거절하였습니다.");
 		noticeVO.setReturn_url("0"); 
+		noticeVO.setWriter_board("-");
 		noticeService.insertNoticeVO(noticeVO);  
 		
 		tlBoardService.deleteMatchingCancle(mem_num);
@@ -452,8 +455,9 @@ public class TlBoardController {
 		noticeVO.setWriter_memnum(mem_num);
 		noticeVO.setReply_mem_num(user.getMem_num());
 		noticeVO.setBoard_comment("수락 완료");
-		noticeVO.setNotice_comment("트레이너 신청이 수락 되었습니다");
+		noticeVO.setNotice_comment("트레이너 신청을 수락하였습니다.");
 		noticeVO.setReturn_url("0");
+		noticeVO.setWriter_board("-");
 		noticeService.insertNoticeVO(noticeVO);  
 		
 		//매칭테이블에서 삭제
