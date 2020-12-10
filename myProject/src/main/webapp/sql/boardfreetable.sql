@@ -17,7 +17,7 @@ create sequence board_free_seq;
 
 create table board_free_comment(
     freec_num number not null,
-    free_comment varchar2(50) not null,
+    free_comment varchar2(200) not null,
     freec_reg_date date default sysdate not null,
     freec_modify_date date default sysdate not null,
     free_num number not null,
@@ -30,7 +30,7 @@ create sequence freec_num_seq;
 
 create table board_free_comment_reply(
     rfreec_num number not null,
-    rfreec_comment varchar2(100) not null,
+    rfreec_comment varchar2(150) not null,
     rfreec_date date default sysdate not null,
     freec_num number not null,
     mem_num number not null,

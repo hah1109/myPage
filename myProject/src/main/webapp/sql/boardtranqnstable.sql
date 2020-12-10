@@ -17,7 +17,7 @@ create sequence board_tranqna_seq;
 
 create table board_tranqna_comment(
     tqc_num number not null,
-    tq_comment varchar2(150) not null,
+    tq_comment varchar2(200) not null,
     tqc_reg_date date default sysdate not null,
     tqc_modify_date date default sysdate not null,
     tq_num number not null,
@@ -30,7 +30,7 @@ create sequence tqc_num_seq;
 
 create table board_tranqna_comment_reply(
     rtqc_num number not null,
-    rtqc_comment varchar2(100) not null,
+    rtqc_comment varchar2(150) not null,
     rtqc_date date default sysdate not null,
     tqc_num number not null,
     mem_num number not null,

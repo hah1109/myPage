@@ -83,6 +83,21 @@ $(document).ready(function(){
 			});
 		});
 		
+		
+		//내가 쓴 글 더보기 버튼 클릭 시
+		$('.more1').click(function(){
+			var id = $(this).attr('id');
+			$('.more1'+id).removeClass('text_overflow');
+			$(this).hide();
+		});
+		
+		//내용 글 더보기 버튼 클릭 시
+		$('.more2').click(function(){
+			var id = $(this).attr('id');
+			$('.more2'+id).removeClass('text_overflow');
+			$(this).hide();
+		});
+		
 });
 
 </script>
@@ -114,20 +129,20 @@ $(document).ready(function(){
 						${notice.notice_comment}
 					</td>
 					<td>
-						<p class="text_overflow">
+						<p class="text_overflow more1${notice.notice_num}">
 						${notice.writer_board}
 						</p>
 						<c:if test="${notice.writer_board.length() > 97}">
-							<a class="moreContent" id="writer"><i class="fas fa-angle-right">더보기</i></a>
+							<a class="more1" id="${notice.notice_num}"><i class="fas fa-angle-right">더보기</i></a>
 						</c:if>
 					</td>
 					<td>
-						<p class="text_overflow">
+						<p class="text_overflow more2${notice.notice_num}">
 						${notice.board_comment}
 						<span style="color:grey; font-size:11px;">[${notice.reg_date}]</span>
 						</p>
 						<c:if test="${notice.board_comment.length() > 97}">
-							<a class="moreContent"><i class="fas fa-angle-right amore">더보기</i></a>
+							<a class="more2" id="${notice.notice_num}"><i class="fas fa-angle-right">더보기</i></a>
 						</c:if>
 					</td>
 					<td>
