@@ -97,6 +97,20 @@ select:focus {
 }
 .myId{
 	padding-top: 0.7%;
+	padding-left: 15%;
+	padding-left: 155px;
+}
+.Btn_training{
+	border: 1px solid black;
+	border-radius: 40px;
+	margin-bottom: 1%;
+	margin-left: 5px%;
+}
+.Btn_follow{
+	border: 1px solid black;
+	border-radius: 40px;
+	margin-bottom: 1%;
+	margin-left: 33px;
 }
 .intro{
 	float:right;

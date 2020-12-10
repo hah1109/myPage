@@ -159,74 +159,74 @@
 						<img src="${pageContext.request.contextPath }/member/photoView.do"
 							width="120" height="120" class="my-photo">
 					</c:if>
-
+				</div>
 					<!-- 프로필 소개 노출 -->
 					<div class="intro">
 						<label for="intro">나의 한마디</label><br>
 						<c:if test="${empty member.mem_intro }">
 
 							<input type="text" id="intro" name="intro"
-								placeholder="하고 싶은 한 마디를 적어주세요" readonly />
+								placeholder="등록된 소개글이 없습니다." readonly style="border: none;" />
 						</c:if>
 						<c:if test="${!empty member.mem_intro }">
 
-							<input type="text" id="intro" value=${member.mem_intro } readonly />
+							<input type="text" id="intro" value=${member.mem_intro } readonly style="border: none;" />
 						</c:if>
 					</div>
-				</div>
 			</div>
 		</li>
 		<li class="myId">
 			<h1>${member.mem_id }</h1>
 		</li>
 	</ul>
-	<hr size="1" width="100%">
-	<div>
+	
+	<div calss=>
 		<!-- 로그인 아이디 일반회원			피드 아이디 트레이너 회원 -->
 		<c:if test="${user.mem_auth == 1 && member.mem_auth ==2 }">
-			<button type="button"
-				onclick="location.href='${pageContext.request.contextPath}/trainerList/trainerListDetail.do?mem_num=${member.mem_num}'">트레이닝
-				신청하기</button>
+			
 			<c:if test="${empty member2.follower_num}">
-				<button type="button"
+				<button type="button" class="Btn_follow"
 					onclick="location.href='insertFollow.do?mem_num=${member.mem_num}'">팔로우하기</button>
 			</c:if>
 			<c:if test="${!empty member2.follower_num}">
-				<button type="button"
+				<button type="button" class="Btn_follow"
 					onclick="location.href='deleteFollow.do?mem_num=${member.mem_num}'">팔로우끊기</button>
 			</c:if>
+			<button type="button" class="Btn_training"
+				onclick="location.href='${pageContext.request.contextPath}/trainerList/trainerListDetail.do?mem_num=${member.mem_num}'">트레이닝 신청하기</button>
 		</c:if>
 		<c:if test="${user.mem_auth == 1 && member.mem_auth ==1 }">
 			<c:if test="${empty member2.follower_num}">
-				<button type="button"
+				<button type="button" class="Btn_follow"
 					onclick="location.href='insertFollow.do?mem_num=${member.mem_num}'">팔로우하기</button>
 			</c:if>
 			<c:if test="${!empty member2.follower_num}">
-				<button type="button"
+				<button type="button" class="Btn_follow"
 					onclick="location.href='deleteFollow.do?mem_num=${member.mem_num}'">팔로우끊기</button>
 			</c:if>
 		</c:if>
 		<c:if test="${user.mem_auth == 2 && member.mem_auth ==1 }">
 			<c:if test="${empty member2.follower_num}">
-				<button type="button"
+				<button type="button" class="Btn_follow"
 					onclick="location.href='insertFollow.do?mem_num=${member.mem_num}'">팔로우하기</button>
 			</c:if>
 			<c:if test="${!empty member2.follower_num}">
-				<button type="button"
+				<button type="button" class="Btn_follow"
 					onclick="location.href='deleteFollow.do?mem_num=${member.mem_num}'">팔로우끊기</button>
 			</c:if>
 		</c:if>
 		<c:if test="${user.mem_auth == 2 && member.mem_auth ==2 }">
 			<c:if test="${empty member2.follower_num}">
-				<button type="button"
+				<button type="button" class="Btn_follow"
 					onclick="location.href='insertFollow.do?mem_num=${member.mem_num}'">팔로우하기</button>
 			</c:if>
 			<c:if test="${!empty member2.follower_num}">
-				<button type="button"
+				<button type="button" class="Btn_follow"
 					onclick="location.href='deleteFollow.do?mem_num=${member.mem_num}'">팔로우끊기</button>
 			</c:if>
 		</c:if>
 	</div>
+	<hr size="1" width="100%">
 </div>
 <div>
 
