@@ -70,11 +70,11 @@ public class NutrimentController {
 	
 		if(log.isDebugEnabled()) { log.debug("<<nustriSearch 메소드 진입 >> :" + foodName); }
 		
-		/*****************paging 처리*************/
-		
+		ModelAndView mav = new ModelAndView();
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("foodName", foodName);
 		
+		/*****************paging 처리*************/
 		//검색된 자바빈의 개수
 		int count = nutrimentService.count(map);
 		if(log.isDebugEnabled()) { log.debug("<<검색된 영양성분 갯수>> : " + count); }
@@ -82,36 +82,28 @@ public class NutrimentController {
 		PagingUtil page = new PagingUtil(currentPage,count,10,10,"nutriSearch.do","&foodName="+foodName);
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
-
+		/*****************paging 처리*************/
+		
 		List<NutrimentVO> list = null;
 		
-		if(count > 0) { //검색결과 있을 시 
-			
-			list = nutrimentService.selectNutriment(map);
+		if(count > 0) { //검색 결과 있을 시 
+			list = nutrimentService.selectNutriment(map); 
 			if(log.isDebugEnabled()) { log.debug("<<검색된 영양성분 목록>> : " + list); }
 			
-		} else  {
+			mav.addObject("list", list);
+			mav.addObject("count", count);
+			mav.addObject("pagingHtml", page.getPagingHtml());
+			mav.setViewName("nutriList");
 			
-			ModelAndView mav = new ModelAndView();
+			return mav;
 			
+		} else  { //검색 결과 없을 시
 			mav.addObject("message", "검색 결과가 없습니다.");
 			mav.addObject("url","nutriList.do");
 			mav.setViewName("common/result");
 			
 			return mav;
 		}
-		
-		
-		ModelAndView mav = new ModelAndView();
-		
-		
-		mav.addObject("list", list);
-		mav.addObject("count", count);
-		mav.addObject("pagingHtml", page.getPagingHtml());
-		mav.setViewName("nutriList");
-		
-		return mav;
-		
 	}
 	
 
