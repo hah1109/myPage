@@ -12,6 +12,8 @@ public class NoticeVO {
 	private int writer_memnum;
 	//댓글을 단 사람(알림주게되는 사람)의 아이디
 	private int reply_mem_num;
+	//댓글이 달린 사람이 썼던 게시판 글
+	private String writer_board;
 	//댓글 내용
 	private String board_comment;
 	//등록한 날짜(default sysdate)
@@ -95,6 +97,13 @@ public class NoticeVO {
 	}
 	public void setMem_id(String mem_id) {
 		this.mem_id = mem_id;
+	}
+	
+	public String getWriter_board() {
+		return writer_board;
+	}
+	public void setWriter_board(String writer_board) {
+		this.writer_board = writer_board;
 	}
 	
 	@Override

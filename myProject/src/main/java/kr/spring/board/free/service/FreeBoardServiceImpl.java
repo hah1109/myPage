@@ -87,4 +87,9 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		return freeBoardMapper.selectBoardWriterMemNum(free_num);
 	}
 	
+	@Override
+	public String selectBoardWriterContent(int free_num) {
+		return freeBoardMapper.selectBoardWriterContent(free_num);
+	}
+	
 }
