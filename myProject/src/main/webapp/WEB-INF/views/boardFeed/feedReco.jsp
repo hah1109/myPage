@@ -124,32 +124,34 @@ $(document).ready(function(){
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/layout_feedReco.css">
-<div class="page-main-style">
-	<input type="button" class="write_Btn" value=""
-		onclick="location.href='feedWrite.do'">
-	<c:if test="${count == 0}">
-		<div class="masonry">
-			<div class="grid">
-				<img src="../resources/images/cameraImage.jpg">
-				<div class="grid__body">
-					<div class="relative">
-						<a class="grid__link" href="/"></a>
-						<h1 class="grid__title">
-							등록된 게시물이 <br>없습니다.
-						</h1>
-						<p class="grid__author">게시물을 등록해주세요</p>
+<div class="page_feedReco">
+	<input type="button" class="write_Btn" value="" onclick="location.href='feedWrite.do'">
+	<a>글쓰기</a>
+	<div class="feeds">	
+		<c:if test="${count == 0}">
+			<div class="masonry">
+				<div class="grid">
+					<img src="../resources/images/cameraImage.jpg">
+					<div class="grid__body">
+						<div class="relative">
+							<a class="grid__link" href="/"></a>
+							<h1 class="grid__title">
+								등록된 게시물이 <br>없습니다.
+							</h1>
+							<p class="grid__author">게시물을 등록해주세요</p>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</c:if>
-	<div class="masonry">
-		<div id="output">
-			<!-- ajax 영역 -->
-		</div>
-		<div id="loading" style="display: none;">
-			<img
-				src="${pageContext.request.contextPath}/resources/images/ajax-loader.gif">
+		</c:if>
+		<div class="masonry">
+			<div id="output">
+				<!-- ajax 영역 -->
+			</div>
+			<div id="loading" style="display: none;">
+				<img
+					src="${pageContext.request.contextPath}/resources/images/ajax-loader.gif">
+			</div>
 		</div>
 	</div>
 </div>
