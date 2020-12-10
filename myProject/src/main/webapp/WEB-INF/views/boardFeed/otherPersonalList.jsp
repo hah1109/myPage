@@ -157,7 +157,7 @@ selectData(1);
 	${member.mem_num}
 		<!-- 로그인 아이디 일반회원			피드 아이디 트레이너 회원 -->
 		<c:if test="${user.mem_auth == 1 && member.mem_auth ==2 }">
-			<button type="button" onclick="location.href='${pageContext.request.contextPath}/trainerList/matching.do?mem_num=${member.mem_num}'">트레이닝 신청하기</button>
+			<button type="button" onclick="location.href='${pageContext.request.contextPath}/trainerList/trainerListDetail.do?mem_num=${member.mem_num}'">트레이닝 신청하기</button>
 			<c:if test="${empty member2.follower_num}"><button type="button" onclick="location.href='insertFollow.do?mem_num=${member.mem_num}'">팔로우하기</button></c:if>
 			<c:if test="${!empty member2.follower_num}"><button type="button" onclick="location.href='deleteFollow.do?mem_num=${member.mem_num}'">팔로우끊기</button></c:if>
 		</c:if>

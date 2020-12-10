@@ -239,58 +239,51 @@ $(document).ready(function(){
  */
 </script>
 
-<div class="page-main-style">
+<div class="personal_feed">
 
 <!-- 아이디 노출 -->
 <!-- 프로필 사진 노출 -->
 	<ul id="upperNotice">
-		<li id="image">
-			<c:if test="${empty member.mem_picName }">
-				<img
-					src="${pageContext.request.contextPath }/resources/images/blank.jpg"
-					width="100" height="100" class="my-photo">
-			</c:if> 
-			<c:if test="${!empty member.mem_picName }">
-				<img src="${pageContext.request.contextPath }/member/photoView.do"
-					width="100" height="100" class="my-photo">
-			</c:if>
-		</li>
-		<li>
-			<h1>${member.mem_id }</h1>
-		</li>
-		<!-- 프로필 사진 수정버튼 -->
-		<li>
-			<div>
+		<li id="image" class="profile_image">
+		<div class="upperIntro">
+			<div class="myPic">
+				<c:if test="${empty member.mem_picName }">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/blank.jpg"
+						width="100" height="100" class="my-photo">
+				</c:if> 
+				<c:if test="${!empty member.mem_picName }">
+					<img src="${pageContext.request.contextPath }/member/photoView.do"
+						width="100" height="100" class="my-photo">
+				</c:if>
+				<!-- 프로필 사진 수정버튼 -->
 				<input type="button" value="수정" id="photo_btn">
+				<div id="photo_choice" style="display: none;">
+					<input type="file" id="upload" accept="image/gif,image/png,image/jpeg">
+					<input type="button" value="전송" id="photo_submit">
+					<input type="button" value="취소" id="photo_reset">
+				</div>
 			</div>
-			<div id="photo_choice" style="display: none;">
-				<input type="file" id="upload" accept="image/gif,image/png,image/jpeg">
-				<input type="button" value="전송" id="photo_submit">
-				<input type="button" value="취소" id="photo_reset">
-			</div>
-		</li>
-	</ul>
-	<!-- 프로필 소개 노출 -->
-	<ul>
-		<li>
-			<c:if test="${empty member.mem_intro }">
-				<label for="intro">나의 한마디 : </label>
-				<input type="text" id="intro" name="intro"
-					placeholder="하고 싶은 한 마디를 적어주세요" readonly/>
-			</c:if> <c:if test="${!empty member.mem_intro }">
-				<label for="intro">나의 한마디 : </label>
+		<!-- 프로필 소개 노출 -->
+			<div class="intro">
+				<label for="intro">나의 한마디</label><br>
+				<c:if test="${empty member.mem_intro }">
+					<input type="text" id="intro" name="intro"
+						placeholder="하고 싶은 한 마디를 적어주세요" readonly/>
+				</c:if> <c:if test="${!empty member.mem_intro }">
 				<input type="text" id="intro" value=${member.mem_intro } readonly/>
-			</c:if>
-		</li>
-		<!-- 프로필 소개 수정버튼 -->
-		<li>
-			<div>
+				</c:if>
+				<!-- 프로필 소개 수정버튼 -->
 				<input type="button" value="수정" id="intro_btn">
+				<div id="intro_change" style="display: none;"> 
+					<input type="button" value="전송" id="intro_submit">
+					<input type="button" value="취소" id="intro_reset">
+				</div>
 			</div>
-			<div id="intro_change" style="display: none;"> 
-				<input type="button" value="전송" id="intro_submit">
-				<input type="button" value="취소" id="intro_reset">
 			</div>
+		</li>
+		<li class="myId">
+			<h1>${member.mem_id }</h1>
 		</li>
 	</ul>
 	<hr size="1" width="100%">

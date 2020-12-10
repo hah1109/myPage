@@ -1,19 +1,15 @@
 @charset "UTF-8";
 /*===================글 리스트*/
 .masonry {
-  columns: 4;
+  columns: 3;
   column-gap: 16px;
+  width: 80%;
+  margin-left: 10%;
 }
-@media (max-width: 1200px) {
-  .masonry {
-    columns: 3;
-  }
-}
-@media (max-width: 992px) {
-  .masonry {
-    columns: 2;
-    margin-bottom: 10px;
-  }
+
+.personal_feed{
+	width: 80%;
+	margin-left: 10%;
 }
 .masonry .grid {
   margin-bottom: 16px;
@@ -29,6 +25,9 @@
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.2);
+}
+.my-photo{
+	border-radius: 80px;
 }
 .masonry .grid img {
   width: 100%;
@@ -84,17 +83,26 @@ body {
   line-height: 1.6em;
   margin: 0;
 }
-h1 {
-  font-size: 40px;
-  line-height: 0.8em;
-  color: rgba(255,255,255,0.2);}
 
 button:focus,
 input:focus,
 textarea:focus,
 select:focus {
   outline: none; }
-
+.upperIntro{
+	flex-wrap : wrap;
+}
+.myPic{
+	float:left;
+}
+.myId{
+	padding-top: 0.7%;
+}
+.intro{
+	float:right;
+	padding-top: 5%;
+	padding-bottom: 5px;
+}
 .tabs {
   display: block;
   display: -webkit-flex;
