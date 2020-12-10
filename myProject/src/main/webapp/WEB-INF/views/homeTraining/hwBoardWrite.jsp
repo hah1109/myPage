@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<div class="page-main-style">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<h2>트레이닝영상 추가</h2>
 	<form:form commandName="hwBoardVO" action="hwBoardWrite.do"
 	                        enctype="multipart/form-data">
 		<ul>
 			<li>
 				<label for="hw_title">제목</label>
-				<form:input path="hw_title"/>
+				<form:input path="hw_title" id="hw_title" name="hw_title"/>
 			</li>
 			<li>
 				<label for="hw_part">부위</label>
@@ -20,7 +21,7 @@
 			</li>
 			<li>
 				<label for="hw_link">링크</label>
-				<form:textarea path="hw_link"/>
+				<form:input path="hw_link" id="hw_link" name="hw_link"/>
 			</li>
 		</ul>	
 		<div class="align-center">

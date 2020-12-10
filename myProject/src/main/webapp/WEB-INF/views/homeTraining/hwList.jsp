@@ -16,14 +16,14 @@
 } 
 </style>
 <div class="page-main-style">
-	<h2 class="hw_title">게시판 목록</h2>
+	<h2 class="hw_title">홈 트레이닝 추천 영상!</h2>
 	
 	<form action="hwList.do" id="search_form" method="get">
 		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield" class="search_type">
-					<option class="search_types" value="title">제목</option>
-					<option class="search_types" value="part">부위</option>
+					<option class="search_types" value="hw_title">제목</option>
+					<option class="search_types" value="hw_part">부위</option>
 					<option class="search_types" value="all">전체</option>
 				</select>
 				<input type="text" class="search_field" name="keyword" id="keyword">

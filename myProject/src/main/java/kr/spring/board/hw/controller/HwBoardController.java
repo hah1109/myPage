@@ -43,20 +43,18 @@ public class HwBoardController {
 	// 트레이닝 화면을 호출해주는 부분
 	//조건에 따라 view에 노출되는 동영상, 메인 글씨 변경(조건은 부위를 조건으로)
 	//검색버튼이 눌렸을 경우에도 여기로 호출
-	@RequestMapping(value="/homeTraining/hwList.do")
-	public ModelAndView hwList(@RequestParam(value="pageNum", defaultValue="1")
-						 int currentPage,
-						 @RequestParam(value="keyfield", defaultValue="")
-						 String keyfield,
-						 @RequestParam(value="keyword", defaultValue="")
-						 String keyword) {
+	@RequestMapping("/homeTraining/hwList.do")
+	public ModelAndView hwList(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+						 @RequestParam(value="keyfield", defaultValue="") String keyfield,
+						 @RequestParam(value="keyword", defaultValue="") String keyword,
+						 @RequestParam(value="part", defaultValue="") String part) {
 		
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		
 		if(log.isDebugEnabled()) {
-			log.debug("<<count>>0 : " + map);
+			log.debug("<<count>> : " + map);
 		}
 		
 		
@@ -68,7 +66,7 @@ public class HwBoardController {
 			log.debug("<<count>> : " + count + map);
 		}
 		
-		PagingUtil page = new PagingUtil(keyfield, keyword,currentPage,count,10,10,"hwList.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword,currentPage,count,6,10,"hwList.do");
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
 	
@@ -106,18 +104,15 @@ public class HwBoardController {
 			String code = null;
 			System.out.println(hwBoardVO.getHw_link());
 			if(hwBoardVO.getHw_link().contains("iframe")) {
-				System.out.println("아이프레임" );
 				pattern = "embed/";
 				io_pattern = hwBoardVO.getHw_link().indexOf(pattern);
 				code = hwBoardVO.getHw_link().substring((io_pattern + pattern.length()),
 						(hwBoardVO.getHw_link().substring(io_pattern).indexOf("\" frameborder")+io_pattern));
 			}else if(hwBoardVO.getHw_link().contains("youtu.be")) {
-				System.out.println("youtu.be");
 				pattern = "youtu.be/";
 				io_pattern = hwBoardVO.getHw_link().indexOf(pattern);
 				code = hwBoardVO.getHw_link().substring(io_pattern + pattern.length());
 			}else if(hwBoardVO.getHw_link().contains("ab_channel")) {
-				System.out.println("사이트 주소" );
 				pattern = "?v=";
 				io_pattern = hwBoardVO.getHw_link().indexOf(pattern);
 				code = hwBoardVO.getHw_link().substring((io_pattern + pattern.length()),

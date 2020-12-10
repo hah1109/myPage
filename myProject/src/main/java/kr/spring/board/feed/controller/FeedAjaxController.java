@@ -25,7 +25,7 @@ import kr.spring.util.PagingUtil;
 @Controller
 public class FeedAjaxController {
 	private Logger log = Logger.getLogger(this.getClass());
-	private int rowCount = 10;
+	private int rowCount = 9;
 	
 	@Resource
 	private MemberService memberService;

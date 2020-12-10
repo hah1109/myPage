@@ -14,15 +14,15 @@
 			*
 			FROM hwboard
 			<where>
-				<if test="keyword != '' and keyfield == 'title'">
+				<if test="keyword != '' and keyfield == 'hw_title'">
 				hw_title like '%' || #{keyword} || '%'
 			</if>
-			<if test="keyword != '' and keyfield == 'part'">
+			<if test="keyword != '' and keyfield == 'hw_part'">
 				hw_part like '%' || #{keyword} || '%'
 			</if>
 			<if test="keyword != '' and keyfield == 'all'">
-				hw_title '%' || #{keyword} || '%' or
-				hw_part '%' || #{keyword} || '%'
+				hw_title like '%' || #{keyword} || '%' or
+				hw_part like '%' || #{keyword} || '%'
 			</if>
 			</where>
 		ORDER BY hw_num DESC)a)
@@ -38,15 +38,15 @@
 		COUNT(*)
 		FROM HWBOARD
 			<where>
-			<if test="keyword != '' and keyfield == 'title'">
+			<if test="keyword != '' and keyfield == 'hw_title'">
 				hw_title like '%' || #{keyword} || '%'
 			</if>
-			<if test="keyword != '' and keyfield == 'part'">
+			<if test="keyword != '' and keyfield == 'hw_part'">
 				hw_part like '%' || #{keyword} || '%'
 			</if>
 			<if test="keyword != '' and keyfield == 'all'">
-				hw_title '%' || #{keyword} || '%' or
-				hw_part '%' || #{keyword} || '%'
+				hw_title like '%' || #{keyword} || '%' or
+				hw_part like '%' || #{keyword} || '%'
 			</if>
 		</where>
 	</select>
