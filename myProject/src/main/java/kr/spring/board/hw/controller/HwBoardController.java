@@ -50,6 +50,7 @@ public class HwBoardController {
 						 @RequestParam(value="part", defaultValue="") String part) {
 		
 		Map<String,Object> map = new HashMap<String, Object>();
+		if(part != "") keyword = part;
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		

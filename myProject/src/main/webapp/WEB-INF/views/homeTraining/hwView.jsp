@@ -72,12 +72,10 @@ $(document).ready(function() {
 			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 			allowfullscreen></iframe>
 	</div>
-	<div class="vod_icos_wrap">
-		<ul class="vod_icos">
-			<li><em id="duration">소요 시간 :</em></li>
-			<li><em>운동부위 : ${hwBoardVO.hw_part}</em></li>
-			<li><em>소모 칼로리 : ${hwBoardVO.hw_kcal}</em></li>
-		</ul>
+	<div class="vod_icos_wrap" style="padding-top:30px;">
+			<span style="padding-left:5%; padding-bottom:5px;"><img src="../resources/images/image_clock.png"><em id="duration">:</em></span>
+			<span style="padding-left:27%;"><img src="../resources/images/image_part.png"><em>: ${hwBoardVO.hw_part}</em></span>
+			<span style="padding-left:27%;"><img src="../resources/images/image_kcal.png"><em>: ${hwBoardVO.hw_kcal}kcal</em></span>
 	</div>
 	<hr size="1" width="100%">
 	<div class="align-right">
