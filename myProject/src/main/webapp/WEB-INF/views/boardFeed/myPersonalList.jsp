@@ -214,9 +214,24 @@
 																	}
 																	output += ' </h1>';
 
-																	output += '<p class="grid__author">'
-																			+ item.feed_auth
-																			+ '</p>';
+																	output += '<p class="grid__author">';
+																	switch(item.feed_auth){
+																		case 1:
+																			output += '나만보기';
+																			break;
+																		case 2:
+																			output += '트레이너만 공개';
+																			break;
+																		case 3:
+																			output += '팔로워 공개';
+																			break;
+																		case 4:
+																			output += '전체 공개';
+																			break;
+																		default :
+																			break;
+																	}
+																	output += '</p>';
 																	output += '</div>';
 																	output += '<div class="mt-auto">';
 																	output += '<span class="grid__tag">'

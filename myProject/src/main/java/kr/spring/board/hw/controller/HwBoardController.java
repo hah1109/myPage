@@ -45,15 +45,15 @@ public class HwBoardController {
 	//검색버튼이 눌렸을 경우에도 여기로 호출
 	@RequestMapping("/homeTraining/hwList.do")
 	public ModelAndView hwList(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
-						 @RequestParam(value="keyfield", defaultValue="") String keyfield,
-						 @RequestParam(value="keyword", defaultValue="") String keyword,
-						 @RequestParam(value="part", defaultValue="") String part) {
+						 @RequestParam(value="keyfield", defaultValue="all") String keyfield,
+						 @RequestParam(value="keyword", defaultValue="") String keyword) {
 		
 		Map<String,Object> map = new HashMap<String, Object>();
-		if(part != "") keyword = part;
+		
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		
+
+
 		if(log.isDebugEnabled()) {
 			log.debug("<<count>> : " + map);
 		}
@@ -88,7 +88,52 @@ public class HwBoardController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/homeTraining/hwPartList.do")
+	public ModelAndView hwPartList(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+			@RequestParam(value="keyfield", defaultValue="hw_part") String keyfield,
+			@RequestParam(value="keyword", defaultValue="") String keyword) {
 
+		Map<String,Object> map = new HashMap<String, Object>();
+
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+
+
+		if(log.isDebugEnabled()) {
+			log.debug("<<count>> : " + map);
+		}
+
+
+		//총 글 갯수
+		int count = hwBoardService.selectHwRowCount(map);
+
+		//로그
+		if(log.isDebugEnabled()) {
+			log.debug("<<count>> : " + count + map);
+		}
+
+		PagingUtil page = new PagingUtil(keyfield, keyword,currentPage,count,6,10,"hwList.do");
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
+
+		List<HwBoardVO> list = null;
+		if(count > 0) {
+			list = hwBoardService.hwSelectList(map);
+
+			if(log.isDebugEnabled()) {
+				log.debug("<<글 목록>> : " + list);
+			}
+		}
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("hwList");
+		mav.addObject("count",count);
+		mav.addObject("list", list);
+		mav.addObject("pagingHtml", page.getPagingHtml());
+
+		return mav;
+	}
 	//관리자만 등록할 수 있는 버튼이눌렸을 경우 글 등록 폼 호출
 	@RequestMapping(value="/homeTraining/hwBoardWrite.do",method=RequestMethod.GET)
 	public String form() {
