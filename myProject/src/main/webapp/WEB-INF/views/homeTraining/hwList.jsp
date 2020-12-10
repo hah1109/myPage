@@ -9,6 +9,7 @@
 	margin-left: 5px;
 	background-image: url('../resources/images/feed/Btn_search.png');
 	border: none;
+	margin-bottom: -10px;
 }
 .search_btn:hover{
 	transform: scale(0.96);
