@@ -65,14 +65,17 @@ $(document).ready(function() {
 	<h2>트레이닝영상 추가</h2>
 	<form:form commandName="hwBoardVO" action="hwBoardWrite.do"
 	                        enctype="multipart/form-data">
+ 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 			<li>
 				<label for="hw_title">제목</label>
 				<form:input path="hw_title" id="hw_title" name="hw_title"/>
+				<form:errors path="hw_title" cssClass="error-color"/>
 			</li>
 			<li>
 				<label for="hw_part">부위</label>
 				<form:input path="hw_part"/>
+				<form:errors path="hw_part" cssClass="error-color"/>
 			</li>
 			<li>
 				<label for="hw_kcal">소모 칼로리</label>
@@ -81,13 +84,14 @@ $(document).ready(function() {
 			<li>
 				<label for="hw_link">링크</label>
 				<form:input path="hw_link" id="hw_link" name="hw_link"/>
+				<form:errors path="hw_link" cssClass="error-color"/>
 			</li>
 		</ul>	
-		<div class="align-center">
+		<div class="align-center" >
+			<input type="button" value="변환" id="change" name="change">
 			<input type="submit" value="전송">
 			<input type="button" value="목록"
 			       onclick="location.href='hwList.do'">
-			<input type="button" value="변환" id="change">
 			
 		</div>
 	</form:form>

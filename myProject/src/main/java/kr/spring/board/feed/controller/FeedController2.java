@@ -95,6 +95,8 @@ public class FeedController2 {
 		mav.addObject("followMeList",followMeList);
 		return mav;
 	}  
+	
+	
 	@RequestMapping(value="/boardFeed/otherFeedList.do")
 	public ModelAndView otherFeedList(@RequestParam int mem_num, HttpSession session) {
 		
@@ -114,7 +116,9 @@ public class FeedController2 {
 		log.debug("vo에 담긴 팔로우관계 확인 결과" + vo);
 		
 		//멤버 정보를 받아옴 
-	    MemberVO memberVO = memberService.selectMember_detail(mem_num);//pic name 을 받아올 수있음 
+	    MemberVO memberVO = memberService.selectMember_detail(mem_num);//pic name 을 받아올 수있음
+
+	    log.debug("트레이너 호출 수행후" + memberVO);
 		MemberVO member = memberService.selectCheckMember_detail(memberVO.getMem_id());// mem_auth를 받아 올 수있음
 		if(member.getMem_auth() == 2) {// 트레이너일 경우 트레이너 정보 받아옴
 			memberVO = memberService.selectTrainer_detail(mem_num);
@@ -122,7 +126,8 @@ public class FeedController2 {
 		}
 		memberVO.setMem_auth(member.getMem_auth());
 		memberVO.setMem_num(mem_num);
-	    
+
+	    log.debug("트레이너 호출 수행후" + memberVO);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("otherPersonalList");
 		mav.addObject("member", memberVO);

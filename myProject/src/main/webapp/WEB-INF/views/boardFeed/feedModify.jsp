@@ -53,21 +53,24 @@
   	<form:form commandName="feedVO" action="feedUpdate.do" enctype="multipart/form-data">
 		<form:hidden path="feed_num" />
 		<ul style="margin-top: 20px">
-			<li><form:select class="feed_type" path="feed_type">
+			<li style="padding-left:100px;">
+				<form:select class="feed_type" path="feed_type" >
 					<form:option value="100" label="글 주제 선택 " />
 					<form:option value="1" label="식단" />
 					<form:option value="2" label="운동" />
 				</form:select></li>
-			<li><form:select class="feed_auth" path="feed_auth">
+			<li style="padding-left:100px;">
+				<form:select class="feed_auth" path="feed_auth">
 					<form:option value="100" label="공개범위를 선택해주세요" />
 					<form:option value="0" label="나만보기" />
 					<form:option value="1" label="트레이너만 공개" />
 					<form:option value="2" label="팔로워 공개" />
 					<form:option value="3" label="전체공개" />
 				</form:select></li>
-			<li><label for="feed_content"></label> 
-			<form:textarea
-					path="feed_content" cols="45" rows="5" /></li>
+			<li style="padding-left:100px;">
+				<label for="feed_content"></label> 
+				<form:textarea path="feed_content" cols="45" rows="5" />
+			</li>
 
 			<li>
 				<c:if test="${empty feedVO.feed_filename}">
