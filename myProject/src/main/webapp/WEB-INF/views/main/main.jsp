@@ -85,7 +85,7 @@
 			<a href="${pageContext.request.contextPath}/boardSysqna/list.do">QnA</a>
 		</c:if>
 			
-		<!-- 비로그인 상태 : 회원가입,로그인 화성화 -->
+		<!-- 비로그인 상태 : 회원가입,로그인 활성화 -->
 		<c:if test="${empty user}">
 			<a href="${pageContext.request.contextPath}/member/userType.do">회원가입</a>
 			<a href="${pageContext.request.contextPath}/member/login.do">로그인</a>	

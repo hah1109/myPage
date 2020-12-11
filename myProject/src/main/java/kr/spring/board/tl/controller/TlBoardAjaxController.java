@@ -105,7 +105,7 @@ public class TlBoardAjaxController {
 	public Map<String,Object> process(@RequestParam String comment,@RequestParam int tl_mem_num,@RequestParam int writer_mem_num){
 		
 		//글의 주인(트레이너 리스트 디테일 주인) : 트레이너(tl_mem_num)
-		//댓글다는 사람 : 로그인한 사람(session의 mem_num)
+		//댓글 다는 사람 : 로그인한 사람(session의 mem_num)
 		
 		/*//로그인한 사람의 정보 얻기 
 		MemberVO memberVO = (MemberVO)session.getAttribute("user");
@@ -122,7 +122,8 @@ public class TlBoardAjaxController {
 		notice.setReply_mem_num(mem_num);
 		notice.setBoard_comment(comment);
 		notice.setNotice_comment("내 트레이너 상세정보에 댓글을 등록했습니다.");
-		notice.setReturn_url("trainerList/trainerListDetail.do?mem_num="+tl_mem_num);
+		notice.setReturn_url("0");
+		notice.setWriter_board("-");
 		noticeService.insertNoticeVO(notice);
 		if(log.isDebugEnabled()) log.debug("<<알림전달>> :" + notice);
 		

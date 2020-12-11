@@ -7,12 +7,15 @@
 <script type="text/javascript">
 var mem_num = ${user.mem_num};
 $(document).ready(function(){
-	commentList();	
+	commentList();
+	
+	/* 댓글 입력 부분 */
 	$('#submit_comment').click(function(){
 		if($('#comment').val()==''){
 			alert('댓글 내용을 입력해주세요!');
 			return;
 		}
+
 		$.ajax({
 			url:'submit_freecomment.do',
 			type:'post',
