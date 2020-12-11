@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.board.notice.service.NoticeService;
 import kr.spring.board.notice.vo.NoticeVO;
+import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
 
@@ -27,6 +28,9 @@ public class NoticeController {
 	@Resource
 	NoticeService noticeService;
 
+	@Resource
+	MemberService memberService;
+	
 	//자바빈(VO) 초기화
 	@ModelAttribute
 	public NoticeVO initCommand() {
@@ -65,6 +69,9 @@ public class NoticeController {
 				log.debug("<<글 목록>> : " + list);
 			}
 		}
+		
+		int noticeCount = memberService.selectNoticeCount(member.getMem_num());
+		session.setAttribute("noticeCount", noticeCount);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("NoticeList");

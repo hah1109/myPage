@@ -18,6 +18,9 @@
 			</c:if>
 			[<span>${user.mem_id}</span>]
 			<a href="${pageContext.request.contextPath}/boardNotice/list.do">알림</a>
+			<c:if test="${noticeCount > 0 }">
+			<span style="color:#0de9df; font-weight:bold">[${noticeCount}]</span>
+			</c:if>
 			<a href="${pageContext.request.contextPath}/member/myPage.do">MyPage</a>
 			<a href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a>
 			<a href="${pageContext.request.contextPath}/boardSysqna/list.do">QnA</a>

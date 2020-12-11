@@ -26,5 +26,6 @@ public interface NoticeMapper {
 	//알림전체 확인 누를 시 전체 알림 삭제
 	@Delete("DELETE FROM notice WHERE writer_memnum=#{writer_memnum}")
 	public void confirmAllNotice(Integer writer_memnum);
+
 	
 }

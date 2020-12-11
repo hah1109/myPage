@@ -182,6 +182,12 @@ public class MemberController {
 				if(check) {
 					//인증 성공, 로그인 처리
 					session.setAttribute("user", member);
+					
+					//================================김다정
+					//알림 개수 세션에 넣어줌
+					int noticeCount = memberService.selectNoticeCount(member.getMem_num());
+					session.setAttribute("noticeCount", noticeCount);
+					
 					return "redirect:/main/main.do";
 				}else {
 					//인증 실패
@@ -214,6 +220,13 @@ public class MemberController {
 				if(check) {
 					//인증 성공, 로그인 처리
 					session.setAttribute("user", trainer);
+					
+					//================================김다정
+					//알림 개수 세션에 넣어줌
+					int noticeCount = memberService.selectNoticeCount(trainer.getMem_num());
+					session.setAttribute("noticeCount", noticeCount);
+					
+					
 					return "redirect:/main/main.do";
 				}else {
 					//인증 실패
