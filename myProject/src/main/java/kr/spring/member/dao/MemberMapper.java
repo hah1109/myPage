@@ -90,6 +90,11 @@ public interface MemberMapper {
 	public void updateMemberPhoto(MemberVO member);
 	@Update("UPDATE trainer_detail SET mem_pic=#{mem_pic} WHERE mem_num=#{mem_num}")
 	public void updateTrainerPhoto(MemberVO member);
+	
+	//=================================김다정
+	//로그인시 알림 온 개수 불러오기
+	@Select("SELECT COUNT(*) FROM notice WHERE writer_memnum=#{mem_num}")
+	public int selectNoticeCount(int mem_num);
 
 
 }

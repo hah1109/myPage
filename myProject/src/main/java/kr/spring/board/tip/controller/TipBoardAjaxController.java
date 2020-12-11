@@ -49,9 +49,11 @@ public class TipBoardAjaxController {
 		
 		//댓글등록 알림 데이터 넣기
 		int writer_memNum = tipBoardService.selectBoardWriterMemNum(free_num);
+		String writer_board = tipBoardService.selectBoardWriterContent(free_num);
 		NoticeVO notice = new NoticeVO();
 		notice.setBoard_num(free_num);
 		notice.setWriter_memnum(writer_memNum);
+		notice.setWriter_board(writer_board);
 		notice.setReply_mem_num(mem_num);
 		notice.setBoard_comment(comment);
 		notice.setNotice_comment("팁게시판 글에 댓글을 등록했습니다.");
@@ -94,11 +96,13 @@ public class TipBoardAjaxController {
 									@RequestParam int mem_num) {
 		if(log.isDebugEnabled()) log.debug("<<댓글의댓글입력>> : " + replyComment_content);
 		
-		//댓글등록 알림 데이터 넣기
+		//댓글의 댓글등록 알림 데이터 넣기
 		int writer_memNum = tipBoardService.selectBoardCommentWriterMemnum(freec_num);
+		String writer_board = tipBoardService.selectBoardCommentWriterContent(freec_num);
 		NoticeVO notice = new NoticeVO();
 		notice.setBoard_num(freec_num);
 		notice.setWriter_memnum(writer_memNum);
+		notice.setWriter_board(writer_board);
 		notice.setReply_mem_num(mem_num);
 		notice.setBoard_comment(replyComment_content);
 		notice.setNotice_comment("팁게시판 댓글에 댓글을 등록했습니다.");

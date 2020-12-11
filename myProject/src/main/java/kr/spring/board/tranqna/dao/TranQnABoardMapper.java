@@ -71,5 +71,13 @@ public interface TranQnABoardMapper {
 	
 	@Select("SELECT mem_num FROM board_tranqna_comment WHERE tqc_num=#{tqc_num}")
 	public int selectBoardCommentWriterMemnum(int tqc_num);
+	
+	//댓글이 달리는 사람이 쓴 글
+	@Select("SELECT tq_content FROM board_tranqna WHERE tq_num=#{tq_num}")
+	public String selectBoardWriterContent(int tq_num);
+
+	//게시판글 댓글의 댓글이 달리는 사람이 쓴 글
+	@Select("SELECT tq_comment FROM board_tranqna_comment WHERE tqc_num=#{tqc_num}")
+	public String selectBoardCommentWriterContent(int tqc_num);
 
 }

@@ -24,4 +24,5 @@ public List<SysQnABoardVO> selectList(Map<String,Object> map);
 	public int deleteSysqnaComment(int sqc_num);
 	
 	public int selectBoardWriterMemNum(int sq_num);
+	public String selectBoardWriterContent(int sq_num);
 }

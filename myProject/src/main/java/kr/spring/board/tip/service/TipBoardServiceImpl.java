@@ -109,4 +109,14 @@ public class TipBoardServiceImpl implements TipBoardService{
 		return tipBoardMapper.selectBoardCommentWriterMemnum(freec_num);
 	}
 	
+	@Override
+	public String selectBoardWriterContent(int free_num) {
+		return tipBoardMapper.selectBoardWriterContent(free_num);
+	}
+	
+	@Override
+	public String selectBoardCommentWriterContent(int freec_num) {
+		return tipBoardMapper.selectBoardCommentWriterContent(freec_num);
+	}
+	
 }

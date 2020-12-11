@@ -35,4 +35,7 @@ public interface TipBoardService {
 	public int selectBoardWriterMemNum(int free_num);
 	public int selectBoardCommentWriterMemnum(int freec_num);
 	
+	//댓글이 달리는 사람이 쓴 글
+	public String selectBoardWriterContent(int free_num);
+	public String selectBoardCommentWriterContent(int freec_num);
 }

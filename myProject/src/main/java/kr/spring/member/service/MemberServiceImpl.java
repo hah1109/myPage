@@ -123,5 +123,11 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 
 	}
+	
+	//=========================김다정
+	@Override
+	public int selectNoticeCount(int mem_num) {
+		return memberMapper.selectNoticeCount(mem_num);
+	}
 
 }

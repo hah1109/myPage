@@ -71,5 +71,13 @@ public interface TipBoardMapper {
 	
 	@Select("SELECT mem_num FROM board_free_comment WHERE freec_num=#{freec_num}")
 	public int selectBoardCommentWriterMemnum(int freec_num);
+	
+	//댓글이 달리는 사람이 쓴 글
+	@Select("SELECT free_content FROM board_free WHERE free_num=#{free_num}")
+	public String selectBoardWriterContent(int free_num);
+	
+	//게시판글 댓글의 댓글이 달리는 사람이 쓴 글
+	@Select("SELECT free_comment FROM board_free_comment WHERE freec_num=#{freec_num}")
+	public String selectBoardCommentWriterContent(int freec_num);
 
 }
