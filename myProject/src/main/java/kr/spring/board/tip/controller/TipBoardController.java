@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.spring.board.free.service.FreeBoardService;
 import kr.spring.board.free.vo.FreeBoardVO;
 import kr.spring.board.tip.service.TipBoardService;
 import kr.spring.member.vo.MemberVO;
@@ -32,9 +31,6 @@ public class TipBoardController {
 
 	@Resource
 	TipBoardService tipBoardService;
-	
-	@Resource
-	FreeBoardService freeBoardService;
 
 	//자바빈(VO) 초기화
 	@ModelAttribute
@@ -190,7 +186,6 @@ public class TipBoardController {
 		
 		if(log.isDebugEnabled()) log.debug("<<자유게시판 글삭제>> : " + free_num);
 		
-		freeBoardService.deleteBoardCommentSet(free_num);
 		tipBoardService.deleteBoardFree(free_num);
 		
 		model.addAttribute("message", "글 삭제 완료");

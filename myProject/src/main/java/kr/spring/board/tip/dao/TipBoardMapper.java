@@ -54,10 +54,6 @@ public interface TipBoardMapper {
 	@Delete("DELETE FROM board_free_comment WHERE freec_num = #{freec_num}")
 	public int deleteFreeComment(int freec_num);
 	
-	//댓글 지울때 댓글의 댓글도 한꺼번에 삭제
-	@Delete("DELETE FROM board_free_comment_reply WHERE freec_num = #{freec_num}")
-	public int DeleteCommentReplySet(int freec_num);
-	
 	//댓글의댓글부분
 	//Mapper
 	public List<FreeBoardCommentReplyVO> selectReplyComment(Integer freec_num);
@@ -67,7 +63,6 @@ public interface TipBoardMapper {
 	
 	//Mapper
 	public int deleteReplyComment(int rfreec_num);
-
 	
 	//댓글등록알림
 	//댓글이 달리는 사람의 멤버번호

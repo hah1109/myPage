@@ -175,7 +175,7 @@ function submit_replyComment(free_num,freec_num){
 	if($('#replyComment_content').val()==''){
 		alert('내용을 입력해주세요');
 		return;
-	}
+	}	
 	if($('#replyComment_content').val().length>50){
 		alert('제한 글자 수 초과!');
 		return;
