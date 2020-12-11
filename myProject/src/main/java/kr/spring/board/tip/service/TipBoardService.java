@@ -30,6 +30,7 @@ public interface TipBoardService {
 	public List<FreeBoardCommentReplyVO> selectReplyComment(Integer freec_num);	
 	public int inserReplyComment(FreeBoardCommentReplyVO replyComment);	
 	public int deleteReplyComment(int rfreec_num);
+	public int DeleteCommentReplySet(int freec_num);
 	
 	//댓글 등록 알림: 댓글이 달리는 사람의 번호
 	public int selectBoardWriterMemNum(int free_num);

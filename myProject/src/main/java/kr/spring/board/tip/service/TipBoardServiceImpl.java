@@ -83,6 +83,11 @@ public class TipBoardServiceImpl implements TipBoardService{
 	public int deleteFreeComment(int freec_num) {
 		return tipBoardMapper.deleteFreeComment(freec_num);
 	}
+	
+	@Override
+	public int DeleteCommentReplySet(int freec_num) {
+		return tipBoardMapper.DeleteCommentReplySet(freec_num);
+	}
 
 	@Override
 	public List<FreeBoardCommentReplyVO> selectReplyComment(Integer freec_num) {
