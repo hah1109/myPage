@@ -77,6 +77,8 @@ public class TipBoardAjaxController {
 	@ResponseBody
 	public int deleteComment(@RequestParam int freec_num) {
 		if(log.isDebugEnabled()) log.debug("<<자유게시판 댓글 삭제>> : " + freec_num);
+		
+		tipBoardService.DeleteCommentReplySet(freec_num);		
 		return tipBoardService.deleteFreeComment(freec_num);
 	}
 	

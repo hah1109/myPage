@@ -188,6 +188,7 @@ public class FreeBoardController {
 		
 		if(log.isDebugEnabled()) log.debug("<<자유게시판 글삭제>> : " + free_num);
 		
+		freeBoardService.deleteBoardCommentSet(free_num);
 		freeBoardService.deleteBoardFree(free_num);
 		
 		model.addAttribute("message", "글 삭제 완료");
