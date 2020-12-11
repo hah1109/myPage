@@ -46,7 +46,7 @@ public interface FreeBoardMapper {
 	
 	//Mapper
 	public List<FreeBoardCommentVO> selectListFreeComment(Integer free_num);
-	
+
 	@Select("SELECT * FROM board_free_comment c JOIN member m USING(mem_num) WHERE c.freec_num = #{freec_num}")
 	public FreeBoardCommentVO selectOneFreeComment(Integer freec_num);
 	
