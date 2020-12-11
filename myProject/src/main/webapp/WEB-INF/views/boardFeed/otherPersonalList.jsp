@@ -94,10 +94,7 @@
 																	output += '</div>';
 
 																	//문서 객체에 추가
-																	$(
-																			'.masonry')
-																			.append(
-																					output);
+																	$('.masonry').append(output);
 																});
 
 											}
