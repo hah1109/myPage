@@ -56,5 +56,9 @@ public interface SysQnABoardMapper {
 	//댓글알림기능에 필요한 글쓴 사람의 멤버번호
 	@Select("SELECT mem_num FROM board_sysqna WHERE sq_num=#{sq_num}")
 	public int selectBoardWriterMemNum(int sq_num);
+	
+	//댓글이 달리는 사람이 쓴 글
+	@Select("SELECT sq_content FROM board_sysqna WHERE sq_num=#{sq_num}")
+	public String selectBoardWriterContent(int sq_num);
 
 }

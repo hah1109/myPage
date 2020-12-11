@@ -44,9 +44,11 @@ public class TranQnaAjaxController {
 				
 		//댓글등록 알림 데이터 넣기
 		int writer_memNum = tranQnABoardMapper.selectBoardWriterMemNum(tq_num);
+		String writer_board = tranQnABoardMapper.selectBoardWriterContent(tq_num);
 		NoticeVO notice = new NoticeVO();
 		notice.setBoard_num(tq_num);
 		notice.setWriter_memnum(writer_memNum);
+		notice.setWriter_board(writer_board);
 		notice.setReply_mem_num(mem_num);
 		notice.setBoard_comment(comment);
 		notice.setNotice_comment("트레이너 게시판 글에 댓글을 등록했습니다.");
@@ -97,9 +99,11 @@ public class TranQnaAjaxController {
 		
 		//댓글등록 알림 데이터 넣기
 		int writer_memNum = tranQnABoardMapper.selectBoardCommentWriterMemnum(tqc_num);
+		String writer_board = tranQnABoardMapper.selectBoardCommentWriterContent(tqc_num);
 		NoticeVO notice = new NoticeVO();
 		notice.setBoard_num(tqc_num);
 		notice.setWriter_memnum(writer_memNum);
+		notice.setWriter_board(writer_board);
 		notice.setReply_mem_num(mem_num);
 		notice.setBoard_comment(replyComment_content);
 		notice.setNotice_comment("트레이너 게시판 댓글에 댓글을 등록했습니다.");

@@ -88,5 +88,10 @@ public class SysQnABoardServiceImple implements SysQnABoardService {
 	public int selectBoardWriterMemNum(int sq_num) {
 		return sysQnaBoardMapper.selectBoardWriterMemNum(sq_num);
 	}
+	
+	@Override
+	public String selectBoardWriterContent(int sq_num) {
+		return sysQnaBoardMapper.selectBoardWriterContent(sq_num);
+	}
 
 }

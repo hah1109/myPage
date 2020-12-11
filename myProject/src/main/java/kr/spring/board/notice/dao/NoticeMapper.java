@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Update;
 
 import kr.spring.board.notice.vo.NoticeVO;
 

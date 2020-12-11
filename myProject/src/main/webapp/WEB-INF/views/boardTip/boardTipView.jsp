@@ -7,6 +7,15 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	commentList();	
+	
+	/* 댓글 글자 수 제한*/
+	$('#comment').on('keyup',function(){
+		if($('#comment').val().length > 100){
+			$('#comment').val($('#comment').val().substring(0,63));
+			$('#limit').html('글자수 초과').css('color','red');
+		}
+	});
+	
 	$('#submit_comment').click(function(){
 		if($('#comment').val()==''){
 			alert('댓글 내용을 입력해주세요!');
@@ -33,10 +42,10 @@ $(document).ready(function(){
 		});
 	});	
 });
+/*댓글 리스트 불러오기*/
 var mem_num = ${user.mem_num};
 function commentList(){
     $.ajax({
-
     	url : 'list_comment.do',
         type : 'get',
         data : {free_num:$('#free_num').val()},
@@ -67,6 +76,7 @@ function commentList(){
     });
 };
 
+/*댓글 수정 버튼 누를 시*/
 function commentUpdate(freec_num, free_comment){
 	var a = '';
 	var b = '';
@@ -79,7 +89,7 @@ function commentUpdate(freec_num, free_comment){
     $('.commentContent'+freec_num).html(b);		
 }
 
-
+/*댓글 수정 완료 버튼 누를 시*/
 function commentUpdateCommit(freec_num){
 	var update_comment = $('#content_'+freec_num).val();
 	$.ajax({
@@ -102,6 +112,7 @@ function commentUpdateCommit(freec_num){
 	});
 }
 
+/*댓글 삭제 버튼 누를 시*/
 function commentDelete(freec_num){
 	var choice = window.confirm('댓글을 삭제하시겠습니까?');
 	if(!choice){
@@ -163,6 +174,10 @@ function reset_replyComment(freec_num){
 function submit_replyComment(free_num,freec_num){
 	if($('#replyComment_content').val()==''){
 		alert('내용을 입력해주세요');
+		return;
+	}	
+	if($('#replyComment_content').val().length>50){
+		alert('제한 글자 수 초과!');
 		return;
 	}
 	
@@ -265,6 +280,7 @@ function delete_replyComment(free_num,rfreec_num,freec_num){
 		<input type="hidden" id="free_num" value="${boardFree.free_num}">
 		<input type="text" id="comment" name="comment" placeholder="댓글을 입력하세요.">
 		<input type="button" id="submit_comment" value="등록">
+		<span id="limit"></span>
 	</form>
 	<h3>댓글</h3>
 	<hr>
