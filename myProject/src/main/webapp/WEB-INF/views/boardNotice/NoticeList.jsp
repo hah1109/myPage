@@ -39,6 +39,8 @@ $(document).ready(function(){
 				cache:false,
 				timeout:30000,
 				success:function(data){
+					$('#confirmcheck' + notice_num).css('font-weight','normal').css('color','grey');
+					$('#check_move' + notice_num).css('font-weight','normal').css('color','grey');
 					location.href = '${pageContext.request.contextPath}/'+return_url;
 				},
 				error:function(){
@@ -155,7 +157,8 @@ $(document).ready(function(){
 								notice_num="${notice.notice_num}" 
 								board_num="${notice.board_num}" 
 								writer_memnum="${notice.writer_memnum}" 
-								return_url="${notice.return_url}">
+								return_url="${notice.return_url}"
+								id="check_move${notice.notice_num}">
 								[이동]
 							</a> 
 						</c:if>
