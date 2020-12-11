@@ -47,15 +47,18 @@
 		UPDATE 
 			feed
 		SET 
+			<if test="feed_filename != ''">
+			feed_file=#{feed_file},
+			feed_filename = #{feed_filename},
+			</if>
 			feed_type = #{feed_type},
 			feed_auth = #{feed_auth},
 			feed_content = #{feed_content},
-			feed_file = #{feed_file},
-			feed_filename = #{feed_filename},
 			feed_ip = #{feed_ip}
 		WHERE
 			feed_num = #{feed_num}
 	</update>
+	
 	<select id="selectListFeedComment" parameterType="integer" resultType="FeedCommentVO">
 		SELECT
 			a.*, b.*, to_char(a.feedc_modify_date,'yyyy-mm-dd') str_date
