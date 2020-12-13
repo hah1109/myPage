@@ -22,7 +22,6 @@ create table board_sysqna_comment(
     sq_num number not null,
     mem_num number not null,
     constraint sqc_num_pk primary key (sqc_num),
-    constraint sq_num_fk foreign key (sq_num) references board_sysqna(sq_num),
     constraint mem_num_sqcfk foreign key (mem_num) references member(mem_num)
 );
 create sequence sqc_num_seq;

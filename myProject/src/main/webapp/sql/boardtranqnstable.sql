@@ -23,7 +23,6 @@ create table board_tranqna_comment(
     tq_num number not null,
     mem_num number not null,
     constraint tqc_num_pk primary key (tqc_num),
-    constraint tq_num_fk foreign key (tq_num) references board_tranqna(tq_num),
     constraint mem_num_tqcfk foreign key (mem_num) references member(mem_num)
 );
 create sequence tqc_num_seq;
@@ -35,7 +34,6 @@ create table board_tranqna_comment_reply(
     tqc_num number not null,
     mem_num number not null,
     constraint rtqc_num_pk primary key (rtqc_num),
-    constraint tqc_num_rfk foreign key (tqc_num) references board_tranqna_comment,
     constraint mem_num_rtqcfk foreign key (mem_num) references member    
 );
 create sequence rtqc_num_seq;

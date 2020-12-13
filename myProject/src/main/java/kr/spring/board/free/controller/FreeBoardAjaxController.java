@@ -17,6 +17,7 @@ import kr.spring.comment.freec.vo.FreeBoardCommentVO;
 
 @Controller
 public class FreeBoardAjaxController {
+	
 	private Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource
