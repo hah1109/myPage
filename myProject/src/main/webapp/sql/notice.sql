@@ -4,7 +4,7 @@ create table notice(
     writer_memnum number not null,
     reply_mem_num number not null,
     writer_board clob,
-    board_comment varchar2(100),
+    board_comment varchar2(200),
     reg_date Date default sysdate not null,
     notice_comment varchar2(100) not null,
     return_url varchar2(100),
