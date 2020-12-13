@@ -65,7 +65,7 @@ $(document).ready(function(){
          <div class="button_next">다음</div>
        </fieldset>
        <fieldset class="section">
-         <h3>업로드할 사진을 선택해주세요</h3>
+         <h3>업로드할 파일을 선택해주세요</h3>
          <div class="row cf">
 			<label for="feedUpload" class="feedUpload" ></label> 
 			<input type="file" name="feedUpload" id="feedUpload" accept="imgage/gif,image/png,image/jpeg">

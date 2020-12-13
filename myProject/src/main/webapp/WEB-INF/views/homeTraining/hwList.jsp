@@ -35,7 +35,7 @@
 	</form>
 	
 	<div class="align-right">
-		<c:if test="${user.mem_auth == 1}"> <!-- 관리자 모드로 들어왔을 경우에 버튼 노출 mem_auth == 0(관리자) -->
+		<c:if test="${user.mem_auth == 3}"> <!-- 관리자 모드로 들어왔을 경우에 버튼 노출 mem_auth == 0(관리자) -->
 		<input type="button" value="글쓰기" 
 		       onclick="location.href='hwBoardWrite.do'">
 		</c:if>

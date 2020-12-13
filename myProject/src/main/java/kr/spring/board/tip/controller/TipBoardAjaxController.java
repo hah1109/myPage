@@ -49,9 +49,11 @@ public class TipBoardAjaxController {
 		
 		//댓글등록 알림 데이터 넣기
 		int writer_memNum = tipBoardService.selectBoardWriterMemNum(free_num);
+		String writer_board = tipBoardService.selectBoardWriterContent(free_num);
 		NoticeVO notice = new NoticeVO();
 		notice.setBoard_num(free_num);
 		notice.setWriter_memnum(writer_memNum);
+		notice.setWriter_board(writer_board);
 		notice.setReply_mem_num(mem_num);
 		notice.setBoard_comment(comment);
 		notice.setNotice_comment("팁게시판 글에 댓글을 등록했습니다.");
@@ -75,10 +77,12 @@ public class TipBoardAjaxController {
 	@ResponseBody
 	public int deleteComment(@RequestParam int freec_num) {
 		if(log.isDebugEnabled()) log.debug("<<자유게시판 댓글 삭제>> : " + freec_num);
+		
+		tipBoardService.DeleteCommentReplySet(freec_num);		
 		return tipBoardService.deleteFreeComment(freec_num);
 	}
 	
-	//댓글의 댓글
+	//댓글의 댓글 리스트 불러오기
 	@RequestMapping("/boardTip/list_replyComment.do")
 	@ResponseBody
 	public List<FreeBoardCommentReplyVO> selectListCofC(@RequestParam int freec_num){
@@ -86,6 +90,8 @@ public class TipBoardAjaxController {
 		return tipBoardService.selectReplyComment(freec_num);
 	}
 	
+	
+	//댓글의 댓글 입력
 	@RequestMapping("/boardTip/submit_replyComment.do")
 	@ResponseBody
 	public int submitReplyComment(@RequestParam String replyComment_content,
@@ -94,11 +100,13 @@ public class TipBoardAjaxController {
 									@RequestParam int mem_num) {
 		if(log.isDebugEnabled()) log.debug("<<댓글의댓글입력>> : " + replyComment_content);
 		
-		//댓글등록 알림 데이터 넣기
+		//댓글의 댓글등록 알림 데이터 넣기
 		int writer_memNum = tipBoardService.selectBoardCommentWriterMemnum(freec_num);
+		String writer_board = tipBoardService.selectBoardCommentWriterContent(freec_num);
 		NoticeVO notice = new NoticeVO();
 		notice.setBoard_num(freec_num);
 		notice.setWriter_memnum(writer_memNum);
+		notice.setWriter_board(writer_board);
 		notice.setReply_mem_num(mem_num);
 		notice.setBoard_comment(replyComment_content);
 		notice.setNotice_comment("팁게시판 댓글에 댓글을 등록했습니다.");

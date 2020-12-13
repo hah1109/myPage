@@ -16,7 +16,7 @@ create sequence sq_num_seq;
 
 create table board_sysqna_comment(
     sqc_num number not null,
-    sq_comment varchar2(100) not null,
+    sq_comment varchar2(200) not null,
     sqc_reg_date date default sysdate not null,
     sqc_modify_date date default sysdate not null,
     sq_num number not null,

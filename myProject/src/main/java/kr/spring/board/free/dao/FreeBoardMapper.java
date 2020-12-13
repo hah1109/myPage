@@ -37,12 +37,16 @@ public interface FreeBoardMapper {
 	@Delete("DELETE FROM board_free WHERE free_num=#{free_num}")
 	public void deleteBoardFree(Integer free_num);
 	
+	@Delete("DELETE FROM board_free_comment WHERE  free_num=#{free_num}")
+	public void deleteBoardCommentSet(Integer free_num);
+	
+	//댓글부분
 	@Insert("INSERT INTO board_free_comment (freec_num, free_comment, free_num, mem_num) VALUES (freec_num_seq.nextval,#{free_comment},#{free_num},#{mem_num})")
 	public int insertFreeComment(FreeBoardCommentVO free_comment);
 	
-	/*@Select("SELECT * FROM board_free_comment c JOIN member m USING(mem_num) WHERE c.free_num = #{free_num} ORDER BY c.freec_num DESC")*/
+	//Mapper
 	public List<FreeBoardCommentVO> selectListFreeComment(Integer free_num);
-	
+
 	@Select("SELECT * FROM board_free_comment c JOIN member m USING(mem_num) WHERE c.freec_num = #{freec_num}")
 	public FreeBoardCommentVO selectOneFreeComment(Integer freec_num);
 	

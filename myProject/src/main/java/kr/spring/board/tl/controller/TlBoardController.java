@@ -177,9 +177,9 @@ public class TlBoardController {
 				log.debug("<<<매칭하기위해 세션에서 가져온 로그인한 회원의 번호>>> :" + memberVO.getMem_num());
 			}
 		
-			//일반회원일 경우
-			if(memberVO.getMem_auth() == 1) {
-				//2가지로 나뉨
+			//2가지로 나뉨
+			if(memberVO.getMem_auth() == 1) {//일반회원일 경우
+				
 				int tNum = memberVO.getT_num();
 				
 				if(log.isDebugEnabled()) {
@@ -190,7 +190,7 @@ public class TlBoardController {
 					//매칭테이블에 신청 내역 저장
 					tlBoardService.insertMatching(map);
 					
-					//알림추가 트레이너한테 매칭신청왔다고 알림 보내기 노티스에 데이터 안들간다잠만잠만잠만
+					//알림추가 트레이너한테 매칭신청왔다고 알림 보내기
 					NoticeVO noticeVO = new NoticeVO();
 					noticeVO.setWriter_memnum(mem_num); //트레이너 멤넘
 					noticeVO.setReply_mem_num(memberVO.getMem_num()); //신청보낸 회원 멤넘
@@ -202,7 +202,7 @@ public class TlBoardController {
 					
 					return "redirect:/trainerList/trainerList.do";
 					
-				}else{//있는경우
+				}else{//매칭상대가 있는 경우
 					return "redirect:/trainerList/trainerList.do";
 				}
 			}else{//일반회원이 아닌 나머지 피플
@@ -410,7 +410,7 @@ public class TlBoardController {
 		 *     mem_num(로그인중인 트레이너의 mem_num)
 		 *     traing_to (트레이닝 받을 일반회원의 mem_num)
 		 *  
-		 * 5.follow관계맺기 ????? 어케할지 잠만
+		 * 5.follow 관계맺기
 		 * 6.매칭테이블에 매칭성공한 일반회원 찾아 신청 내역 [제거or변경]한 후에 알림보냄? 
 		 */
 		
@@ -472,7 +472,7 @@ public class TlBoardController {
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
-		if(user.getT_num() != 0) {
+		if(user.getT_num() != 0) { //연결된 트레이너가 있는 경우
 			
 			//팔로우 테이블에 데이터 삭제
 			// user.getMem_num 일반회원 mem_num / user.getT_num() 트레이너회원의 mem_num

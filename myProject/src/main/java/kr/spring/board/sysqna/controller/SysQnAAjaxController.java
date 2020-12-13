@@ -44,9 +44,11 @@ public class SysQnAAjaxController {
 		
 		//댓글등록 알림 데이터 넣기
 		int writer_memNum = sysQnABoardService.selectBoardWriterMemNum(sq_num);
+		String writer_board = sysQnABoardService.selectBoardWriterContent(sq_num);
 		NoticeVO notice = new NoticeVO();
 		notice.setBoard_num(sq_num);
 		notice.setWriter_memnum(writer_memNum);
+		notice.setWriter_board(writer_board);
 		notice.setReply_mem_num(mem_num);
 		notice.setBoard_comment(comment);
 		notice.setNotice_comment("시스템문의 글에 댓글을 등록했습니다.");

@@ -58,6 +58,11 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 
 	@Override
+	public void deleteBoardCommentSet(Integer free_num) {
+		freeBoardMapper.deleteBoardCommentSet(free_num);
+	}
+	
+	@Override
 	public int insertFreeComment(FreeBoardCommentVO free_comment) {
 		return freeBoardMapper.insertFreeComment(free_comment);		
 	}

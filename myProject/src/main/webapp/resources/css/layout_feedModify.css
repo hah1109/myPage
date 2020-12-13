@@ -172,7 +172,7 @@ input[type="text"].title{
 	height:18px;
 	margin-bottom:10px;
 }
-input#upload{
+input#feedUpload{
     display: inline;
     width: 100px;
     height: 30px;
@@ -180,7 +180,7 @@ input#upload{
     box-sizing: border-box;
     border: none;	 
 }
-label.upload{
+label.feedUpload{
 	margin-left:130px;
 	display:block;
 	width: 130px;

@@ -106,6 +106,7 @@
 		WHERE a.free_num = #{free_num}
 	</select>
 	
+	<!-- 댓글의 댓글 리스트로 출력 -->
 	<select id="selectReplyComment" parameterType="integer" resultType="freeBoardCommentReplyVO">
 		SELECT 
 			r.*, m.*, to_char(r.rfreec_date,'yyyy-mm-dd') str_date 
@@ -115,6 +116,7 @@
 			member m ON r.mem_num = m.mem_num 
 		WHERE 
 			r.freec_num = #{freec_num}
+		ORDER BY r.freec_num
 	</select>
 	
 	<insert id="inserReplyComment" parameterType="freeBoardCommentReplyVO">

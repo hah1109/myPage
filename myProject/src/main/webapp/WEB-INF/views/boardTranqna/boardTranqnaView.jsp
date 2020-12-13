@@ -7,6 +7,15 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	commentList();	
+	
+	/* 댓글 글자 수 제한*/
+	$('#comment').on('keyup',function(){
+		if($('#comment').val().length > 100){
+			$('#comment').val($('#comment').val().substring(0,63));
+			$('#limit').html('글자수 초과').css('color','red');
+		}
+	});
+	
 	$('#submit_comment').click(function(){
 		if($('#comment').val()==''){
 			alert('댓글 내용을 입력해주세요!');
@@ -164,7 +173,10 @@ function submit_replyComment(tq_num,tqc_num){
 		alert('내용을 입력해주세요');
 		return;
 	}
-	
+	if($('#replyComment_content').val().length>50){
+		alert('제한 글자 수 초과!');
+		return;
+	}
 	$.ajax({
 		url:'submit_replyComment.do',
 		type:'post',
@@ -264,6 +276,7 @@ function delete_replyComment(tq_num,rtqc_num,tqc_num){
 		<input type="hidden" id="tq_num" value="${boardTranqna.tq_num}">
 		<input type="text" id="comment" name="comment" placeholder="댓글을 입력하세요.">
 		<input type="button" id="submit_comment" value="등록">
+		<span id="limit"></span>
 	</form>
 	<h3>댓글</h3>
 	<hr>

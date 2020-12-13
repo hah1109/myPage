@@ -9,6 +9,15 @@ var mem_num = ${user.mem_num};
 /* 댓글 입력하기 */
 $(document).ready(function(){
 	commentList();	
+	
+	/* 댓글 글자 수 제한*/
+	$('#comment').on('keyup',function(){
+		if($('#comment').val().length > 100){
+			$('#comment').val($('#comment').val().substring(0,63));
+			$('#limit').html('글자수 초과').css('color','red');
+		}
+	});
+	
 	$('#submit_comment').click(function(){
 		if($('#comment').val()==''){
 			alert('댓글 내용을 입력해주세요!');			
@@ -183,6 +192,7 @@ function commentDelete(sqc_num){
 		<input type="hidden" id="sq_num" value="${boardSysqna.sq_num}">
 		<input type="text" id="comment" name="comment" placeholder="댓글을 입력하세요.">
 		<input type="button" id="submit_comment" value="등록">
+		<span id="limit"></span>
 	</form>
 	<h3>댓글</h3>
 	<hr>

@@ -67,4 +67,9 @@ public interface MemberService {
 	//프로필 사진 변경
 	public void updateMemberPhoto(MemberVO member);
 	public void updateTrainerPhoto(MemberVO member);
+	
+	//=========================================김다정
+	//로그인시 알림 개수 불러오기
+	public int selectNoticeCount(int mem_num);
+	
 }
