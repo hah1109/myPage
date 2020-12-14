@@ -92,8 +92,8 @@ input.form-control{
 				url:'submit_tlcomment.do',
 				type:'post',
 				data:{comment:$('#comment').val(),
-					  'tl_mem_num' : tl_mem_num,
-					  'writer_mem_num' : writer_mem_num},
+					  'tl_mem_num':tl_mem_num,
+					  'writer_mem_num':writer_mem_num},
 				dataType:'json',
 				cache:false,
 				timeout:30000,
@@ -255,6 +255,7 @@ input.form-control{
 		
 		<div class="trainer_info">
 			<ul style="text-align:left;">
+				<li><input type="hidden" id="tl_mem_num" name="tl_mem_num" value="${trainer.mem_num}"></li>
 				<li>이름 : ${trainer.mem_name}</li>
 				<li>
 					<c:if test="${trainer.mem_gender == 1}">성별: 남자</c:if> 

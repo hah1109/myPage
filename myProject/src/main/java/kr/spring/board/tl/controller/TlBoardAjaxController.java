@@ -102,7 +102,7 @@ public class TlBoardAjaxController {
 	//댓글 입력
 	@RequestMapping("/trainerList/submit_tlcomment.do")
 	@ResponseBody
-	public Map<String,Object> process(@RequestParam String comment,@RequestParam int tl_mem_num,@RequestParam int writer_mem_num){
+	public Map<String,Object> process(@RequestParam String comment,@RequestParam int tl_mem_num,@RequestParam int writer_mem_num,HttpSession session){
 		
 		//글의 주인(트레이너 리스트 디테일 주인) : 트레이너(tl_mem_num)
 		//댓글 다는 사람 : 로그인한 사람(session의 mem_num)
@@ -111,15 +111,14 @@ public class TlBoardAjaxController {
 		MemberVO memberVO = (MemberVO)session.getAttribute("user");
 		int mem_num = memberVO.getMem_num();*/
 		
-		int mem_num = writer_mem_num;
 
 		if(log.isDebugEnabled()) {log.debug("<<트레이너 상세정보 댓글등록>> 트레이너 번호 : " + tl_mem_num + "댓글 내용 :" + comment);}
 		
-		//댓글등록 알림 데이터 넣기
+		//댓글등록
 		int writer_memNum = tl_mem_num; //알림 받을 사람 mem_num
 		NoticeVO notice = new NoticeVO();
-		notice.setWriter_memnum(writer_memNum);
-		notice.setReply_mem_num(mem_num);
+		notice.setWriter_memnum(writer_memNum); //글 쓴 사람 즉 트레이너 디테일 주인 트레이너
+		notice.setReply_mem_num(writer_mem_num); //댓글 쓴 사람 즉 로그인한 유
 		notice.setBoard_comment(comment);
 		notice.setNotice_comment("내 트레이너 상세정보에 댓글을 등록했습니다.");
 		notice.setReturn_url("0");
@@ -131,7 +130,7 @@ public class TlBoardAjaxController {
 		TlBoardCommentVO tlBoardCommentVO = new TlBoardCommentVO();
 		tlBoardCommentVO.setTl_comment(comment);
 		tlBoardCommentVO.setTl_mem_num(tl_mem_num);		
-		tlBoardCommentVO.setWriter_mem_num(mem_num);
+		tlBoardCommentVO.setWriter_mem_num(writer_mem_num);
 				
 		tlBoardService.insertTlBoardComment(tlBoardCommentVO);
 		
