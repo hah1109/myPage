@@ -197,7 +197,7 @@ public class TlBoardController {
 					noticeVO.setBoard_comment("트레이닝 신청 도착");
 					noticeVO.setNotice_comment("트레이닝 신청을 하였습니다.");
 					noticeVO.setWriter_board("-");
-					noticeVO.setReturn_url("0");
+					noticeVO.setReturn_url("trainerList/matchingList.do?mem_num=" + mem_num);
 					noticeService.insertNoticeVO(noticeVO);  
 					
 					return "redirect:/trainerList/trainerList.do";
