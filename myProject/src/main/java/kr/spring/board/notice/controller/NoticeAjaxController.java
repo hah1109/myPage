@@ -1,6 +1,7 @@
 package kr.spring.board.notice.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.board.notice.service.NoticeService;
 import kr.spring.board.notice.vo.NoticeVO;
+import kr.spring.member.service.MemberService;
 
 @Controller
 public class NoticeAjaxController {
@@ -18,6 +20,9 @@ public class NoticeAjaxController {
 	
 	@Resource
 	NoticeService noticeService;
+	
+	@Resource
+	MemberService memberService;
 	
 	@RequestMapping("/boardNotice/confirmOneNotice.do")
 	@ResponseBody
@@ -41,6 +46,14 @@ public class NoticeAjaxController {
 	public void confirmAllNotice(@RequestParam int writer_memnum) {
 		if(log.isDebugEnabled()) log.debug("<<알림전체확인>> : " + writer_memnum);
 		noticeService.confirmAllNotice(writer_memnum);
+	}
+	
+	@RequestMapping("/boardNotice/updateNoticeCount.do")
+	@ResponseBody
+	public void updateNoticeCount(@RequestParam int mem_num,HttpSession session) {
+		if(log.isDebugEnabled()) log.debug("<<알림개수 업댓>>");
+		int noticeCount = memberService.selectNoticeCount(mem_num);
+		session.setAttribute("noticeCount", noticeCount);
 	}
 	
 }

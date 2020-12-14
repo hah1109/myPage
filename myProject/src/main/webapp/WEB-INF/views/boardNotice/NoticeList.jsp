@@ -7,7 +7,28 @@
 <script src="https://kit.fontawesome.com/a6055a8b9e.js" crossorigin="anonymous" ></script>
 
 <script type="text/javascript">
+$(window).bind("pageshow",function(event){
+	if(event.originalEvent.persisted){
+		var mem_num = ${user.mem_num};
+		alert('tet');
+		  $.ajax({
+			  url:'updateNoticeCount.do',
+			  type:'post',
+			  data:{'mem_num':mem_num},
+			  cache:false,
+			  success:function(data){
+			  },
+			  error:function(data){
+				  alert('새로고침 실패!');
+			  }
+		  });
+	}
+	
+});
+
 $(document).ready(function(){
+
+		//알림 10개씩보기, 20개씩보기 기
 		$("div.boardPaging-selectbox > ul").on("click", ".init", function() {
 		    $(this).closest("div.boardPaging-selectbox > ul").children('li:not(.init)').slideToggle();
 		    if($('.selectbox-option').hasClass('opened')){
@@ -24,6 +45,46 @@ $(document).ready(function(){
 		    $("div.boardPaging-selectbox > ul").children('.init').html($(this).html());
 		    allOptions.slideUp();
 		});
+
+
+		//
+		$(window).bind("pageshow",function(event){
+			if(event.originalEvent.persisted){
+				var mem_num = ${user.mem_num};
+				alert('tet');
+				  $.ajax({
+					  url:'updateNoticeCount.do',
+					  type:'post',
+					  data:{'mem_num':mem_num},
+					  cache:false,
+					  success:function(data){
+					  },
+					  error:function(data){
+						  alert('새로고침 실패!');
+					  }
+				  });
+			}
+			
+		});
+		
+
+		//새로고침 버튼
+		if ("onhashchange" in window) {
+			  var mem_num = ${user.mem_num};
+			  $.ajax({
+				  url:'updateNoticeCount.do',
+				  type:'post',
+				  data:{'mem_num':mem_num},
+				  cache:false,
+				  success:function(data){
+				  },
+				  error:function(data){
+					  alert('새로고침 실패!');
+				  }
+			  });
+		}
+		
+					
 		
 		// 알림리스트에서 이동 누를 시
 		$('.check_move').click(function(){
