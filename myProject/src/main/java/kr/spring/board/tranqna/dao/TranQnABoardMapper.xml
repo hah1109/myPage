@@ -77,7 +77,7 @@
 		<![CDATA[
 			WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>	
-
+		ORDER BY e.tq_num DESC
 	</select>
 	
 	<select id="selectBoardTranqna" parameterType="integer" resultType="tranQnABoardVO">

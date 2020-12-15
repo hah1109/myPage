@@ -5,6 +5,22 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+
+		$('#board_submit').submit(function(){
+			
+			if($('#sq_title').val()==''){
+				alert('제목을 입력해 주세요');
+				$('#sq_title').focus();
+				return false;
+			}
+			if($('#sq_content').val()==''){
+				alert('내용을 입력해 주세요');
+				$('#sq_content').focus();
+				return false;
+			}
+			
+		});
+		
 		
 		$('#upload').change(function(){
 			$('#cancel_upload').show();
@@ -39,8 +55,7 @@
 
 <div class="page-main-style">
 	<h2>시스템 문의 게시판</h2>
-  	<form:form commandName="sysQnABoardVO" action="write.do"
-	                      		    enctype="multipart/form-data"> 
+  	<form:form commandName="sysQnABoardVO" action="write.do" enctype="multipart/form-data" id="board_submit">
  		<form:errors element="div" cssClass="error-color"/>
 		<ul style="margin-top:20px">
 			<li>

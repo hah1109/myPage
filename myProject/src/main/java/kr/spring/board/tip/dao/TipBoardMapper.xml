@@ -66,7 +66,7 @@
 		<![CDATA[
 			WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>	
-
+		ORDER BY c.free_num DESC
 	</select>
 	
 	<update id="updateBoardFree" parameterType="freeBoardVO">
