@@ -153,7 +153,7 @@
 							width="120" height="120" class="my-photo">
 					</c:if>
 					<c:if test="${!empty member.mem_picName }">
-						<img src="${pageContext.request.contextPath }/member/photoView.do"
+						<img src="${pageContext.request.contextPath }/member/photoOtherView.do?mem_num=${member.mem_num}"
 							width="120" height="120" class="my-photo">
 					</c:if>
 				</div>
