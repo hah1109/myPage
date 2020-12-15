@@ -33,14 +33,21 @@
 			$('#upload').val("");
 			$('.free_file').hide();
 		});
+
+		//글제목 글자수 제한
+		$('#boardSubmit').submit(function(){
+			if($('#free_title').val().length > 32){
+				alert('글 제목이 제한 글자수를 초과했습니다.');
+			}
+			return false;
+		});
 		
 	});
 </script>
 
 <div class="page-main-style">
 	<h2>자유 게시판</h2>
-  	<form:form commandName="freeBoardVO" action="write.do"
-	                      		    enctype="multipart/form-data"> 
+  	<form:form commandName="freeBoardVO" action="write.do" enctype="multipart/form-data" id="boardSubmit"> 
  		<form:errors element="div" cssClass="error-color"/>
 		<ul style="margin-top:20px">
 			<li>

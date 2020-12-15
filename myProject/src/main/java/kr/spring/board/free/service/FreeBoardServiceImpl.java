@@ -96,5 +96,12 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	public String selectBoardWriterContent(int free_num) {
 		return freeBoardMapper.selectBoardWriterContent(free_num);
 	}
+
+	@Override
+	public void updateAlarmReport(int board_num) {
+		freeBoardMapper.updateAlarmReport(board_num);
+	}
+	
+	
 	
 }

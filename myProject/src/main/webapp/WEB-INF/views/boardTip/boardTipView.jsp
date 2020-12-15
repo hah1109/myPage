@@ -264,6 +264,12 @@ function delete_replyComment(free_num,rfreec_num,freec_num){
 			<input type="button" value="수정" onclick="location.href='modify.do?free_num=${boardFree.free_num}'">
 			<input type="button" value="삭제" id="btn_delete">
 		</c:if>
+		
+		<!-- 관리자 권한 삭제 -->
+		<c:if test="${!empty user && user.mem_auth == 0}">
+			<input type="button" value="삭제" id="btn_delete">
+		</c:if>
+		
 		<script>
 			var btn_delete = document.getElementById('btn_delete');
 			btn_delete.onclick=function(){

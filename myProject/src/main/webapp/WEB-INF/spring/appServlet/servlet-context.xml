@@ -49,6 +49,8 @@
 		base-package="kr.spring.board.tl.controller" />
 	<context:component-scan
 		base-package="kr.spring.board.notice.controller" />
+	<context:component-scan
+		base-package="kr.spring.alarm.report.controller" />
 
 	<!-- tiles 설정 -->
 	<beans:bean id="tilesConfigurer"

@@ -103,7 +103,7 @@ public class SysQnABoardController {
 		sysqnaBoardVO.setSq_ip(request.getRemoteAddr());
 		sysQnABoardService.insertBoardSysqna(sysqnaBoardVO);
 		
-		model.addAttribute("message", "자유게시판에 글이 등록되었습니다.");
+		model.addAttribute("message", "시스템 문의 게시에 글이 등록되었습니다.");
 		model.addAttribute("url",request.getContextPath() + "/boardSysqna/list.do");
 		
 		return "common/result";

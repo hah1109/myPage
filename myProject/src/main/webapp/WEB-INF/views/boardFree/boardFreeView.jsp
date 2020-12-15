@@ -44,7 +44,21 @@ $(document).ready(function(){
 				alert('댓글 입력 네트워크 오류 발생!');
 			}
 		});
-	});	
+	});
+
+	//신고하기 버튼	
+	$('.alarm').click(function(){
+		var popupWidth = 500;
+		var popupHeight = 600;
+
+		var popupX = (window.screen.width / 2) - (popupWidth / 2);
+		var popupY= (window.screen.height / 2) - (popupHeight / 2);
+		
+		var board_num = $(this).attr('board_num');
+		var popup = window.open('${pageContext.request.contextPath}/alarmReport/report.do?board_num='+board_num, '게시판신고팝업', 'width=500,height=600,left='+popupX+',top='+popupY+',scrollbars=yes');
+		
+	});
+	
 });
 
 function commentList(){
@@ -135,6 +149,8 @@ function commentDelete(freec_num){
 			alert('댓글삭제 네트워크오류');
 		}
 	});
+
+		
 }
 	
 </script>
@@ -153,13 +169,14 @@ function commentDelete(freec_num){
 			<c:if test="${boardFree.mem_auth==2}">
 				트레이너
 			</c:if>
+			&nbsp; | &nbsp; <a class="alarm" board_num="${boardFree.free_num}">신고하기</a>
 		</li>
 		<li>
 			최근수정일: ${boardFree.free_modify_date}
 		</li>
 		<li>
 			조회수 : ${boardFree.free_hit}
-		</li>		
+		</li>
 	</ul>
 	<hr size="1" width="100%">
 	<c:if test="${!empty boardFree.free_filename}">
@@ -176,6 +193,12 @@ function commentDelete(freec_num){
 			<input type="button" value="수정" onclick="location.href='modify.do?free_num=${boardFree.free_num}'">
 			<input type="button" value="삭제" id="btn_delete">
 		</c:if>
+		
+		<!-- 관리자 권한 삭제 -->
+		<c:if test="${!empty user && user.mem_auth == 0}">
+			<input type="button" value="삭제" id="btn_delete">
+		</c:if>
+		
 		<script>
 			var btn_delete = document.getElementById('btn_delete');
 			btn_delete.onclick=function(){

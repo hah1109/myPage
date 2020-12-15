@@ -176,6 +176,12 @@ function commentDelete(sqc_num){
 			<input type="button" value="수정" onclick="location.href='modify.do?sq_num=${boardSysqna.sq_num}'">
 			<input type="button" value="삭제" id="btn_delete">
 		</c:if>
+		
+		<!-- 관리자 권한 삭제 -->
+		<c:if test="${!empty user && user.mem_auth == 0}">
+			<input type="button" value="삭제" id="btn_delete">
+		</c:if>
+		
 		<script>
 			var btn_delete = document.getElementById('btn_delete');
 			btn_delete.onclick=function(){

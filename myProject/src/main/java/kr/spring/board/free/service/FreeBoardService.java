@@ -27,4 +27,7 @@ public interface FreeBoardService {
 	//댓글 알림에 필요한 내용
 	public int selectBoardWriterMemNum(int free_num);
 	public String selectBoardWriterContent(int free_num);
+	
+	//신고하기
+	public void updateAlarmReport(int board_num);
 }

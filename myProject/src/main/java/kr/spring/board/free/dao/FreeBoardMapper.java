@@ -64,4 +64,8 @@ public interface FreeBoardMapper {
 	@Select("SELECT free_content FROM board_free WHERE free_num=#{free_num}")
 	public String selectBoardWriterContent(int free_num);
 	
+	//신고버튼 눌렀을때
+	@Update("UPDATE board_free SET alarm=alarm+1 WHERE free_num=#{board_num}")
+	public void updateAlarmReport(int board_num);
+	
 }

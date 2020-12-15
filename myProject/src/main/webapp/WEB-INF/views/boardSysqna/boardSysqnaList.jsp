@@ -72,23 +72,26 @@
 					<td>${boardSysQna.asc_rnum}</td>
 					<td style="color:grey;">
 					
-						<c:if test="${user.mem_num == boardSysQna.mem_num && boardSysQna.commentNum > 0}">
-							<b><a href="detail.do?sq_num=${boardSysQna.sq_num}">
-								${boardSysQna.sq_title} 
-								[${boardSysQna.commentNum}]
-							</a></b>
-						</c:if>
-						
-						<c:if test="${boardSysQna.commentNum == 0}">
-							<b><a href="detail.do?sq_num=${boardSysQna.sq_num}">
-								${boardSysQna.sq_title} 
-								[${boardSysQna.commentNum}]
-							</a></b>
-						</c:if>
-						
-						<c:if test="${user.mem_num != boardSysQna.mem_num && boardSysQna.commentNum > 0}">
+						<c:if test="${user.mem_num != boardSysQna.mem_num && user.mem_auth > 0}">
 							<img src="${pageContext.request.contextPath}/resources/images/board/lock.png" style="max-width:16px;">비밀글 입니다
 						</c:if>
+						
+						<c:if test="${user.mem_num == boardSysQna.mem_num}">
+							<b><a href="detail.do?sq_num=${boardSysQna.sq_num}">
+								${boardSysQna.sq_title} 
+							</a></b>
+						</c:if>
+						
+						<c:if test="${user.mem_auth == 0}">
+							<b><a href="detail.do?sq_num=${boardSysQna.sq_num}">
+								${boardSysQna.sq_title} 
+							</a></b>
+						</c:if>
+						
+						<c:if test="${boardSysQna.commentNum > 0}">
+							<b>[${boardSysQna.commentNum}]</b>
+						</c:if>
+						
 					</td>
 					<td>${boardSysQna.mem_id}</td>
 					<td>${boardSysQna.sq_modify_date}</td>

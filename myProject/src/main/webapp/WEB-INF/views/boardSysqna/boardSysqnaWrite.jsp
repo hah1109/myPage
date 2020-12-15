@@ -49,6 +49,14 @@
 			$('#upload').val("");
 			$('.sq_file').hide();
 		});
+
+		//글제목 글자수 제한
+		$('#boardSubmit').submit(function(){
+			if($('#free_title').val().length > 32){
+				alert('글 제목이 제한 글자수를 초과했습니다.');
+			}
+			return false;
+		});
 		
 	});
 </script>
