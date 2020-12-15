@@ -79,13 +79,14 @@
 							</a></b>
 						</c:if>
 						
-						<c:if test="${user.mem_num == boardSysQna.mem_num && boardSysQna.commentNum == 0}">
+						<c:if test="${boardSysQna.commentNum == 0}">
 							<b><a href="detail.do?sq_num=${boardSysQna.sq_num}">
 								${boardSysQna.sq_title} 
+								[${boardSysQna.commentNum}]
 							</a></b>
 						</c:if>
 						
-						<c:if test="${user.mem_num != boardSysQna.mem_num}">
+						<c:if test="${user.mem_num != boardSysQna.mem_num && boardSysQna.commentNum > 0}">
 							<img src="${pageContext.request.contextPath}/resources/images/board/lock.png" style="max-width:16px;">비밀글 입니다
 						</c:if>
 					</td>
