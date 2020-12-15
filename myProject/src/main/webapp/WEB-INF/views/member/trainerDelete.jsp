@@ -84,7 +84,7 @@
 			<li><form:input path="mem_id" placeholder="아이디 입력"/></li>
 			
 			<a><img class="mypage_texts" src="../resources/images/text_pw.png"></a>
-			<li><form:input type="text" id="memModify" path="mem_pw" placeholder="비밀번호 입력"/></li>
+			<li><form:input type="password" id="memModify" path="mem_pw" placeholder="비밀번호 입력"/></li>
 			
 			
 			<input type="submit" value="" class="update_btn">
