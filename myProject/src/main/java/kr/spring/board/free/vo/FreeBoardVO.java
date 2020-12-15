@@ -37,6 +37,9 @@ public class FreeBoardVO {
 	
 	private List<FreeBoardCommentVO> commentList;	
 	
+	//신고한 수
+	private int alarm;
+	
 	public void setUpload(MultipartFile upload) throws IOException{
 		if(upload == null) return;
 		setFree_file(upload.getBytes());
@@ -149,6 +152,14 @@ public class FreeBoardVO {
 
 	public void setCommentNum(int commentNum) {
 		this.commentNum = commentNum;
+	}
+	
+	public int getAlarm() {
+		return alarm;
+	}
+
+	public void setAlarm(int alarm) {
+		this.alarm = alarm;
 	}
 
 	@Override

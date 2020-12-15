@@ -275,6 +275,11 @@ ul.selectbox-options li:hover {
 	color:grey;
 	cursor:pointer;
 }
+.alarm_reset{
+	font-weight:bold;
+	color:grey;
+	cursor:pointer;
+}
 /*=====================댓글창======================*/
 form#commentbox{
 	border:none;

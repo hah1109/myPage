@@ -30,4 +30,6 @@ public interface FreeBoardService {
 	
 	//신고하기
 	public void updateAlarmReport(int board_num);
+	//신고 수 초기화
+	public void resetAlarmReport(int board_num);
 }

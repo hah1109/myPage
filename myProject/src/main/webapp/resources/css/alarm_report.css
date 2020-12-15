@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+#report_submit{
+	width:450px;
+	height:550px;
+	border: solid 2px #0de9df;
+	border-radius: 15px;
+	margin: auto;
+}
+
+#report_submit input{
+	text-align:center;
+}
+

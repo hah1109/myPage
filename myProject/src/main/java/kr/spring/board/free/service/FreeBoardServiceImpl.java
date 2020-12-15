@@ -102,6 +102,9 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		freeBoardMapper.updateAlarmReport(board_num);
 	}
 	
-	
+	@Override
+	public void resetAlarmReport(int board_num) {
+		freeBoardMapper.resetAlarmReport(board_num);
+	}
 	
 }

@@ -50,13 +50,15 @@ public class FreeBoardController {
 			@RequestParam(value="keyword",defaultValue="")
 			String keyword,
 			@RequestParam(value="rowCount",defaultValue="10")
-			int rowCount) {
+			int rowCount,
+			@RequestParam(value="alarm",defaultValue="0")
+			int alarm) {
 
 		Map<String,Object> map = 
 				new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		
+		map.put("alarm", alarm);
 		//총 글의 갯수 또는 검색된 글의 갯수
 		int count = freeBoardService.selectRowCount(map);
 		

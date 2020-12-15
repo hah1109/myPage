@@ -68,4 +68,8 @@ public interface FreeBoardMapper {
 	@Update("UPDATE board_free SET alarm=alarm+1 WHERE free_num=#{board_num}")
 	public void updateAlarmReport(int board_num);
 	
+	//신고 수 초기화하기
+	@Update("UPDATE board_free SET alarm=0 WHERE free_num=#{board_num}")
+	public void resetAlarmReport(int board_num);
+	
 }

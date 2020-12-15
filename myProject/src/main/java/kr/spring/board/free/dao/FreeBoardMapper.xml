@@ -52,6 +52,9 @@
 							m.id LIKE '%' || #{keyword} || '%' or
 							b.free_content LIKE '%' || #{keyword} || '%'
 						</if>
+						<if test="alarm == 1">
+							AND b.alarm > 0
+						</if>
 			  		</where>
 			  		ORDER BY b.free_num DESC)a)c LEFT JOIN (SELECT free_num, COUNT(*) commentNum FROM board_free_comment GROUP BY free_num) d
 			  		ON c.free_num=d.free_num

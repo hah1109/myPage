@@ -58,6 +58,23 @@ $(document).ready(function(){
 		var popup = window.open('${pageContext.request.contextPath}/alarmReport/report.do?board_num='+board_num, '게시판신고팝업', 'width=500,height=600,left='+popupX+',top='+popupY+',scrollbars=yes');
 		
 	});
+
+	//신고 초기화 버튼
+	$('.alarm_reset').click(function(){
+		var board_num = $(this).attr('board_num');
+
+		$.ajax({
+			url:'alarmReset.do',
+			type:'post',
+			data:{'board_num':board_num},
+			success : function(data){
+				alert('신고 수가 초기화 되었습니다.');
+			},
+			error:function(data){
+			}
+		});
+
+	});
 	
 });
 
@@ -170,6 +187,9 @@ function commentDelete(freec_num){
 				트레이너
 			</c:if>
 			&nbsp; | &nbsp; <a class="alarm" board_num="${boardFree.free_num}">신고하기</a>
+			<c:if test="${user.mem_auth == 0 && boardFree.alarm > 0}">
+				&nbsp; | &nbsp; <a class="alarm_reset" board_num="${boardFree.free_num}">신고 초기화</a>
+			</c:if>
 		</li>
 		<li>
 			최근수정일: ${boardFree.free_modify_date}

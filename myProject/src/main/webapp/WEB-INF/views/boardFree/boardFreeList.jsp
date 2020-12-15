@@ -55,6 +55,14 @@
 		<div class="align-center">등록된 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
+		<!-- 관리자인 경우 신고글만 보기 추 -->
+		<c:if test="${user.mem_auth == 0}">
+			<ul>
+				<li><a href="list.do?alarm=0">전체보기	</a></li>
+				<li><a href="list.do?alarm=1">신고 접수된 글만 보기</a></li>
+			</ul>
+		</c:if>
+		
 		<table class="table_freeboard">
 			<tr>
 				<th></th>
@@ -95,6 +103,10 @@
 							</c:if>
 						</c:if>
 						
+						<!-- 관리자인 경우 신고 수 보이게 -->
+						<c:if test="${user.mem_auth == 0 && boardFree.alarm > 0}">
+							<b>[신고:${boardFree.alarm}]</b>
+						</c:if>	
 					</td>
 					
 					<td>${boardFree.mem_id}</td>
