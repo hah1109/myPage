@@ -48,14 +48,14 @@ $(document).ready(function(){
 
 	//신고하기 버튼	
 	$('.alarm').click(function(){
-		var popupWidth = 500;
-		var popupHeight = 600;
+		var popupWidth = 300;
+		var popupHeight = 300;
 
 		var popupX = (window.screen.width / 2) - (popupWidth / 2);
 		var popupY= (window.screen.height / 2) - (popupHeight / 2);
 		
 		var board_num = $(this).attr('board_num');
-		var popup = window.open('${pageContext.request.contextPath}/alarmReport/report.do?board_num='+board_num, '게시판신고팝업', 'width=500,height=600,left='+popupX+',top='+popupY+',scrollbars=yes');
+		var popup = window.open('${pageContext.request.contextPath}/alarmReport/report.do?board_num='+board_num, '게시판신고팝업', 'width='+popupWidth+',height='+popupHeight+',left='+popupX+',top='+popupY+',scrollbars=yes');
 		
 	});
 

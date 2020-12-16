@@ -54,8 +54,9 @@
 	<c:if test="${count == 0}">
 		<div class="align-center">등록된 게시물이 없습니다.</div>
 	</c:if>
+	
 	<c:if test="${count > 0}">
-		<!-- 관리자인 경우 신고글만 보기 추 -->
+		<!-- 관리자인 경우 신고글만 보기 추가 -->
 		<c:if test="${user.mem_auth == 0}">
 			<ul>
 				<li><a href="list.do?alarm=0">전체보기	</a></li>
@@ -78,35 +79,43 @@
 					
 					<td style="text-align:left;">
 					
-						<c:if test="${boardFree.commentNum>0}">
-							<c:if test="${empty boardFree.free_filename}">	
-								<a href="detail.do?free_num=${boardFree.free_num}">${boardFree.free_title} <b>[${boardFree.commentNum}]</b></a>
-							</c:if>
-							<c:if test="${!empty boardFree.free_filename}">
-								<a href="detail.do?free_num=${boardFree.free_num}">
-									${boardFree.free_title} 
-									<img src="${pageContext.request.contextPath}/resources/images/board/clip.png" style="width:12px;">
+						<%-- 신고가 10개 미만 글 --%>
+						<c:if test="${boardFree.alarm < 10}">
+							<a href="detail.do?free_num=${boardFree.free_num}">${boardFree.free_title} 
+		
+								<c:if test="${!empty boardFree.free_filename}">
+									<img src="${pageContext.request.contextPath}/resources/images/board/clip.png" style="width:12px;">								
+								</c:if>
+								
+								<c:if test="${boardFree.commentNum>0}">
 									<b>[${boardFree.commentNum}]</b>
-								</a>
-							</c:if>
+								</c:if>
+								<!-- 관리자인 경우 신고 수 보이게 -->
+								<c:if test="${user.mem_auth == 0 && boardFree.alarm > 0}">
+									<b>[신고:${boardFree.alarm}]</b>
+								</c:if>	
+							</a>
 						</c:if>
 						
-						<c:if test="${boardFree.commentNum==0}">
-							<c:if test="${empty boardFree.free_filename}">	
-								<a href="detail.do?free_num=${boardFree.free_num}">${boardFree.free_title}</a>
-							</c:if>
-							<c:if test="${!empty boardFree.free_filename}">
-								<a href="detail.do?free_num=${boardFree.free_num}">
-									${boardFree.free_title}
-									<img src="${pageContext.request.contextPath}/resources/images/board/clip.png" style="width:12px;">
-								</a>
-							</c:if>
+						<%-- 신고가 10개 이상 일반회원 트레이너 회원에게 보이는 글 --%>
+						 <c:if test="${boardFree.alarm > 9 && user.mem_auth > 0}">
+							<span style="color:grey;"><b>신고가 10번 이상 접수된 글입니다.</b></span>				
 						</c:if>
 						
-						<!-- 관리자인 경우 신고 수 보이게 -->
-						<c:if test="${user.mem_auth == 0 && boardFree.alarm > 0}">
-							<b>[신고:${boardFree.alarm}]</b>
-						</c:if>	
+						<%-- 신고가 10개 이상 관리자에게 보이는 글 --%>
+						<c:if test="${boardFree.alarm > 9 && user.mem_auth == 0}">
+							<a href="detail.do?free_num=${boardFree.free_num}">${boardFree.free_title} 
+		
+								<c:if test="${!empty boardFree.free_filename}">
+									<img src="${pageContext.request.contextPath}/resources/images/board/clip.png" style="width:12px;">								
+								</c:if>								
+								<c:if test="${boardFree.commentNum>0}">
+									<b>[${boardFree.commentNum}]</b>
+								</c:if>
+								<b style="color:red">[신고:${boardFree.alarm}]</b>
+							</a>			
+						</c:if>
+					
 					</td>
 					
 					<td>${boardFree.mem_id}</td>
@@ -128,6 +137,7 @@
 				</ul>
 			</div>
 		</div>
+		
 	</c:if>
 </div>
 
