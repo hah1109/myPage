@@ -118,7 +118,15 @@
 					
 					</td>
 					
-					<td>${boardFree.mem_id}</td>
+					<td>
+						${boardFree.mem_id}
+						<c:if test="${boardFree.mem_auth==1}">
+							<img src="${pageContext.request.contextPath}/resources/images/header/grade_m.png" width="14px">
+						</c:if>
+						<c:if test="${boardFree.mem_auth==2}">
+							<img src="${pageContext.request.contextPath}/resources/images/header/grade_t.png" width="14px">
+						</c:if>
+					</td>
 					<td>${boardFree.free_modify_date}</td>
 					<td>${boardFree.free_hit}</td>
 				</tr>

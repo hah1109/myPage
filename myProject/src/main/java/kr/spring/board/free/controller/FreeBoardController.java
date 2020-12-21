@@ -119,8 +119,8 @@ public class FreeBoardController {
 		if(log.isDebugEnabled()) log.debug("<<글상세>> : " + free_num);
 
 		FreeBoardVO freeBoardVO = freeBoardService.selectBoardFree(free_num);
-		List<FreeBoardCommentVO> freeCommentList = freeBoardService.selectListFreeComment(free_num);
-		freeBoardVO.setCommentList(freeCommentList);
+/*		List<FreeBoardCommentVO> freeCommentList = freeBoardService.selectListFreeComment(free_num);*/
+/*		freeBoardVO.setCommentList(freeCommentList);*/
 		
 		//다른 아이디로 조회하는 경우에만 해당 글의 조회 수 증가
 		MemberVO member = (MemberVO)session.getAttribute("user");
@@ -129,7 +129,7 @@ public class FreeBoardController {
 		}
 		
 		model.addAttribute("boardFree", freeBoardVO);
-		model.addAttribute("freeCommentList",freeCommentList);
+/*		model.addAttribute("freeCommentList",freeCommentList);*/
 		return "boardFreeView";
 	}
 

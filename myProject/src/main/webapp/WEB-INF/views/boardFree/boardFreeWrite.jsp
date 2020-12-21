@@ -34,12 +34,21 @@
 			$('.free_file').hide();
 		});
 
-		//글제목 글자수 제한
+		//글제목 글자수 제한 및 유효성 체크
 		$('#boardSubmit').submit(function(){
 			if($('#free_title').val().length > 32){
 				alert('글 제목이 제한 글자수를 초과했습니다.');
+				return false;
 			}
-			return false;
+			if($('#free_title').val()==''){
+				alert('글 제목을 입력해주세요');
+				return false;
+			}
+			if($('#free_content').val()==''){
+				alert('글 내용을 입력해주세요');
+				return false;
+			}
+			
 		});
 		
 	});

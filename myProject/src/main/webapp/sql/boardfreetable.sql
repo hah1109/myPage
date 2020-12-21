@@ -10,6 +10,7 @@ create table board_free(
   free_ip varchar2(40) not null,
   free_type number not null,
   mem_num number not null,
+  alarm number default 0 not null,
   constraint boardfree_pk primary key (free_num),
   constraint boardfree_fk foreign key (mem_num) references member(mem_num)
 );
