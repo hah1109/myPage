@@ -11,7 +11,7 @@
 		    	$('.selectbox-options').removeClass('opened');
 		    }else{
 		    	$('.selectbox-options').addClass('opened');
-		    }
+		    } 
 		});
 		
 		var allOptions = $("div.boardPaging-selectbox > ul").children('li:not(.init)');
