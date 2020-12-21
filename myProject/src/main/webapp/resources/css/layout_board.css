@@ -73,6 +73,7 @@ div.align-right > input{
     border: none;
 }
 
+
 /*Mypage*/
 .mypage-div{
 	width:48%;
@@ -125,6 +126,10 @@ div.page-main-style input[type="button"]{
     border: none;
     cursor: pointer;
 }
+
+
+br { letter-spacing:0px; }
+
 
 table{
 	width:100%;

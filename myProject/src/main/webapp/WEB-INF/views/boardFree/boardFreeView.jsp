@@ -202,9 +202,7 @@ function commentDelete(freec_num){
 	<c:if test="${!empty boardFree.free_filename}">
 		<img src="imageView.do?free_num=${boardFree.free_num}"  style="max-width:400px; max-height:400px;">
 	</c:if>
-	<p>
-		${boardFree.free_content}
-	</p>
+	<p style="white-space:pre;">${boardFree.free_content}</p>
 	
 	<hr size="1" width="100%">
 	
