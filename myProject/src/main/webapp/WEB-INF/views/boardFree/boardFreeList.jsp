@@ -7,7 +7,7 @@
 	$(document).ready(function(){
 		$("div.boardPaging-selectbox > ul").on("click", ".init", function() {
 		    $(this).closest("div.boardPaging-selectbox > ul").children('li:not(.init)').slideToggle();
-		    if($('.selectbox-option').hasClass('opened')){
+		    if($('.selectbox-options').hasClass('opened')){
 		    	$('.selectbox-options').removeClass('opened');
 		    }else{
 		    	$('.selectbox-options').addClass('opened');

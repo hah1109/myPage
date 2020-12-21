@@ -42,20 +42,13 @@ public class FreeBoardController {
 
 	//게시판 목록
 	@RequestMapping("/boardFree/list.do")
-	public ModelAndView process(
-			@RequestParam(value="pageNum",defaultValue="1")
-			int currentPage,
-			@RequestParam(value="keyfield",defaultValue="")
-			String keyfield,
-			@RequestParam(value="keyword",defaultValue="")
-			String keyword,
-			@RequestParam(value="rowCount",defaultValue="10")
-			int rowCount,
-			@RequestParam(value="alarm",defaultValue="0")
-			int alarm) {
+	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1")	int currentPage,
+								@RequestParam(value="keyfield",defaultValue="") String keyfield,
+								@RequestParam(value="keyword",defaultValue="") String keyword,	
+								@RequestParam(value="rowCount",defaultValue="10") int rowCount,
+								@RequestParam(value="alarm",defaultValue="0") int alarm) {
 
-		Map<String,Object> map = 
-				new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		map.put("alarm", alarm);
