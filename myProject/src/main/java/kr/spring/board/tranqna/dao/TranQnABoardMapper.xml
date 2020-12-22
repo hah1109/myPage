@@ -42,7 +42,7 @@
 				a.*,
 				rownum rnum
 			  FROM (SELECT
-			  			*
+			  			b.tq_num, b.tq_title, b.tq_modify_date, b.tq_filename, b.tq_hit, b.tq_type, m.*
 			  		FROM board_tranqna b JOIN member m
 			  		ON b.mem_num = m.mem_num
 			  		WHERE			  		
