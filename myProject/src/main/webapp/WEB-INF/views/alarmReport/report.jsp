@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>글 신고하기</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/alarm_report.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
@@ -15,17 +15,22 @@ $(document).ready(function(){
 	});
 	
 	$('#report_submit').submit(function(){
-
-		if($(':radio[name="alarm"]:checked').length<1){
-			alert('신고이유를 선택해 주세요!');
-			return false;
-		}
 			
 		var value = $('input[name="alarm"]:checked').val();
 		var text = $('#text').val();
 		if(value == 7){
+			if(text.length<1){
+				alert('신고이유를 기재해 주세요!');
+				return false;
+			}			
 			$('input[name="alarm"]:checked').val(text);
 		}
+
+		if($('input[name="alarm"]:checked').length<1){
+			alert('신고이유를 선택해 주세요!');
+			return false;
+		}
+		
 	});
 	
 });
