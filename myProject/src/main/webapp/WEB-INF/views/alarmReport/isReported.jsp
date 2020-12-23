@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>글 신고하기</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/alarm_report.css">
 </head>
 <body>
