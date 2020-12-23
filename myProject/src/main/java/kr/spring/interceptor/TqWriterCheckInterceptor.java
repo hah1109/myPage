@@ -43,7 +43,7 @@ public class TqWriterCheckInterceptor extends HandlerInterceptorAdapter{
 		}
 		
 		//로그인 회원 번호와 작성자 회원 번호 일치 여부 체크
-		if(user==null || user.getMem_num() != board.getMem_num()) {
+		if(user==null || user.getMem_num() != board.getMem_num() && user.getMem_auth() != 0) {
 			if(log.isDebugEnabled()) {
 				log.debug("<<로그인 아이디와 작성자 아이디 불일치>>");
 			}
