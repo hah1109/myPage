@@ -13,14 +13,14 @@
 				AND b.free_title LIKE '%' || #{keyword} || '%'
 			</if>
 			<if test="keyword != '' and keyfield == 'id'">
-				AND m.id LIKE '%' || #{keyword} || '%'
+				AND m.mem_id LIKE '%' || #{keyword} || '%'
 			</if>
 			<if test="keyword != '' and keyfield == 'content'">
 				AND b.free_content LIKE '%' || #{keyword} || '%'
 			</if>
 			<if test="keyword != '' and keyfield == 'all'">
 				AND b.free_title LIKE '%' || #{keyword} || '%' or
-				m.id LIKE '%' || #{keyword} || '%' or
+				m.mem_id LIKE '%' || #{keyword} || '%' or
 				b.free_content LIKE '%' || #{keyword} || '%'
 			</if>
 		</where>		
@@ -42,14 +42,14 @@
 			  				AND b.free_title LIKE '%' || #{keyword} || '%'
 			  			</if>
 			  			<if test="keyword != '' and keyfield == 'id'">
-							AND m.id LIKE '%' || #{keyword} || '%'
+							AND m.mem_id LIKE '%' || #{keyword} || '%'
 						</if>
 						<if test="keyword != '' and keyfield == 'content'">
 							AND b.free_content LIKE '%' || #{keyword} || '%'
 						</if>
 						<if test="keyword != '' and keyfield == 'all'">
 							AND b.free_title LIKE '%' || #{keyword} || '%' or
-							m.id LIKE '%' || #{keyword} || '%' or
+							m.mem_id LIKE '%' || #{keyword} || '%' or
 							b.free_content LIKE '%' || #{keyword} || '%'
 						</if>
 						<if test="alarm == 1">

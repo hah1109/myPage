@@ -22,14 +22,14 @@
 				b.tq_title LIKE '%' || #{keyword} || '%'
 			</if>
 			<if test="keyword != '' and keyfield == 'id'">
-				m.id LIKE '%' || #{keyword} || '%'
+				m.mem_id LIKE '%' || #{keyword} || '%'
 			</if>
 			<if test="keyword != '' and keyfield == 'content'">
 				b.tq_content LIKE '%' || #{keyword} || '%'
 			</if>
 			<if test="keyword != '' and keyfield == 'all'">
 				b.tq_title LIKE '%' || #{keyword} || '%' or
-				m.id LIKE '%' || #{keyword} || '%' or
+				m.mem_id LIKE '%' || #{keyword} || '%' or
 				b.tq_content LIKE '%' || #{keyword} || '%'
 			</if>
 		</where>		
